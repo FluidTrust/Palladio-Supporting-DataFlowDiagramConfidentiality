@@ -3,6 +3,7 @@ module org.palladiosimulator.pcm.dataspec.mwe2.dataspec
 import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.emf.mwe.utils.DirectoryCleaner
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator
+import tools.mdsd.ecoreworkflow.mwe2lib.bean.EclipseRCPSupportingStandaloneSetup
 import tools.mdsd.ecoreworkflow.mwe2lib.component.*
 
 var workspaceRoot = "../../"
@@ -11,35 +12,33 @@ var dataFlowDiagramProjectName = "org.palladiosimulator.dataflow.diagram.charact
 
 Workflow {
 
-	bean = StandaloneSetup {
+	bean = EclipseRCPSupportingStandaloneSetup {
 		scanClassPath = true
 		platformUri = workspaceRoot
 		
-		uriMap = ContextDependentMapping {
-			onRunningPlatform = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
-			onStandalone = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+		uriMap = {
+			from = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+			to = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
 		}
 		
-		uriMap = ContextDependentMapping {
-			onRunningPlatform = "platform:/plugin/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
-			onStandalone = "platform:/resource/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
+		uriMap = {
+			from = "platform:/plugin/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
+			to = "platform:/resource/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
 		}
 		
-		uriMap = ContextDependentMapping {
-			onRunningPlatform = "platform:/plugin/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
-			onStandalone = "platform:/resource/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
+		uriMap = {
+			from = "platform:/plugin/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
+			to = "platform:/resource/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
 		}
 		
-		uriMap = ContextDependentMapping {
-			onRunningPlatform = "platform:/plugin/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
-			onStandalone = "platform:/resource/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
+		uriMap = {
+			from = "platform:/plugin/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
+			to = "platform:/resource/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
 		}
 		
-		logResourceUriMap = true
+//		logResourceUriMap = true
 		
-		registerGenModelFile = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
 		registerGenModelFile = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
-		
 	}
 
 	component = EcoreGenerator {

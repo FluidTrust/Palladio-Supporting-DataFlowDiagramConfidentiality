@@ -6,7 +6,7 @@
     modelPluginID="org.palladiosimulator.dataflow.diagram.characterized" modelName="DataFlowDiagramCharacterized"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.palladiosimulator.dataflow.diagram.characterized.tests/src-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.genmodel#//DataDictionaryCharacterized ../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel#//DataFlowDiagram platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
+    runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.genmodel#//DataDictionaryCharacterized ../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel#//DataFlowDiagram ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
     importOrganizing="true" eclipsePlatformVersion="2019-09">
   <foreignModel>DataFlowDiagramCharacterized.ecore</foreignModel>
   <genPackages prefix="DataFlowDiagramCharacterized" basePackage="org.palladiosimulator.dataflow.diagram.characterized"

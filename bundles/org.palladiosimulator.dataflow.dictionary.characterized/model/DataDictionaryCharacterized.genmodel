@@ -5,7 +5,7 @@
     editorDirectory="/org.palladiosimulator.dataflow.dictionary.characterized.editor/src-gen"
     modelPluginID="org.palladiosimulator.dataflow.dictionary.characterized" modelName="DataDictionaryCharacterized"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
+    complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
     importOrganizing="true" eclipsePlatformVersion="2019-09">
   <foreignModel>DataDictionaryCharacterized.ecore</foreignModel>
   <genPackages prefix="DataDictionaryCharacterized" basePackage="org.palladiosimulator.dataflow.dictionary.characterized"
