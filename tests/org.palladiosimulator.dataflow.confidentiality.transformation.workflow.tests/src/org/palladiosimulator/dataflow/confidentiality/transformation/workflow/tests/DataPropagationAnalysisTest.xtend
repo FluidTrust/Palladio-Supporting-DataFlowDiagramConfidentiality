@@ -15,12 +15,12 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 		
 	@Test
 	def void testFlawByActorOutput() {
-		assertOneFlaw("DFDC_Actor_output")
+		assertOneFlaw("DFDC_Actor_Output")
 	}
 	
 	@Test
 	def void testNoFlawByActorOutput() {
-		assertNoFlaw("DFDC_Actor_output_noFlaw")
+		assertNoFlaw("DFDC_Actor_Output_noFlaw")
 	}
 	
 	@Test
@@ -115,14 +115,14 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testFlawByProcessConstantFalse() {
-		builder.addDFD(getRelativeURI("models/evaluation/unittests/DFDC_Process_constantFalse.xmi"))
+		builder.addDFD(getRelativeURI("models/evaluation/unittests/DFDC_Process_ConstantFalse.xmi"))
 		var solution = findFlaws([findLowViolation])
 		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "PIN"))
 	}
 	
 	@Test
 	def void testNoFlawByProcessConstantFalse() {
-		builder.addDFD(getRelativeURI("models/evaluation/unittests/DFDC_Process_constantFalse_noFlaw.xmi"))
+		builder.addDFD(getRelativeURI("models/evaluation/unittests/DFDC_Process_ConstantFalse_noFlaw.xmi"))
 		var solution = findFlaws([findLowViolation])
 		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "PIN"))
 	}
