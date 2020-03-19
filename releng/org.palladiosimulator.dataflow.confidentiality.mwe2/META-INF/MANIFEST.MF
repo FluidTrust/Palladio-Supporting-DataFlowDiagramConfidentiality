@@ -13,5 +13,4 @@ Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="2.9.1",
  tools.mdsd.ecoreworkflow.mwe2lib;bundle-version="0.1.0",
  de.uka.ipd.sdq.identifier;bundle-version="2.1.0",
  org.palladiosimulator.dataflow.diagram;bundle-version="0.1.0",
- org.palladiosimulator.dataflow.dictionary;bundle-version="0.1.0",
- org.objectweb.asm;bundle-version="7.2.0"
+ org.palladiosimulator.dataflow.dictionary;bundle-version="0.1.0"

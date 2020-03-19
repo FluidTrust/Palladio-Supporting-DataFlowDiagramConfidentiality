@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.presentation.DataFlowDiagramCharacterizedEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,

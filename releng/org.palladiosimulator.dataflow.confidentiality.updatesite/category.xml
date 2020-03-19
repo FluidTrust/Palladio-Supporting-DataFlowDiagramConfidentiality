@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.model.feature">
+      <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
+   </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature">
+      <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
+   </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.model.feature.source">
+      <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
+   </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature.source">
+      <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
+   </feature>
+   <category-def name="org.palladiosimulator.dataflow.confidentiality.category" label="Data Flow Confidentiality">
+   </category-def>
+   <category-def name="org.palladiosimulator.dataflow.confidentiality.source.category" label="Data Flow Confidentiality Developer Resources">
+   </category-def>
+</site>
+
