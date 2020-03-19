@@ -66,18 +66,22 @@ Workflow {
 			gen = "platform:/resource/${dataDictionaryProjectName}.edit/src-gen"
 			src = "platform:/resource/${dataDictionaryProjectName}.edit/src"
 		}
+		/*
 		folders = {
 			gen = "platform:/resource/${dataDictionaryProjectName}.editor/src-gen"
 			src = "platform:/resource/${dataDictionaryProjectName}.editor/src"
 		}
+		*/
 		folders = {
 			gen = "platform:/resource/${dataFlowDiagramProjectName}.edit/src-gen"
 			src = "platform:/resource/${dataFlowDiagramProjectName}.edit/src"
 		}
+		/*
 		folders = {
 			gen = "platform:/resource/${dataFlowDiagramProjectName}.editor/src-gen"
 			src = "platform:/resource/${dataFlowDiagramProjectName}.editor/src"
 		}
+		*/
 	}
 
 }
