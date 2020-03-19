@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DataDictionaryCharacterized" nsURI="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    nsPrefix="DataDictionaryCharacterized">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataDictionaryCharacterized" eSuperTypes="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.ecore#//DataDictionary">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicTypes" upperBound="-1"
+        eType="#//CharacteristicType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerations" upperBound="-1"
+        eType="#//Enumeration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDefinitions" upperBound="-1"
+        eType="#//BehaviorDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacteristicType" abstract="true"
+      eSuperTypes="#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumCharacteristicType" eSuperTypes="#//CharacteristicType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Enumeration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" lowerBound="1"
+        upperBound="-1" eType="#//Literal" containment="true" eOpposite="#//Literal/enum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enum" lowerBound="1" eType="#//Enumeration"
+        eOpposite="#//Enumeration/literals"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BehaviorDefinition" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//Pin" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="#//Pin" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+        eType="#//Assignment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pin" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//BehaviorDefinition"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="derivation" value="self.oclAsType(ecore::EObject).eContainer().oclAsType(BehaviorDefinition)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="leftHandSideRefersOutputPin characteristicWildcardHasToBeOnLhsAndRhs literalWildcardHasToBeOnLhsAndRhs"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="leftHandSideRefersOutputPin" value="self.oclAsType(ecore::EObject).eContainer().oclAsType(BehaviorDefinition).outputs->includes(self.lhs.pin)"/>
+      <details key="characteristicWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::CharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.characteristicType.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.characteristicType.oclIsUndefined()&#xA;)"/>
+      <details key="literalWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::CharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::CharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.literal.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::CharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.literal.oclIsUndefined()&#xA;)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="#//expressions/DataCharacteristicReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="#//expressions/Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Behaving" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="exactlyOneBehaviorHasToBeSpecified"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="exactlyOneBehaviorHasToBeSpecified" value="self.ownedBehavior->including(self.referencedBehavior)->selectByKind(BehaviorDefinition)->size() = 1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1"
+        eType="#//BehaviorDefinition" changeable="false" volatile="true" transient="true"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="derivation" value="self.ownedBehavior->including(self.referencedBehavior)->selectByKind(BehaviorDefinition)->any(true)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBehavior" eType="#//BehaviorDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedBehavior" eType="#//BehaviorDefinition"/>
+  </eClassifiers>
+  <eSubpackages name="expressions" nsURI="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+      nsPrefix="expressions">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Constant" abstract="true" eSuperTypes="#//expressions/Term"/>
+    <eClassifiers xsi:type="ecore:EClass" name="True" eSuperTypes="#//expressions/Constant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="False" eSuperTypes="#//expressions/Constant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LogicTerm" abstract="true" eSuperTypes="#//expressions/Term">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="terms" ordered="false"
+          upperBound="-1" eType="#//expressions/Term" changeable="false" volatile="true"
+          transient="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+          <details key="derivation" value="self.oclAsType(ecore::EObject).eContents()->selectByKind(Term)->asSet()"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryLogicTerm" abstract="true" eSuperTypes="#//expressions/LogicTerm">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1"
+          eType="#//expressions/Term" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//expressions/UnaryLogicTerm"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BinaryLogicTerm" abstract="true" eSuperTypes="#//expressions/LogicTerm">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1"
+          eType="#//expressions/Term" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1"
+          eType="#//expressions/Term" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//expressions/BinaryLogicTerm"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//expressions/BinaryLogicTerm"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CharacteristicReference" abstract="true"
+        eSuperTypes="#//expressions/Term">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="literalHasToBeWildcardIfCharacteristicIsWildcard"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="literalHasToBeWildcardIfCharacteristicIsWildcard" value="not self.characteristicType.oclIsUndefined() or self.literal.oclIsUndefined()"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicType" eType="#//CharacteristicType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="#//Literal"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContainerCharacteristicReference"
+        eSuperTypes="#//expressions/CharacteristicReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataCharacteristicReference" eSuperTypes="#//expressions/CharacteristicReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pin" lowerBound="1" eType="#//Pin"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

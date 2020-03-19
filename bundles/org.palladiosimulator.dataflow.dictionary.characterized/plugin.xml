@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated org.palladiosimulator.dataflow.dictionary.characterized -->
+      <package
+            uri="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage"
+            genModel="model/DataDictionaryCharacterized.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DataDictionaryCharacterized -->
+      <package
+            uri="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsPackage"
+            genModel="model/DataDictionaryCharacterized.genmodel"/>
+   </extension>
+
+</plugin>

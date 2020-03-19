@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated DataDictionaryCharacterized -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.presentation.DataDictionaryCharacterizedModelWizardID"
+            name="%_UI_DataDictionaryCharacterizedModelWizard_label"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.presentation.DataDictionaryCharacterizedModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DataDictionaryCharacterizedModelFile.gif">
+         <description>%_UI_DataDictionaryCharacterizedModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated DataDictionaryCharacterized -->
+      <editor
+            id="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.presentation.DataDictionaryCharacterizedEditorID"
+            name="%_UI_DataDictionaryCharacterizedEditor_label"
+            icon="icons/full/obj16/DataDictionaryCharacterizedModelFile.gif"
+            extensions="datadictionarycharacterized"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.presentation.DataDictionaryCharacterizedEditor"
+            contributorClass="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.presentation.DataDictionaryCharacterizedActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated DataDictionaryCharacterized -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.presentation.ExpressionsModelWizardID"
+            name="%_UI_ExpressionsModelWizard_label"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.presentation.ExpressionsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ExpressionsModelFile.gif">
+         <description>%_UI_ExpressionsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated DataDictionaryCharacterized -->
+      <editor
+            id="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.presentation.ExpressionsEditorID"
+            name="%_UI_ExpressionsEditor_label"
+            icon="icons/full/obj16/ExpressionsModelFile.gif"
+            extensions="expressions"
+            class="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.presentation.ExpressionsEditor"
+            contributorClass="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.presentation.ExpressionsActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DataFlowDiagramCharacterized" nsURI="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    nsPrefix="DataFlowDiagramCharacterized">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Characterizable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristics" upperBound="-1"
+        eType="#//Characteristic" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Characteristic" abstract="true" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//CharacteristicType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumCharacteristic" eSuperTypes="#//Characteristic">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="ecore:EClass ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//Literal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumCharacteristicType"
+        lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//EnumCharacteristicType"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="derivation" value="self.type.oclAsType(DataDictionaryCharacterized::EnumCharacteristicType)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedExternalActor" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//ExternalActor #//CharacterizedNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedStore" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Store #//CharacterizedNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="storeHasNoAssignmentsInBehavior storeHasExactlyOneInputAndOneOutputPin"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="storeHasNoAssignmentsInBehavior" value="self.behavior.assignments->isEmpty()"/>
+      <details key="storeHasExactlyOneInputAndOneOutputPin" value="self.behavior.inputs->size() = 1 and self.behavior.outputs->size() = 1"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedProcess" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Process #//CharacterizedNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedData" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Data #//Characterizable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedDataFlow" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Edge #//Characterizable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="sourcePinIsEntityOutputPin destinationPinIsEntityInputPin sourcePinOwnerMatchesSource destinationPinOwnerMatchesDestination notPartOfLoop"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="sourcePinIsEntityOutputPin" value="self.sourcePin.owner.outputs->includes(self.sourcePin)"/>
+      <details key="destinationPinIsEntityInputPin" value="self.targetPin.owner.inputs->includes(self.targetPin)"/>
+      <details key="sourcePinOwnerMatchesSource" value="not self.source.oclIsKindOf(DataDictionaryCharacterized::Behaving) or self.source.oclAsType(DataDictionaryCharacterized::Behaving).behavior.outputs->includes(self.sourcePin)"/>
+      <details key="destinationPinOwnerMatchesDestination" value="not self.target.oclIsKindOf(DataDictionaryCharacterized::Behaving) or self.target.oclAsType(DataDictionaryCharacterized::Behaving).behavior.inputs->includes(self.targetPin)"/>
+      <details key="notPartOfLoop" value="not self.oclAsType(DataFlowDiagram::Edge)->closure(e |&#xA;&#x9;self.oclAsType(ecore::EObject).eContainer().oclAsType(DataFlowDiagram::DataFlowDiagram).edges->select(f |&#xA;&#x9;&#x9;f.source = e.target and&#xA;&#x9;&#x9;not f.source->including(f.target)->exists(n | n.oclIsKindOf(CharacterizedExternalActor))&#xA;&#x9;)&#xA;)->exists(f | f.target = self.source)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePin" lowerBound="1"
+        eType="ecore:EClass ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//Pin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetPin" lowerBound="1"
+        eType="ecore:EClass ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//Pin"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedActorProcess" eSuperTypes="#//CharacterizedProcess">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actor" lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//ExternalActor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedNode" abstract="true" eSuperTypes="../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//Behaving #//Characterizable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="atLeastOneInputFlowForEachInputPin"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="atLeastOneInputFlowForEachInputPin" value="self.behavior.inputs->isEmpty() or CharacterizedDataFlow.allInstances()->select(f | f.target = self).targetPin->asSet()->includesAll(self.behavior.inputs->asSet())"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

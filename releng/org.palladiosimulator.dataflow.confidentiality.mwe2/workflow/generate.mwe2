@@ -1,0 +1,84 @@
+module org.palladiosimulator.pcm.dataspec.mwe2.dataspec
+
+import org.eclipse.emf.mwe.utils.StandaloneSetup
+import org.eclipse.emf.mwe.utils.DirectoryCleaner
+import org.eclipse.emf.mwe2.ecore.EcoreGenerator
+import tools.mdsd.ecoreworkflow.mwe2lib.component.*
+
+var workspaceRoot = "../../"
+var dataDictionaryProjectName = "org.palladiosimulator.dataflow.dictionary.characterized"
+var dataFlowDiagramProjectName = "org.palladiosimulator.dataflow.diagram.characterized"
+
+Workflow {
+
+	bean = StandaloneSetup {
+		scanClassPath = true
+		platformUri = workspaceRoot
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+			onStandalone = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+		}
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
+			onStandalone = "platform:/resource/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
+		}
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
+			onStandalone = "platform:/resource/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel"
+		}
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
+			onStandalone = "platform:/resource/${dataFlowDiagramProjectName}/model/DataDictionaryCharacterized.genmodel"
+		}
+		
+		logResourceUriMap = true
+		
+		registerGenModelFile = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+		registerGenModelFile = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.genmodel"
+		
+	}
+
+	component = EcoreGenerator {
+		generateCustomClasses = false
+		generateEdit = true
+		generateEditor = true
+		genModel = "platform:/resource/${dataDictionaryProjectName}/model/DataDictionaryCharacterized.genmodel"
+		srcPath = "platform:/resource/${dataDictionaryProjectName}/src"
+		srcPath = "platform:/resource/${dataDictionaryProjectName}.edit/src"
+		srcPath = "platform:/resource/${dataDictionaryProjectName}.editor/src"
+	}
+	
+	component = EcoreGenerator {
+		generateCustomClasses = false
+		generateEdit = true
+		generateEditor = true
+		genModel = "platform:/resource/${dataFlowDiagramProjectName}/model/DataFlowDiagramCharacterized.genmodel"
+		srcPath = "platform:/resource/${dataFlowDiagramProjectName}/src"
+		srcPath = "platform:/resource/${dataFlowDiagramProjectName}.edit/src"
+		srcPath = "platform:/resource/${dataFlowDiagramProjectName}.editor/src"
+	}
+
+	component = GapPatternPostProcessor {
+		folders = {
+			gen = "platform:/resource/${dataDictionaryProjectName}.edit/src-gen"
+			src = "platform:/resource/${dataDictionaryProjectName}.edit/src"
+		}
+		folders = {
+			gen = "platform:/resource/${dataDictionaryProjectName}.editor/src-gen"
+			src = "platform:/resource/${dataDictionaryProjectName}.editor/src"
+		}
+		folders = {
+			gen = "platform:/resource/${dataFlowDiagramProjectName}.edit/src-gen"
+			src = "platform:/resource/${dataFlowDiagramProjectName}.edit/src"
+		}
+		folders = {
+			gen = "platform:/resource/${dataFlowDiagramProjectName}.editor/src-gen"
+			src = "platform:/resource/${dataFlowDiagramProjectName}.editor/src"
+		}
+	}
+
+}
