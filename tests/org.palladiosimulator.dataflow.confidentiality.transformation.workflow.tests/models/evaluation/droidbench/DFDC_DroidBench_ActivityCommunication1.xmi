@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_jzfXIENEEeq3NrD2DjPidQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_COtVVVQNEeqnLp_48pbpVA"
+      name="TelephonyManager">
+    <ownedBehavior
+        id="_Dv40MFQNEeqnLp_48pbpVA">
+      <outputs
+          id="_EJe_8VQNEeqnLp_48pbpVA"
+          name="TelephonyManager.out.deviceId"/>
+      <assignments
+          id="_FsRoYlQNEeqnLp_48pbpVA">
+        <lhs
+            id="_GBqCgFQNEeqnLp_48pbpVA"
+            pin="_EJe_8VQNEeqnLp_48pbpVA">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="DDC_DroidBench.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal
+              href="DDC_DroidBench.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_HkIh4VQNEeqnLp_48pbpVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_IHrT1VQNEeqnLp_48pbpVA"
+      name="SMSManager">
+    <ownedBehavior
+        id="_Jf0LcFQNEeqnLp_48pbpVA">
+      <inputs
+          id="_KnIY0FQNEeqnLp_48pbpVA"
+          name="SMSManager.in.deviceId"/>
+    </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_apykIVQNEeqnLp_48pbpVA"
+        name="trust">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="DDC_DroidBench.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values
+          href="DDC_DroidBench.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_Nn40F1QNEeqnLp_48pbpVA"
+      name="Activity1">
+    <referencedBehavior
+        href="DDC_DroidBench.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_QMwkl1QNEeqnLp_48pbpVA"
+      name="Activity2">
+    <referencedBehavior
+        href="DDC_DroidBench.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_RwdzCVQNEeqnLp_48pbpVA"
+      name="deviceId"
+      target="_QMwkl1QNEeqnLp_48pbpVA"
+      source="_COtVVVQNEeqnLp_48pbpVA"
+      sourcePin="_EJe_8VQNEeqnLp_48pbpVA">
+    <targetPin
+        href="DDC_DroidBench.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_UUQleVQNEeqnLp_48pbpVA"
+      name="deviceId"
+      target="_Nn40F1QNEeqnLp_48pbpVA"
+      source="_QMwkl1QNEeqnLp_48pbpVA">
+    <sourcePin
+        href="DDC_DroidBench.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin
+        href="DDC_DroidBench.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_XG5FKVQNEeqnLp_48pbpVA"
+      name="deviceId"
+      target="_IHrT1VQNEeqnLp_48pbpVA"
+      source="_Nn40F1QNEeqnLp_48pbpVA"
+      targetPin="_KnIY0FQNEeqnLp_48pbpVA">
+    <sourcePin
+        href="DDC_DroidBench.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>

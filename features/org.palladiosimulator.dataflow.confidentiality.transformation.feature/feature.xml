@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.dataflow.confidentiality.transformation.feature"
+      label="Prolog Transformation"
+      version="0.1.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license.epl2"
+      license-feature-version="1.0.0">
+
+   <requires>
+      <import feature="org.palladiosimulator.dataflow.confidentiality.model.feature" version="0.1.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.dataflow.confidentiality.transformation.prolog"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dataflow.confidentiality.transformation.workflow"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

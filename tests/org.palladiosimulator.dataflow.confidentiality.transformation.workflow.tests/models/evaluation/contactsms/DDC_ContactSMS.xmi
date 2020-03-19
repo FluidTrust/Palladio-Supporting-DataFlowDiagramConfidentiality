@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_fCiJk0NEEeq3NrD2DjPidQ" name="AccessRights" type="_oxiwtFGWEeqNss2H0GFEyA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_oxiwtFGWEeqNss2H0GFEyA"/>
+  <enumerations id="_oxiwtFGWEeqNss2H0GFEyA" name="Roles">
+    <literals id="_pwUtIFGWEeqNss2H0GFEyA" name="User"/>
+    <literals id="_sW8xIFGWEeqNss2H0GFEyA" name="ContactManager"/>
+    <literals id="_tKef0FGWEeqNss2H0GFEyA" name="SMSManager"/>
+  </enumerations>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

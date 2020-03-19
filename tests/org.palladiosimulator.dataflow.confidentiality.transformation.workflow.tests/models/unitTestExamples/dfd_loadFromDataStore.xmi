@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_jzfXIENEEeq3NrD2DjPieQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_21ryRUsyEeqBeZX3QKuNVA"
+      name="A1">
+    <ownedBehavior
+        id="_IFEPYUszEeqBeZX3QKuNVA">
+      <outputs
+          id="_I6O80UszEeqBeZX3QKuNVA"
+          name="A1.out"/>
+      <assignments
+          id="_O677AkszEeqBeZX3QKuNVA">
+        <lhs
+            id="_PiJsAEszEeqBeZX3QKuNVA"
+            pin="_I6O80UszEeqBeZX3QKuNVA">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="dd_simple.xmi#_iwJnY0syEeqBeZX3QKuNVA"/>
+          <literal
+              href="dd_simple.xmi#_o9M_gEsyEeqBeZX3QKuNVA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_RPYp4UszEeqBeZX3QKuNVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_7HOzIUz3EeqyWs80cS8siQ"
+      name="S1">
+    <ownedBehavior
+        id="_8cD4EUz3EeqyWs80cS8siQ">
+      <inputs
+          id="_88uVIEz3EeqyWs80cS8siQ"
+          name="S1.in"/>
+      <outputs
+          id="_-wMd4Uz3EeqyWs80cS8siQ"
+          name="S1.out"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_I1hvJUz4EeqyWs80cS8siQ"
+      name="A2">
+    <ownedBehavior
+        id="_KieZIUz4EeqyWs80cS8siQ">
+      <inputs
+          id="_LEsVYEz4EeqyWs80cS8siQ"
+          name="A2.in"/>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_Ezxw-Uz4EeqyWs80cS8siQ"
+      name="store data"
+      target="_7HOzIUz3EeqyWs80cS8siQ"
+      source="_21ryRUsyEeqBeZX3QKuNVA"
+      sourcePin="_I6O80UszEeqBeZX3QKuNVA"
+      targetPin="_88uVIEz3EeqyWs80cS8siQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_Mf0Pmkz4EeqyWs80cS8siQ"
+      name="load data"
+      target="_I1hvJUz4EeqyWs80cS8siQ"
+      source="_7HOzIUz3EeqyWs80cS8siQ"
+      sourcePin="_-wMd4Uz3EeqyWs80cS8siQ"
+      targetPin="_LEsVYEz4EeqyWs80cS8siQ"/>
+</DataFlowDiagram:DataFlowDiagram>

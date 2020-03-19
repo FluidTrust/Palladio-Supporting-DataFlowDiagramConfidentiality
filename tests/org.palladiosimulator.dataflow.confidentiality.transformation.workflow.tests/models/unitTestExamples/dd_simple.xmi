@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionary="http://palladiosimulator.org/dataflow/dictionary/1.0"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    id="_YG--oENCEeqZ7Kg2_yifbw">
+  <entries xsi:type="DataDictionary:CompositeDataType"
+      id="_gWGm0UsyEeqBeZX3QKuNVA"
+      name="DT_1"/>
+  <entries xsi:type="DataDictionary:CompositeDataType"
+      id="_htt6AUsyEeqBeZX3QKuNVA"
+      name="DT_2"/>
+  <characteristicTypes
+      xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+      id="_iwJnY0syEeqBeZX3QKuNVA"
+      name="CT_1"
+      type="_nazYpEsyEeqBeZX3QKuNVA"/>
+  <characteristicTypes
+      xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+      id="_lFAl80syEeqBeZX3QKuNVA"
+      name="CT_2_a"
+      type="_oOA-REsyEeqBeZX3QKuNVA"/>
+  <characteristicTypes
+      xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+      id="_lfC2k0syEeqBeZX3QKuNVA"
+      name="CT_2_b"
+      type="_oOA-REsyEeqBeZX3QKuNVA"/>
+  <enumerations
+      id="_nazYpEsyEeqBeZX3QKuNVA"
+      name="E_1">
+    <literals
+        id="_o9M_gEsyEeqBeZX3QKuNVA"
+        name="E_1_a"/>
+    <literals
+        id="_qY_BAEsyEeqBeZX3QKuNVA"
+        name="E_1_b"/>
+    <literals
+        id="_r198YEsyEeqBeZX3QKuNVA"
+        name="E_1_c"/>
+  </enumerations>
+  <enumerations
+      id="_oOA-REsyEeqBeZX3QKuNVA"
+      name="E_2">
+    <literals
+        id="_siuUsEsyEeqBeZX3QKuNVA"
+        name="E_2_a"/>
+    <literals
+        id="_thylAEsyEeqBeZX3QKuNVA"
+        name="E_2_b"/>
+    <literals
+        id="_uO90EEsyEeqBeZX3QKuNVA"
+        name="E_2_c"/>
+  </enumerations>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

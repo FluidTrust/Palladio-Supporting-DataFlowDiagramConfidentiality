@@ -2,6 +2,14 @@
 <?pde version="3.8"?>
 <target name="Target Platform" sequenceNumber="1">
 	<locations>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
+			<unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="3.10.0.v20190909-1952"/>
+			<repository location="http://download.eclipse.org/releases/2019-09/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
+			<unit id="org.apache.commons.lang3" version="3.1.0.v201403281430"/>
+			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20190827152740/repository"/>
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 			<unit id="de.uka.ipd.sdq.identifier.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-core-commons/nightly/"/>
@@ -11,12 +19,36 @@
 			<repository location="https://updatesite.palladio-simulator.com/palladio-core-commons/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
+			<unit id="de.uka.ipd.sdq.workflow.feature.mdsd.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-workflowengine/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
+			<unit id="de.uka.ipd.sdq.workflow.feature.mdsd.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-workflowengine/releases/latest"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 			<unit id="org.palladiosimulator.dataflow.diagram.editor.tree.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-dataflowdiagram/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
 			<unit id="org.palladiosimulator.dataflow.diagram.editor.tree.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-dataflowdiagram/releases/latest/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
+			<unit id="org.palladiosimulator.supporting.prolog.serializer.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
+			<unit id="org.palladiosimulator.supporting.prolog.serializer.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog/releases/latest"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
+			<unit id="org.prolog4j.tuprolog.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog4j/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
+			<unit id="org.prolog4j.tuprolog.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog4j/releases/latest"/>
 		</location>
 	</locations>
 </target>

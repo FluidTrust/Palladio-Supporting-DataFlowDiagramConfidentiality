@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_jzfXIENEEeq3NrD2DjPieQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_21ryRUsyEeqBeZX3QKuNVA"
+      name="A1">
+    <ownedBehavior
+        id="_IFEPYUszEeqBeZX3QKuNVA">
+      <inputs
+          id="_kYwxUFSxEeqnLp_48pbpVA"
+          name="A1.in"/>
+      <outputs
+          id="_I6O80UszEeqBeZX3QKuNVA"
+          name="A1.out"/>
+      <assignments
+          id="_O677AkszEeqBeZX3QKuNVA">
+        <lhs
+            id="_PiJsAEszEeqBeZX3QKuNVA"
+            pin="_I6O80UszEeqBeZX3QKuNVA">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="dd_simple.xmi#_iwJnY0syEeqBeZX3QKuNVA"/>
+          <literal
+              href="dd_simple.xmi#_o9M_gEsyEeqBeZX3QKuNVA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_RPYp4UszEeqBeZX3QKuNVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_Ujs9KVSxEeqnLp_48pbpVA"
+      name="P1">
+    <ownedBehavior
+        id="_WiXpQFSxEeqnLp_48pbpVA">
+      <inputs
+          id="_W-RiIFSxEeqnLp_48pbpVA"
+          name="P1.in"/>
+      <outputs
+          id="_Yf5F4VSxEeqnLp_48pbpVA"
+          name="P1.out"/>
+      <assignments
+          id="_cj-mYlSxEeqnLp_48pbpVA">
+        <lhs
+            id="_c_zmwFSxEeqnLp_48pbpVA"
+            pin="_Yf5F4VSxEeqnLp_48pbpVA"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_dthBV1SxEeqnLp_48pbpVA"
+            pin="_W-RiIFSxEeqnLp_48pbpVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_ZY1gGVSxEeqnLp_48pbpVA"
+      name="P2">
+    <ownedBehavior
+        id="_Z7uKsFSxEeqnLp_48pbpVA">
+      <inputs
+          id="_aPGZsFSxEeqnLp_48pbpVA"
+          name="P2.in"/>
+      <outputs
+          id="_ahM2UVSxEeqnLp_48pbpVA"
+          name="P2.out"/>
+      <assignments
+          id="_g-dNolSxEeqnLp_48pbpVA">
+        <lhs
+            id="_hUTh0FSxEeqnLp_48pbpVA"
+            pin="_ahM2UVSxEeqnLp_48pbpVA"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_h9vgZ1SxEeqnLp_48pbpVA"
+            pin="_aPGZsFSxEeqnLp_48pbpVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_l0z4mVSxEeqnLp_48pbpVA"
+      name="Loop P1 P2"
+      target="_ZY1gGVSxEeqnLp_48pbpVA"
+      source="_Ujs9KVSxEeqnLp_48pbpVA"
+      sourcePin="_Yf5F4VSxEeqnLp_48pbpVA"
+      targetPin="_aPGZsFSxEeqnLp_48pbpVA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_qK4g-lSxEeqnLp_48pbpVA"
+      name="Loop P2 P1"
+      target="_Ujs9KVSxEeqnLp_48pbpVA"
+      source="_ZY1gGVSxEeqnLp_48pbpVA"
+      sourcePin="_ahM2UVSxEeqnLp_48pbpVA"
+      targetPin="_W-RiIFSxEeqnLp_48pbpVA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_skIQSlSxEeqnLp_48pbpVA"
+      name="A1 P1"
+      target="_Ujs9KVSxEeqnLp_48pbpVA"
+      source="_21ryRUsyEeqBeZX3QKuNVA"
+      sourcePin="_I6O80UszEeqBeZX3QKuNVA"
+      targetPin="_W-RiIFSxEeqnLp_48pbpVA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_vuBZalSxEeqnLp_48pbpVA"
+      name="P2 A1"
+      target="_21ryRUsyEeqBeZX3QKuNVA"
+      source="_ZY1gGVSxEeqnLp_48pbpVA"
+      sourcePin="_ahM2UVSxEeqnLp_48pbpVA"
+      targetPin="_kYwxUFSxEeqnLp_48pbpVA"/>
+</DataFlowDiagram:DataFlowDiagram>

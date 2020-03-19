@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_jzfXIENEEeq3NrD2DjPieQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_21ryRUsyEeqBeZX3QKuNVA"
+      name="A1">
+    <ownedBehavior
+        id="_IFEPYUszEeqBeZX3QKuNVA">
+      <outputs
+          id="_I6O80UszEeqBeZX3QKuNVA"
+          name="A1.out"/>
+      <assignments
+          id="_O677AkszEeqBeZX3QKuNVA">
+        <lhs
+            id="_PiJsAEszEeqBeZX3QKuNVA"
+            pin="_I6O80UszEeqBeZX3QKuNVA">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="dd_simple.xmi#_iwJnY0syEeqBeZX3QKuNVA"/>
+          <literal
+              href="dd_simple.xmi#_o9M_gEsyEeqBeZX3QKuNVA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_RPYp4UszEeqBeZX3QKuNVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_44_t0ksyEeqBeZX3QKuNVA"
+      name="P1 - CopyInToOut">
+    <ownedBehavior
+        id="_59hs8UsyEeqBeZX3QKuNVA">
+      <inputs
+          id="_6jruAEsyEeqBeZX3QKuNVA"
+          name="P1.in"/>
+      <outputs
+          id="_8KIucUsyEeqBeZX3QKuNVA"
+          name="P1.out"/>
+      <assignments
+          id="_9nhScksyEeqBeZX3QKuNVA">
+        <lhs
+            id="_-DmKcEsyEeqBeZX3QKuNVA"
+            pin="_8KIucUsyEeqBeZX3QKuNVA"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_Ad6Qx0szEeqBeZX3QKuNVA"
+            pin="_6jruAEsyEeqBeZX3QKuNVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_KAQwx0szEeqBeZX3QKuNVA"
+      name="copyFlow"
+      source="_21ryRUsyEeqBeZX3QKuNVA"
+      target="_44_t0ksyEeqBeZX3QKuNVA"
+      sourcePin="_I6O80UszEeqBeZX3QKuNVA"
+      targetPin="_6jruAEsyEeqBeZX3QKuNVA"/>
+</DataFlowDiagram:DataFlowDiagram>

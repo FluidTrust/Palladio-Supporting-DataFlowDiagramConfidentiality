@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_LNbeM1IoEeqxoa0IdF5JoA" name="ConfidentialityRequirements" type="_OjyWBFIoEeqxoa0IdF5JoA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_R8xrE1IoEeqxoa0IdF5JoA" name="ZoneMembership" type="_d4IbFFIuEeqkVaPUPi-ogw"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_BxMbA1ItEeqkVaPUPi-ogw" name="ContainedConfidentialityRequirements" type="_OjyWBFIoEeqxoa0IdF5JoA"/>
+  <enumerations id="_OjyWBFIoEeqxoa0IdF5JoA" name="Level">
+    <literals id="_PtJx0FIoEeqxoa0IdF5JoA" name="High"/>
+    <literals id="_QlOpUFIoEeqxoa0IdF5JoA" name="Low"/>
+  </enumerations>
+  <enumerations id="_d4IbFFIuEeqkVaPUPi-ogw" name="Zones">
+    <literals id="_exuVgFIuEeqkVaPUPi-ogw" name="AttackZone"/>
+    <literals id="_fvlE4FIuEeqkVaPUPi-ogw" name="TrustedZone"/>
+  </enumerations>
+  <behaviorDefinitions id="_VlznRVIoEeqxoa0IdF5JoA" name="Copy">
+    <inputs id="_WLaOsFIoEeqxoa0IdF5JoA" name="copy.input"/>
+    <outputs id="_XjMhAVIoEeqxoa0IdF5JoA" name="copy.output"/>
+    <assignments id="_YWm68lIoEeqxoa0IdF5JoA">
+      <lhs id="_ZQFgoFIoEeqxoa0IdF5JoA" pin="_XjMhAVIoEeqxoa0IdF5JoA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_aGbSx1IoEeqxoa0IdF5JoA" pin="_WLaOsFIoEeqxoa0IdF5JoA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_ax__WFIoEeqxoa0IdF5JoA" name="Join">
+    <inputs id="_bTQ5UFIoEeqxoa0IdF5JoA" name="join.input1"/>
+    <inputs id="_brZFcFIoEeqxoa0IdF5JoA" name="join.input2"/>
+    <outputs id="_cBDzcVIoEeqxoa0IdF5JoA" name="join.output"/>
+    <assignments id="_o7XtylIoEeqxoa0IdF5JoA">
+      <lhs id="_pd_5sFIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_cBDzcVIoEeqxoa0IdF5JoA"/>
+      <rhs xsi:type="expressions:And" id="_q4zq1FIoEeqxoa0IdF5JoA">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_riSFplIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_bTQ5UFIoEeqxoa0IdF5JoA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_sBWnTVIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_brZFcFIoEeqxoa0IdF5JoA"/>
+      </rhs>
+    </assignments>
+    <assignments id="_eQ358lIoEeqxoa0IdF5JoA">
+      <lhs id="_h3yWQFIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_cBDzcVIoEeqxoa0IdF5JoA"/>
+      <rhs xsi:type="expressions:Or" id="_jxdNpVIoEeqxoa0IdF5JoA">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_kR1W1lIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_bTQ5UFIoEeqxoa0IdF5JoA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_k9_SPVIoEeqxoa0IdF5JoA" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_brZFcFIoEeqxoa0IdF5JoA"/>
+      </rhs>
+    </assignments>
+    <assignments id="_mG9TKlItEeqkVaPUPi-ogw">
+      <lhs id="_mmaPQFItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_cBDzcVIoEeqxoa0IdF5JoA"/>
+      <rhs xsi:type="expressions:And" id="_oNTUlFItEeqkVaPUPi-ogw">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_rOU1llItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_bTQ5UFIoEeqxoa0IdF5JoA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_qyQkrVItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_brZFcFIoEeqxoa0IdF5JoA"/>
+      </rhs>
+    </assignments>
+    <assignments id="_wjp7ilItEeqkVaPUPi-ogw">
+      <lhs id="_w8VhQFItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_cBDzcVIoEeqxoa0IdF5JoA"/>
+      <rhs xsi:type="expressions:Or" id="_ylxkRVItEeqkVaPUPi-ogw">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_zEBmhlItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_bTQ5UFIoEeqxoa0IdF5JoA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_zkCjXVItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_brZFcFIoEeqxoa0IdF5JoA"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_MmefWFIpEeqkVaPUPi-ogw" name="Encrypt">
+    <inputs id="__xKc8FIsEeqkVaPUPi-ogw" name="encrypt.input"/>
+    <outputs id="_AJut8VItEeqkVaPUPi-ogw" name="encrypt.output"/>
+    <assignments id="_GiltclItEeqkVaPUPi-ogw">
+      <lhs id="_HPFnEFItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" pin="_AJut8VItEeqkVaPUPi-ogw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_Ie0wp1ItEeqkVaPUPi-ogw" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" pin="__xKc8FIsEeqkVaPUPi-ogw"/>
+    </assignments>
+    <assignments id="_LYHR8lItEeqkVaPUPi-ogw">
+      <lhs id="_LyW98FItEeqkVaPUPi-ogw" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" pin="_AJut8VItEeqkVaPUPi-ogw"/>
+      <rhs xsi:type="expressions:False" id="_NOtAIlItEeqkVaPUPi-ogw"/>
+    </assignments>
+    <assignments id="_NpPnGlItEeqkVaPUPi-ogw">
+      <lhs id="_OBo48FItEeqkVaPUPi-ogw" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_AJut8VItEeqkVaPUPi-ogw"/>
+      <rhs xsi:type="expressions:True" id="_PcWjcVItEeqkVaPUPi-ogw"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_SIdkaFItEeqkVaPUPi-ogw" name="Decrypt">
+    <inputs id="_TKg3QFItEeqkVaPUPi-ogw" name="decrypt.input"/>
+    <outputs id="_Tf54cVItEeqkVaPUPi-ogw" name="decrypt.output"/>
+    <assignments id="_ZBOL8lItEeqkVaPUPi-ogw">
+      <lhs id="_ZowGAFItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" pin="_Tf54cVItEeqkVaPUPi-ogw"/>
+      <rhs xsi:type="expressions:False" id="_art-4lItEeqkVaPUPi-ogw"/>
+    </assignments>
+    <assignments id="_U7cCUlItEeqkVaPUPi-ogw">
+      <lhs id="_VXV7MFItEeqkVaPUPi-ogw" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" pin="_Tf54cVItEeqkVaPUPi-ogw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_XW9pl1ItEeqkVaPUPi-ogw" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" pin="_TKg3QFItEeqkVaPUPi-ogw"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_VPA8BVypEeqKwtlhILVboQ" name="Join4">
+    <inputs id="_WmnBEFypEeqKwtlhILVboQ" name="join4.input1"/>
+    <inputs id="_XLXT8FypEeqKwtlhILVboQ" name="join4.input2"/>
+    <inputs id="_Xfw2oFypEeqKwtlhILVboQ" name="join4.input3"/>
+    <inputs id="_XzvikFypEeqKwtlhILVboQ" name="join4.input4"/>
+    <outputs id="_YIZj8VypEeqKwtlhILVboQ" name="join4.output"/>
+    <assignments id="_cDij0lypEeqKwtlhILVboQ">
+      <lhs id="_jigPwFypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_YIZj8VypEeqKwtlhILVboQ"/>
+      <rhs xsi:type="expressions:And" id="_mgayZFypEeqKwtlhILVboQ">
+        <left xsi:type="expressions:And" id="_nbU7c1ypEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_pETrdlypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_WmnBEFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_sE3SbVypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_XLXT8FypEeqKwtlhILVboQ"/>
+        </left>
+        <right xsi:type="expressions:And" id="_ogTmilypEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_uiB4ZlypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_Xfw2oFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_v_LL3VypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_XzvikFypEeqKwtlhILVboQ"/>
+        </right>
+      </rhs>
+    </assignments>
+    <assignments id="_yb5F6lypEeqKwtlhILVboQ">
+      <lhs id="_y7ADwFypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_YIZj8VypEeqKwtlhILVboQ"/>
+      <rhs xsi:type="expressions:Or" id="_08VCVVypEeqKwtlhILVboQ">
+        <left xsi:type="expressions:Or" id="_1ax45FypEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_2tZXVlypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_WmnBEFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_4VA1bVypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_XLXT8FypEeqKwtlhILVboQ"/>
+        </left>
+        <right xsi:type="expressions:Or" id="_16D161ypEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_5u9D1lypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_Xfw2oFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_7GwkTVypEeqKwtlhILVboQ" characteristicType="_LNbeM1IoEeqxoa0IdF5JoA" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_XzvikFypEeqKwtlhILVboQ"/>
+        </right>
+      </rhs>
+    </assignments>
+    <assignments id="_D0Zp2lyqEeqKwtlhILVboQ">
+      <lhs id="_Ec2xBlyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_YIZj8VypEeqKwtlhILVboQ"/>
+      <rhs xsi:type="expressions:And" id="_F1QuVFyqEeqKwtlhILVboQ">
+        <left xsi:type="expressions:And" id="_GjuW01yqEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_H53DVlyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_WmnBEFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_JofIXVyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_XLXT8FypEeqKwtlhILVboQ"/>
+        </left>
+        <right xsi:type="expressions:And" id="_HLjy6lyqEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_LjZ85lyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_Xfw2oFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_NC-SPVyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_QlOpUFIoEeqxoa0IdF5JoA" pin="_XzvikFypEeqKwtlhILVboQ"/>
+        </right>
+      </rhs>
+    </assignments>
+    <assignments id="_PM8PalyqEeqKwtlhILVboQ">
+      <lhs id="_PxnpwFyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_YIZj8VypEeqKwtlhILVboQ"/>
+      <rhs xsi:type="expressions:Or" id="_RRTT1VyqEeqKwtlhILVboQ">
+        <left xsi:type="expressions:Or" id="_R9P0AFyqEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_StgzJlyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_WmnBEFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_TPsTLVyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_XLXT8FypEeqKwtlhILVboQ"/>
+        </left>
+        <right xsi:type="expressions:Or" id="_STzSq1yqEeqKwtlhILVboQ">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_Ttm-NlyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_Xfw2oFypEeqKwtlhILVboQ"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_UHgE7VyqEeqKwtlhILVboQ" characteristicType="_BxMbA1ItEeqkVaPUPi-ogw" literal="_PtJx0FIoEeqxoa0IdF5JoA" pin="_XzvikFypEeqKwtlhILVboQ"/>
+        </right>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_vV2QFVyrEeqKwtlhILVboQ" name="Store">
+    <inputs id="_wePbgFyrEeqKwtlhILVboQ" name="store.in"/>
+    <outputs id="_xR-lkVyrEeqKwtlhILVboQ" name="store.out"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

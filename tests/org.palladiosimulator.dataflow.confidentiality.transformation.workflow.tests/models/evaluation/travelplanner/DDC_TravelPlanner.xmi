@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionary="http://palladiosimulator.org/dataflow/dictionary/1.0" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <entries xsi:type="DataDictionary:CompositeDataType" id="_j5s3YENFEeqMccFFI9r5HQ" name="CreditCardData"/>
+  <entries xsi:type="DataDictionary:CompositeDataType" id="_yxW7IUnHEeqvK9OBmXfwBQ" name="Flights"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_fCiJk0NEEeq3NrD2DjPidQ" name="AccessRights" type="_ZU1R1ENCEeqZ7Kg2_yifbw"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_ZU1R1ENCEeqZ7Kg2_yifbw"/>
+  <enumerations id="_ZU1R1ENCEeqZ7Kg2_yifbw" name="Roles">
+    <literals id="_a2t7UENCEeqZ7Kg2_yifbw" name="User"/>
+    <literals id="_c0qj0ENEEeq3NrD2DjPidQ" name="TravelAgency"/>
+    <literals id="_drKuAENEEeq3NrD2DjPidQ" name="Airline"/>
+  </enumerations>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

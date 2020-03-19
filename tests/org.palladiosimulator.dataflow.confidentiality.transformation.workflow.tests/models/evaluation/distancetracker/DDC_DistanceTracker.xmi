@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_fCiJk0NEEeq3NrD2DjPidQ" name="AccessRights" type="_FddZBFGLEeq8MuaPiZgRhQ"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_FddZBFGLEeq8MuaPiZgRhQ"/>
+  <enumerations id="_FddZBFGLEeq8MuaPiZgRhQ" name="Roles">
+    <literals id="_GlhNR1GLEeq8MuaPiZgRhQ" name="User"/>
+    <literals id="_JHaiQFGLEeq8MuaPiZgRhQ" name="TrackingService"/>
+    <literals id="_Kfr8wFGLEeq8MuaPiZgRhQ" name="DistanceTracker"/>
+  </enumerations>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

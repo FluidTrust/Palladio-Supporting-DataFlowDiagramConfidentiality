@@ -1,0 +1,843 @@
+transformation DFD2Prolog(in inputDFD : DFD, out outputProlog : PL);
+
+modeltype DD uses DataDictionary('http://palladiosimulator.org/dataflow/dictionary/1.0');
+modeltype DDC uses DataDictionaryCharacterized('http://palladiosimulator.org/dataflow/dictionary/characterized/1.0');
+modeltype DFD uses DataFlowDiagram('http://palladiosimulator.org/dataflow/diagram/1.0');
+modeltype DFDC uses DataFlowDiagramCharacterized('http://palladiosimulator.org/dataflow/diagram/characterized/1.0');
+modeltype PL uses prolog('http://palladiosimulator.org/supporting/prolog/0.1.0');
+modeltype ID uses identifier('http://sdq.ipd.uka.de/Identifier/2.1');
+modeltype ECORE uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+configuration property QualifiedNameDerivation : String;
+
+main() {
+	var dfds := inputDFD.rootObjects()[DFD::DataFlowDiagram];
+	assert fatal (dfds->size() = 1);
+
+	dfds->map diagramToProgram();
+}
+
+mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
+	clauses += self.map createDiscontiguousDirective();
+	clauses += self.map createTableDirective();
+	clauses += self.map createFlowSelectionHelpers();
+	clauses += self.map createSetHelpers();
+	clauses += new Comment("");
+	clauses += new Comment("Types and characteristics");
+	clauses += new Comment("");
+	clauses += self.getUsedDataTypes()-> map dataTypeToFact();
+	clauses += self.getUsedCharacteristicTypes(true, true)-> map characteristicTypeToFact()->flatten();
+	clauses += new Comment("");
+	clauses += new Comment("Nodes");
+	clauses += new Comment("");
+	clauses += self.nodes->map nodeToClause()->flatten();
+	clauses += new Comment("");
+	clauses += new Comment("Edges");
+	clauses += new Comment("");
+	clauses += self.edges->map edgeToClause()->flatten();
+}
+
+
+mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::Discontiguous {
+	name := "discontiguous";
+	predicates += new PL::directives::PredicateIndicator("actor", 1);
+	predicates += new PL::directives::PredicateIndicator("characteristic", 5);
+	predicates += new PL::directives::PredicateIndicator("characteristicType", 1);
+	predicates += new PL::directives::PredicateIndicator("characteristicTypeValue", 2);
+	predicates += new PL::directives::PredicateIndicator("dataflow", 5);
+	predicates += new PL::directives::PredicateIndicator("inputPin", 2);
+	predicates += new PL::directives::PredicateIndicator("nodeCharacteristic", 3);
+	predicates += new PL::directives::PredicateIndicator("outputPin", 2);
+	predicates += new PL::directives::PredicateIndicator("process", 1);
+	predicates += new PL::directives::PredicateIndicator("store", 1);
+	predicates += new PL::directives::PredicateIndicator("characteristic tabled", 5);
+}
+
+mapping DFD::DataFlowDiagram::createTableDirective() : PL::directives::Table {
+	predicate := new PL::directives::PredicateIndicator("characteristic", 5);
+}
+
+mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
+	result += new Comment("");
+	result += new Comment("Helper rules to determine available input flows");
+	result += new Comment("");
+	result += new Comment("Select one arbitrary input flow (FLOW) for the pin (PIN) from a set of available flows (AVAILABLE_FLOWS).");
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "inputFlow";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
+			arguments += object PL::CompoundTerm { value := "FLOW" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := object PL::CompoundTerm {
+					value := "inputPin";
+					arguments += object PL::CompoundTerm { value := "P" };
+					arguments += object PL::CompoundTerm { value := "PIN" };
+				};
+				right := object PL::CompoundTerm {
+					value := "inputFlowsSelection";
+					arguments += object PL::CompoundTerm { value := "P" };
+					arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
+				};
+			};
+			right := object PL::CompoundTerm {
+				value := "inputFlowSelection";
+				arguments += object PL::CompoundTerm { value := "PIN" };
+				arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
+				arguments += object PL::CompoundTerm { value := "FLOW" };
+			};
+		}
+	};
+	
+	result += new Comment("Select one arbitrary input flow (FLOW) for the pin (PIN) from a set of available flows. Here: use list head.");
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "inputFlowSelection";
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "H" };
+				tails += object PL::CompoundTerm { value := "_" };
+			};
+			arguments += object PL::CompoundTerm { value := "FLOW" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::CompoundTerm {
+				value := "dataflow";
+				arguments += object PL::CompoundTerm { value := "H" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "PIN" };
+			};
+			right := object PL::expressions::Unification {
+				left := object PL::CompoundTerm { value := "FLOW" };
+				right := object PL::CompoundTerm { value := "H" };
+			}
+		}
+	};
+	
+	result += new Comment("Select one arbitrary input flow (FLOW) for the pin (PIN) from a set of available flows. Here: use any entry of list tail.");
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "inputFlowSelection";
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "H" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "FLOW" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::CompoundTerm {
+				value := "dataflow";
+				arguments += object PL::CompoundTerm { value := "H" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+			};
+			right := object PL::CompoundTerm {
+				value := "inputFlowSelection";
+				arguments += object PL::CompoundTerm { value := "PIN" };
+				arguments += object PL::CompoundTerm { value := "T" };
+				arguments += object PL::CompoundTerm { value := "FLOW" };
+			};
+		}
+	};
+
+	result += new Comment("Find one arbitrary set of flows (SELECTED_FLOWS) for a given behaving element (P) in a way that for every input pin, there is one input flow.");
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "inputFlowsSelection";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "SELECTED_FLOWS" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::CompoundTerm {
+				value := "findall";
+				arguments += object PL::CompoundTerm { value := "X" };
+				arguments += object PL::CompoundTerm {
+					value := "inputPin";
+					arguments += object PL::CompoundTerm { value := "P" };
+					arguments += object PL::CompoundTerm { value := "X" };
+				};
+				arguments += object PL::CompoundTerm { value := "INPUT_PINS" };
+			};
+			right := object PL::CompoundTerm {
+				value := "inputPinsFlowSelection";
+				arguments += object PL::CompoundTerm { value := "P" };
+				arguments += object PL::CompoundTerm { value := "INPUT_PINS" };
+				arguments += object PL::CompoundTerm { value := "SELECTED_FLOWS" };
+			};
+		};
+	};
+	
+	result += new Comment("Find a data flow for a given input pin (H) and add the flow to the set of selected flows (SELECTED_FLOWS) that also integrates the existing set (RECURSE_FLOWS).");
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "inputPinsFlowSelection";
+			arguments += object PL::CompoundTerm { value := "_" };
+			arguments += object PL::_List {};
+			arguments += object PL::_List {};
+		};
+	};
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "inputPinsFlowSelection";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "PIN" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "SELECTED_FLOWS" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := object PL::CompoundTerm {
+					value := "dataflow";
+					arguments += object PL::CompoundTerm { value := "FLOW_TO_PIN" };
+					arguments += object PL::CompoundTerm { value := "_" };
+					arguments += object PL::CompoundTerm { value := "_" };
+					arguments += object PL::CompoundTerm { value := "P" };
+					arguments += object PL::CompoundTerm { value := "PIN" };
+				};
+				right := object PL::CompoundTerm {
+					value := "inputPinsFlowSelection";
+					arguments += object PL::CompoundTerm { value := "P" };
+					arguments += object PL::CompoundTerm { value := "T" };
+					arguments += object PL::CompoundTerm { value := "RECURSE_FLOWS" };
+				};
+			};
+			right := object PL::expressions::Unification {
+				left := object PL::CompoundTerm { value := "SELECTED_FLOWS" };
+				right := object PL::_List {
+					heads += object PL::CompoundTerm { value := "FLOW_TO_PIN" };
+					tails += object PL::CompoundTerm { value := "RECURSE_FLOWS" };
+				};
+			};
+		};
+	};	
+	
+}
+
+
+mapping DFD::DataFlowDiagram::createSetHelpers() : List(PL::Clause) {
+
+	result += object PL::Comment { value := "Find intersection R between elements of L1 and L2 (to be independent of library predicates)" };
+
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "isect";
+			arguments += object PL::_List {};
+			arguments += object PL::CompoundTerm { value := "_" };
+			arguments += object PL::_List {};
+		}
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "isect";
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "H" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "L" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := object PL::expressions::LogicalAnd {
+					left := object PL::CompoundTerm {
+						value := "member";
+						arguments += object PL::CompoundTerm { value := "H" };
+						arguments += object PL::CompoundTerm { value := "L" };
+					};
+					right := object PL::Cut {};
+				};
+				right := object PL::CompoundTerm {
+				value := "isect";
+				arguments += object PL::CompoundTerm{ value := "T" };
+				arguments += object PL::CompoundTerm { value := "L" };
+				arguments += object PL::CompoundTerm { value := "RTAIL" };
+			};
+			};
+			right := object PL::expressions::Unification {
+					left := object PL::CompoundTerm { value := "R" };
+					right := object PL::_List {
+						heads += object PL::CompoundTerm { value := "H" };
+						tails += object PL::CompoundTerm { value := "RTAIL" };
+					}
+				};
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "isect";
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "_" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "L" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::CompoundTerm {
+				value := "isect";
+				arguments += object PL::CompoundTerm{ value := "T" };
+				arguments += object PL::CompoundTerm { value := "L" };
+				arguments += object PL::CompoundTerm { value := "R" };
+			};
+		};
+}
+
+// Nodes
+
+mapping DFD::Node::nodeToClause() : List(PL::Clause)
+disjuncts 
+	DFDC::CharacterizedProcess::processToClause,
+    DFDC::CharacterizedActorProcess::actorProcessToClause,
+    DFDC::CharacterizedExternalActor::externalActorToClause,
+    DFDC::CharacterizedStore::storeToClause
+{
+}
+
+// Store facts
+
+mapping DFDC::CharacterizedStore::storeToClause() : List(PL::Fact)
+merges DFDC::Characterizable::characterizableToFact, DDC::Behaving::behavingToWhatever
+{
+	result += self.map storeToFact();
+}
+
+mapping DFDC::CharacterizedStore::storeToFact() : PL::Fact {
+	head := self.map storeToFactHead();
+}
+
+mapping DFDC::CharacterizedStore::storeToFactHead() : PL::CompoundTerm {
+	value := "store";
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+
+// Actor facts
+
+mapping DFDC::CharacterizedExternalActor::externalActorToClause() : List(PL::Fact)
+merges DFDC::Characterizable::characterizableToFact, DDC::Behaving::behavingToWhatever
+{
+	result += self.map actorToFact();
+}
+
+mapping DFDC::CharacterizedExternalActor::actorToFact() : PL::Fact {
+	head := self.map actorToFactHead();
+}
+
+mapping DFDC::CharacterizedExternalActor::actorToFactHead() : PL::CompoundTerm {
+	value := "actor";
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+// Actor process facts
+
+mapping DFDC::CharacterizedActorProcess::actorProcessToClause() : List(PL::Fact)
+merges DFDC::CharacterizedProcess::processToClause
+{
+	result += self.map actorProcessToFact();
+}
+
+mapping DFDC::CharacterizedActorProcess::actorProcessToFact() : PL::Fact {
+	head := self.map processToFactHead();
+}
+
+mapping DFDC::CharacterizedActorProcess::actorProcessToFactHead() : PL::CompoundTerm {
+	value := "actorProcess";
+	arguments += new AtomicQuotedString(self.uniqueName());
+	arguments += new AtomicQuotedString(self.actor.uniqueName());
+}
+
+// Process facts
+
+mapping DFDC::CharacterizedProcess::processToClause() : List(PL::Clause)
+merges DFDC::Characterizable::characterizableToFact, DDC::Behaving::behavingToWhatever
+{
+	result += self.map processToFact();
+}
+
+mapping DDC::Pin::inputPinToCharacteristicRule(owner : DDC::Behaving) : PL::Rule {
+	head := self.map inputPinToCharacteristicRuleHead(owner);
+	body := self.map inputPinToCharacteristicRuleBody(owner);
+}
+
+mapping DDC::Pin::inputPinToCharacteristicRuleHead(owner : DDC::Behaving) : PL::CompoundTerm {
+	value := "characteristic";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(self.uniqueName());
+	arguments += object PL::CompoundTerm { value := "CT" };
+	arguments += object PL::CompoundTerm { value := "V" };
+	arguments += object PL::CompoundTerm { value := "S" };  
+}
+
+mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::expressions::LogicalAnd {
+	var flowFinding := object PL::CompoundTerm {
+		value := "inputFlow";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += object PL::CompoundTerm { value := "F" };
+	};
+	
+	var incomingDataFlowTerm := object PL::CompoundTerm {
+		value := "dataflow";
+		arguments += object PL::CompoundTerm { value := "F" };
+		arguments += object PL::CompoundTerm { value := "PSRC" };
+		arguments += object PL::CompoundTerm { value := "PINSRC" };
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+	};
+	
+	var sourceCharacteristicTerm := object PL::CompoundTerm {
+		value := "characteristic";
+		arguments += object PL::CompoundTerm { value := "PSRC" };
+		arguments += object PL::CompoundTerm { value := "PINSRC" };
+		arguments += object PL::CompoundTerm { value := "CT" };
+		arguments += object PL::CompoundTerm { value := "V" };
+		arguments += object PL::CompoundTerm { value := "_" };
+	};
+	
+	left := object PL::expressions::LogicalAnd {
+		left := flowFinding;
+		right := incomingDataFlowTerm;
+	};
+	right := sourceCharacteristicTerm;
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignment(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+disjuncts	DDC::BehaviorDefinition::behaviorToAssignmentForStore,
+			DDC::BehaviorDefinition::behaviorToAssignmentWithAssignments
+{}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForStore(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+when {owner.oclIsKindOf(DFDC::CharacterizedStore)}
+{
+	var store := owner.oclAsType(DFDC::CharacterizedStore);
+	assert warning (self.assignments->isEmpty()) with log ("Store has assignments but these will be ignored.");
+	assert fatal (not self.inputs->isEmpty()) with log ("Store has to have at least one input.");
+	assert warning (not self.inputs->isEmpty()) with log ("Store has more than one input. Results will be non-deterministic.");
+	
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
+	body := self.inputs->any(true).map sourcePinToTerm(owner, characteristicType, _literal, self);
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentWithAssignments(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+when {not self.lastMatchingAssignment(owner, pin, characteristicType, _literal).oclIsUndefined()}
+{
+	var assignment := self.lastMatchingAssignment(owner, pin, characteristicType, _literal);
+	var requireStack := not assignment.allSubobjectsOfKind(DDC::expressions::DataCharacteristicReference)->excluding(assignment.lhs)->isEmpty();
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, requireStack);
+	body := assignment.rhs.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentHead(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, requireStack : Boolean) : PL::CompoundTerm {
+	var stackName := if requireStack then "S" else "_" endif;
+	value := "characteristic";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(pin.uniqueName());
+	arguments += new AtomicQuotedString(characteristicType.uniqueName());
+	arguments += new AtomicQuotedString(_literal.uniqueName());
+	arguments += object PL::CompoundTerm { value := stackName };
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentBody(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::Expression
+{
+	init {
+		var assignment := self.lastMatchingAssignment(owner, pin, characteristicType, _literal);
+		result := assignment.rhs.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+	}
+}
+
+mapping DDC::expressions::Term::rhsTermToCharacteristicRuleExpression(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::Expression
+disjuncts DDC::expressions::True::constantToConstant,
+          DDC::expressions::False::constantToConstant,
+          DDC::expressions::And::logicalTermToLogicalTerm,
+          DDC::expressions::Or::logicalTermToLogicalTerm,
+          DDC::expressions::Not::logicalTermToLogicalTerm,
+          DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm,
+          DDC::expressions::DataCharacteristicReference::dataReferenceToTerm
+{
+}
+
+mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::True
+{
+}
+
+mapping DDC::expressions::False::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::False
+{
+}
+
+mapping DDC::expressions::And::logicalTermToLogicalTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::LogicalAnd {
+	left := self.left.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+	right := self.right.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+}
+
+mapping DDC::expressions::Or::logicalTermToLogicalTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::LogicalOr {
+	left := self.left.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+	right := self.right.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+}
+
+mapping DDC::expressions::Not::logicalTermToLogicalTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::NotProvable {
+	expr := self.term.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+}
+
+mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm {
+	var characteristicTypeToUse := 
+		if not self.characteristicType.oclIsUndefined() and self.characteristicType.oclIsKindOf(DDC::EnumCharacteristicType) then
+			self.characteristicType.oclAsType(DDC::EnumCharacteristicType)
+		else
+			characteristicType
+		endif;
+	var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
+	
+	value := "nodeCharacteristic";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(characteristicTypeToUse.uniqueName());
+	arguments += new AtomicQuotedString(_literal.uniqueName());
+}
+
+mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm {
+	init {
+		var characteristicTypeToUse := 
+			if not self.characteristicType.oclIsUndefined() and self.characteristicType.oclIsKindOf(DDC::EnumCharacteristicType) then
+				self.characteristicType.oclAsType(DDC::EnumCharacteristicType)
+			else
+				characteristicType
+			endif;
+		var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
+		result := self.pin.map sourcePinToTerm(owner, characteristicTypeToUse, literalToUse, self);
+	}
+}
+
+// element is required to force QVTo to create a new element even if all other parameters are the same
+mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, dummyElement : Element) : PL::CompoundTerm {
+	value := "characteristic";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(self.uniqueName());
+	arguments += new AtomicQuotedString(characteristicType.uniqueName());
+	arguments += new AtomicQuotedString(_literal.uniqueName());
+	arguments += object PL::CompoundTerm { value := "S" };
+}
+
+
+mapping DFDC::CharacterizedProcess::processToFact() : PL::Fact {
+	head := self.map processToFactHead();
+}
+
+mapping DFDC::CharacterizedProcess::processToFactHead() : PL::CompoundTerm {
+	value := "process";
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+mapping DDC::Pin::inputPinToFact(owner : DDC::Behaving) : PL::Fact {
+	head := self.map inputPinToFactHead(owner);
+}
+
+mapping DDC::Pin::inputPinToFactHead(owner : DDC::Behaving) : PL::CompoundTerm {
+	value := "inputPin";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+mapping DDC::Pin::outputPinToFact(owner : DDC::Behaving) : PL::Fact {
+	head := self.map outputPinToFactHead(owner);
+}
+
+mapping DDC::Pin::outputPinToFactHead(owner : DDC::Behaving) : PL::CompoundTerm {
+	value := "outputPin";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments +=  new AtomicQuotedString(self.uniqueName());
+}
+
+// characterizable
+mapping DFDC::Characterizable::characterizableToFact() : List(PL::Clause) {
+	result += self.characteristics->map characteristicToFact(self)->flatten();
+}
+
+mapping DFDC::Characteristic::characteristicToFact(characterizable : DFDC::Characterizable) : List(PL::Fact)
+disjuncts DFDC::EnumCharacteristic::characteristicToFact
+{
+}
+
+// behaving
+mapping DDC::Behaving::behavingToWhatever() : List(PL::Clause) {
+	result += self.behavior.inputs->map inputPinToFact(self);
+	result += self.behavior.inputs->map inputPinToCharacteristicRule(self);
+	result += self.behavior.outputs->map outputPinToFact(self);
+	
+	self.getAllUsedEnumCharacteristicTypes(true, false)->forEach(ct) {
+		ct.type.literals->forEach(l) {
+			self.behavior.outputs->forEach(pin) {
+				result += self.behavior.map behaviorToAssignment(self, pin, ct, l);
+			}
+		}
+	}
+}
+
+// enum characteristics
+
+mapping DFDC::EnumCharacteristic::characteristicToFact(characterizable : DFDC::Characterizable) : List(PL::Fact)
+{
+	result += self.values->map enumCharacteristicLiteralToFact(characterizable, self);
+}
+
+mapping DDC::Literal::enumCharacteristicLiteralToFact(characterizable : DFDC::Characterizable, characteristic : DFDC::EnumCharacteristic) : PL::Fact {
+	head := self.map enumCharacteristicLiteralToFactHead(characterizable, characteristic);
+}
+
+mapping DDC::Literal::enumCharacteristicLiteralToFactHead(characterizable : DFDC::Characterizable, characteristic : DFDC::EnumCharacteristic) : PL::CompoundTerm {
+	value := "nodeCharacteristic";
+	arguments += new AtomicQuotedString(characterizable.uniqueName());
+	arguments += new AtomicQuotedString(characteristic.type.uniqueName());
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+
+
+// characteristic types
+mapping DDC::CharacteristicType::characteristicTypeToFact() : List(PL::Fact)
+disjuncts DDC::EnumCharacteristicType::characteristicTypeToFact
+{
+}
+
+// enum characteristic types
+
+mapping DDC::EnumCharacteristicType::characteristicTypeToFact() : List(PL::Fact) {
+	result += self.map enumCharacteristicTypeToFact();
+	result += self.type.literals->map enumCharacteristicTypeLiteralToFact(self);
+}
+
+mapping DDC::EnumCharacteristicType::enumCharacteristicTypeToFact() :PL::Fact {
+	head := self.map enumCharacteristicTypeToFactHead();
+}
+
+mapping DDC::EnumCharacteristicType::enumCharacteristicTypeToFactHead() :PL::CompoundTerm {
+	value := "characteristicType";
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+mapping DDC::Literal::enumCharacteristicTypeLiteralToFact(owner : DDC::EnumCharacteristicType) :PL::Fact {
+	head := self.map enumCharacteristicTypeLiteralToFactHead(owner);
+}
+
+mapping DDC::Literal::enumCharacteristicTypeLiteralToFactHead(owner : DDC::EnumCharacteristicType) :PL::CompoundTerm {
+	value := "characteristicTypeValue";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+
+// data types
+mapping DD::DataType::dataTypeToFact() : PL::Fact {
+	head := self.map dataTypeToFactHead();
+}
+
+mapping DD::DataType::dataTypeToFactHead() : PL::CompoundTerm {
+	value := "dataType";
+	arguments += new AtomicQuotedString(self.uniqueName());
+}
+
+
+
+// Edges
+
+mapping DFD::Edge::edgeToClause() : List(PL::Clause)
+disjuncts 
+	DFDC::CharacterizedDataFlow::dataFlowToClause
+{
+}
+
+// CharacterizedDataFlow
+
+mapping DFDC::CharacterizedDataFlow::dataFlowToClause() : List(PL::Clause) {
+	result += self.map dataFlowToFact();
+}
+
+
+
+mapping DFDC::CharacterizedDataFlow::dataFlowToFact() : PL::Fact {
+	head := self.map dataFlowToFactHead();
+}
+
+mapping DFDC::CharacterizedDataFlow::dataFlowToFactHead() : PL::CompoundTerm {
+	value := "dataflow";
+	arguments += new AtomicQuotedString(self.uniqueName());
+	arguments += new AtomicQuotedString(self.source.uniqueName());
+	arguments += new AtomicQuotedString(self.sourcePin.uniqueName());
+	arguments += new AtomicQuotedString(self.target.uniqueName());
+	arguments += new AtomicQuotedString(self.targetPin.uniqueName());
+}
+
+// utilities
+
+query Element::getAllUsedEnumCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::EnumCharacteristicType) {
+	return self.getAllUsedCharacteristicTypes(considerAssignments, considerCharacteristics)->selectByKind(DDC::EnumCharacteristicType);
+}
+
+query Element::getAllUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::CharacteristicType) {
+	var dfd := self.oclAsType(ecore::EObject)->closure(o : ecore::EObject | o.eContainer())->selectByType(DFD::DataFlowDiagram)->any(true);
+	var types := dfd.getUsedCharacteristicTypes(considerAssignments, considerCharacteristics);
+	return types;
+}
+
+query DFD::DataFlowDiagram::getUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::CharacteristicType) {
+	var emptySet := self.nodes->selectByType(DFD::Edge);
+	var typesFromCharacteristics := if considerCharacteristics then self.allSubobjectsOfKind(DFDC::Characteristic).type->asSet() else emptySet endif;
+	var typesFromAssignments := if considerAssignments then self.allSubobjectsOfKind(DDC::Behaving).behavior.allSubobjectsOfKind(DDC::expressions::CharacteristicReference).characteristicType->asSet() else emptySet endif;
+	return typesFromCharacteristics->union(typesFromAssignments)->selectByKind(DDC::CharacteristicType)->sortedBy(uniqueName());
+}
+
+query DFD::DataFlowDiagram::getUsedDataTypes() : OrderedSet(DD::DataType) {
+	return self.allSubobjectsOfType(DFD::DataFlow).data->flatten().type->asOrderedSet()->sortedBy(uniqueName());
+}
+
+query OclAny::uniqueName() : String {
+	assert error (self.oclIsKindOf(ID::Identifier));
+	var identifier := self.oclAsType(ID::Identifier);
+	
+	return switch {
+		case (QualifiedNameDerivation = "name-and-id") identifier.uniqueNameByNameAndId();
+		case (QualifiedNameDerivation = "id") identifier.uniqueNameById();
+		else identifier.uniqueNameById();
+	};
+}
+
+query ID::Identifier::uniqueNameByNameAndId() : String {
+	var eobject := self.oclAsType(ecore::EObject);
+	var nameAttribute := eobject.eClass().eAllAttributes->any(ea : EAttribute | ea.name = "name");
+	var nameObject := eobject.eGet(nameAttribute);
+	var name := nameObject.toString();
+	return if nameObject.oclIsUndefined() then self.id else name + " (" + self.id + ")" endif;
+}
+
+query ID::Identifier::uniqueNameById() : String {
+	return self.id;
+}
+
+helper OclAny::createCompoundTermFromId() : PL::CompoundTerm {
+	assert error (self.oclIsKindOf(ID::Identifier));
+	var identifier := self.oclAsType(ID::Identifier);
+	return object PL::CompoundTerm { value := "ID" + identifier.id.toString().toUpperCase() };
+}
+
+constructor PL::AtomicQuotedString::AtomicQuotedString(name : String) {
+	value := name;
+}
+
+constructor PL::directives::PredicateIndicator::PredicateIndicator(name : String, arity : Integer) {
+	result.name := name;
+	result.arity := arity;	
+}
+
+helper createList(headAtom : String, tailAtom : String) : PL::_List {
+	return object PL::_List {
+		heads := new AtomicQuotedString(headAtom);
+		tails := new AtomicQuotedString(tailAtom); 
+	}
+}
+
+helper createList(headAtom : String) : PL::_List {
+	return object PL::_List {
+		heads := new AtomicQuotedString(headAtom);
+		tails := object PL::CompoundTerm {
+			value := "_";
+		}
+	}
+}
+
+helper createLogicalAnd(lhs : PL::expressions::Expression, rhs : PL::expressions::Expression) : PL::expressions::LogicalAnd {
+	return object PL::expressions::LogicalAnd {
+		left := lhs;
+		right := rhs;
+	}
+}
+
+helper createCompoundTerm(predicate : String, atoms : OrderedSet(String)) : PL::CompoundTerm {
+	return object PL::CompoundTerm {
+		value := predicate;
+		atoms->forEach(atom) {
+			arguments += new AtomicQuotedString(atom);			
+		}
+	};
+}
+
+query DDC::CharacteristicType::isCompatibleTo(ct : DDC::CharacteristicType) : Boolean {
+	return 
+		self = ct or (
+			self.oclIsKindOf(DDC::EnumCharacteristicType) and
+			ct.oclIsKindOf(DDC::EnumCharacteristicType) and 
+			self.oclAsType(DDC::EnumCharacteristicType).type = ct.oclAsType(DDC::EnumCharacteristicType).type
+		)
+}
+
+query DDC::BehaviorDefinition::lastMatchingAssignment(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : DDC::Assignment {
+	var lastMatchingAssignment : DDC::Assignment;
+	self.assignments->forEach(assignment) {
+		
+		var lhs := assignment.lhs;
+		
+		// no match if pin does not match
+		if (lhs.pin <> pin) {
+			continue
+		};
+		
+		// no match if characteristic type is given but does not match
+		if (not lhs.characteristicType.oclIsUndefined() and lhs.characteristicType <> characteristicType) {
+			continue
+		};
+		
+		// no match if literalis given but does not match
+		if (not lhs._literal.oclIsUndefined() and lhs._literal <> _literal) {
+			continue
+		};
+		
+		var rhsIsIncompatible := false;
+		var termsToValidate : Set(DDC::expressions::Term);
+		termsToValidate += assignment.rhs;
+		while (not rhsIsIncompatible and not termsToValidate->isEmpty()) {
+			var term := termsToValidate->any(true);
+			termsToValidate := termsToValidate->excluding(term);
+			
+			if (term.oclIsKindOf(DDC::expressions::Constant)) {
+				continue
+			} elif (term.oclIsKindOf(DDC::expressions::LogicTerm)) {
+				termsToValidate += term.oclAsType(DDC::expressions::LogicTerm).terms
+			} elif (term.oclIsKindOf(DDC::expressions::DataCharacteristicReference)) {
+				var dataReference := term.oclAsType(DDC::expressions::DataCharacteristicReference);
+				// incompatible if characteristic type is given but does not match
+				rhsIsIncompatible := not dataReference.characteristicType.oclIsUndefined() and not dataReference.characteristicType.isCompatibleTo(characteristicType);
+			} elif (term.oclIsKindOf(DDC::expressions::ContainerCharacteristicReference)) {
+				var containerReference := term.oclAsType(DDC::expressions::ContainerCharacteristicReference);
+				// incompatible if characteristic type is given but does not match
+				// rhsIsIncompatible := not containerReference.characteristicType.oclIsUndefined() and containerReference.characteristicType <> characteristicType;
+				// incompatible if container does not have matching characteristic type
+				var characterizable := owner.oclAsType(DFDC::Characterizable);
+				rhsIsIncompatible := characterizable.characteristics->select(c | c.type.isCompatibleTo(characteristicType))->isEmpty();
+			} else {
+				// incompatible in any case not considered yet
+				rhsIsIncompatible := true;
+			}
+		};
+		
+		if (rhsIsIncompatible) {
+			continue
+		};
+		
+		lastMatchingAssignment := assignment;
+	};
+	
+	return lastMatchingAssignment;
+}
+
+constructor PL::Comment::Comment(comment : String) {
+	value := comment;
+}

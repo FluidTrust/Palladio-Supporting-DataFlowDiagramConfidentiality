@@ -1,6 +1,5 @@
 package org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.provider;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.AdapterFactory;

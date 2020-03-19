@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_YG--oENCEeqz7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_yuQ3811cEequxah3HlaYJg" name="Level" type="_uYrXxF1cEequxah3HlaYJg"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_Kqg1s11dEequxah3HlaYJg" name="AllowedLevel" type="_uYrXxF1cEequxah3HlaYJg"/>
+  <enumerations id="_uYrXxF1cEequxah3HlaYJg" name="Level">
+    <literals id="_w90ODl1cEequxah3HlaYJg" name="High"/>
+    <literals id="_xzDM4F1cEequxah3HlaYJg" name="Low"/>
+  </enumerations>
+  <behaviorDefinitions id="_kgSO9V1fEequxah3HlaYJg" name="Store">
+    <inputs id="_nmGwYF1fEequxah3HlaYJg" name="store.in"/>
+    <outputs id="_DR3s0V1gEequxah3HlaYJg" name="store.out"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

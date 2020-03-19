@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uriMap:MappingContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uriMap="http:///www.eclipse.org/m2m/qvt/oml/MModelUriMap/1.0.0">
+  <mapping sourceURI="http://palladiosimulator.org/dataflow/diagram/characterized/1.0" targetURI="platform:/resource/org.palladiosimulator.dataflow.diagram.characterized/model/DataFlowDiagramCharacterized.ecore"/>
+  <mapping sourceURI="http://palladiosimulator.org/dataflow/diagram/1.0" targetURI="platform:/resource/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore"/>
+  <mapping sourceURI="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" targetURI="platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore"/>
+  <mapping sourceURI="http://palladiosimulator.org/dataflow/dictionary/1.0" targetURI="platform:/resource/org.palladiosimulator.dataflow.dictionary/model/DataDictionary.ecore"/>
+  <mapping sourceURI="http://palladiosimulator.org/supporting/prolog/0.1.0" targetURI="platform:/resource/org.palladiosimulator.supporting.prolog.model/model/prolog.ecore"/>
+</uriMap:MappingContainer>
