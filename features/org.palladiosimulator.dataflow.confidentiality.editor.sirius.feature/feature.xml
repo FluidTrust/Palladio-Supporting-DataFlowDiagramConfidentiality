@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.dataflow.confidentiality.editor.sirius.feature"
+      label="Data Flow Confidentiality Sirius Editors"
+      version="0.1.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license.epl2"
+      license-feature-version="1.0.0">
+
+   <includes
+         id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import feature="org.palladiosimulator.dataflow.diagram.editor.sirius.feature" version="0.1.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.dataflow.diagram.characerized.editor.sirius"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

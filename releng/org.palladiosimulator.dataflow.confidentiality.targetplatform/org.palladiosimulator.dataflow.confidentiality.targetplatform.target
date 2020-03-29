@@ -27,11 +27,11 @@
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-workflowengine/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
-			<unit id="org.palladiosimulator.dataflow.diagram.editor.tree.feature.feature.group" version="tbd"/>
+			<unit id="org.palladiosimulator.dataflow.diagram.editor.sirius.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-dataflowdiagram/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
-			<unit id="org.palladiosimulator.dataflow.diagram.editor.tree.feature.feature.group" version="tbd"/>
+			<unit id="org.palladiosimulator.dataflow.diagram.editor.sirius.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-dataflowdiagram/releases/latest/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">

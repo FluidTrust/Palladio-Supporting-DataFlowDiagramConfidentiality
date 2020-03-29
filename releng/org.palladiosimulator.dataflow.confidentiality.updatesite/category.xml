@@ -6,6 +6,9 @@
    <feature id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature">
       <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
    </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.editor.sirius.feature">
+      <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
+   </feature>
    <feature id="org.palladiosimulator.dataflow.confidentiality.transformation.feature">
       <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
    </feature>
@@ -13,6 +16,9 @@
       <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
    </feature>
    <feature id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature.source">
+      <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
+   </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.editor.sirius.feature.source">
       <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
    </feature>
    <feature id="org.palladiosimulator.dataflow.confidentiality.transformation.feature.source">
