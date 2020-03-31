@@ -35,8 +35,7 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterizedProcess" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Process #//CharacterizedNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedData" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Data #//Characterizable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedDataFlow" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//Edge #//Characterizable">
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterizedDataFlow" eSuperTypes="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#//DataFlowEdge #//Characterizable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="sourcePinIsEntityOutputPin destinationPinIsEntityInputPin sourcePinOwnerMatchesSource destinationPinOwnerMatchesDestination notPartOfLoop"/>
     </eAnnotations>
