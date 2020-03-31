@@ -1,1 +1,1 @@
-# Palladio-Addons-DataFlowConfidentiality
+# Palladio-Supporting-DataFlowConfidentiality
