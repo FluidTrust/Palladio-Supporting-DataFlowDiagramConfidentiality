@@ -1,3 +1,6 @@
+import helpers.TransformationUtils;
+import helpers.bpchecks.BPChecks;
+
 transformation DFD2Prolog(in inputDFD : DFD, out outputProlog : PL);
 
 modeltype DD uses DataDictionary('http://palladiosimulator.org/dataflow/dictionary/1.0');
@@ -20,6 +23,9 @@ main() {
 mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
 	clauses += self.map createTableDirective();
+	clauses += self.map createReadWriteFlowCategorizationHelpers();
+	clauses += self.map createDataDependenciesHelpers();
+	clauses += self.map createDataTypeHelpers();
 	clauses += self.map createFlowSelectionHelpers();
 	clauses += self.map createSetHelpers();
 	clauses += new Comment("");
@@ -60,6 +66,90 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::D
 
 mapping DFD::DataFlowDiagram::createTableDirective() : PL::directives::Table {
 	predicate := new PL::directives::PredicateIndicator("characteristic", 5);
+}
+
+mapping DFD::DataFlowDiagram::createDataTypeHelpers() : List(PL::Clause) {
+	result += new Comment("");
+	result += new Comment("Helper rules to determine transmitted data types from a set of flows");
+	result += new Comment("");
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "transmittedDataTypes";
+			arguments += object PL::_List {};
+			arguments += object PL::_List {};
+		}
+	};
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "transmittedDataTypes";
+			arguments += object PL::CompoundTerm { value := "FLOW" };
+			arguments += object PL::CompoundTerm { value := "FOUND" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::CompoundTerm {
+				value := "dataflow";
+				arguments += object PL::CompoundTerm { value := "FLOW" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "_" };
+			};
+			right := object PL::CompoundTerm {
+				value := "findall";
+				arguments += object PL::CompoundTerm { value := "X" };
+				arguments += object PL::CompoundTerm {
+					value := "dataflowData";
+					arguments += object PL::CompoundTerm { value := "FLOW" };
+					arguments += object PL::CompoundTerm { value := "_" };
+					arguments += object PL::CompoundTerm { value := "_" };
+					arguments += object PL::CompoundTerm { value := "X" };
+				};
+				arguments += object PL::CompoundTerm { value := "FOUND" };
+			};
+		};
+	};
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "transmittedDataTypes";
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "F" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "FOUND" };
+		};
+		var body1 := object PL::CompoundTerm {
+			value := "transmittedDataTypes";
+			arguments += object PL::CompoundTerm { value := "F" };
+			arguments += object PL::CompoundTerm { value := "FFOUND" }; 			
+		};
+		var body2 := object PL::CompoundTerm {
+			value := "transmittedDataTypes";
+			arguments += object PL::CompoundTerm { value := "T" };
+			arguments += object PL::CompoundTerm { value := "TFOUND" }; 			
+		};
+		var body3 := object PL::CompoundTerm {
+			value := "append";
+			arguments += object PL::CompoundTerm { value := "FFOUND" };
+			arguments += object PL::CompoundTerm { value := "TFOUND" };
+			arguments += object PL::CompoundTerm { value := "MERGED" }; 			
+		};
+		var body4 := object PL::CompoundTerm {
+			value := "list_to_set";
+			arguments += object PL::CompoundTerm { value := "MERGED" };
+			arguments += object PL::CompoundTerm { value := "FOUND" };		
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := object PL::expressions::LogicalAnd {
+					left := body1;
+					right := body2;
+				};
+				right := body3;
+			};
+			right := body4;
+		};
+	};
+
 }
 
 mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
@@ -795,15 +885,6 @@ helper OclAny::createCompoundTermFromId() : PL::CompoundTerm {
 	return object PL::CompoundTerm { value := "ID" + identifier.id.toString().toUpperCase() };
 }
 
-constructor PL::AtomicQuotedString::AtomicQuotedString(name : String) {
-	value := name;
-}
-
-constructor PL::directives::PredicateIndicator::PredicateIndicator(name : String, arity : Integer) {
-	result.name := name;
-	result.arity := arity;	
-}
-
 helper createList(headAtom : String, tailAtom : String) : PL::_List {
 	return object PL::_List {
 		heads := new AtomicQuotedString(headAtom);
@@ -904,6 +985,3 @@ query DDC::BehaviorDefinition::lastMatchingAssignment(owner : DDC::Behaving, pin
 	return lastMatchingAssignment;
 }
 
-constructor PL::Comment::Comment(comment : String) {
-	value := comment;
-}
