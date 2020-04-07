@@ -227,7 +227,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 		solution
 	}
 
-	protected def Solution findFlaws(Callable<Solution> solutionProvider) {
+	protected def Solution<Object> findFlaws(Callable<Solution<Object>> solutionProvider) {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
 		builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID)
 		var workflow = builder.build()
