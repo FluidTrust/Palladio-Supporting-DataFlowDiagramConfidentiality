@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionary="http://palladiosimulator.org/dataflow/dictionary/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_Vya04HNvEeqbvrpGxoLSUQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_qYAY0HNvEeqbvrpGxoLSUQ"
+      name="Editor">
+    <ownedBehavior
+        id="_326N8HNvEeqbvrpGxoLSUQ">
+      <outputs
+          id="_4ZkPEXNvEeqbvrpGxoLSUQ"
+          name="phoneBookEntry"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_szmRiXNvEeqbvrpGxoLSUQ"
+      name="validateEntry">
+    <ownedBehavior
+        id="_11cFcHNvEeqbvrpGxoLSUQ">
+      <inputs
+          id="_2VLVcHNvEeqbvrpGxoLSUQ"
+          name="input"/>
+      <outputs
+          id="_2lfpYXNvEeqbvrpGxoLSUQ"
+          name="output"/>
+      <assignments
+          id="_TTyZ0nNwEeqbvrpGxoLSUQ">
+        <lhs
+            id="_lUQVoHNwEeqbvrpGxoLSUQ"
+            pin="_2lfpYXNvEeqbvrpGxoLSUQ"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_mN7vp3NwEeqbvrpGxoLSUQ"
+            pin="_2VLVcHNvEeqbvrpGxoLSUQ"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_wjK6mHNvEeqbvrpGxoLSUQ"
+      name="PhoneBookStore">
+    <ownedBehavior
+        id="_yO_jMHNvEeqbvrpGxoLSUQ">
+      <inputs
+          id="_yucfUHNvEeqbvrpGxoLSUQ"
+          name="input"/>
+      <outputs
+          id="_zCbLQXNvEeqbvrpGxoLSUQ"
+          name="output"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_ptPIFXNwEeqbvrpGxoLSUQ"
+      name="CallCenterEmployee">
+    <ownedBehavior
+        id="_t77WEHNwEeqbvrpGxoLSUQ">
+      <inputs
+          id="_jxfF4HNxEeqbvrpGxoLSUQ"
+          name="numbers"/>
+      <outputs
+          id="_uS3PYXNwEeqbvrpGxoLSUQ"
+          name="query"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_H1acl3NxEeqbvrpGxoLSUQ"
+      name="findPhoneNumbers">
+    <ownedBehavior
+        id="_J5zWMHNxEeqbvrpGxoLSUQ">
+      <inputs
+          id="_KXKnoHNxEeqbvrpGxoLSUQ"
+          name="query"/>
+      <inputs
+          id="_LP0G4HNxEeqbvrpGxoLSUQ"
+          name="phoneBook"/>
+      <outputs
+          id="_MphEwXNxEeqbvrpGxoLSUQ"
+          name="numbers"/>
+      <assignments
+          id="_O99MknNxEeqbvrpGxoLSUQ">
+        <lhs
+            id="_PZUS4HNxEeqbvrpGxoLSUQ"
+            pin="_MphEwXNxEeqbvrpGxoLSUQ"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_QLogp3NxEeqbvrpGxoLSUQ"
+            pin="_LP0G4HNxEeqbvrpGxoLSUQ"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_7DISWXNvEeqbvrpGxoLSUQ"
+      name="EditorToValidate"
+      target="_szmRiXNvEeqbvrpGxoLSUQ"
+      source="_qYAY0HNvEeqbvrpGxoLSUQ"
+      sourcePin="_4ZkPEXNvEeqbvrpGxoLSUQ"
+      targetPin="_2VLVcHNvEeqbvrpGxoLSUQ">
+    <data id="__CfD0HNvEeqbvrpGxoLSUQ"
+        name="phoneBookEntry">
+      <type
+          xsi:type="DataDictionary:CompositeDataType"
+          href="DD_DataTypes.xmi#_f28N0XNvEeqbvrpGxoLSUQ"/>
+    </data>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_MpAj63NwEeqbvrpGxoLSUQ"
+      name="ValidateToStore"
+      target="_wjK6mHNvEeqbvrpGxoLSUQ"
+      source="_szmRiXNvEeqbvrpGxoLSUQ"
+      sourcePin="_2lfpYXNvEeqbvrpGxoLSUQ"
+      targetPin="_yucfUHNvEeqbvrpGxoLSUQ">
+    <data id="_Q0tIQHNwEeqbvrpGxoLSUQ"
+        name="phoneBookEntry">
+      <type
+          xsi:type="DataDictionary:CompositeDataType"
+          href="DD_DataTypes.xmi#_f28N0XNvEeqbvrpGxoLSUQ"/>
+    </data>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_U29nW3NxEeqbvrpGxoLSUQ"
+      name="EmployeeToQuery"
+      target="_H1acl3NxEeqbvrpGxoLSUQ"
+      source="_ptPIFXNwEeqbvrpGxoLSUQ"
+      sourcePin="_uS3PYXNwEeqbvrpGxoLSUQ"
+      targetPin="_KXKnoHNxEeqbvrpGxoLSUQ">
+    <data id="_Y10pkHNxEeqbvrpGxoLSUQ"
+        name="query">
+      <type
+          xsi:type="DataDictionary:PrimitiveDataType"
+          href="DD_DataTypes.xmi#_cjk_onNvEeqbvrpGxoLSUQ"/>
+    </data>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_aEW5S3NxEeqbvrpGxoLSUQ"
+      name="QueryToEmployee"
+      target="_ptPIFXNwEeqbvrpGxoLSUQ"
+      source="_H1acl3NxEeqbvrpGxoLSUQ"
+      sourcePin="_MphEwXNxEeqbvrpGxoLSUQ"
+      targetPin="_jxfF4HNxEeqbvrpGxoLSUQ">
+    <data id="_rHnl8HNxEeqbvrpGxoLSUQ"
+        name="numbers">
+      <type
+          xsi:type="DataDictionary:CollectionDataType"
+          href="DD_DataTypes.xmi#_dyPLIHNvEeqbvrpGxoLSUQ"/>
+    </data>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_mShfSnNxEeqbvrpGxoLSUQ"
+      name="StoreToQuery"
+      target="_H1acl3NxEeqbvrpGxoLSUQ"
+      source="_wjK6mHNvEeqbvrpGxoLSUQ"
+      sourcePin="_zCbLQXNvEeqbvrpGxoLSUQ"
+      targetPin="_LP0G4HNxEeqbvrpGxoLSUQ">
+    <data id="_pYLBkHNxEeqbvrpGxoLSUQ"
+        name="phoneBook">
+      <type
+          xsi:type="DataDictionary:CollectionDataType"
+          href="DD_DataTypes.xmi#_mnSgQHNvEeqbvrpGxoLSUQ"/>
+    </data>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>

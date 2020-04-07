@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionary="http://palladiosimulator.org/dataflow/dictionary/1.0" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_NmYnkHNvEeqbvrpGxoLSUQ">
+  <entries xsi:type="DataDictionary:PrimitiveDataType" id="_auP1sHNvEeqbvrpGxoLSUQ" name="int"/>
+  <entries xsi:type="DataDictionary:PrimitiveDataType" id="_cjk_onNvEeqbvrpGxoLSUQ" name="string"/>
+  <entries xsi:type="DataDictionary:CollectionDataType" id="_dyPLIHNvEeqbvrpGxoLSUQ" name="IntArray" type="_auP1sHNvEeqbvrpGxoLSUQ"/>
+  <entries xsi:type="DataDictionary:CompositeDataType" id="_f28N0XNvEeqbvrpGxoLSUQ" name="PhoneBookEntry">
+    <components id="_hzQJgHNvEeqbvrpGxoLSUQ" type="_cjk_onNvEeqbvrpGxoLSUQ" name="name"/>
+    <components id="_i8wIMHNvEeqbvrpGxoLSUQ" type="_auP1sHNvEeqbvrpGxoLSUQ" name="phoneNumber"/>
+  </entries>
+  <entries xsi:type="DataDictionary:CollectionDataType" id="_mnSgQHNvEeqbvrpGxoLSUQ" name="PhoneBook" type="_f28N0XNvEeqbvrpGxoLSUQ"/>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

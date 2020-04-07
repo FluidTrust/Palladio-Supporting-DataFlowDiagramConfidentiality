@@ -25,7 +25,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
-	clauses += self.getUsedDataTypes()-> map dataTypeToFact();
+	clauses += self.getUsedDataTypes()-> map dataTypeToFacts()->flatten();
 	clauses += self.getUsedCharacteristicTypes(true, true)-> map characteristicTypeToFact()->flatten();
 	clauses += new Comment("");
 	clauses += new Comment("Nodes");
@@ -44,7 +44,12 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::D
 	predicates += new PL::directives::PredicateIndicator("characteristic", 5);
 	predicates += new PL::directives::PredicateIndicator("characteristicType", 1);
 	predicates += new PL::directives::PredicateIndicator("characteristicTypeValue", 2);
+	predicates += new PL::directives::PredicateIndicator("collectionDataType", 2);
+	predicates += new PL::directives::PredicateIndicator("compositeDataType", 1);
+	predicates += new PL::directives::PredicateIndicator("compositeDataTypeEntry", 3);
 	predicates += new PL::directives::PredicateIndicator("dataflow", 5);
+	predicates += new PL::directives::PredicateIndicator("dataflowData", 4);
+	predicates += new PL::directives::PredicateIndicator("dataType", 1);
 	predicates += new PL::directives::PredicateIndicator("inputPin", 2);
 	predicates += new PL::directives::PredicateIndicator("nodeCharacteristic", 3);
 	predicates += new PL::directives::PredicateIndicator("outputPin", 2);
@@ -637,6 +642,49 @@ mapping DDC::Literal::enumCharacteristicTypeLiteralToFactHead(owner : DDC::EnumC
 
 
 // data types
+mapping DD::DataType::dataTypeToFacts() : List(PL::Clause)
+disjuncts
+	DD::PrimitiveDataType::dataTypeToFacts,
+	DD::CollectionDataType::dataTypeToFacts,
+	DD::CompositeDataType::dataTypeToFacts
+{
+}
+
+mapping DD::PrimitiveDataType::dataTypeToFacts() : List(PL::Clause) {
+	result += self.map dataTypeToFact();
+}
+
+mapping DD::CollectionDataType::dataTypeToFacts() : List(PL::Clause) {
+	result += self.map dataTypeToFact();
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "collectionDataType";
+			arguments += new AtomicQuotedString(self.uniqueName());
+			arguments += new AtomicQuotedString(self.type.uniqueName());
+		};
+	};
+}
+
+mapping DD::CompositeDataType::dataTypeToFacts() : List(PL::Clause) {
+	result += self.map dataTypeToFact();
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "compositeDataType";
+			arguments += new AtomicQuotedString(self.uniqueName());
+		};
+	};
+	result += self.components->map compositeDataTypeEntryToFact(self);
+}
+
+mapping DD::Entry::compositeDataTypeEntryToFact(parent : DD::CompositeDataType) : PL::Fact {
+	head := object PL::CompoundTerm {
+		value := "compositeDataTypeEntry";
+		arguments += new AtomicQuotedString(parent.uniqueName());
+		arguments += new AtomicQuotedString(self.name);
+		arguments += new AtomicQuotedString(self.type.uniqueName());
+	};
+}
+
 mapping DD::DataType::dataTypeToFact() : PL::Fact {
 	head := self.map dataTypeToFactHead();
 }
@@ -660,9 +708,8 @@ disjuncts
 
 mapping DFDC::CharacterizedDataFlow::dataFlowToClause() : List(PL::Clause) {
 	result += self.map dataFlowToFact();
+	result += self.data->map dataToFact(self);
 }
-
-
 
 mapping DFDC::CharacterizedDataFlow::dataFlowToFact() : PL::Fact {
 	head := self.map dataFlowToFactHead();
@@ -675,6 +722,16 @@ mapping DFDC::CharacterizedDataFlow::dataFlowToFactHead() : PL::CompoundTerm {
 	arguments += new AtomicQuotedString(self.sourcePin.uniqueName());
 	arguments += new AtomicQuotedString(self.target.uniqueName());
 	arguments += new AtomicQuotedString(self.targetPin.uniqueName());
+}
+
+mapping DFD::Data::dataToFact(dataFlow : DFD::DataFlowEdge) : PL::Fact {
+	head := object PL::CompoundTerm {
+		value := "dataflowData";
+		arguments += new AtomicQuotedString(dataFlow.uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+		arguments += new AtomicQuotedString(self.name);
+		arguments += new AtomicQuotedString(self.type.uniqueName());
+	}
 }
 
 // utilities
@@ -697,7 +754,16 @@ query DFD::DataFlowDiagram::getUsedCharacteristicTypes(considerAssignments : Boo
 }
 
 query DFD::DataFlowDiagram::getUsedDataTypes() : OrderedSet(DD::DataType) {
-	return self.allSubobjectsOfType(DFD::DataFlow).data->flatten().type->asOrderedSet()->sortedBy(uniqueName());
+	return self.allSubobjectsOfKind(DFD::DataFlowEdge).data->flatten().type->getUsedDataTypes()->flatten()->asOrderedSet()->sortedBy(uniqueName());
+}
+
+query DD::DataType::getUsedDataTypes() : Set(DD::DataType) {
+	var foundTypes := self->selectByKind(DD::CollectionDataType).type->asSet()->union(
+				self->selectByKind(DD::CompositeDataType).components.type->asSet()
+			);
+	foundTypes := foundTypes->closure(getUsedDataTypes());
+	foundTypes := foundTypes->including(self);
+	return foundTypes;
 }
 
 query OclAny::uniqueName() : String {
