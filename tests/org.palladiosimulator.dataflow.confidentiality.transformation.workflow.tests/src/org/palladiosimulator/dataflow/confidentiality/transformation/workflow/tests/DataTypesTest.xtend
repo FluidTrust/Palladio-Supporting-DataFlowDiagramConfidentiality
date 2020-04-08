@@ -40,7 +40,6 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 		workflow.run()
 		var result = workflow.getSerializedPrologProgram()
 		assertFalse(result.isEmpty())
-		println(result)
 		
 		prover.loadTheory(result.get())
 	}
