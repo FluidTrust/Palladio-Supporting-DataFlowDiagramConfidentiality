@@ -105,7 +105,7 @@ mapping DFD::DataFlowDiagram::createReadWriteFlowCategorizationHelpers() : List(
 			right := object PL::CompoundTerm {
 				value := "writeFlows";
 				arguments += object PL::CompoundTerm { value := "T" };
-				arguments += object PL::CompoundTerm { value := "RECURSEFLOWS" };
+				arguments += object PL::CompoundTerm { value := "WRITEFLOWS" };
 			};
 		};
 	};
@@ -343,7 +343,7 @@ mapping DFD::DataFlowDiagram::createDataDependenciesHelpers() : List(PL::Clause)
 helper createSkipAssociatedFlowsRule(nodeType : String, nodeTypeArity : Integer) : PL::Rule {
 	var ignoredArgumentsList : OrderedSet(PL::CompoundTerm);
 	var cnt := nodeTypeArity - 1;
-	while (cnt >= 0) {
+	while (cnt > 0) {
 		cnt := cnt - 1;
 		ignoredArgumentsList += object PL::CompoundTerm { value := "_" };
 	};

@@ -47,6 +47,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::Discontiguous {
 	name := "discontiguous";
 	predicates += new PL::directives::PredicateIndicator("actor", 1);
+	predicates += new PL::directives::PredicateIndicator("actorProcess", 2);
 	predicates += new PL::directives::PredicateIndicator("characteristic", 5);
 	predicates += new PL::directives::PredicateIndicator("characteristicType", 1);
 	predicates += new PL::directives::PredicateIndicator("characteristicTypeValue", 2);
@@ -392,8 +393,8 @@ mapping DFD::DataFlowDiagram::createSetHelpers() : List(PL::Clause) {
 
 mapping DFD::Node::nodeToClause() : List(PL::Clause)
 disjuncts 
-	DFDC::CharacterizedProcess::processToClause,
     DFDC::CharacterizedActorProcess::actorProcessToClause,
+    DFDC::CharacterizedProcess::processToClause,
     DFDC::CharacterizedExternalActor::externalActorToClause,
     DFDC::CharacterizedStore::storeToClause
 {
@@ -443,7 +444,7 @@ merges DFDC::CharacterizedProcess::processToClause
 }
 
 mapping DFDC::CharacterizedActorProcess::actorProcessToFact() : PL::Fact {
-	head := self.map processToFactHead();
+	head := self.map actorProcessToFactHead();
 }
 
 mapping DFDC::CharacterizedActorProcess::actorProcessToFactHead() : PL::CompoundTerm {
