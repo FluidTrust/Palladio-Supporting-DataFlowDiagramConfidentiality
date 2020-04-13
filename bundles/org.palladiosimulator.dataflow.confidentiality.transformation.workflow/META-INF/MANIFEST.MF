@@ -11,4 +11,6 @@ Require-Bundle: de.uka.ipd.sdq.workflow;bundle-version="4.2.0",
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.palladiosimulator.dataflow.confidentiality.transformation.workflow.impl.Activator
 Import-Package: org.apache.commons.lang3;version="3.1.0"
-Export-Package: org.palladiosimulator.dataflow.confidentiality.transformation.workflow
+Export-Package: org.palladiosimulator.dataflow.confidentiality.transformation.workflow,
+ org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards,
+ org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs

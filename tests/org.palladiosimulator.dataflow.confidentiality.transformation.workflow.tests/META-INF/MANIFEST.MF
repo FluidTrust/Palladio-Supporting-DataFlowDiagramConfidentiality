@@ -15,4 +15,7 @@ Require-Bundle: org.eclipse.ocl.ecore,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro
+ org.eclipse.xtend.lib.macro,
+ tools.mdsd.library.standalone.initialization;bundle-version="0.1.0",
+ tools.mdsd.library.standalone.initialization.log4j;bundle-version="0.1.0",
+ org.palladiosimulator.supporting.prolog.ui;bundle-version="4.2.0"

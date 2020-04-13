@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.DFDTransformationBlackboard;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.impl.TransformDFDToPrologWorkflowImpl;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.CopyModelJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.LoadModelJob;
@@ -32,7 +32,8 @@ public class TransformationWorkflowBuilder {
 	private static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
 	private static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
 	private static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
-	private final DFDTransformationBlackboard blackboard = new DFDTransformationBlackboard();
+	private static final String DEFAULT_PROLOG_KEY = "prolog";
+	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
 	private final Collection<IJob> serializationJobs = new ArrayList<>();
 	private ModelLocation dfdLocation;
 	private WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
@@ -81,7 +82,7 @@ public class TransformationWorkflowBuilder {
 	
 	public TransformationWorkflowBuilder addSerializeToString(Map<Object, Object> saveOptions) {
 		serializationJobs.removeIf(SerializeModelToStringJob.class::isInstance);
-		var serializeJob = new SerializeModelToStringJob(DEFAULT_PROLOG_LOCATION, saveOptions);
+		var serializeJob = new SerializeModelToStringJob(DEFAULT_PROLOG_LOCATION, saveOptions, DEFAULT_PROLOG_KEY);
 		serializationJobs.add(serializeJob);
 		return this;
 	}
@@ -125,6 +126,6 @@ public class TransformationWorkflowBuilder {
 		jobSequence.addAll(serializationJobs);
 		
 		// create workflow
-		return new TransformDFDToPrologWorkflowImpl(jobSequence, progressMonitor, workflowExceptionHandler, blackboard);
+		return new TransformDFDToPrologWorkflowImpl(jobSequence, progressMonitor, workflowExceptionHandler, blackboard, DEFAULT_PROLOG_KEY);
 	}
 }

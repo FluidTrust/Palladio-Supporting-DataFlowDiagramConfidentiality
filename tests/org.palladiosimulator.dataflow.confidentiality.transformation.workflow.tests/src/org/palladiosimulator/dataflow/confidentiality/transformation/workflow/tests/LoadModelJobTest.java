@@ -2,7 +2,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.URIHelper.getRelativeURI;
+import static org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.StandaloneUtil.getRelativeURI;
 
 import java.util.List;
 
@@ -12,19 +12,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.LoadModelJob;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.StandaloneInitializer;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.StandaloneUtil;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.ModelLocation;
+import tools.mdsd.library.standalone.initialization.StandaloneInitializationException;
 
 public class LoadModelJobTest {
 
 	@BeforeAll
-	public static void init() {
-		StandaloneInitializer.init();
+	public static void init() throws StandaloneInitializationException {
+		StandaloneUtil.init();
 	}
 	
 	@Test

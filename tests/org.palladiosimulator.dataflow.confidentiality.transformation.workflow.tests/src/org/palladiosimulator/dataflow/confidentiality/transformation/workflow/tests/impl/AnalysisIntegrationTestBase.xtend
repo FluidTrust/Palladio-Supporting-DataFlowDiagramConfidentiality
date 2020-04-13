@@ -4,8 +4,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.TransformationWorkflowBuilder
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.StandaloneInitializer
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.URIHelper
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util.StandaloneUtil
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterized
 import org.prolog4j.IProverFactory
@@ -29,7 +28,7 @@ class AnalysisIntegrationTestBase {
 	
 	@BeforeAll
 	static def void init() {
-		StandaloneInitializer.init();
+		StandaloneUtil.init();
 		proverFactory = new TuPrologProverFactory()
 		
 	}
@@ -90,7 +89,7 @@ class AnalysisIntegrationTestBase {
 //	}
 
 	protected static def getRelativeURI(String path) {
-		return URIHelper.getRelativeURI(path)
+		return StandaloneUtil.getRelativeURI(path)
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+@Deprecated
 public class SerializerUtils {
 
 	public static void serializeString(String filename, String value) throws IOException {

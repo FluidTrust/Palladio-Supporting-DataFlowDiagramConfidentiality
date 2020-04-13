@@ -35,11 +35,11 @@
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-dataflowdiagram/releases/latest/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
-			<unit id="org.palladiosimulator.supporting.prolog.serializer.feature.feature.group" version="tbd"/>
+			<unit id="org.palladiosimulator.supporting.prolog.ui.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
-			<unit id="org.palladiosimulator.supporting.prolog.serializer.feature.feature.group" version="tbd"/>
+			<unit id="org.palladiosimulator.supporting.prolog.ui.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
@@ -49,6 +49,14 @@
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
 			<unit id="org.prolog4j.tuprolog.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog4j/releases/latest"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
+			<unit id="tools.mdsd.library.standalone.initialization.log4j.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.mdsd.tools/library-standaloneinitialization/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
+			<unit id="tools.mdsd.library.standalone.initialization.log4j.feature.feature.group" version="tbd"/>
+			<repository location="https://updatesite.mdsd.tools/library-standaloneinitialization/releases/latest"/>
 		</location>
 	</locations>
 </target>

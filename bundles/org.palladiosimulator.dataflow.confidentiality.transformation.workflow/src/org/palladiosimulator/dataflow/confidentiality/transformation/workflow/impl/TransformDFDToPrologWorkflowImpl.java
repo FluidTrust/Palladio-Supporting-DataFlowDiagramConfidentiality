@@ -4,36 +4,40 @@ import java.util.Optional;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.TransformDFDToPrologWorkflow;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.DFDTransformationBlackboard;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 
 import de.uka.ipd.sdq.workflow.BlackboardBasedWorkflow;
 import de.uka.ipd.sdq.workflow.WorkflowExceptionHandler;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 
-public class TransformDFDToPrologWorkflowImpl extends BlackboardBasedWorkflow<DFDTransformationBlackboard> implements TransformDFDToPrologWorkflow {
+public class TransformDFDToPrologWorkflowImpl extends BlackboardBasedWorkflow<KeyValueMDSDBlackboard> implements TransformDFDToPrologWorkflow {
 
-	private final DFDTransformationBlackboard blackboard;
+	private final KeyValueMDSDBlackboard blackboard;
+    private final String serializedProgramKey;
 	
-	public TransformDFDToPrologWorkflowImpl(IJob job, DFDTransformationBlackboard blackboard) {
+	public TransformDFDToPrologWorkflowImpl(IJob job, KeyValueMDSDBlackboard blackboard, String serializedProgramKey) {
 		super(job, blackboard);
 		this.blackboard = blackboard;
+		this.serializedProgramKey = serializedProgramKey;
 	}
 
 	public TransformDFDToPrologWorkflowImpl(IJob job, IProgressMonitor monitor, WorkflowExceptionHandler handler,
-			DFDTransformationBlackboard blackboard) {
+	        KeyValueMDSDBlackboard blackboard, String serializedProgramKey) {
 		super(job, monitor, handler, blackboard);
 		this.blackboard = blackboard;
+		this.serializedProgramKey = serializedProgramKey;
 	}
 
 	public TransformDFDToPrologWorkflowImpl(IJob job, WorkflowExceptionHandler handler,
-			DFDTransformationBlackboard blackboard) {
+	        KeyValueMDSDBlackboard blackboard, String serializedProgramKey) {
 		super(job, handler, blackboard);
 		this.blackboard = blackboard;
+		this.serializedProgramKey = serializedProgramKey;
 	}
 
 	@Override
 	public Optional<String> getSerializedPrologProgram() {
-		return Optional.ofNullable(blackboard.getValue());
+		return blackboard.get(serializedProgramKey).map(String.class::cast);
 	}
 
 }
