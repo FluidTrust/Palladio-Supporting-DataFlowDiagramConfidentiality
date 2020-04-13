@@ -65,7 +65,7 @@ public class LoadExistingModelsJob<T extends MDSDBlackboard> extends LoadModelJo
 
     @Override
     protected ResourceSetPartition loadModel(ModelLocation modelLocation) throws JobFailedException {
-        Optional<List<EObject>> modelContent = Optional.ofNullable(modelContents.get(modelLocation));
+        Optional<List<EObject>> modelContent = Optional.ofNullable(modelContents.get(modelLocation)).filter(content -> !content.isEmpty());
         if (modelContent.isPresent()) {
             ResourceSetPartition partition = getPartition(modelLocation);
             partition.setContents(modelLocation.getModelID(), modelContent.get());
