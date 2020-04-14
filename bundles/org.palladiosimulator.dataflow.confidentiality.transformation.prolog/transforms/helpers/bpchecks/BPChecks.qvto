@@ -7,7 +7,7 @@ modeltype PL uses prolog('http://palladiosimulator.org/supporting/prolog/0.1.0')
 
 mapping DFD::DataFlowDiagram::createReadWriteFlowCategorizationHelpers() : List(PL::Clause) {
 	result += new Comment("");
-	result += new Comment("Helper rules to classify data flows as read/write");
+	result += new Comment("Helper rules to classify data flows as read or write");
 	result += new Comment("");
 	result += object PL::Rule {
 		head := object PL::CompoundTerm {
@@ -121,13 +121,78 @@ mapping DFD::DataFlowDiagram::createDataDependenciesHelpers() : List(PL::Clause)
 			arguments += object PL::CompoundTerm { value := "N" };
 			arguments += object PL::CompoundTerm { value := "CLOSURE" };
 		};
-		body := object PL::CompoundTerm {
+		var directNodesTerm := object PL::CompoundTerm {
+			value := "directAssociatedNodes";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "NODES" };
+		};
+		var associatedFlowsTerm := object PL::CompoundTerm {
 			value := "associatedFlows";
 			arguments += object PL::_List {
 				heads += object PL::CompoundTerm { value := "N" };
+				tails += object PL::CompoundTerm { value := "NODES" };
 			};
 			arguments += object PL::_List {};
 			arguments += object PL::CompoundTerm { value := "CLOSURE" };
+		};
+		
+		body := object PL::expressions::LogicalAnd {
+			left := directNodesTerm;
+			right := associatedFlowsTerm;
+		};
+	};
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "directAssociatedNodes";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "NODES" };
+		};
+		var findDstNodesTerm := object PL::CompoundTerm {
+			value := "findall";
+			arguments += object PL::CompoundTerm { value := "X" };
+			arguments += object PL::CompoundTerm {
+				value := "dataflow";
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "N" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "X" };
+				arguments += object PL::CompoundTerm { value := "_" };
+			};
+			arguments += object PL::CompoundTerm { value := "DSTNODES" };
+		};
+		var findSrcNodesTerm := object PL::CompoundTerm {
+			value := "findall";
+			arguments += object PL::CompoundTerm { value := "Y" };
+			arguments += object PL::CompoundTerm {
+				value := "dataflow";
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "Y" };
+				arguments += object PL::CompoundTerm { value := "_" };
+				arguments += object PL::CompoundTerm { value := "N" };
+				arguments += object PL::CompoundTerm { value := "_" };
+			};
+			arguments += object PL::CompoundTerm { value := "SRCNODES" };
+		};
+		var mergeTerm := object PL::CompoundTerm {
+			value := "append";
+			arguments += object PL::CompoundTerm { value := "DSTNODES" };
+			arguments += object PL::CompoundTerm { value := "SRCNODES" };
+			arguments += object PL::CompoundTerm { value := "TMP" };
+		};
+		var setTerm := object PL::CompoundTerm {
+			value := "list_to_set";
+			arguments += object PL::CompoundTerm { value := "TMP" };
+			arguments += object PL::CompoundTerm { value := "NODES" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := object PL::expressions::LogicalAnd {
+					left := findDstNodesTerm;
+					right := findSrcNodesTerm;
+				};
+				right := mergeTerm;
+			};
+			right := setTerm;
 		};
 	};
 	result += object PL::Rule {
