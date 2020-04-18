@@ -14,6 +14,7 @@ import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.conf
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.impl.TransformDFDToPrologWorkflowImpl;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.CopyModelJob;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.DFDToPrologTraceCreationJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.LoadModelJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.SerializeModelToStringJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.TransformDFDToPrologJob;
@@ -32,6 +33,8 @@ public class TransformationWorkflowBuilder {
 	private static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
 	private static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
 	private static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
+	private static final ModelLocation DEFAULT_TRACE_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.trace"));
+	private static final String DEFAULT_TRACE_KEY = "trace";
 	private static final String DEFAULT_PROLOG_KEY = "prolog";
 	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
 	private final Collection<IJob> serializationJobs = new ArrayList<>();
@@ -105,27 +108,33 @@ public class TransformationWorkflowBuilder {
 		return this;
 	}
 	
-	public TransformDFDToPrologWorkflow build() {
-		// validate state
-		Validate.validState(dfdLocation != null, "A DFD diagram has to be given");
-		Validate.validState(!serializationJobs.isEmpty(), "At least one serialization option has to be given");
-		
-		// create job sequence
-		var jobSequence = new SequentialBlackboardInteractingJob<>("DFD to Prolog Transformation");
-		
-		// add model loading job
-		var loadDFDJob = new LoadModelJob<>(dfdLocation);
-		jobSequence.add(loadDFDJob);
-		
-		// create transformation job
-		blackboard.addPartition(DEFAULT_PROLOG_LOCATION.getPartitionID(), new ResourceSetPartition());
-		var transformJob = new TransformDFDToPrologJob(dfdLocation, DEFAULT_PROLOG_LOCATION, nameDerivationMethod);
-		jobSequence.add(transformJob);
-		
-		// create serialization job
-		jobSequence.addAll(serializationJobs);
-		
-		// create workflow
-		return new TransformDFDToPrologWorkflowImpl(jobSequence, progressMonitor, workflowExceptionHandler, blackboard, DEFAULT_PROLOG_KEY);
-	}
+    public TransformDFDToPrologWorkflow build() {
+        // validate state
+        Validate.validState(dfdLocation != null, "A DFD diagram has to be given");
+        Validate.validState(!serializationJobs.isEmpty(), "At least one serialization option has to be given");
+
+        // create job sequence
+        var jobSequence = new SequentialBlackboardInteractingJob<>("DFD to Prolog Transformation");
+
+        // add model loading job
+        var loadDFDJob = new LoadModelJob<>(dfdLocation);
+        jobSequence.add(loadDFDJob);
+
+        // create transformation job
+        blackboard.addPartition(DEFAULT_PROLOG_LOCATION.getPartitionID(), new ResourceSetPartition());
+        var transformJob = new TransformDFDToPrologJob(dfdLocation, DEFAULT_PROLOG_LOCATION, DEFAULT_TRACE_LOCATION,
+                nameDerivationMethod);
+        jobSequence.add(transformJob);
+
+        // create trace transformation job
+        var traceJob = new DFDToPrologTraceCreationJob<>(DEFAULT_TRACE_LOCATION, DEFAULT_TRACE_KEY);
+        jobSequence.add(traceJob);
+
+        // create serialization job
+        jobSequence.addAll(serializationJobs);
+
+        // create workflow
+        return new TransformDFDToPrologWorkflowImpl(jobSequence, progressMonitor, workflowExceptionHandler, blackboard,
+                DEFAULT_PROLOG_KEY, DEFAULT_TRACE_KEY);
+    }
 }
