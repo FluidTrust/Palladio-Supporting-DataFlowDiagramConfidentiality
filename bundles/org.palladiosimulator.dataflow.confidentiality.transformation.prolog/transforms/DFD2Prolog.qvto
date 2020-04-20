@@ -1,7 +1,7 @@
 import helpers.TransformationUtils;
 import helpers.bpchecks.BPChecks;
 
-transformation DFD2Prolog(in inputDFD : DFD, out outputProlog : PL);
+transformation DFD2Prolog(in inputDFD : DFD, in inputDefaultCharacteristics : DFDC, out outputProlog : PL);
 
 modeltype DD uses DataDictionary('http://palladiosimulator.org/dataflow/dictionary/1.0');
 modeltype DDC uses DataDictionaryCharacterized('http://palladiosimulator.org/dataflow/dictionary/characterized/1.0');
@@ -13,9 +13,14 @@ modeltype ECORE uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
 configuration property QualifiedNameDerivation : String;
 
+property defaultCharacteristicsDictionary : DDC::DataDictionaryCharacterized;
+
 main() {
 	var dfds := inputDFD.rootObjects()[DFD::DataFlowDiagram];
 	assert fatal (dfds->size() = 1);
+	var defaultCharacteristics := inputDefaultCharacteristics.rootObjects()[DDC::DataDictionaryCharacterized];
+	assert fatal (defaultCharacteristics->size() = 1);
+	defaultCharacteristicsDictionary := defaultCharacteristics->any(true);
 
 	dfds->map diagramToProgram();
 }
@@ -23,16 +28,17 @@ main() {
 mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
 	clauses += self.map createTableDirective();
-	clauses += self.map createReadWriteFlowCategorizationHelpers();
-	clauses += self.map createDataDependenciesHelpers();
-	clauses += self.map createDataTypeHelpers();
+//	clauses += self.map createReadWriteFlowCategorizationHelpers();
+//	clauses += self.map createDataDependenciesHelpers();
+//	clauses += self.map createDataTypeHelpers();
 	clauses += self.map createFlowSelectionHelpers();
 	clauses += self.map createSetHelpers();
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
 	clauses += self.getUsedDataTypes()-> map dataTypeToFacts()->flatten();
-	clauses += self.getUsedCharacteristicTypes(true, true)-> map characteristicTypeToFact()->flatten();
+	getNodesEnum().literals += self.nodes->map nodeToEnumLiteral(); // temporarily modifies literals in default enumeration
+	clauses += self.getUsedCharacteristicTypes(true, true, true)-> map characteristicTypeToFact()->flatten();
 	clauses += new Comment("");
 	clauses += new Comment("Nodes");
 	clauses += new Comment("");
@@ -42,7 +48,6 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += new Comment("");
 	clauses += self.edges->map edgeToClause()->flatten();
 }
-
 
 mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::Discontiguous {
 	name := "discontiguous";
@@ -670,13 +675,101 @@ mapping DDC::Behaving::behavingToWhatever() : List(PL::Clause) {
 	result += self.behavior.inputs->map inputPinToCharacteristicRule(self);
 	result += self.behavior.outputs->map outputPinToFact(self);
 	
-	self.getAllUsedEnumCharacteristicTypes(true, false)->forEach(ct) {
+	self.getAllUsedEnumCharacteristicTypes(true, false, false)->forEach(ct) {
 		ct.type.literals->forEach(l) {
 			self.behavior.outputs->forEach(pin) {
 				result += self.behavior.map behaviorToAssignment(self, pin, ct, l);
 			}
 		}
+	};
+	
+	// defaults calculation
+	self.getAllUsedEnumCharacteristicTypes(false, false, true)->forEach(ct) {
+		ct.type.literals->forEach(l) {
+			self.behavior.outputs->forEach(pin) {
+				result += self.behavior.map behaviorToAssignmentForDefaults(self, pin, ct, l);
+			}
+		}
+	};
+}
+
+// default characteristics behavior
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForDefaults(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+merges
+	DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesSelf,
+	DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthers//,
+//	DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthersForStores
+{
+}
+
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesSelf(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+when { characteristicType = getVisitedNodesCharacteristicType() and _literal = owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
+{
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, false);
+	body := object PL::True {};
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthers(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
+{
+	var referencedInputPins := self.assignments.rhs.allSubobjects()->union(self.assignments.rhs)->selectByKind(DDC::expressions::DataCharacteristicReference).pin->asSet()->sortedBy(id);
+	var hasReferences := not referencedInputPins->isEmpty();
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasReferences);
+
+	if(not hasReferences) {
+		body := object PL::Fail {};
+	} else {
+		var firstPin = referencedInputPins->at(1);
+		var remainingPins = referencedInputPins->excluding(firstPin)->sortedBy(id);
+		body := firstPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, remainingPins);
 	}
+	
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthersForStores(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
+when { owner.oclIsKindOf(DFDC::CharacterizedStore) and characteristicType = getVisitedNodesCharacteristicType() and _literal <> owner.oclAsType(DFD::Node).map nodeToEnumLiteral()}
+{
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
+	
+	assert fatal (self.inputs->size() = 1);
+	var inputPin := self.inputs->any(true);
+	var emptySet := self.inputs->excluding(inputPin)->sortedBy(name);
+	body := inputPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, _emptySet);
+}
+
+mapping DDC::Pin::referencedPinToReferenceForVisitedNodes(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, remainingPins : OrderedSet(DDC::Pin)) : PL::expressions::LogicalOr
+disjuncts
+	DDC::Pin::referencedPinToReferenceForVisitedNodesWithRemainingPins,
+	DDC::Pin::referencedPinToReferenceForVisitedNodesNoRemainingPins
+{
+}
+
+mapping DDC::Pin::referencedPinToReferenceForVisitedNodesWithRemainingPins(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, remainingPins : OrderedSet(DDC::Pin)) : PL::expressions::LogicalOr
+when {remainingPins->size() > 0}
+{
+	assert fatal (remainingPins->excludes(self));
+	var nextPin := remainingPins->at(1);
+	var newRemainingPins := remainingPins->excluding(nextPin)->sortedBy(id);
+	left := nextPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, newRemainingPins);
+	var dummy := createDummyIdentifier(remainingPins->including(self));
+	right := self.map sourcePinToTerm(owner, characteristicType, _literal, dummy);
+}
+
+mapping DDC::Pin::referencedPinToReferenceForVisitedNodesNoRemainingPins(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, remainingPins : OrderedSet(DDC::Pin)) : PL::expressions::LogicalOr
+when {remainingPins->size() = 0}
+{
+	var dummy := createDummyIdentifier(remainingPins->including(self));
+	left := self.map sourcePinToTerm(owner, characteristicType, _literal, dummy);
+	right := object PL::False {};
+}
+
+query createDummyIdentifier(pins : Collection(DDC::Pin)) : Element {
+	var identifier = "";
+	pins.id->forEach(id) {
+		identifier := identifier + id
+	};
+	return new AtomicQuotedString(identifier);
 }
 
 // enum characteristics
@@ -712,7 +805,7 @@ mapping DDC::EnumCharacteristicType::characteristicTypeToFact() : List(PL::Fact)
 	result += self.type.literals->map enumCharacteristicTypeLiteralToFact(self);
 }
 
-mapping DDC::EnumCharacteristicType::enumCharacteristicTypeToFact() :PL::Fact {
+mapping DDC::EnumCharacteristicType::enumCharacteristicTypeToFact() : PL::Fact {
 	head := self.map enumCharacteristicTypeToFactHead();
 }
 
@@ -785,6 +878,10 @@ mapping DD::DataType::dataTypeToFactHead() : PL::CompoundTerm {
 	arguments += new AtomicQuotedString(self.uniqueName());
 }
 
+mapping DFD::Node::nodeToEnumLiteral() : DDC::Literal {
+	id := "NodeEnumLiteral_" + self.name;
+	name := self.name;
+}
 
 
 // Edges
@@ -827,21 +924,22 @@ mapping DFD::Data::dataToFact(dataFlow : DFD::DataFlowEdge) : PL::Fact {
 
 // utilities
 
-query Element::getAllUsedEnumCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::EnumCharacteristicType) {
-	return self.getAllUsedCharacteristicTypes(considerAssignments, considerCharacteristics)->selectByKind(DDC::EnumCharacteristicType);
+query Element::getAllUsedEnumCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean, considerDefaults : Boolean) : OrderedSet(DDC::EnumCharacteristicType) {
+	return self.getAllUsedCharacteristicTypes(considerAssignments, considerCharacteristics, considerDefaults)->selectByKind(DDC::EnumCharacteristicType);
 }
 
-query Element::getAllUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::CharacteristicType) {
+query Element::getAllUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean, considerDefaults : Boolean) : OrderedSet(DDC::CharacteristicType) {
 	var dfd := self.oclAsType(ecore::EObject)->closure(o : ecore::EObject | o.eContainer())->selectByType(DFD::DataFlowDiagram)->any(true);
-	var types := dfd.getUsedCharacteristicTypes(considerAssignments, considerCharacteristics);
+	var types := dfd.getUsedCharacteristicTypes(considerAssignments, considerCharacteristics, considerDefaults);
 	return types;
 }
 
-query DFD::DataFlowDiagram::getUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean) : OrderedSet(DDC::CharacteristicType) {
+query DFD::DataFlowDiagram::getUsedCharacteristicTypes(considerAssignments : Boolean, considerCharacteristics : Boolean, considerDefaults : Boolean) : OrderedSet(DDC::CharacteristicType) {
 	var emptySet := self.nodes->selectByType(DFD::Edge);
 	var typesFromCharacteristics := if considerCharacteristics then self.allSubobjectsOfKind(DFDC::Characteristic).type->asSet() else emptySet endif;
 	var typesFromAssignments := if considerAssignments then self.allSubobjectsOfKind(DDC::Behaving).behavior.allSubobjectsOfKind(DDC::expressions::CharacteristicReference).characteristicType->asSet() else emptySet endif;
-	return typesFromCharacteristics->union(typesFromAssignments)->selectByKind(DDC::CharacteristicType)->sortedBy(uniqueName());
+	var typesFromDefaults := if considerDefaults then defaultCharacteristicsDictionary.characteristicTypes else emptySet endif;
+	return typesFromCharacteristics->union(typesFromAssignments)->union(typesFromDefaults)->selectByKind(DDC::CharacteristicType)->sortedBy(uniqueName());
 }
 
 query DFD::DataFlowDiagram::getUsedDataTypes() : OrderedSet(DD::DataType) {
@@ -986,3 +1084,10 @@ query DDC::BehaviorDefinition::lastMatchingAssignment(owner : DDC::Behaving, pin
 	return lastMatchingAssignment;
 }
 
+query getNodesEnum() : DDC::Enumeration {
+	return defaultCharacteristicsDictionary.enumerations->any(id = "_z_SuFIITEeqR5tyIqE6kZA");
+}
+
+query getVisitedNodesCharacteristicType() : DDC::EnumCharacteristicType {
+	return defaultCharacteristicsDictionary.characteristicTypes->selectByKind(DDC::EnumCharacteristicType)->any(id = "_067sYYISEeqR5tyIqE6kZA");
+}

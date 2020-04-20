@@ -115,7 +115,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		query.bind("J$PIN", "A2.in (_LEsVYEz4EeqyWs80cS8siQ)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "PIN", "CT", "V", "S"));
 	}
 	
 	@Test
@@ -135,7 +135,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN", "CT", "V"));
+		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "PIN", "CT", "V"));
 	}
 	
 	@Test
@@ -160,4 +160,17 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 	}
 
 
+	@Test
+	public void testFlowStack() {
+	    builder.addDFD(getRelativeURI("models/unitTestExamples/DFDC_FlowStack.xmi"));
+        builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+        builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID);
+        var workflow = builder.build();
+
+        workflow.run();
+        var result = workflow.getSerializedPrologProgram();
+        assertFalse(result.isEmpty());
+        System.out.println(result);
+	}
+	
 }

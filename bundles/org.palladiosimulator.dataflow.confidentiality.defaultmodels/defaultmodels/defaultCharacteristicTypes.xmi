@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_z29t8IISEeqR5tyIqE6kZA">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_067sYYISEeqR5tyIqE6kZA" name="TraversedNodes" type="_z_SuFIITEeqR5tyIqE6kZA"/>
+  <enumerations id="_z_SuFIITEeqR5tyIqE6kZA" name="AvailableNodes"/>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

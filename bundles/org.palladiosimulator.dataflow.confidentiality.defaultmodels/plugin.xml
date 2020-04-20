@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.ecore.uri_mapping">
+      <mapping
+            source="pathmap://DFD_DEFAULT_MODELS/"
+            target="platform:/plugin/org.palladiosimulator.dataflow.confidentiality.resources/defaultmodels/">
+      </mapping>
+   </extension>
+
+</plugin>

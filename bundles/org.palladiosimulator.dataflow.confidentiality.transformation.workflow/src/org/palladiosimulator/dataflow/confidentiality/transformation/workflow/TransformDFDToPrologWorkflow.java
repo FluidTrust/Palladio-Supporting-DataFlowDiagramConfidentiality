@@ -6,6 +6,6 @@ public interface TransformDFDToPrologWorkflow extends Runnable {
 
 	public Optional<String> getSerializedPrologProgram();
 
-    public Optional<TransformationTrace> getTransformationTrace();
+    public Optional<DFD2PrologTransformationTrace> getTransformationTrace();
 	
 }

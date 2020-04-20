@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Defaultmodels
+Bundle-SymbolicName: org.palladiosimulator.dataflow.confidentiality.resources;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.palladiosimulator.dataflow.confidentiality.defaultmodels.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;bundle-version="2.19.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.palladiosimulator.dataflow.confidentiality.defaultmodels
+Bundle-ActivationPolicy: lazy
+Export-Package: org.palladiosimulator.dataflow.confidentiality.defaultmodels

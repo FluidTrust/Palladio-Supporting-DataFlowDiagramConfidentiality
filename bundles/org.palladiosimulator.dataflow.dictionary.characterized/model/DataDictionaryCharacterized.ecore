@@ -53,7 +53,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
       <details key="leftHandSideRefersOutputPin" value="self.oclAsType(ecore::EObject).eContainer().oclAsType(BehaviorDefinition).outputs->includes(self.lhs.pin)"/>
       <details key="characteristicWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::CharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.characteristicType.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.characteristicType.oclIsUndefined()&#xA;)"/>
-      <details key="literalWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::CharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::CharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.literal.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::CharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.literal.oclIsUndefined()&#xA;)"/>
+      <details key="literalWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::EnumCharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::EnumCharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.literal.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::EnumCharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.literal.oclIsUndefined()&#xA;)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="#//expressions/DataCharacteristicReference"
         containment="true"/>
@@ -112,18 +112,20 @@
     <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//expressions/BinaryLogicTerm"/>
     <eClassifiers xsi:type="ecore:EClass" name="CharacteristicReference" abstract="true"
         eSuperTypes="#//expressions/Term">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicType" eType="#//CharacteristicType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumCharacteristicReference" eSuperTypes="#//expressions/CharacteristicReference">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
         <details key="constraints" value="literalHasToBeWildcardIfCharacteristicIsWildcard"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="literalHasToBeWildcardIfCharacteristicIsWildcard" value="not self.characteristicType.oclIsUndefined() or self.literal.oclIsUndefined()"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicType" eType="#//CharacteristicType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="#//Literal"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ContainerCharacteristicReference"
-        eSuperTypes="#//expressions/CharacteristicReference"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DataCharacteristicReference" eSuperTypes="#//expressions/CharacteristicReference">
+        eSuperTypes="#//expressions/EnumCharacteristicReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataCharacteristicReference" eSuperTypes="#//expressions/EnumCharacteristicReference">
       <eStructuralFeatures xsi:type="ecore:EReference" name="pin" lowerBound="1" eType="#//Pin"/>
     </eClassifiers>
   </eSubpackages>

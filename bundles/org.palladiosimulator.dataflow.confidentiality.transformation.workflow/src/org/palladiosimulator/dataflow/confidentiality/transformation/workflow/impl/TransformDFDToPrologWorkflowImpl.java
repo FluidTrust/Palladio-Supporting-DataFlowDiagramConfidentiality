@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.TransformDFDToPrologWorkflow;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.TransformationTrace;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.DFD2PrologTransformationTrace;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 
 import de.uka.ipd.sdq.workflow.BlackboardBasedWorkflow;
@@ -49,10 +49,10 @@ public class TransformDFDToPrologWorkflowImpl extends BlackboardBasedWorkflow<Ke
     }
 
     @Override
-    public Optional<TransformationTrace> getTransformationTrace() {
+    public Optional<DFD2PrologTransformationTrace> getTransformationTrace() {
         return blackboard.get(traceKey)
-            .filter(TransformationTrace.class::isInstance)
-            .map(TransformationTrace.class::cast);
+            .filter(DFD2PrologTransformationTrace.class::isInstance)
+            .map(DFD2PrologTransformationTrace.class::cast);
     }
 
 }
