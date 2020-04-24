@@ -28,16 +28,14 @@ main() {
 mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
 	clauses += self.map createTableDirective();
-//	clauses += self.map createReadWriteFlowCategorizationHelpers();
-//	clauses += self.map createDataDependenciesHelpers();
-//	clauses += self.map createDataTypeHelpers();
 	clauses += self.map createFlowSelectionHelpers();
-	clauses += self.map createSetHelpers();
+	clauses += self.map createFlowStackHelpers();
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
 	clauses += self.getUsedDataTypes()-> map dataTypeToFacts()->flatten();
 	getNodesEnum().literals += self.nodes->map nodeToEnumLiteral(); // temporarily modifies literals in default enumeration
+	clauses += self.nodes->map nodeToNodeLiteralFact();
 	clauses += self.getUsedCharacteristicTypes(true, true, true)-> map characteristicTypeToFact()->flatten();
 	clauses += new Comment("");
 	clauses += new Comment("Nodes");
@@ -72,90 +70,6 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::D
 
 mapping DFD::DataFlowDiagram::createTableDirective() : PL::directives::Table {
 	predicate := new PL::directives::PredicateIndicator("characteristic", 5);
-}
-
-mapping DFD::DataFlowDiagram::createDataTypeHelpers() : List(PL::Clause) {
-	result += new Comment("");
-	result += new Comment("Helper rules to determine transmitted data types from a set of flows");
-	result += new Comment("");
-	result += object PL::Fact {
-		head := object PL::CompoundTerm {
-			value := "transmittedDataTypes";
-			arguments += object PL::_List {};
-			arguments += object PL::_List {};
-		}
-	};
-	result += object PL::Rule {
-		head := object PL::CompoundTerm {
-			value := "transmittedDataTypes";
-			arguments += object PL::CompoundTerm { value := "FLOW" };
-			arguments += object PL::CompoundTerm { value := "FOUND" };
-		};
-		body := object PL::expressions::LogicalAnd {
-			left := object PL::CompoundTerm {
-				value := "dataflow";
-				arguments += object PL::CompoundTerm { value := "FLOW" };
-				arguments += object PL::CompoundTerm { value := "_" };
-				arguments += object PL::CompoundTerm { value := "_" };
-				arguments += object PL::CompoundTerm { value := "_" };
-				arguments += object PL::CompoundTerm { value := "_" };
-			};
-			right := object PL::CompoundTerm {
-				value := "findall";
-				arguments += object PL::CompoundTerm { value := "X" };
-				arguments += object PL::CompoundTerm {
-					value := "dataflowData";
-					arguments += object PL::CompoundTerm { value := "FLOW" };
-					arguments += object PL::CompoundTerm { value := "_" };
-					arguments += object PL::CompoundTerm { value := "_" };
-					arguments += object PL::CompoundTerm { value := "X" };
-				};
-				arguments += object PL::CompoundTerm { value := "FOUND" };
-			};
-		};
-	};
-	result += object PL::Rule {
-		head := object PL::CompoundTerm {
-			value := "transmittedDataTypes";
-			arguments += object PL::_List {
-				heads += object PL::CompoundTerm { value := "F" };
-				tails += object PL::CompoundTerm { value := "T" };
-			};
-			arguments += object PL::CompoundTerm { value := "FOUND" };
-		};
-		var body1 := object PL::CompoundTerm {
-			value := "transmittedDataTypes";
-			arguments += object PL::CompoundTerm { value := "F" };
-			arguments += object PL::CompoundTerm { value := "FFOUND" }; 			
-		};
-		var body2 := object PL::CompoundTerm {
-			value := "transmittedDataTypes";
-			arguments += object PL::CompoundTerm { value := "T" };
-			arguments += object PL::CompoundTerm { value := "TFOUND" }; 			
-		};
-		var body3 := object PL::CompoundTerm {
-			value := "append";
-			arguments += object PL::CompoundTerm { value := "FFOUND" };
-			arguments += object PL::CompoundTerm { value := "TFOUND" };
-			arguments += object PL::CompoundTerm { value := "MERGED" }; 			
-		};
-		var body4 := object PL::CompoundTerm {
-			value := "list_to_set";
-			arguments += object PL::CompoundTerm { value := "MERGED" };
-			arguments += object PL::CompoundTerm { value := "FOUND" };		
-		};
-		body := object PL::expressions::LogicalAnd {
-			left := object PL::expressions::LogicalAnd {
-				left := object PL::expressions::LogicalAnd {
-					left := body1;
-					right := body2;
-				};
-				right := body3;
-			};
-			right := body4;
-		};
-	};
-
 }
 
 mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
@@ -324,74 +238,101 @@ mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
 	
 }
 
-
-mapping DFD::DataFlowDiagram::createSetHelpers() : List(PL::Clause) {
-
-	result += object PL::Comment { value := "Find intersection R between elements of L1 and L2 (to be independent of library predicates)" };
-
-	result += object PL::Fact {
-		head := object PL::CompoundTerm {
-			value := "isect";
-			arguments += object PL::_List {};
-			arguments += object PL::CompoundTerm { value := "_" };
-			arguments += object PL::_List {};
-		}
-	};
+mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
+	result += object PL::Comment { value := "Find valid flow stack for node P" };
 	
 	result += object PL::Rule {
 		head := object PL::CompoundTerm {
-			value := "isect";
-			arguments += object PL::_List {
-				heads += object PL::CompoundTerm { value := "H" };
-				tails += object PL::CompoundTerm { value := "T" };
-			};
-			arguments += object PL::CompoundTerm { value := "L" };
-			arguments += object PL::CompoundTerm { value := "R" };
+			value := "fullStack";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "S" };
 		};
+		
+		var processTerm := object PL::CompoundTerm {
+			value := "process";
+			arguments += object PL::CompoundTerm { value := "P" };
+		};
+		var inputPinTerm := object PL::CompoundTerm {
+			value := "inputPin";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+		};
+		var inputFlowTerm := object PL::CompoundTerm {
+			value := "inputFlow";
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::CompoundTerm { value := "SHEAD" };
+			arguments += object PL::CompoundTerm { value := "F" };
+		};
+		var dataFlowTerm := object PL::CompoundTerm {
+			value := "dataflow";
+			arguments += object PL::CompoundTerm { value := "F" };
+			arguments += object PL::CompoundTerm { value := "PSRC" };
+			arguments += object PL::CompoundTerm { value := "_" };
+			arguments += object PL::CompoundTerm { value := "P" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+		};
+		var fullStackTerm := object PL::CompoundTerm {
+			value := "fullStack";
+			arguments += object PL::CompoundTerm { value := "PSRC" };
+			arguments += object PL::CompoundTerm { value := "STAIL" };
+		};
+		var listTerm := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "S" };
+			right := object PL::_List {
+				heads += object PL::CompoundTerm { value := "SHEAD" };
+				tails += object PL::CompoundTerm { value := "STAIL" };
+			};	
+		};
+		
 		body := object PL::expressions::LogicalAnd {
 			left := object PL::expressions::LogicalAnd {
 				left := object PL::expressions::LogicalAnd {
-					left := object PL::CompoundTerm {
-						value := "member";
-						arguments += object PL::CompoundTerm { value := "H" };
-						arguments += object PL::CompoundTerm { value := "L" };
+					left := object PL::expressions::LogicalAnd {
+						left := object PL::expressions::LogicalAnd {
+							left := processTerm;
+							right := inputPinTerm;
+						};
+						right := inputFlowTerm;
 					};
-					right := object PL::Cut {};
+					right := dataFlowTerm;
 				};
-				right := object PL::CompoundTerm {
-				value := "isect";
-				arguments += object PL::CompoundTerm{ value := "T" };
-				arguments += object PL::CompoundTerm { value := "L" };
-				arguments += object PL::CompoundTerm { value := "RTAIL" };
+				right := fullStackTerm;
 			};
-			};
-			right := object PL::expressions::Unification {
-					left := object PL::CompoundTerm { value := "R" };
-					right := object PL::_List {
-						heads += object PL::CompoundTerm { value := "H" };
-						tails += object PL::CompoundTerm { value := "RTAIL" };
-					}
-				};
+			right := listTerm;
 		};
 	};
 	
 	result += object PL::Rule {
 		head := object PL::CompoundTerm {
-			value := "isect";
-			arguments += object PL::_List {
-				heads += object PL::CompoundTerm { value := "_" };
-				tails += object PL::CompoundTerm { value := "T" };
-			};
-			arguments += object PL::CompoundTerm { value := "L" };
-			arguments += object PL::CompoundTerm { value := "R" };
+			value := "fullStack";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::_List {};
 		};
-		body := object PL::CompoundTerm {
-				value := "isect";
-				arguments += object PL::CompoundTerm{ value := "T" };
-				arguments += object PL::CompoundTerm { value := "L" };
-				arguments += object PL::CompoundTerm { value := "R" };
-			};
+		
+		var actorTerm := object PL::CompoundTerm {
+			value := "actor";
+			arguments += object PL::CompoundTerm { value := "N" };
 		};
+		var storeTerm := object PL::CompoundTerm {
+			value := "store";
+			arguments += object PL::CompoundTerm { value := "N" };
+		};
+		var nodeTerm := object PL::CompoundTerm {
+			value := "process";
+			arguments += object PL::CompoundTerm { value := "N" };
+		};
+
+		
+		body := object PL::expressions::LogicalOr {
+			left := object PL::expressions::LogicalOr {
+				left := actorTerm;
+				right := storeTerm;
+			};
+			right := nodeTerm;
+		};
+	};
+	
 }
 
 // Nodes
@@ -485,7 +426,7 @@ mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::
 		value := "inputFlow";
 		arguments += new AtomicQuotedString(owner.uniqueName());
 		arguments += new AtomicQuotedString(self.uniqueName());
-		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += object PL::CompoundTerm { value := "SHEAD" };
 		arguments += object PL::CompoundTerm { value := "F" };
 	};
 	
@@ -504,14 +445,25 @@ mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::
 		arguments += object PL::CompoundTerm { value := "PINSRC" };
 		arguments += object PL::CompoundTerm { value := "CT" };
 		arguments += object PL::CompoundTerm { value := "V" };
-		arguments += object PL::CompoundTerm { value := "_" };
+		arguments += object PL::CompoundTerm { value := "STAIL" };
+	};
+	
+	var listbuildingTerm := object PL::expressions::Unification {
+		left := object PL::CompoundTerm { value := "S" };
+		right := object PL::_List {
+			heads += object PL::CompoundTerm { value := "SHEAD" };
+			tails += object PL::CompoundTerm { value := "STAIL" };
+		};
 	};
 	
 	left := object PL::expressions::LogicalAnd {
-		left := flowFinding;
-		right := incomingDataFlowTerm;
+		left := object PL::expressions::LogicalAnd {
+			left := flowFinding;
+			right := incomingDataFlowTerm;
+		};
+		right := sourceCharacteristicTerm;
 	};
-	right := sourceCharacteristicTerm;
+	right := listbuildingTerm;
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignment(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
@@ -528,14 +480,23 @@ when {owner.oclIsKindOf(DFDC::CharacterizedStore)}
 	assert warning (not self.inputs->isEmpty()) with log ("Store has more than one input. Results will be non-deterministic.");
 	
 	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
-	body := self.inputs->any(true).map sourcePinToTerm(owner, characteristicType, _literal, self);
+	body := self.inputs->any(true).map storeBehaviorBody(owner, characteristicType, _literal, self);
+}
+
+mapping DDC::Pin::storeBehaviorBody(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, dummy : Element) : PL::expressions::LogicalAnd {
+	left := object PL::CompoundTerm {
+		value := "fullStack";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += object PL::CompoundTerm { value := "S" };
+	};
+	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "_", self);
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentWithAssignments(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when {not self.lastMatchingAssignment(owner, pin, characteristicType, _literal).oclIsUndefined()}
 {
 	var assignment := self.lastMatchingAssignment(owner, pin, characteristicType, _literal);
-	var requireStack := not assignment.allSubobjectsOfKind(DDC::expressions::DataCharacteristicReference)->excluding(assignment.lhs)->isEmpty();
+	var requireStack := not assignment.rhs.oclIsKindOf(DDC::expressions::False);
 	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, requireStack);
 	body := assignment.rhs.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
 }
@@ -569,8 +530,11 @@ disjuncts DDC::expressions::True::constantToConstant,
 {
 }
 
-mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::True
+mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm
 {
+	value := "fullStack";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += object PL::CompoundTerm { value := "S" };
 }
 
 mapping DDC::expressions::False::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::False
@@ -591,7 +555,7 @@ mapping DDC::expressions::Not::logicalTermToLogicalTerm(owner : DDC::Behaving, c
 	expr := self.term.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
 }
 
-mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm {
+mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::LogicalAnd {
 	var characteristicTypeToUse := 
 		if not self.characteristicType.oclIsUndefined() and self.characteristicType.oclIsKindOf(DDC::EnumCharacteristicType) then
 			self.characteristicType.oclAsType(DDC::EnumCharacteristicType)
@@ -600,10 +564,17 @@ mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceTo
 		endif;
 	var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
 	
-	value := "nodeCharacteristic";
-	arguments += new AtomicQuotedString(owner.uniqueName());
-	arguments += new AtomicQuotedString(characteristicTypeToUse.uniqueName());
-	arguments += new AtomicQuotedString(_literal.uniqueName());
+	left := object PL::CompoundTerm {
+		value := "nodeCharacteristic";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += new AtomicQuotedString(characteristicTypeToUse.uniqueName());
+		arguments += new AtomicQuotedString(_literal.uniqueName());
+	};
+	right := object PL::CompoundTerm {
+		value := "fullStack";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += object PL::CompoundTerm { value := "S" };
+	}
 }
 
 mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm {
@@ -615,18 +586,18 @@ mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner
 				characteristicType
 			endif;
 		var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
-		result := self.pin.map sourcePinToTerm(owner, characteristicTypeToUse, literalToUse, self);
+		result := self.pin.map sourcePinToTerm(owner, characteristicTypeToUse, literalToUse, "S", self);
 	}
 }
 
 // element is required to force QVTo to create a new element even if all other parameters are the same
-mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, dummyElement : Element) : PL::CompoundTerm {
+mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, stackVariable : String, dummyElement : Element) : PL::CompoundTerm {
 	value := "characteristic";
 	arguments += new AtomicQuotedString(owner.uniqueName());
 	arguments += new AtomicQuotedString(self.uniqueName());
 	arguments += new AtomicQuotedString(characteristicType.uniqueName());
 	arguments += new AtomicQuotedString(_literal.uniqueName());
-	arguments += object PL::CompoundTerm { value := "S" };
+	arguments += object PL::CompoundTerm { value := stackVariable };
 }
 
 
@@ -706,8 +677,12 @@ merges
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesSelf(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { characteristicType = getVisitedNodesCharacteristicType() and _literal = owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
 {
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, false);
-	body := object PL::True {};
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
+	body := object PL::CompoundTerm {
+		value := "fullStack";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += object PL::CompoundTerm { value := "S" };
+	};
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthers(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
@@ -718,7 +693,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> 
 	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasReferences);
 
 	if(not hasReferences) {
-		body := object PL::Fail {};
+		body := object PL::False {};
 	} else {
 		var firstPin = referencedInputPins->at(1);
 		var remainingPins = referencedInputPins->excluding(firstPin)->sortedBy(id);
@@ -753,14 +728,14 @@ when {remainingPins->size() > 0}
 	var newRemainingPins := remainingPins->excluding(nextPin)->sortedBy(id);
 	left := nextPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, newRemainingPins);
 	var dummy := createDummyIdentifier(remainingPins->including(self));
-	right := self.map sourcePinToTerm(owner, characteristicType, _literal, dummy);
+	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "S", dummy);
 }
 
 mapping DDC::Pin::referencedPinToReferenceForVisitedNodesNoRemainingPins(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, remainingPins : OrderedSet(DDC::Pin)) : PL::expressions::LogicalOr
 when {remainingPins->size() = 0}
 {
 	var dummy := createDummyIdentifier(remainingPins->including(self));
-	left := self.map sourcePinToTerm(owner, characteristicType, _literal, dummy);
+	left := self.map sourcePinToTerm(owner, characteristicType, _literal, "S", dummy);
 	right := object PL::False {};
 }
 
@@ -881,6 +856,14 @@ mapping DD::DataType::dataTypeToFactHead() : PL::CompoundTerm {
 mapping DFD::Node::nodeToEnumLiteral() : DDC::Literal {
 	id := "NodeEnumLiteral_" + self.name;
 	name := self.name;
+}
+
+mapping DFD::Node::nodeToNodeLiteralFact() : PL::Fact {
+	head := object PL::CompoundTerm {
+		value := "nodeLiteral";
+		arguments += new AtomicQuotedString(self.resolveoneIn(DFD::Node::nodeToEnumLiteral).uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+	}
 }
 
 

@@ -95,7 +95,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testFlawByProcessContainerReference() {
-		assertOneFlaw("DFDC_Process_ContainerReference")
+		assertFlawCount("DFDC_Process_ContainerReference", 2)
 	}
 	
 	@Test
@@ -105,7 +105,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testFlawByProcessConstantTrue() {
-		assertOneFlaw("DFDC_Process_ConstantTrue")
+		assertFlawCount("DFDC_Process_ConstantTrue", 2)
 	}
 	
 	@Test
@@ -194,7 +194,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	protected def assertFlawCount(String modelName, int flawCount) {
 		builder.addDFD(getRelativeURI("models/evaluation/unittests/" + modelName + ".xmi"))
 		var solution = findFlaws([findHighViolation])
-		assertNumberOfSolutions(solution, flawCount, Arrays.asList("P", "PIN"))
+		assertNumberOfSolutions(solution, flawCount, Arrays.asList("P", "PIN", "S"))
 	}
 
 	protected def findHighViolation() {

@@ -1,5 +1,8 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl;
 
+import java.util.HashMap
+import java.util.Map
+import java.util.function.Predicate
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
@@ -12,9 +15,9 @@ import org.prolog4j.Prover
 import org.prolog4j.Solution
 import org.prolog4j.tuprolog.TuPrologProverFactory
 
-import static org.junit.jupiter.api.Assertions.assertEquals
 import static org.junit.jupiter.api.Assertions.assertFalse
-import static org.junit.jupiter.api.Assertions.assertTrue
+import static org.junit.jupiter.api.Assertions.*
+import java.util.ArrayList
 
 class AnalysisIntegrationTestBase {
 
@@ -51,42 +54,53 @@ class AnalysisIntegrationTestBase {
 		dfd
 	}
 
+	protected static def void assertNumberOfSolutionsWithoutTraversedNodes(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
+		if (!variableNames.contains("CT")) {
+			throw new IllegalArgumentException("The name of the characterstic type has to be CT.")
+		}
+		val Predicate<Map<String, Object>> solutionFilter = [map | map.get("CT") != "TraversedNodes (_067sYYISEeqR5tyIqE6kZA)"]
+		assertNumberOfSolutions(solution, expectedAmount, variableNames, solutionFilter)
+	}
+
 	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
-		if (expectedAmount == 0) {
-			assertFalse(solution.isSuccess());
+		assertNumberOfSolutions(solution, expectedAmount, variableNames, [true])
+	}
+
+	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Predicate<Map<String, Object>> solutionFilter) {
+		if (expectedAmount == 0 && !solution.isSuccess) {
 			return;
 		}
-		
+
 		// use first given variable as starting point
 		var variableIter = variableNames.iterator();
 		if (variableIter.hasNext()) {
 			solution.on(variableIter.next());			
 		}
-		
+
 		assertTrue(solution.isSuccess());
+
+		val solutions = new ArrayList
+		for (var iter = solution.iterator(); iter.hasNext(); iter.next()) {
+			val solutionVariables = new HashMap();
+			for (String variableName : variableNames) {
+				solutionVariables.put(variableName, iter.get(variableName))
+			}
+			solutions += solutionVariables
+		}
+
+		val filteredSolutions = solutions.filter[s | solutionFilter.test(s)]
 		var solutionCounter = 0;
 		var debugMessage = "";
-		for (var iter = solution.iterator(); iter.hasNext();) {
+		for (filteredSolution : filteredSolutions) {
 			debugMessage += "solution " + solutionCounter + ":\n";
-			for (String variableName : variableNames) {
-				debugMessage += "\t" + variableName + ": " + iter.get(variableName).toString + "\n";
+			for (variableName : variableNames) {
+				debugMessage += "\t" + variableName + ": " + filteredSolution.get(variableName).toString + "\n";				
 			}
-			iter.next();
 			solutionCounter++;
 		}
+
 		assertEquals(expectedAmount, solutionCounter, debugMessage);
 	}
-	
-//	private static void printSolution(Solution<Object> solution) {
-//		for (SolutionIterator<Object> iter = solution.iterator(); iter.hasNext();) {
-//			System.out.println("new solution:");
-//			iter.next();
-//			System.out.println("P : " + iter.get("P"));
-//			System.out.println("CT: " + iter.get("CT"));
-//			System.out.println("V : " + iter.get("V"));
-//			System.out.println("S : " + iter.get("S"));
-//		}
-//	}
 
 	protected static def getRelativeURI(String path) {
 		return StandaloneUtil.getRelativeURI(path)

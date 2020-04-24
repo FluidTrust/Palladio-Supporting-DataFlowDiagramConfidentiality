@@ -53,7 +53,7 @@ class ContactSMSAnalysisTest extends AnalysisIntegrationTestBase {
 			inputPin(P, PIN),
 			bagof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
 			bagof(A, characteristic(P, PIN, ?CTRIGHTS, A, S), REQ),
-			isect(REQ, ROLES, MATCH),
+			intersection(REQ, ROLES, MATCH),
 			length(MATCH, 0).
 		'''
 		var query = prover.query(queryString)

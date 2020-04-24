@@ -17,7 +17,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/distancetracker/DFDC_DistanceTracker.xmi"))
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
+		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directFlow
 			
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
+		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
 	}
 	
 	protected def Solution<Object> findFlaws() {
@@ -54,7 +54,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 			inputPin(P, PIN),
 			bagof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
 			bagof(A, characteristic(P, PIN, ?CTRIGHTS, A, S), REQ),
-			isect(REQ, ROLES, MATCH),
+			intersection(REQ, ROLES, MATCH),
 			length(MATCH, 0).
 		'''
 		var query = prover.query(queryString)
