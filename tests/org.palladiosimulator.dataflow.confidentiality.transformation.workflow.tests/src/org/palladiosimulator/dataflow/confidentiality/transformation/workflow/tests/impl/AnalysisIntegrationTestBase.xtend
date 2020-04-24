@@ -1,5 +1,7 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl;
 
+import java.util.ArrayList
+import java.util.Collection
 import java.util.HashMap
 import java.util.Map
 import java.util.function.Predicate
@@ -15,9 +17,7 @@ import org.prolog4j.Prover
 import org.prolog4j.Solution
 import org.prolog4j.tuprolog.TuPrologProverFactory
 
-import static org.junit.jupiter.api.Assertions.assertFalse
 import static org.junit.jupiter.api.Assertions.*
-import java.util.ArrayList
 
 class AnalysisIntegrationTestBase {
 
@@ -54,7 +54,7 @@ class AnalysisIntegrationTestBase {
 		dfd
 	}
 
-	protected static def void assertNumberOfSolutionsWithoutTraversedNodes(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
+	protected static def void assertNumberOfSolutionsWithoutTraversedNodes(Solution<Object> solution, int expectedAmount, Collection<String> variableNames) {
 		if (!variableNames.contains("CT")) {
 			throw new IllegalArgumentException("The name of the characterstic type has to be CT.")
 		}
