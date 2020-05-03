@@ -688,7 +688,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal = o
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthers(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
 {
-	var referencedInputPins := self.assignments.rhs.allSubobjects()->union(self.assignments.rhs)->selectByKind(DDC::expressions::DataCharacteristicReference).pin->asSet()->sortedBy(id);
+	var referencedInputPins := self.assignments.rhs.allSubobjects()->union(self.assignments.rhs)->selectByKind(DDC::expressions::DataCharacteristicReference).pin->asSet()->sortedBy(oclAsType(Identifier).id);
 	var hasReferences := not referencedInputPins->isEmpty();
 	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasReferences);
 
@@ -696,7 +696,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> 
 		body := object PL::False {};
 	} else {
 		var firstPin = referencedInputPins->at(1);
-		var remainingPins = referencedInputPins->excluding(firstPin)->sortedBy(id);
+		var remainingPins = referencedInputPins->excluding(firstPin)->sortedBy(oclAsType(Identifier).id);
 		body := firstPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, remainingPins);
 	}
 	
@@ -725,7 +725,7 @@ when {remainingPins->size() > 0}
 {
 	assert fatal (remainingPins->excludes(self));
 	var nextPin := remainingPins->at(1);
-	var newRemainingPins := remainingPins->excluding(nextPin)->sortedBy(id);
+	var newRemainingPins := remainingPins->excluding(nextPin)->sortedBy(oclAsType(Identifier).id);
 	left := nextPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, newRemainingPins);
 	var dummy := createDummyIdentifier(remainingPins->including(self));
 	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "S", dummy);
@@ -741,7 +741,7 @@ when {remainingPins->size() = 0}
 
 query createDummyIdentifier(pins : Collection(DDC::Pin)) : Element {
 	var identifier = "";
-	pins.id->forEach(id) {
+	pins->selectByKind(Identifier).id->forEach(id) {
 		identifier := identifier + id
 	};
 	return new AtomicQuotedString(identifier);
@@ -854,7 +854,7 @@ mapping DD::DataType::dataTypeToFactHead() : PL::CompoundTerm {
 }
 
 mapping DFD::Node::nodeToEnumLiteral() : DDC::Literal {
-	id := "NodeEnumLiteral_" + self.name;
+	result.oclAsType(Identifier).id := "NodeEnumLiteral_" + self.name;
 	name := self.name;
 }
 
@@ -1068,9 +1068,9 @@ query DDC::BehaviorDefinition::lastMatchingAssignment(owner : DDC::Behaving, pin
 }
 
 query getNodesEnum() : DDC::Enumeration {
-	return defaultCharacteristicsDictionary.enumerations->any(id = "_z_SuFIITEeqR5tyIqE6kZA");
+	return defaultCharacteristicsDictionary.enumerations->any(oclAsType(Identifier).id = "_z_SuFIITEeqR5tyIqE6kZA");
 }
 
 query getVisitedNodesCharacteristicType() : DDC::EnumCharacteristicType {
-	return defaultCharacteristicsDictionary.characteristicTypes->selectByKind(DDC::EnumCharacteristicType)->any(id = "_067sYYISEeqR5tyIqE6kZA");
+	return defaultCharacteristicsDictionary.characteristicTypes->selectByKind(DDC::EnumCharacteristicType)->any(oclAsType(Identifier).id = "_067sYYISEeqR5tyIqE6kZA");
 }
