@@ -13,6 +13,7 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.CharacteristicType;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Literal;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.CharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
@@ -70,7 +71,7 @@ public class DataCharacteristicReferenceItemProvider extends DataCharacteristicR
 				if (thisObject instanceof CharacteristicReference) {
 					CharacteristicType characteristicType = ((CharacteristicReference) thisObject).getCharacteristicType();
 					if (characteristicType instanceof EnumCharacteristicType) {
-						var literals = new ArrayList<>(((EnumCharacteristicType) characteristicType).getType().getLiterals());
+						Collection<Literal> literals = new ArrayList<>(((EnumCharacteristicType) characteristicType).getType().getLiterals());
 						literals.add(null);
 						return literals;
 					}
