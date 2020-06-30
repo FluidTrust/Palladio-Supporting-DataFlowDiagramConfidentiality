@@ -4,10 +4,15 @@
     editDirectory="/org.palladiosimulator.dataflow.dictionary.characterized.edit/src-gen"
     editorDirectory="/org.palladiosimulator.dataflow.dictionary.characterized.editor/src-gen"
     modelPluginID="org.palladiosimulator.dataflow.dictionary.characterized" modelName="DataDictionaryCharacterized"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
-    importOrganizing="true" eclipsePlatformVersion="2019-09">
+    rootExtendsInterface="org.eclipse.emf.cdo.CDOObject" rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl"
+    reflectiveDelegation="true" testsDirectory="/org.palladiosimulator.dataflow.dictionary.characterized.tests/src-gen"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="5.0"
+    copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.cdo.edit.CDOItemProviderAdapter"
+    usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
+    importOrganizing="true">
   <foreignModel>DataDictionaryCharacterized.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <editPluginVariables>CDO_EDIT=org.eclipse.emf.cdo.edit</editPluginVariables>
   <genPackages prefix="DataDictionaryCharacterized" basePackage="org.palladiosimulator.dataflow.dictionary.characterized"
       disposableProviderFactory="true" extensibleProviderFactory="true" childCreationExtenders="true"
       ecorePackage="DataDictionaryCharacterized.ecore#/">
@@ -46,9 +51,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Behaving/ownedBehavior"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Behaving/referencedBehavior"/>
     </genClasses>
-    <nestedGenPackages prefix="Expressions" basePackage="org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized"
-        disposableProviderFactory="true" extensibleProviderFactory="true" childCreationExtenders="true"
-        ecorePackage="DataDictionaryCharacterized.ecore#//expressions">
+    <nestedGenPackages prefix="Expressions" disposableProviderFactory="true" extensibleProviderFactory="true"
+        childCreationExtenders="true" ecorePackage="DataDictionaryCharacterized.ecore#//expressions">
       <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//expressions/Term"/>
       <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//expressions/Constant"/>
       <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//expressions/True"/>
@@ -69,8 +73,10 @@
       <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//expressions/CharacteristicReference">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//expressions/CharacteristicReference/characteristicType"/>
+      </genClasses>
+      <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//expressions/EnumCharacteristicReference">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//expressions/CharacteristicReference/literal"/>
+            ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//expressions/EnumCharacteristicReference/literal"/>
       </genClasses>
       <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//expressions/ContainerCharacteristicReference"/>
       <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//expressions/DataCharacteristicReference">

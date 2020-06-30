@@ -4,11 +4,15 @@
     editDirectory="/org.palladiosimulator.dataflow.diagram.characterized.edit/src-gen"
     editorDirectory="/org.palladiosimulator.dataflow.diagram.characterized.editor/src-gen"
     modelPluginID="org.palladiosimulator.dataflow.diagram.characterized" modelName="DataFlowDiagramCharacterized"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.palladiosimulator.dataflow.diagram.characterized.tests/src-gen"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    runtimeVersion="2.19" usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.genmodel#//DataDictionaryCharacterized ../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel#//DataFlowDiagram ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
-    importOrganizing="true" eclipsePlatformVersion="2019-09">
+    rootExtendsInterface="org.eclipse.emf.cdo.CDOObject" rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl"
+    reflectiveDelegation="true" testsDirectory="/org.palladiosimulator.dataflow.diagram.characterized.tests/src-gen"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="5.0"
+    copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.cdo.edit.CDOItemProviderAdapter"
+    usedGenPackages="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.genmodel#//DataDictionary ../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.genmodel#//DataDictionaryCharacterized ../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel#//DataFlowDiagram ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier"
+    importOrganizing="true">
   <foreignModel>DataFlowDiagramCharacterized.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <editPluginVariables>CDO_EDIT=org.eclipse.emf.cdo.edit</editPluginVariables>
   <genPackages prefix="DataFlowDiagramCharacterized" basePackage="org.palladiosimulator.dataflow.diagram.characterized"
       disposableProviderFactory="true" extensibleProviderFactory="true" childCreationExtenders="true"
       ecorePackage="DataFlowDiagramCharacterized.ecore#/">
@@ -25,7 +29,6 @@
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedExternalActor"/>
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedStore"/>
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedProcess"/>
-    <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedData"/>
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedDataFlow">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//CharacterizedDataFlow/sourcePin"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//CharacterizedDataFlow/targetPin"/>
