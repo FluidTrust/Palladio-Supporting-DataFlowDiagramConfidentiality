@@ -46,7 +46,7 @@
           <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ProcessNode']"/>
         </nodeMappings>
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedStoreNode" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedStore">
-          <borderedNodeMappings name="StoreInputPin" semanticCandidatesExpression="aql:self->filter(DataDictionaryCharacterized::Behaving).behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
+          <borderedNodeMappings name="StoreInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -68,6 +68,30 @@
             </style>
           </borderedNodeMappings>
           <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='StoreNode']"/>
+        </nodeMappings>
+ <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedExternalActorNode" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor">
+          <borderedNodeMappings name="ProcessInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </borderedNodeMappings>
+          <borderedNodeMappings name="ProcessOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </borderedNodeMappings>
+          <borderedNodeMappings name="ExternalActorCharacterics" semanticCandidatesExpression="aql:self.characteristics" domainClass="DataFlowDiagramCharacterized::Characteristic">
+            <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </borderedNodeMappings>
+          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ExternalActorNode']"/>
         </nodeMappings>
         <edgeMappings name="CharacterizedDataFlowEdge" semanticCandidatesExpression="aql:self.edges" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" targetMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" targetFinderExpression="aql:self.targetPin" sourceFinderExpression="aql:self.sourcePin" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" useDomainElement="true">
           <style sizeComputationExpression="2">
