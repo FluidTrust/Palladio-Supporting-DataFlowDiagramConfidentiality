@@ -3,12 +3,12 @@
 <target name="Target Platform" sequenceNumber="1">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
-			<unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="3.10.0.v20190909-1952"/>
-			<repository location="http://download.eclipse.org/releases/2019-09/"/>
+			<unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="3.10.2.v20200609-1812"/>
+			<repository location="http://download.eclipse.org/releases/2020-06/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
 			<unit id="org.apache.commons.lang3" version="3.1.0.v201403281430"/>
-			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20190827152740/repository"/>
+			<repository location="http://download.eclipse.org/tools/orbit/downloads/2020-06/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 			<unit id="de.uka.ipd.sdq.identifier.feature.feature.group" version="tbd"/>
