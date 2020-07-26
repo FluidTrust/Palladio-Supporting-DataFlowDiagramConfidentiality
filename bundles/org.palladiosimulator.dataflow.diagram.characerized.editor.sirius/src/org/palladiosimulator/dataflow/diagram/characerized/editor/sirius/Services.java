@@ -1,6 +1,18 @@
 package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius;
 
+import java.util.List;
+
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.ui.dialogs.ResourceDialog;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util.DFDRefinementUtil;
+import org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util.DFDTypeUtil;
+
 
 /**
  * The services class used by VSM.
@@ -14,4 +26,36 @@ public class Services {
        // TODO Auto-generated code
       return self;
     }
+    
+    public void loadResources(EObject self) {
+		ResourceDialog r = new ResourceDialog(Display.getCurrent().getActiveShell(), "Load Characterized Data Dictionary",
+				SWT.SINGLE);
+		r.open();
+		r.setBlockOnOpen(true);
+		Session session = SessionManager.INSTANCE.getSession(self);
+		for (URI uri : r.getURIs()) {
+			if (!DFDTypeUtil.uriAlreadyLoaded(uri, session))
+				session.addSemanticResource(uri, new NullProgressMonitor());
+		}
+		
+	}
+    
+    public List<EObject> listDataTypes(EObject self) {
+		Session session = SessionManager.INSTANCE.getSession(self);
+		return DFDTypeUtil.getDataTypes(session);
+	}
+    
+    public boolean isNotRefined(EObject self, EObject element) {
+		return !DFDRefinementUtil.isRefined(element);
+	}
+    
+	public EObject navigateUp(EObject self, EObject dfd) {
+		return dfd.eContainer().eContainer();
+	}
+
+	public EObject navigateDown(EObject self, EObject element) {
+		return DFDRefinementUtil.getRefinement(element).getRefiningDiagram();
+
+	}
+
 }
