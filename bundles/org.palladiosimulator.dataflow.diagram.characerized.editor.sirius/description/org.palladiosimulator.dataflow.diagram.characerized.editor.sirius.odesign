@@ -208,9 +208,10 @@
     <metamodels href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"/>
     <metamodels href="http://sdq.ipd.uka.de/Identifier/2.1#/"/>
     <categories name="Default Category">
-      <pages name="DFC Editor Page" labelExpression="EditChar" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2">
+      <pages name="DFC Editor Page" labelExpression="EditChar" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3">
         <extends href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@extensions.0/@categories.0/@pages.0"/>
       </pages>
+      <pages name="Behavior Page" labelExpression="Behavior" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3 //@extensions.0/@categories.0/@groups.4"/>
       <groups name="Characteristics" labelExpression="Properties" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="CharacteristicName" labelExpression="Name" valueExpression="aql:self.name">
           <initialOperation>
@@ -321,6 +322,18 @@
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:loadResources()"/>
           </initialOperation>
         </controls>
+      </groups>
+      <groups name="Behavior Description" labelExpression="Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="BehaviorName" labelExpression="Name" valueExpression="aql:self.behavior.name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.behavior">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Behavior Assignments" labelExpression="Assignments" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:LabelDescription" name="LHS" labelExpression="LHS"/>
       </groups>
     </categories>
   </extensions>
