@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl
+Bundle-ManifestVersion: 2
+Bundle-Name: org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.palladiosimulator.dataflow.dictionary.characterized,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.services,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.generator,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.formatting2,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.parser.antlr.internal,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.serializer,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.parser.antlr,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.scoping,
+ org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.validation
+Import-Package: org.apache.log4j
