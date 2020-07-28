@@ -1,4 +1,4 @@
-package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util;
+package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
  * Utility class implementing references between refining dfds and edges.
  *
  */
-public class DFDRefinementUtil {
+public class DFDCRefinementUtil {
 
 	private static EdgeRefinement currentRefinement = null;
 

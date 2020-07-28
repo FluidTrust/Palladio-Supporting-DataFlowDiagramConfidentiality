@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.palladiosimulator.dataflow.diagram.characerized.editor.sirius;singleton:=true
+Bundle-SymbolicName: org.palladiosimulator.dataflow.diagram.characterized.editor.sirius;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.Activator
+Bundle-Activator: org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.Activator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -19,5 +19,5 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: %providerName
-Automatic-Module-Name: org.palladiosimulator.dataflow.diagram.characerized.editor.sirius
+Automatic-Module-Name: org.palladiosimulator.dataflow.diagram.characterized.editor.sirius
 Import-Package: org.eclipse.emf.common.ui.dialogs

@@ -1,4 +1,4 @@
-package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius;
+package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
-import org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util.DFDRefinementUtil;
-import org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util.DFDTypeUtil;
+import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.DFDCRefinementUtil;
+import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.DFDCTypeUtil;
 
 
 /**
@@ -34,7 +34,7 @@ public class Services {
 		r.setBlockOnOpen(true);
 		Session session = SessionManager.INSTANCE.getSession(self);
 		for (URI uri : r.getURIs()) {
-			if (!DFDTypeUtil.uriAlreadyLoaded(uri, session))
+			if (!DFDCTypeUtil.uriAlreadyLoaded(uri, session))
 				session.addSemanticResource(uri, new NullProgressMonitor());
 		}
 		
@@ -42,11 +42,11 @@ public class Services {
     
     public List<EObject> listDataTypes(EObject self) {
 		Session session = SessionManager.INSTANCE.getSession(self);
-		return DFDTypeUtil.getDataTypes(session);
+		return DFDCTypeUtil.getDataTypes(session);
 	}
     
     public boolean isNotRefined(EObject self, EObject element) {
-		return !DFDRefinementUtil.isRefined(element);
+		return !DFDCRefinementUtil.isRefined(element);
 	}
     
 	public EObject navigateUp(EObject self, EObject dfd) {
@@ -54,7 +54,7 @@ public class Services {
 	}
 
 	public EObject navigateDown(EObject self, EObject element) {
-		return DFDRefinementUtil.getRefinement(element).getRefiningDiagram();
+		return DFDCRefinementUtil.getRefinement(element).getRefiningDiagram();
 
 	}
 

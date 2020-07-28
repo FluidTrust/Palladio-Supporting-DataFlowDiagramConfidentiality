@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="org.palladiosimulator.dataflow.diagram.characerized.editor.sirius" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius" version="12.0.0.2017041100">
   <ownedViewpoints name="Data Flows Confidentiality">
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Characterization Extension" viewpointURI="viewpoint:/org.palladiosimulator.dataflow.diagram.editor.sirius/Dataflows" representationName="DFD Editor">
       <metamodel href="http://palladiosimulator.org/dataflow/diagram/1.0#/"/>
@@ -32,7 +32,7 @@
             </style>
           </borderedNodeMappings>
           <conditionnalStyles predicateExpression="aql:self.oclIsKindOf(DataFlowDiagramCharacterized::CharacterizedActorProcess)">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/org.palladiosimulator.dataflow.diagram.characerized.editor.sirius/icons/actorProcess.svg">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorProcess.svg">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
@@ -198,7 +198,7 @@
         </toolSections>
       </layers>
     </ownedRepresentationExtensions>
-    <ownedJavaExtensions qualifiedClassName="org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.Services"/>
+    <ownedJavaExtensions qualifiedClassName="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.Services"/>
   </ownedViewpoints>
   <extensions xsi:type="properties:ViewExtensionDescription" name="Properties DFDC">
     <metamodels href="http://palladiosimulator.org/dataflow/diagram/1.0#/"/>
@@ -208,7 +208,7 @@
     <metamodels href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"/>
     <metamodels href="http://sdq.ipd.uka.de/Identifier/2.1#/"/>
     <categories name="Default Category">
-      <pages name="DFC Editor Page" labelExpression="EditChar" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3">
+      <pages name="DFC Editor Page" labelExpression="EditChar" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2">
         <extends href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@extensions.0/@categories.0/@pages.0"/>
       </pages>
       <pages name="Behavior Page" labelExpression="Behavior" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3 //@extensions.0/@categories.0/@groups.4"/>
@@ -246,8 +246,8 @@
                     <buttons labelExpression="OK" isEnabledExpression="service:isValidData()" default="true" closeDialogOnClick="true">
                       <initialOperation/>
                     </buttons>
-                    <page name="Default Page" labelExpression="New Piece of Data" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
-                    <groups name="Default Group" labelExpression="Enter data" semanticCandidateExpression="var:self">
+                    <page name="Add Data Page" labelExpression="New Piece of Data" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Add Data Group" labelExpression="Enter data" semanticCandidateExpression="var:self">
                       <controls xsi:type="properties:TextDescription" name="Name">
                         <initialOperation>
                           <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instance">
@@ -286,8 +286,8 @@
                   <buttons labelExpression="OK" isEnabledExpression="service:isValidData(entry)" default="true" closeDialogOnClick="true">
                     <initialOperation/>
                   </buttons>
-                  <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.2/@initialOperation/@firstModelOperations/@subModelOperations.1/@groups.0"/>
-                  <groups name="Default Group" labelExpression="Group" semanticCandidateExpression="var:self">
+                  <page name="Data Edit Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.2/@initialOperation/@firstModelOperations/@subModelOperations.1/@groups.0"/>
+                  <groups name="Data Edit" labelExpression="Edit data" semanticCandidateExpression="var:self">
                     <controls xsi:type="properties:TextDescription" name="Name" valueExpression="aql:selection->first().name">
                       <initialOperation>
                         <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:selection->first()">
@@ -311,7 +311,7 @@
           </actions>
         </controls>
         <validationSet>
-          <propertyValidationRules name="CharacterizedDataFlowNameValidation" level="WARNING" message="The name should not be empty.">
+          <propertyValidationRules name="CharacterizedDataFlowNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.1/@controls.0">
             <audits auditExpression="aql:self->size() > 0"/>
           </propertyValidationRules>
         </validationSet>
@@ -331,6 +331,11 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
+        <validationSet>
+          <propertyValidationRules name="BehaviorNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.3/@controls.0">
+            <audits auditExpression="aql:self->size() > 0"/>
+          </propertyValidationRules>
+        </validationSet>
       </groups>
       <groups name="Behavior Assignments" labelExpression="Assignments" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:LabelDescription" name="LHS" labelExpression="LHS"/>

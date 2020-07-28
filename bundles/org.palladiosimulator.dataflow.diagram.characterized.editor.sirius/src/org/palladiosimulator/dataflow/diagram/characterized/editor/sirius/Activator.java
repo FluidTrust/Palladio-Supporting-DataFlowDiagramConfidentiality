@@ -1,4 +1,4 @@
-package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius;
+package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
     // The plug-in ID
-    public static final String PLUGIN_ID = "org.palladiosimulator.dataflow.diagram.characerized.editor.sirius";
+    public static final String PLUGIN_ID = "org.palladiosimulator.dataflow.diagram.characterized.editor.sirius";
 
     // The shared instance
     private static Activator plugin;
@@ -35,7 +35,7 @@ public class Activator extends AbstractUIPlugin {
       super.start(context);
 	  plugin = this;
 	  viewpoints = new HashSet<Viewpoint>();
-	  viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.odesign")); 
+	  viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.odesign")); 
     }
 
     /*

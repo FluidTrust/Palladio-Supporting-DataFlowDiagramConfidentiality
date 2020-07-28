@@ -1,4 +1,4 @@
-package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util;
+package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util;
 
 import java.util.ArrayList;
 

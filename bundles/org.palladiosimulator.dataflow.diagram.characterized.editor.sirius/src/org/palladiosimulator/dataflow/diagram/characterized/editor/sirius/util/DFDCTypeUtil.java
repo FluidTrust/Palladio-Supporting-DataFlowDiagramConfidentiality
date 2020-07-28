@@ -1,4 +1,4 @@
-package org.palladiosimulator.dataflow.diagram.characerized.editor.sirius.util;
+package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,8 +21,9 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
  * Utility class for interacting with data dictionary models.
  *
  */
-public class DFDTypeUtil {
+public class DFDCTypeUtil {
 	private static final String DDC_CLASS = "DataDictionaryCharacterized";
+	private static final String DD_PACKAGE="org.palladiosimulator.dataflow.dictionary.DataDictionary";
 
 	/**
 	 * 
@@ -76,8 +77,7 @@ public class DFDTypeUtil {
 		for (Resource r : resources) {
 			for (EObject typeDefinition : r.getContents()) {
 				for (EObject datatype : typeDefinition.eContents()) {
-					String dataTypeClass = datatype.eClass().getName();
-					if (!dataTypeClass.equals("Enumeration") && !dataTypeClass.equals("BehaviorDefinition")) {
+					if (datatype.eClass().getInstanceClassName().startsWith(DD_PACKAGE)) {
 						types.add(datatype);
 
 					}
