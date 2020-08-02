@@ -16,7 +16,7 @@
    </requires>
 
    <plugin
-         id="org.palladiosimulator.dataflow.diagram.characerized.editor.sirius"
+         id="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius"
          download-size="0"
          install-size="0"
          version="0.0.0"
