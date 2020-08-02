@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.DefaultCharacteristicsUsage;
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
 
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
@@ -25,14 +26,16 @@ public class TransformDFDToPrologJob extends QVTOTransformationJob {
     protected MDSDBlackboard blackboard;
 
     public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation, ModelLocation traceLocation,
-            NameDerivationMethod nameDerivationMethod) {
-        super(createQVTOConfiguration(dfdLocation, prologLocation, traceLocation, nameDerivationMethod));
+            NameDerivationMethod nameDerivationMethod, DefaultCharacteristicsUsage defaultCharacteristicsUsage) {
+        super(createQVTOConfiguration(dfdLocation, prologLocation, traceLocation, nameDerivationMethod,
+                defaultCharacteristicsUsage));
         defaultCharacteristicTypesLocation = createDefaultCharacteristicTypeLocation(dfdLocation);
     }
 
     public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation,
             ModelLocation traceLocation) {
-        this(dfdLocation, prologLocation, traceLocation, NameDerivationMethod.NAME_AND_ID);
+        this(dfdLocation, prologLocation, traceLocation, NameDerivationMethod.NAME_AND_ID,
+                DefaultCharacteristicsUsage.TRUE);
     }
 
     @Override
@@ -50,7 +53,8 @@ public class TransformDFDToPrologJob extends QVTOTransformationJob {
     }
 
     protected static QVTOTransformationJobConfiguration createQVTOConfiguration(ModelLocation dfdLocation,
-            ModelLocation prologLocation, ModelLocation traceLocation, NameDerivationMethod nameDerivationMethod) {
+            ModelLocation prologLocation, ModelLocation traceLocation, NameDerivationMethod nameDerivationMethod,
+            DefaultCharacteristicsUsage defaultCharacteristicsUsage) {
         var transformationConfiguration = new QVTOTransformationJobConfiguration();
 
         // script path
@@ -67,6 +71,7 @@ public class TransformDFDToPrologJob extends QVTOTransformationJob {
         // init options
         Map<String, Object> options = new HashMap<>();
         options.put(NameDerivationMethod.QVTO_PROPERTY_KEY, nameDerivationMethod.getQvtoPropertyValue());
+        options.put(DefaultCharacteristicsUsage.QVTO_PROPERTY_KEY, defaultCharacteristicsUsage.getQvtoPropertyValue());
         transformationConfiguration.setOptions(options);
 
         // job creation

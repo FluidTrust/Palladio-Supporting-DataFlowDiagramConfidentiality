@@ -12,6 +12,7 @@ modeltype ID uses identifier('http://sdq.ipd.uka.de/Identifier/2.1');
 modeltype ECORE uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
 configuration property QualifiedNameDerivation : String;
+configuration property UseDefaultCharacteristics : String;
 
 property defaultCharacteristicsDictionary : DDC::DataDictionaryCharacterized;
 
@@ -34,8 +35,10 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
 	clauses += self.getUsedDataTypes()-> map dataTypeToFacts()->flatten();
-	getNodesEnum().literals += self.nodes->map nodeToEnumLiteral(); // temporarily modifies literals in default enumeration
-	clauses += self.nodes->map nodeToNodeLiteralFact();
+	if (isUseDefaultCharacteristics()) {
+		getNodesEnum().literals += self.nodes->map nodeToEnumLiteral(); // temporarily modifies literals in default enumeration
+		clauses += self.nodes->map nodeToNodeLiteralFact();
+	};
 	clauses += self.getUsedCharacteristicTypes(true, true, true)-> map characteristicTypeToFact()->flatten();
 	clauses += new Comment("");
 	clauses += new Comment("Nodes");
@@ -655,13 +658,15 @@ mapping DDC::Behaving::behavingToWhatever() : List(PL::Clause) {
 	};
 	
 	// defaults calculation
-	self.getAllUsedEnumCharacteristicTypes(false, false, true)->forEach(ct) {
-		ct.type.literals->forEach(l) {
-			self.behavior.outputs->forEach(pin) {
-				result += self.behavior.map behaviorToAssignmentForDefaults(self, pin, ct, l);
+	if (isUseDefaultCharacteristics()) {
+		self.getAllUsedEnumCharacteristicTypes(false, false, true)->forEach(ct) {
+			ct.type.literals->forEach(l) {
+				self.behavior.outputs->forEach(pin) {
+					result += self.behavior.map behaviorToAssignmentForDefaults(self, pin, ct, l);
+				}
 			}
-		}
-	};
+		};		
+	}
 }
 
 // default characteristics behavior
@@ -1073,4 +1078,12 @@ query getNodesEnum() : DDC::Enumeration {
 
 query getVisitedNodesCharacteristicType() : DDC::EnumCharacteristicType {
 	return defaultCharacteristicsDictionary.characteristicTypes->selectByKind(DDC::EnumCharacteristicType)->any(oclAsType(Identifier).id = "_067sYYISEeqR5tyIqE6kZA");
+}
+
+query isUseDefaultCharacteristics() : Boolean {
+	return switch {
+		case (UseDefaultCharacteristics = "true") true;
+		case (UseDefaultCharacteristics = "false") false;
+		else true;
+	};
 }

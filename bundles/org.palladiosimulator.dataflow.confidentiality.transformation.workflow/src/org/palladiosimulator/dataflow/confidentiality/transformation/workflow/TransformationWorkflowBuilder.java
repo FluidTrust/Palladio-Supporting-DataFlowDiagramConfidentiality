@@ -10,6 +10,7 @@ import org.apache.commons.lang3.Validate;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.DefaultCharacteristicsUsage;
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.impl.TransformDFDToPrologWorkflowImpl;
@@ -42,6 +43,7 @@ public class TransformationWorkflowBuilder {
 	private WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
 	private IProgressMonitor progressMonitor = new NullProgressMonitor();
 	private NameDerivationMethod nameDerivationMethod = NameDerivationMethod.ID;
+	private DefaultCharacteristicsUsage defaultCharacteristicsUsage = DefaultCharacteristicsUsage.TRUE;
 	
 	public TransformationWorkflowBuilder() {
 		
@@ -76,6 +78,11 @@ public class TransformationWorkflowBuilder {
 	public TransformationWorkflowBuilder setNameDerivationMethod(NameDerivationMethod method) {
 		this.nameDerivationMethod = method;
 		return this;
+	}
+	
+	public TransformationWorkflowBuilder setDefaultCharacteristicsUsage(boolean usage) {
+	    this.defaultCharacteristicsUsage = usage ? DefaultCharacteristicsUsage.TRUE : DefaultCharacteristicsUsage.FALSE;
+	    return this;
 	}
 	
 	public TransformationWorkflowBuilder addSerializeToString() {
@@ -123,7 +130,7 @@ public class TransformationWorkflowBuilder {
         // create transformation job
         blackboard.addPartition(DEFAULT_PROLOG_LOCATION.getPartitionID(), new ResourceSetPartition());
         var transformJob = new TransformDFDToPrologJob(dfdLocation, DEFAULT_PROLOG_LOCATION, DEFAULT_TRACE_LOCATION,
-                nameDerivationMethod);
+                nameDerivationMethod, defaultCharacteristicsUsage);
         jobSequence.add(transformJob);
 
         // create trace transformation job
