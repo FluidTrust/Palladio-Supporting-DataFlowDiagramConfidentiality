@@ -50,25 +50,29 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.edges->map edgeToClause()->flatten();
 }
 
-mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : PL::directives::Discontiguous {
+mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : List(PL::directives::Discontiguous) {
+	result += self.map createDiscontiguousDirective("actor", 1);
+	result += self.map createDiscontiguousDirective("actorProcess", 2);
+	result += self.map createDiscontiguousDirective("characteristic", 5);
+	result += self.map createDiscontiguousDirective("characteristicType", 1);
+	result += self.map createDiscontiguousDirective("characteristicTypeValue", 2);
+	result += self.map createDiscontiguousDirective("collectionDataType", 2);
+	result += self.map createDiscontiguousDirective("compositeDataType", 1);
+	result += self.map createDiscontiguousDirective("compositeDataTypeEntry", 3);
+	result += self.map createDiscontiguousDirective("dataflow", 5);
+	result += self.map createDiscontiguousDirective("dataflowData", 4);
+	result += self.map createDiscontiguousDirective("dataType", 1);
+	result += self.map createDiscontiguousDirective("inputPin", 2);
+	result += self.map createDiscontiguousDirective("nodeCharacteristic", 3);
+	result += self.map createDiscontiguousDirective("outputPin", 2);
+	result += self.map createDiscontiguousDirective("process", 1);
+	result += self.map createDiscontiguousDirective("store", 1);
+	result += self.map createDiscontiguousDirective("characteristic tabled", 5);
+}
+
+mapping DFD::DataFlowDiagram::createDiscontiguousDirective(predicate : String, arity : Integer) : PL::directives::Discontiguous {
 	name := "discontiguous";
-	predicates += new PL::directives::PredicateIndicator("actor", 1);
-	predicates += new PL::directives::PredicateIndicator("actorProcess", 2);
-	predicates += new PL::directives::PredicateIndicator("characteristic", 5);
-	predicates += new PL::directives::PredicateIndicator("characteristicType", 1);
-	predicates += new PL::directives::PredicateIndicator("characteristicTypeValue", 2);
-	predicates += new PL::directives::PredicateIndicator("collectionDataType", 2);
-	predicates += new PL::directives::PredicateIndicator("compositeDataType", 1);
-	predicates += new PL::directives::PredicateIndicator("compositeDataTypeEntry", 3);
-	predicates += new PL::directives::PredicateIndicator("dataflow", 5);
-	predicates += new PL::directives::PredicateIndicator("dataflowData", 4);
-	predicates += new PL::directives::PredicateIndicator("dataType", 1);
-	predicates += new PL::directives::PredicateIndicator("inputPin", 2);
-	predicates += new PL::directives::PredicateIndicator("nodeCharacteristic", 3);
-	predicates += new PL::directives::PredicateIndicator("outputPin", 2);
-	predicates += new PL::directives::PredicateIndicator("process", 1);
-	predicates += new PL::directives::PredicateIndicator("store", 1);
-	predicates += new PL::directives::PredicateIndicator("characteristic tabled", 5);
+	predicates += new PL::directives::PredicateIndicator(predicate, arity);
 }
 
 mapping DFD::DataFlowDiagram::createTableDirective() : PL::directives::Table {
