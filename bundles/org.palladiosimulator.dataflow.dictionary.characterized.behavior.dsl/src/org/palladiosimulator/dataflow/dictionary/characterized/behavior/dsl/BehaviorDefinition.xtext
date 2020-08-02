@@ -52,9 +52,14 @@ EnumCharacteristicReference returns ex::Term:
 ;
 
 ContainerCharacteristicReference returns ex::ContainerCharacteristicReference:
-	{ex::ContainerCharacteristicReference} 'refContainer' '[' characteristicType=[CharacteristicType|STRING] '.' literal=[Literal|STRING] ']'
+	{ex::ContainerCharacteristicReference} 'refContainer' '[' (
+		(characteristicType=[CharacteristicType|STRING] '.' (literal=[Literal|STRING] | '*')) | '*' '.' '*'
+	) ']'
 ;
 
 DataCharacteristicReference returns ex::DataCharacteristicReference:
-	{ex::DataCharacteristicReference} 'refPin' '[' pin=[Pin|STRING] '.' characteristicType=[CharacteristicType|STRING] '.' literal=[Literal|STRING] ']'
+	{ex::DataCharacteristicReference} 'refPin' '['
+		pin=[Pin|STRING] '.' (
+			(characteristicType=[CharacteristicType|STRING] '.' (literal=[Literal|STRING] | '*')) | '*' '.' '*'
+	) ']'
 ;
