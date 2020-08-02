@@ -55,7 +55,7 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : List(PL::directiv
 	result += self.map createDiscontiguousDirective("actorProcess", 2);
 	result += self.map createDiscontiguousDirective("characteristic", 5);
 	result += self.map createDiscontiguousDirective("characteristicType", 1);
-	result += self.map createDiscontiguousDirective("characteristicTypeValue", 2);
+	result += self.map createDiscontiguousDirective("characteristicTypeValue", 3);
 	result += self.map createDiscontiguousDirective("collectionDataType", 2);
 	result += self.map createDiscontiguousDirective("compositeDataType", 1);
 	result += self.map createDiscontiguousDirective("compositeDataTypeEntry", 3);
@@ -806,6 +806,9 @@ mapping DDC::Literal::enumCharacteristicTypeLiteralToFactHead(owner : DDC::EnumC
 	value := "characteristicTypeValue";
 	arguments += new AtomicQuotedString(owner.uniqueName());
 	arguments += new AtomicQuotedString(self.uniqueName());
+	arguments += object PL::AtomicNumber {
+		value := owner.type.literals->indexOf(self);
+	};
 }
 
 
