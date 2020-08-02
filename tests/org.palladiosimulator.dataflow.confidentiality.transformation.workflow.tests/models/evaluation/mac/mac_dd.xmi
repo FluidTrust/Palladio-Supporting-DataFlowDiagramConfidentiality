@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_uQQ_ANMCEeqMaJ4277tZGA">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_um9nwNMCEeqMaJ4277tZGA" name="Clearance" type="_wIcopNMCEeqMaJ4277tZGA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_VD0vQ9MDEeqMaJ4277tZGA" name="Classification" type="_wIcopNMCEeqMaJ4277tZGA"/>
+  <enumerations id="_wIcopNMCEeqMaJ4277tZGA" name="Levels">
+    <literals id="_gHYjUNMDEeqMaJ4277tZGA" name="Secret"/>
+    <literals id="_etgmUNMDEeqMaJ4277tZGA" name="Classified"/>
+    <literals id="_iLV_INMDEeqMaJ4277tZGA" name="Unclassified"/>
+  </enumerations>
+  <behaviorDefinitions id="_PnKw1dSZEeqakq6offlGZg" name="Store">
+    <inputs id="_Qh23cNSZEeqakq6offlGZg" name="input"/>
+    <outputs id="_Q0I6QdSZEeqakq6offlGZg" name="output"/>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_POLMldSaEeqakq6offlGZg" name="Combine 2">
+    <inputs id="_SQGsgNSaEeqakq6offlGZg" name="input1"/>
+    <inputs id="_S4KyENSaEeqakq6offlGZg" name="input2"/>
+    <outputs id="_ShKAQdSaEeqakq6offlGZg" name="output"/>
+    <assignments id="_Q96E0tSaEeqakq6offlGZg">
+      <lhs id="_RUZ5QNSaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_ShKAQdSaEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:Or" id="_Xk8qRdSaEeqakq6offlGZg">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_ZdgHV9SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_SQGsgNSaEeqakq6offlGZg"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_aIng79SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_S4KyENSaEeqakq6offlGZg"/>
+      </rhs>
+    </assignments>
+    <assignments id="_fNVX-9SaEeqakq6offlGZg">
+      <lhs id="_gealUNSaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_ShKAQdSaEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:Or" id="_zua2ZdSaEeqakq6offlGZg">
+        <left xsi:type="expressions:And" id="_0JqA49SaEeqakq6offlGZg">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_1QLkF9SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_SQGsgNSaEeqakq6offlGZg"/>
+          <right xsi:type="expressions:Or" id="_2wHFzNSaEeqakq6offlGZg">
+            <left xsi:type="expressions:DataCharacteristicReference" id="_3esqF9SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_S4KyENSaEeqakq6offlGZg"/>
+            <right xsi:type="expressions:DataCharacteristicReference" id="_5CTx79SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_S4KyENSaEeqakq6offlGZg"/>
+          </right>
+        </left>
+        <right xsi:type="expressions:And" id="_9j4fq9SaEeqakq6offlGZg">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_-E9MZ9SaEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_S4KyENSaEeqakq6offlGZg"/>
+          <right xsi:type="expressions:Or" id="_AReuXNSbEeqakq6offlGZg">
+            <left xsi:type="expressions:DataCharacteristicReference" id="_A-gzd9SbEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_SQGsgNSaEeqakq6offlGZg"/>
+            <right xsi:type="expressions:DataCharacteristicReference" id="_CVvsL9SbEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_SQGsgNSaEeqakq6offlGZg"/>
+          </right>
+        </right>
+      </rhs>
+    </assignments>
+    <assignments id="_IXd-AtSbEeqakq6offlGZg">
+      <lhs id="_IwrIMNSbEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_ShKAQdSaEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:And" id="_J48X1NSbEeqakq6offlGZg">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_K0gBJ9SbEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_SQGsgNSaEeqakq6offlGZg"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_LQDUv9SbEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_S4KyENSaEeqakq6offlGZg"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_81BZFdSbEeqakq6offlGZg" name="Forwarder">
+    <inputs id="_907W4NSbEeqakq6offlGZg" name="input"/>
+    <outputs id="_-JbAMdSbEeqakq6offlGZg" name="output"/>
+    <assignments id="__gh9EtSbEeqakq6offlGZg">
+      <lhs id="__1VIYNSbEeqakq6offlGZg" pin="_-JbAMdSbEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_AF1CiNScEeqakq6offlGZg" pin="_907W4NSbEeqakq6offlGZg"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_cCQ7aNSgEeqakq6offlGZg" name="Combine 3">
+    <inputs id="_fsqwkNSgEeqakq6offlGZg" name="input1"/>
+    <inputs id="_f_cioNSgEeqakq6offlGZg" name="input2"/>
+    <inputs id="_gM5IwNSgEeqakq6offlGZg" name="input3"/>
+    <outputs id="_gbx5UdSgEeqakq6offlGZg" name="output"/>
+    <assignments id="_0f22MtShEeqakq6offlGZg">
+      <lhs id="_1COjcNShEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_gbx5UdSgEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:And" id="_23T1xNShEeqakq6offlGZg">
+        <left xsi:type="expressions:And" id="_3UHtk9ShEeqakq6offlGZg">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_3wm1R9ShEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_4NOf39ShEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+        </left>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_4ogGn9ShEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+      </rhs>
+    </assignments>
+    <assignments id="_9QbT-9ShEeqakq6offlGZg">
+      <lhs id="_9s2KMNShEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_gbx5UdSgEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:Or" id="_AwloBdSiEeqakq6offlGZg">
+        <left xsi:type="expressions:Or" id="_BIa5NNSiEeqakq6offlGZg">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_B4K7J9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+          <right xsi:type="expressions:DataCharacteristicReference" id="_CTHKv9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+        </left>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_BdnGH9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_gHYjUNMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+      </rhs>
+    </assignments>
+    <assignments id="_GpgjO9SiEeqakq6offlGZg">
+      <lhs id="_HDz5kNSiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_gbx5UdSgEeqakq6offlGZg"/>
+      <rhs xsi:type="expressions:Or" id="_IfzWddSiEeqakq6offlGZg">
+        <left xsi:type="expressions:Or" id="_qDGuDNSiEeqakq6offlGZg">
+          <left xsi:type="expressions:And" id="_bbwDE9SiEeqakq6offlGZg">
+            <left xsi:type="expressions:DataCharacteristicReference" id="_b55-t9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+            <right xsi:type="expressions:And" id="_dlsyK9SiEeqakq6offlGZg">
+              <left xsi:type="expressions:Or" id="_eS4BNNSiEeqakq6offlGZg">
+                <left xsi:type="expressions:DataCharacteristicReference" id="_foizp9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+                <right xsi:type="expressions:DataCharacteristicReference" id="_gC9ez9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+              </left>
+              <right xsi:type="expressions:Or" id="_kPxdfNSiEeqakq6offlGZg">
+                <left xsi:type="expressions:DataCharacteristicReference" id="_lHjaB9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+                <right xsi:type="expressions:DataCharacteristicReference" id="_ljZBf9SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+              </right>
+            </right>
+          </left>
+          <right xsi:type="expressions:And" id="_8SGOC9SiEeqakq6offlGZg">
+            <left xsi:type="expressions:DataCharacteristicReference" id="_9WbY19SiEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+            <right xsi:type="expressions:And" id="_-674i9SiEeqakq6offlGZg">
+              <left xsi:type="expressions:Or" id="_Ab7xNNSjEeqakq6offlGZg">
+                <left xsi:type="expressions:DataCharacteristicReference" id="_BGaRl9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+                <right xsi:type="expressions:DataCharacteristicReference" id="_BmITf9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+              </left>
+              <right xsi:type="expressions:Or" id="__fO4bNSiEeqakq6offlGZg">
+                <left xsi:type="expressions:DataCharacteristicReference" id="_CGo_h9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+                <right xsi:type="expressions:DataCharacteristicReference" id="_Ckv339SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+              </right>
+            </right>
+          </right>
+        </left>
+        <right xsi:type="expressions:And" id="_rgw-09SiEeqakq6offlGZg">
+          <left xsi:type="expressions:DataCharacteristicReference" id="_NbFIN9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_gM5IwNSgEeqakq6offlGZg"/>
+          <right xsi:type="expressions:And" id="_QqXuu9SjEeqakq6offlGZg">
+            <left xsi:type="expressions:Or" id="_RKTL9NSjEeqakq6offlGZg">
+              <left xsi:type="expressions:DataCharacteristicReference" id="_R0sMx9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+              <right xsi:type="expressions:DataCharacteristicReference" id="_SM0Y79SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_fsqwkNSgEeqakq6offlGZg"/>
+            </left>
+            <right xsi:type="expressions:Or" id="_Rh82_NSjEeqakq6offlGZg">
+              <left xsi:type="expressions:DataCharacteristicReference" id="_Sor1h9SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_etgmUNMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+              <right xsi:type="expressions:DataCharacteristicReference" id="_TC0z39SjEeqakq6offlGZg" characteristicType="_VD0vQ9MDEeqMaJ4277tZGA" literal="_iLV_INMDEeqMaJ4277tZGA" pin="_f_cioNSgEeqakq6offlGZg"/>
+            </right>
+          </right>
+        </right>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

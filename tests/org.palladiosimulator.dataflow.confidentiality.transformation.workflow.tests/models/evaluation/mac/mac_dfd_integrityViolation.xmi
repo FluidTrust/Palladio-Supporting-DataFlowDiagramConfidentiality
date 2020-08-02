@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    xsi:schemaLocation="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0 http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"
+    id="_MoDmQNSXEeqakq6offlGZg">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_NCb1INSXEeqakq6offlGZg"
+      name="Clerk">
+    <ownedBehavior
+        id="_WqHPINSZEeqakq6offlGZg"
+        name="Clerk.behavior">
+      <inputs
+          id="_Kxy18NScEeqakq6offlGZg"
+          name="Clerk.in.weatherReport"/>
+      <outputs
+          id="_XCZzUdSZEeqakq6offlGZg"
+          name="Clerk.out.weatherData"/>
+      <outputs
+          id="_jvdC0dSbEeqakq6offlGZg"
+          name="Clerk.out.timeInterval"/>
+      <assignments
+          id="_icWuItSZEeqakq6offlGZg">
+        <lhs
+            id="_i7MmQNSZEeqakq6offlGZg"
+            pin="_XCZzUdSZEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="_DYZUl9SeEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+      <assignments
+          id="_lUgVG9SbEeqakq6offlGZg">
+        <lhs
+            id="_mCwiMNSbEeqakq6offlGZg"
+            pin="_jvdC0dSbEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+          <literal
+              href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="_FOvyN9SeEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+    </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_k6jO4dSZEeqakq6offlGZg"
+        name="clearance">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_QMTwJdSXEeqakq6offlGZg"
+      name="Flight Controller">
+    <ownedBehavior
+        id="_EmnQoNSdEeqakq6offlGZg"
+        name="FlightController.behavior">
+      <inputs
+          id="_jDVcUNSeEeqakq6offlGZg"
+          name="FlightController.in.planePosition"/>
+      <inputs
+          id="_pX0qcNSkEeqakq6offlGZg"
+          name="FlightController.in.planeRoute"/>
+      <outputs
+          id="_IcTIwdSdEeqakq6offlGZg"
+          name="FlightController.out.planePosition"/>
+      <outputs
+          id="_U6VhUdSeEeqakq6offlGZg"
+          name="FlightController.out.planeId"/>
+      <assignments
+          id="_MoFzwtSdEeqakq6offlGZg">
+        <lhs
+            id="_NBDtYNSdEeqakq6offlGZg"
+            pin="_IcTIwdSdEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="__Dctl9SdEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+      <assignments
+          id="_WiDtG9SeEeqakq6offlGZg">
+        <lhs
+            id="_W5q70NSeEeqakq6offlGZg"
+            pin="_U6VhUdSeEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="_YPA-J9SeEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+    </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_QvgVEdSdEeqakq6offlGZg"
+        name="clearance">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_UPU5pdSXEeqakq6offlGZg"
+      name="Military Flight Controller">
+    <ownedBehavior
+        id="_18x_0NSkEeqakq6offlGZg"
+        name="MilitaryFlightController.behavior">
+      <inputs
+          id="_5GZKMNSmEeqakq6offlGZg"
+          name="MilitaryFlightController.in.planeRoute"/>
+      <outputs
+          id="_4FnUkdSkEeqakq6offlGZg"
+          name="MilitaryFlightController.out.planeId"/>
+      <outputs
+          id="_Q_mbAdSnEeqakq6offlGZg"
+          name="MilitaryFlightController.out.planePosition"/>
+      <assignments
+          id="_DP7Q4tSlEeqakq6offlGZg">
+        <lhs
+            id="_Drjc8NSlEeqakq6offlGZg"
+            pin="_4FnUkdSkEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="_FJrn19SlEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+      <assignments
+          id="_UbRQq9SnEeqakq6offlGZg">
+        <lhs
+            id="_U49SMNSnEeqakq6offlGZg"
+            pin="_Q_mbAdSnEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:ContainerCharacteristicReference"
+            id="_WHCO59SnEeqakq6offlGZg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+        </rhs>
+      </assignments>
+    </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_ztxxodSkEeqakq6offlGZg"
+        name="clearance">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_NKGRdtSZEeqakq6offlGZg"
+      name="Weather Information">
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_gV4UkdS_EeqGKakHh_u4hw"
+        name="classification">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_Jx2GyNSaEeqakq6offlGZg"
+      name="Clerk.createWeatherReport"
+      actor="_NCb1INSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_POLMldSaEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_5VhMWNSbEeqakq6offlGZg"
+      name="Clerk.storeWeatherReport"
+      actor="_NCb1INSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_81BZFdSbEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_anlNeNSdEeqakq6offlGZg"
+      name="FlightController.registerPlane"
+      actor="_QMTwJdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_81BZFdSbEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_kgbh5tSdEeqakq6offlGZg"
+      name="PlaneStore">
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_befu4dS_EeqGKakHh_u4hw"
+        name="classification">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_MDKFSNSeEeqakq6offlGZg"
+      name="FlightController.findPlanePosition"
+      actor="_QMTwJdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_POLMldSaEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_Urh-aNSgEeqakq6offlGZg"
+      name="FlightController.determineNewRoute"
+      actor="_QMTwJdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_cCQ7aNSgEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_JPgNuNSlEeqakq6offlGZg"
+      name="MilitaryFlightController.findPlanePosition"
+      actor="_UPU5pdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_POLMldSaEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_WHvretSlEeqakq6offlGZg"
+      name="MilitaryFlightController.findAvailableCivilRoutes"
+      actor="_UPU5pdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_POLMldSaEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_WOuAuNSmEeqakq6offlGZg"
+      name="MilitaryFlightController.determineNewRoute"
+      actor="_UPU5pdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_cCQ7aNSgEeqakq6offlGZg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_ec48BtSmEeqakq6offlGZg"
+      name="MilitaryPlaneStore">
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_ox4QgdS_EeqGKakHh_u4hw"
+        name="classification">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_czT5qNSnEeqakq6offlGZg"
+      name="MilitaryFlightController.registerPlane"
+      actor="_UPU5pdSXEeqakq6offlGZg">
+    <referencedBehavior
+        href="mac_dd.xmi#_81BZFdSbEeqakq6offlGZg"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_VqPGidSZEeqakq6offlGZg"
+      name="weather data"
+      target="_NKGRdtSZEeqakq6offlGZg"
+      source="_NCb1INSXEeqakq6offlGZg"
+      sourcePin="_XCZzUdSZEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_cD33O9SbEeqakq6offlGZg"
+      name="time interval"
+      target="_Jx2GyNSaEeqakq6offlGZg"
+      source="_NCb1INSXEeqakq6offlGZg"
+      sourcePin="_jvdC0dSbEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_SQGsgNSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_0QAEC9SbEeqakq6offlGZg"
+      name="weather data"
+      target="_Jx2GyNSaEeqakq6offlGZg"
+      source="_NKGRdtSZEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_S4KyENSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_EhpGi9ScEeqakq6offlGZg"
+      name="weather report"
+      target="_NKGRdtSZEeqakq6offlGZg"
+      source="_5VhMWNSbEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_NBqm29ScEeqakq6offlGZg"
+      name="weather report"
+      target="_NCb1INSXEeqakq6offlGZg"
+      source="_5VhMWNSbEeqakq6offlGZg"
+      targetPin="_Kxy18NScEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_gxcuu9SdEeqakq6offlGZg"
+      name="plane position"
+      target="_anlNeNSdEeqakq6offlGZg"
+      source="_QMTwJdSXEeqakq6offlGZg"
+      sourcePin="_IcTIwdSdEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_907W4NSbEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_obJD-9SdEeqakq6offlGZg"
+      name="plane position"
+      target="_kgbh5tSdEeqakq6offlGZg"
+      source="_anlNeNSdEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_Zer2S9SeEeqakq6offlGZg"
+      name="plane id"
+      target="_MDKFSNSeEeqakq6offlGZg"
+      source="_QMTwJdSXEeqakq6offlGZg"
+      sourcePin="_U6VhUdSeEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_SQGsgNSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_c_Dlu9SeEeqakq6offlGZg"
+      name="registered planes"
+      target="_MDKFSNSeEeqakq6offlGZg"
+      source="_kgbh5tSdEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_S4KyENSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_h4rAC9SeEeqakq6offlGZg"
+      name="plane position"
+      target="_QMTwJdSXEeqakq6offlGZg"
+      source="_MDKFSNSeEeqakq6offlGZg"
+      targetPin="_jDVcUNSeEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_ShKAQdSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_JuWiW9SkEeqakq6offlGZg"
+      name="plane id"
+      target="_Urh-aNSgEeqakq6offlGZg"
+      source="_QMTwJdSXEeqakq6offlGZg"
+      sourcePin="_U6VhUdSeEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_fsqwkNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_SNgf-9SkEeqakq6offlGZg"
+      name="plane positions"
+      target="_Urh-aNSgEeqakq6offlGZg"
+      source="_kgbh5tSdEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_f_cioNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_V6OCS9SkEeqakq6offlGZg"
+      name="weather report"
+      target="_Urh-aNSgEeqakq6offlGZg"
+      source="_NKGRdtSZEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_gM5IwNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_bSVWe9SkEeqakq6offlGZg"
+      name="plane route"
+      target="_QMTwJdSXEeqakq6offlGZg"
+      source="_Urh-aNSgEeqakq6offlGZg"
+      targetPin="_pX0qcNSkEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_gbx5UdSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_JZXe69SmEeqakq6offlGZg"
+      name="weather report"
+      target="_WHvretSlEeqakq6offlGZg"
+      source="_NKGRdtSZEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_SQGsgNSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_MEEKm9SmEeqakq6offlGZg"
+      name="plane positions"
+      target="_WHvretSlEeqakq6offlGZg"
+      source="_kgbh5tSdEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_S4KyENSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_c4OrW9SmEeqakq6offlGZg"
+      name="military plane positions"
+      target="_WOuAuNSmEeqakq6offlGZg"
+      source="_ec48BtSmEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_fsqwkNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_kdM4q9SmEeqakq6offlGZg"
+      name="civil plane routes"
+      target="_WOuAuNSmEeqakq6offlGZg"
+      source="_WHvretSlEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_ShKAQdSaEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_f_cioNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_pRMMG9SmEeqakq6offlGZg"
+      name="plane id"
+      target="_WOuAuNSmEeqakq6offlGZg"
+      source="_UPU5pdSXEeqakq6offlGZg"
+      sourcePin="_4FnUkdSkEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_gM5IwNSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_1W1vS9SmEeqakq6offlGZg"
+      name="military plane route"
+      target="_UPU5pdSXEeqakq6offlGZg"
+      source="_WOuAuNSmEeqakq6offlGZg"
+      targetPin="_5GZKMNSmEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_gbx5UdSgEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_gz_g29SnEeqakq6offlGZg"
+      name="military plane position"
+      target="_czT5qNSnEeqakq6offlGZg"
+      source="_UPU5pdSXEeqakq6offlGZg"
+      sourcePin="_Q_mbAdSnEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_907W4NSbEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_kkvOm9SnEeqakq6offlGZg"
+      name="military plane position"
+      target="_ec48BtSmEeqakq6offlGZg"
+      source="_czT5qNSnEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_yoB6q9TdEeqRbpVUMz5XAQ"
+      name="plane position"
+      target="_ec48BtSmEeqakq6offlGZg"
+      source="_anlNeNSdEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>
