@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_coomgNVeEeqRbpVUMz5XAQ">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_o7_1k9VeEeqRbpVUMz5XAQ" name="Identity" type="_g7HvYtVeEeqRbpVUMz5XAQ"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_rd9cA9VeEeqRbpVUMz5XAQ" name="Read Access" type="_g7HvYtVeEeqRbpVUMz5XAQ"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_swJco9VeEeqRbpVUMz5XAQ" name="Write Access" type="_g7HvYtVeEeqRbpVUMz5XAQ"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_uEVoY9VeEeqRbpVUMz5XAQ" name="Owner" type="_g7HvYtVeEeqRbpVUMz5XAQ"/>
+  <enumerations id="_g7HvYtVeEeqRbpVUMz5XAQ" name="Identities">
+    <literals id="_kF3NENVeEeqRbpVUMz5XAQ" name="Mother"/>
+    <literals id="_lwXnENVeEeqRbpVUMz5XAQ" name="Dad"/>
+    <literals id="_marvYNVeEeqRbpVUMz5XAQ" name="Aunt"/>
+    <literals id="_nJlcwNVeEeqRbpVUMz5XAQ" name="Indexing Bot"/>
+  </enumerations>
+  <behaviorDefinitions id="_5wj-9dVeEeqRbpVUMz5XAQ" name="Forwarding">
+    <inputs id="_7LfE0NVeEeqRbpVUMz5XAQ" name="input"/>
+    <outputs id="_8BeRodVeEeqRbpVUMz5XAQ" name="output"/>
+    <assignments id="_8vDwYtVeEeqRbpVUMz5XAQ">
+      <lhs id="_9OMjcNVeEeqRbpVUMz5XAQ" pin="_8BeRodVeEeqRbpVUMz5XAQ"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_-TMcqNVeEeqRbpVUMz5XAQ" pin="_7LfE0NVeEeqRbpVUMz5XAQ"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_Bda89dVfEeqRbpVUMz5XAQ" name="Store">
+    <inputs id="_CsafoNVfEeqRbpVUMz5XAQ" name="input"/>
+    <outputs id="_DEBuYdVfEeqRbpVUMz5XAQ" name="output"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>
