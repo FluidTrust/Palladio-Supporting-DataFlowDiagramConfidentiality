@@ -2,10 +2,10 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.eclipse.xtext.resource.SaveOptions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase;
@@ -140,8 +140,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
-	public void testSimpleCycle() {
+	public void testSimpleCycle() throws IOException {
 		builder.addDFD(getRelativeURI("models/unitTestExamples/dfd_simpleCycle.xmi"));
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID);
@@ -150,7 +149,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		workflow.run();
 		var result = workflow.getSerializedPrologProgram();
 		assertFalse(result.isEmpty());
-		
+
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, CT, V, S).");
 		query.bind("J$P", "A1 (_21ryRUsyEeqBeZX3QKuNVA)");
@@ -180,6 +179,24 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         Solution<Object> solution = query.solve();
         
         assertNumberOfSolutionsWithoutTraversedNodes(solution, 8, Arrays.asList("P", "PIN", "CT", "V", "S"));
+	}
+	
+	@Test
+	public void testOtherLoop() throws IOException {
+        builder.addDFD(getRelativeURI("models/unitTestExamples/loop_dfd.xmi"));
+        builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+        builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID);
+        builder.setDefaultCharacteristicsUsage(false);
+        var workflow = builder.build();
+
+        workflow.run();
+        var result = workflow.getSerializedPrologProgram();
+        assertFalse(result.isEmpty());
+
+        prover.loadTheory(result.get());
+        Query query = prover.query("characteristic(N, PIN, CT, V, S).");
+        Solution<Object> solution = query.solve();
+        assertNumberOfSolutionsWithoutTraversedNodes(solution, 16, Arrays.asList("N", "PIN", "CT", "V", "S"));
 	}
 	
 }

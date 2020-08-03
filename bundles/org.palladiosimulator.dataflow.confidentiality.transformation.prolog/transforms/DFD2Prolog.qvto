@@ -28,9 +28,9 @@ main() {
 
 mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
-	clauses += self.map createTableDirective();
 	clauses += self.map createFlowSelectionHelpers();
 	clauses += self.map createFlowStackHelpers();
+	clauses += self.map createCharacteristicShortcut();
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
@@ -53,7 +53,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : List(PL::directives::Discontiguous) {
 	result += self.map createDiscontiguousDirective("actor", 1);
 	result += self.map createDiscontiguousDirective("actorProcess", 2);
-	result += self.map createDiscontiguousDirective("characteristic", 5);
+	result += self.map createDiscontiguousDirective("characteristic", 6);
 	result += self.map createDiscontiguousDirective("characteristicType", 1);
 	result += self.map createDiscontiguousDirective("characteristicTypeValue", 3);
 	result += self.map createDiscontiguousDirective("collectionDataType", 2);
@@ -67,7 +67,6 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective() : List(PL::directiv
 	result += self.map createDiscontiguousDirective("outputPin", 2);
 	result += self.map createDiscontiguousDirective("process", 1);
 	result += self.map createDiscontiguousDirective("store", 1);
-	result += self.map createDiscontiguousDirective("characteristic tabled", 5);
 }
 
 mapping DFD::DataFlowDiagram::createDiscontiguousDirective(predicate : String, arity : Integer) : PL::directives::Discontiguous {
@@ -76,7 +75,7 @@ mapping DFD::DataFlowDiagram::createDiscontiguousDirective(predicate : String, a
 }
 
 mapping DFD::DataFlowDiagram::createTableDirective() : PL::directives::Table {
-	predicate := new PL::directives::PredicateIndicator("characteristic", 5);
+	predicate := new PL::directives::PredicateIndicator("characteristic", 6);
 }
 
 mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
@@ -91,27 +90,38 @@ mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
 			arguments += object PL::CompoundTerm { value := "PIN" };
 			arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
 			arguments += object PL::CompoundTerm { value := "FLOW" };
+			arguments += object PL::CompoundTerm { value := "VISITED" };
 		};
 		body := object PL::expressions::LogicalAnd {
 			left := object PL::expressions::LogicalAnd {
-				left := object PL::CompoundTerm {
-					value := "inputPin";
-					arguments += object PL::CompoundTerm { value := "P" };
-					arguments += object PL::CompoundTerm { value := "PIN" };
+				left := object PL::expressions::LogicalAnd {
+					left := object PL::CompoundTerm {
+						value := "inputPin";
+						arguments += object PL::CompoundTerm { value := "P" };
+						arguments += object PL::CompoundTerm { value := "PIN" };
+					};
+					right := object PL::CompoundTerm {
+						value := "inputFlowsSelection";
+						arguments += object PL::CompoundTerm { value := "P" };
+						arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
+					};
 				};
 				right := object PL::CompoundTerm {
-					value := "inputFlowsSelection";
-					arguments += object PL::CompoundTerm { value := "P" };
+					value := "inputFlowSelection";
+					arguments += object PL::CompoundTerm { value := "PIN" };
 					arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
+					arguments += object PL::CompoundTerm { value := "FLOW" };
 				};
 			};
 			right := object PL::CompoundTerm {
-				value := "inputFlowSelection";
-				arguments += object PL::CompoundTerm { value := "PIN" };
-				arguments += object PL::CompoundTerm { value := "AVAILABLE_FLOWS" };
-				arguments += object PL::CompoundTerm { value := "FLOW" };
-			};
-		}
+				value := "intersection";
+				arguments += object PL::CompoundTerm { value := "VISITED" };
+				arguments += object PL::_List {
+					heads := object PL::CompoundTerm { value := "FLOW" };
+				};
+				arguments += object PL::_List {};
+			}
+		};
 	};
 	
 	result += new Comment("Select one arbitrary input flow (FLOW) for the pin (PIN) from a set of available flows. Here: use list head.");
@@ -253,6 +263,7 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 			value := "fullStack";
 			arguments += object PL::CompoundTerm { value := "P" };
 			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "VISITED" };
 		};
 		
 		var processTerm := object PL::CompoundTerm {
@@ -270,6 +281,7 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 			arguments += object PL::CompoundTerm { value := "PIN" };
 			arguments += object PL::CompoundTerm { value := "SHEAD" };
 			arguments += object PL::CompoundTerm { value := "F" };
+			arguments += object PL::_List { };
 		};
 		var dataFlowTerm := object PL::CompoundTerm {
 			value := "dataflow";
@@ -279,10 +291,22 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 			arguments += object PL::CompoundTerm { value := "P" };
 			arguments += object PL::CompoundTerm { value := "PIN" };
 		};
+		var intersectionTerm := object PL::CompoundTerm {
+			value := "intersection";
+			arguments += object PL::_List {
+				heads := object PL::CompoundTerm { value := "F" };
+			};
+			arguments += object PL::CompoundTerm { value := "VISITED" };
+			arguments += object PL::_List {};
+		};
 		var fullStackTerm := object PL::CompoundTerm {
 			value := "fullStack";
 			arguments += object PL::CompoundTerm { value := "PSRC" };
 			arguments += object PL::CompoundTerm { value := "STAIL" };
+			arguments += object PL::_List {
+				heads := object PL::CompoundTerm { value := "F" };
+				tails := object PL::CompoundTerm { value := "VISITED" };
+			};
 		};
 		var listTerm := object PL::expressions::Unification {
 			left := object PL::CompoundTerm { value := "S" };
@@ -297,12 +321,15 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 				left := object PL::expressions::LogicalAnd {
 					left := object PL::expressions::LogicalAnd {
 						left := object PL::expressions::LogicalAnd {
-							left := processTerm;
-							right := inputPinTerm;
+							left := object PL::expressions::LogicalAnd {
+								left := processTerm;
+								right := inputPinTerm;								
+							};
+							right := inputFlowTerm;
 						};
-						right := inputFlowTerm;
+						right := dataFlowTerm;
 					};
-					right := dataFlowTerm;
+					right := intersectionTerm;
 				};
 				right := fullStackTerm;
 			};
@@ -315,6 +342,7 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 			value := "fullStack";
 			arguments += object PL::CompoundTerm { value := "N" };
 			arguments += object PL::_List {};
+			arguments += object PL::CompoundTerm { value := "_" };
 		};
 		
 		var actorTerm := object PL::CompoundTerm {
@@ -340,6 +368,30 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 		};
 	};
 	
+}
+
+mapping DFD::DataFlowDiagram::createCharacteristicShortcut() : List(PL::Clause) {
+	result += object PL::Comment { value := "Shortcut for characteristic queries" };
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "characteristic";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::CompoundTerm { value := "CT" };
+			arguments += object PL::CompoundTerm { value := "V" };
+			arguments += object PL::CompoundTerm { value := "S" };
+		};
+		body := object PL::CompoundTerm {
+			value := "characteristic";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::CompoundTerm { value := "CT" };
+			arguments += object PL::CompoundTerm { value := "V" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::_List {};
+		}
+	};
 }
 
 // Nodes
@@ -425,7 +477,8 @@ mapping DDC::Pin::inputPinToCharacteristicRuleHead(owner : DDC::Behaving) : PL::
 	arguments += new AtomicQuotedString(self.uniqueName());
 	arguments += object PL::CompoundTerm { value := "CT" };
 	arguments += object PL::CompoundTerm { value := "V" };
-	arguments += object PL::CompoundTerm { value := "S" };  
+	arguments += object PL::CompoundTerm { value := "S" };
+	arguments += object PL::CompoundTerm { value := "VISITED" };
 }
 
 mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::expressions::LogicalAnd {
@@ -435,6 +488,7 @@ mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::
 		arguments += new AtomicQuotedString(self.uniqueName());
 		arguments += object PL::CompoundTerm { value := "SHEAD" };
 		arguments += object PL::CompoundTerm { value := "F" };
+		arguments += object PL::CompoundTerm { value := "VISITED" };
 	};
 	
 	var incomingDataFlowTerm := object PL::CompoundTerm {
@@ -453,6 +507,10 @@ mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::
 		arguments += object PL::CompoundTerm { value := "CT" };
 		arguments += object PL::CompoundTerm { value := "V" };
 		arguments += object PL::CompoundTerm { value := "STAIL" };
+		arguments += object PL::_List {
+			heads += object PL::CompoundTerm { value := "F" };
+			tails += object PL::CompoundTerm { value := "VISITED" };
+		};
 	};
 	
 	var listbuildingTerm := object PL::expressions::Unification {
@@ -495,6 +553,7 @@ mapping DDC::Pin::storeBehaviorBody(owner : DDC::Behaving, characteristicType : 
 		value := "fullStack";
 		arguments += new AtomicQuotedString(owner.uniqueName());
 		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += object PL::CompoundTerm { value := "VISITED" };
 	};
 	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "_", self);
 }
@@ -510,12 +569,14 @@ when {not self.lastMatchingAssignment(owner, pin, characteristicType, _literal).
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentHead(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, requireStack : Boolean) : PL::CompoundTerm {
 	var stackName := if requireStack then "S" else "_" endif;
+	var visitedName := if requireStack then "VISITED" else "_" endif;
 	value := "characteristic";
 	arguments += new AtomicQuotedString(owner.uniqueName());
 	arguments += new AtomicQuotedString(pin.uniqueName());
 	arguments += new AtomicQuotedString(characteristicType.uniqueName());
 	arguments += new AtomicQuotedString(_literal.uniqueName());
 	arguments += object PL::CompoundTerm { value := stackName };
+	arguments += object PL::CompoundTerm { value := visitedName };
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentBody(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::Expression
@@ -542,6 +603,7 @@ mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, charac
 	value := "fullStack";
 	arguments += new AtomicQuotedString(owner.uniqueName());
 	arguments += object PL::CompoundTerm { value := "S" };
+	arguments += object PL::CompoundTerm { value := "VISITED" };
 }
 
 mapping DDC::expressions::False::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::False
@@ -581,6 +643,7 @@ mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceTo
 		value := "fullStack";
 		arguments += new AtomicQuotedString(owner.uniqueName());
 		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += object PL::CompoundTerm { value := "VISITED" };
 	}
 }
 
@@ -605,6 +668,7 @@ mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DD
 	arguments += new AtomicQuotedString(characteristicType.uniqueName());
 	arguments += new AtomicQuotedString(_literal.uniqueName());
 	arguments += object PL::CompoundTerm { value := stackVariable };
+	arguments += object PL::CompoundTerm { value := "VISITED" };
 }
 
 
@@ -691,6 +755,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal = o
 		value := "fullStack";
 		arguments += new AtomicQuotedString(owner.uniqueName());
 		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += object PL::CompoundTerm { value := "VISITED" };
 	};
 }
 

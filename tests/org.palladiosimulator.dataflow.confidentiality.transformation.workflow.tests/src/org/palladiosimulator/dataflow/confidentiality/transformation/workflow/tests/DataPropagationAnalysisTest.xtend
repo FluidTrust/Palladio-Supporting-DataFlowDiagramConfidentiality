@@ -3,7 +3,6 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 import java.util.Arrays
 import java.util.concurrent.Callable
 import org.eclipse.xtext.resource.SaveOptions
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
@@ -148,37 +147,31 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testFlawByProcessCycleDataReference() {
 		assertOneFlaw("DFDC_Process_Cycle_DataReference")
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testNoFlawByProcessCycleDataReference() {
 		assertNoFlaw("DFDC_Process_Cycle_DataReference_noFlaw")
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testFlawByProcessCycleSingleAnd() {
 		assertOneFlaw("DFDC_Process_Cycle_SingleAnd")
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testNoFlawByProcessCycleSingleAnd() {
 		assertNoFlaw("DFDC_Process_Cycle_SingleAnd_noFlaw")
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testFlawByProcessCycleSingleOr() {
-		assertOneFlaw("DFDC_Process_Cycle_SingleOr")
+		assertFlawCount("DFDC_Process_Cycle_SingleOr", 2)
 	}
 	
 	@Test
-	@Disabled("The used embedded solver does not support tabling, which results in an endless recursion")
 	def void testNoFlawByProcessCycleSingleOr() {
 		assertNoFlaw("DFDC_Process_Cycle_SingleOr_noFlaw")
 	}

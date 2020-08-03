@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" id="_uQQ_ANMCEeqMaJ4277tZGA">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_2JbbM9WVEeqRbpVUMz5XAQ" name="CharacteristicType" type="_4a3SVNWVEeqRbpVUMz5XAQ"/>
+  <enumerations id="_4a3SVNWVEeqRbpVUMz5XAQ" name="CharacteristicEnumeration">
+    <literals id="_7OqPoNWVEeqRbpVUMz5XAQ" name="Literal1"/>
+    <literals id="_8QrGQNWVEeqRbpVUMz5XAQ" name="Literal2"/>
+  </enumerations>
+  <behaviorDefinitions id="_BuI0hdWWEeqRbpVUMz5XAQ" name="Store">
+    <inputs id="_CjIi0NWWEeqRbpVUMz5XAQ" name="input"/>
+    <outputs id="_Cz5isdWWEeqRbpVUMz5XAQ" name="output"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

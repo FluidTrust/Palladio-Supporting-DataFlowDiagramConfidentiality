@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    id="_MD4awNVeEeqRbpVUMz5XAQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_-xvmxdWTEeqRbpVUMz5XAQ"
+      name="Actor">
+    <ownedBehavior
+        id="_AcDMcNWUEeqRbpVUMz5XAQ">
+      <inputs
+          id="_BzCNgNWUEeqRbpVUMz5XAQ"
+          name="input"/>
+      <outputs
+          id="_AzZVcdWUEeqRbpVUMz5XAQ"
+          name="output"/>
+      <assignments
+          id="_uHyqktWWEeqRbpVUMz5XAQ">
+        <lhs
+            id="_uibYINWWEeqRbpVUMz5XAQ"
+            pin="_AzZVcdWUEeqRbpVUMz5XAQ">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="loop_dd.xmi#_2JbbM9WVEeqRbpVUMz5XAQ"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_v2vfsdWWEeqRbpVUMz5XAQ"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_AgjnFtWWEeqRbpVUMz5XAQ"
+      name="Store">
+    <referencedBehavior
+        href="loop_dd.xmi#_BuI0hdWWEeqRbpVUMz5XAQ"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_M3d5Z9WWEeqRbpVUMz5XAQ"
+      name="read value">
+    <ownedBehavior
+        id="_OGppUNWWEeqRbpVUMz5XAQ">
+      <inputs
+          id="_OeVwkNWWEeqRbpVUMz5XAQ"
+          name="input"/>
+      <outputs
+          id="_Pq8todWWEeqRbpVUMz5XAQ"
+          name="output"/>
+      <assignments
+          id="_SDi8stWWEeqRbpVUMz5XAQ">
+        <lhs
+            id="_Sclu0NWWEeqRbpVUMz5XAQ"
+            pin="_Pq8todWWEeqRbpVUMz5XAQ"/>
+        <rhs
+            xsi:type="expressions:DataCharacteristicReference"
+            id="_S-8N-NWWEeqRbpVUMz5XAQ"
+            pin="_OeVwkNWWEeqRbpVUMz5XAQ"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_ZSsrB9WWEeqRbpVUMz5XAQ"
+      name="update value">
+    <ownedBehavior
+        id="_bFjvwNWWEeqRbpVUMz5XAQ">
+      <inputs
+          id="_bff5wNWWEeqRbpVUMz5XAQ"
+          name="newValue"/>
+      <inputs
+          id="_d2bU4NWWEeqRbpVUMz5XAQ"
+          name="oldValue"/>
+      <outputs
+          id="_bt8lcdWWEeqRbpVUMz5XAQ"
+          name="newRecord"/>
+      <assignments
+          id="_fiU2AtWWEeqRbpVUMz5XAQ">
+        <lhs
+            id="_gC5McNWWEeqRbpVUMz5XAQ"
+            pin="_bt8lcdWWEeqRbpVUMz5XAQ"/>
+        <rhs
+            xsi:type="expressions:And"
+            id="_cUvYVNWZEeqRbpVUMz5XAQ">
+          <left
+              xsi:type="expressions:DataCharacteristicReference"
+              id="_czo619WZEeqRbpVUMz5XAQ"
+              pin="_bff5wNWWEeqRbpVUMz5XAQ"/>
+          <right
+              xsi:type="expressions:DataCharacteristicReference"
+              id="_dkvAn9WZEeqRbpVUMz5XAQ"
+              pin="_d2bU4NWWEeqRbpVUMz5XAQ"/>
+        </rhs>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_JvNH-dWWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_AgjnFtWWEeqRbpVUMz5XAQ"
+      source="_-xvmxdWTEeqRbpVUMz5XAQ"
+      sourcePin="_AzZVcdWUEeqRbpVUMz5XAQ">
+    <targetPin
+        href="loop_dd.xmi#_CjIi0NWWEeqRbpVUMz5XAQ"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_UQZOydWWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_M3d5Z9WWEeqRbpVUMz5XAQ"
+      source="_AgjnFtWWEeqRbpVUMz5XAQ"
+      targetPin="_OeVwkNWWEeqRbpVUMz5XAQ">
+    <sourcePin
+        href="loop_dd.xmi#_Cz5isdWWEeqRbpVUMz5XAQ"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_WKx329WWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_-xvmxdWTEeqRbpVUMz5XAQ"
+      source="_M3d5Z9WWEeqRbpVUMz5XAQ"
+      sourcePin="_Pq8todWWEeqRbpVUMz5XAQ"
+      targetPin="_BzCNgNWUEeqRbpVUMz5XAQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_kctsadWWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_ZSsrB9WWEeqRbpVUMz5XAQ"
+      source="_M3d5Z9WWEeqRbpVUMz5XAQ"
+      sourcePin="_Pq8todWWEeqRbpVUMz5XAQ"
+      targetPin="_d2bU4NWWEeqRbpVUMz5XAQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_mnmPm9WWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_AgjnFtWWEeqRbpVUMz5XAQ"
+      source="_ZSsrB9WWEeqRbpVUMz5XAQ"
+      sourcePin="_bt8lcdWWEeqRbpVUMz5XAQ">
+    <targetPin
+        href="loop_dd.xmi#_CjIi0NWWEeqRbpVUMz5XAQ"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_o_bCm9WWEeqRbpVUMz5XAQ"
+      name="record"
+      target="_ZSsrB9WWEeqRbpVUMz5XAQ"
+      source="_-xvmxdWTEeqRbpVUMz5XAQ"
+      sourcePin="_AzZVcdWUEeqRbpVUMz5XAQ"
+      targetPin="_bff5wNWWEeqRbpVUMz5XAQ"/>
+</DataFlowDiagram:DataFlowDiagram>
