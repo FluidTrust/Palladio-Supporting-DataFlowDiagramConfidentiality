@@ -30,7 +30,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
 	clauses += self.map createFlowSelectionHelpers();
 	clauses += self.map createFlowStackHelpers();
-	clauses += self.map createCharacteristicShortcut();
+	clauses += self.map createShortcuts();
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
 	clauses += new Comment("");
@@ -39,7 +39,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 		getNodesEnum().literals += self.nodes->map nodeToEnumLiteral(); // temporarily modifies literals in default enumeration
 		clauses += self.nodes->map nodeToNodeLiteralFact();
 	};
-	clauses += self.getUsedCharacteristicTypes(true, true, true)-> map characteristicTypeToFact()->flatten();
+	clauses += self.getUsedCharacteristicTypes(true, true, isUseDefaultCharacteristics())-> map characteristicTypeToFact()->flatten();
 	clauses += new Comment("");
 	clauses += new Comment("Nodes");
 	clauses += new Comment("");
@@ -370,9 +370,12 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 	
 }
 
-mapping DFD::DataFlowDiagram::createCharacteristicShortcut() : List(PL::Clause) {
-	result += object PL::Comment { value := "Shortcut for characteristic queries" };
+mapping DFD::DataFlowDiagram::createShortcuts() : List(PL::Clause) {
+	result += new Comment("");
+	result += new Comment("Shortcuts for common use cases");
+	result += new Comment("");
 	
+	result += new Comment("Shortcut for characteristic queries");
 	result += object PL::Rule {
 		head := object PL::CompoundTerm {
 			value := "characteristic";
@@ -390,6 +393,31 @@ mapping DFD::DataFlowDiagram::createCharacteristicShortcut() : List(PL::Clause) 
 			arguments += object PL::CompoundTerm { value := "V" };
 			arguments += object PL::CompoundTerm { value := "S" };
 			arguments += object PL::_List {};
+		}
+	};
+	
+	result += new Comment("Always inherit node characteristics from parent");
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "nodeCharacteristic";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "CT" };
+			arguments += object PL::CompoundTerm { value := "V" };
+		};
+		var actorProcessTerm := object PL::CompoundTerm {
+			value := "actorProcess";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "A" };
+		};
+		var nodeCharacteristicTerm := object PL::CompoundTerm {
+			value := "nodeCharacteristic";
+			arguments += object PL::CompoundTerm { value := "A" };
+			arguments += object PL::CompoundTerm { value := "CT" };
+			arguments += object PL::CompoundTerm { value := "V" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := left := actorProcessTerm;
+			right := nodeCharacteristicTerm;
 		}
 	};
 }

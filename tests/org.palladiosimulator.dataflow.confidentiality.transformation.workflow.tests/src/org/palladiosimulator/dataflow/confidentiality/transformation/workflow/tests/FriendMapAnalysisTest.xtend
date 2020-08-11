@@ -14,7 +14,7 @@ class FriendMapAnalysisTest extends AnalysisIntegrationTestBase {
 	def void testOneViolation() {
 		builder.addDFD(getRelativeURI("models/evaluation/friendmap/DFDC_FriendMap.xmi"))
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "PIN"))
+		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN"))
 	}
 	
 	@Test
