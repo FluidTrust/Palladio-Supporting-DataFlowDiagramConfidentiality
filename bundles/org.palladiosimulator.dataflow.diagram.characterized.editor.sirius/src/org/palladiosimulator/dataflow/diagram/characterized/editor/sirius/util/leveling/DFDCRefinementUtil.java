@@ -170,21 +170,20 @@ public class DFDCRefinementUtil {
 				.collect(Collectors.toList());
 	}
 
-	public static EdgeRefinement addToRef(CharacterizedDataFlow df, CharacterizedDataFlow ndf, DataFlowDiagramRefinement ref) {
+	public static EdgeRefinement addToRef(CharacterizedDataFlow cdf, CharacterizedDataFlow ncdf, DataFlowDiagramRefinement ref) {
 		EdgeRefinement er = DataFlowDiagramFactory.eINSTANCE.createEdgeRefinement();
-		er.setRefinedEdge(df);
-		if (ndf != null) {
-			er.getRefiningEdges().add(ndf);
+		er.setRefinedEdge(cdf);
+		if (ncdf != null) {
+			er.getRefiningEdges().add(ncdf);
 		}
 		ref.getRefinedEdges().add(er);
 		return er;
 	}
 //
-	public static void refineDF(EObject self, CharacterizedDataFlow df, DataFlowDiagram dfd) {
+	public static void refineCDF(EObject self, CharacterizedDataFlow df, DataFlowDiagram dfd) {
 		Session session = SessionManager.INSTANCE.getSession(df);
 
-		// dataflows without data are allowed
-		if (!DFDCValidationUtil.isRefinable(df)) {
+		if (df.getData().isEmpty() || !DFDCValidationUtil.isRefinable(df)) {
 			return;
 		}
 
@@ -196,6 +195,7 @@ public class DFDCRefinementUtil {
 		if (df.getData().size() > 1) {
 			// one df per data
 			for (Data d : df.getData()) {
+				NamingScheme namingScheme = new NumberedSuffixes(1);
 				CharacterizedDataFlow ndf = ComponentFactory.makeSingleDataFlow(d, df);
 				dfd.getEdges().add(ndf);
 				if (ref != null) {
@@ -211,10 +211,10 @@ public class DFDCRefinementUtil {
 			// one df per type
 			Data origin = df.getData().get(0);
 			DataType type = origin.getType();
-			String name = origin.getName();
-			NamingScheme namingScheme = new NumberedSuffixes(1);
-			List<CharacterizedDataFlow> dfs = new ArrayList<CharacterizedDataFlow>();
 			if (type instanceof CompositeDataType) {
+				String name = origin.getName();
+				NamingScheme namingScheme = new NumberedSuffixes(1);
+				List<CharacterizedDataFlow> dfs = new ArrayList<CharacterizedDataFlow>();
 				List<Entry> entries = DFDCTypeUtil.refineDT(type, session);
 				for (Entry e : entries) {
 					Data data = ComponentFactory.makeData(e);

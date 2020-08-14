@@ -45,20 +45,9 @@ public class DFDCTypeUtil {
 	}
 
 	public static List<Entry> refineDT(DataType type, Session session) {
-		List<DataType> definedTypes = new ArrayList<DataType>();
+		List<DataType> definedTypes = getDataTypes(session).stream().
+										map(d -> (DataType) d).collect(Collectors.toList());
 		List<Entry> entries = new ArrayList<Entry>();
-		List<Resource> resources = session.getSemanticResources().stream().filter(
-				resource -> resource.getContents().stream().anyMatch(c -> c.eClass().getName().equals(DDC_CLASS) || c.eClass().getName().equals(DD_CLASS)))
-				.collect(Collectors.toList());
-		
-		for (Resource r : resources) {
-			for (EObject typeDefinition : r.getContents()) {
-				for (EObject datatype : typeDefinition.eContents()) {
-					definedTypes.add((DataType) datatype);
-				}
-			}
-
-		}
 		for (DataType dt : definedTypes) {
 			if (EcoreUtil.equals(type, dt)) {
 				entries.addAll(((CompositeDataType) dt).getComponents());

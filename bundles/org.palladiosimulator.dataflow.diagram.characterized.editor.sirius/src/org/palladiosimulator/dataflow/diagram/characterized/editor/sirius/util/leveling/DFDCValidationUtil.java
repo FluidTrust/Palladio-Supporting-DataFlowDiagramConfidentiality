@@ -88,7 +88,7 @@ public class DFDCValidationUtil {
 				}
 
 				for (List<Edge> r : refineOne(c)) { // refine one df of each candidate -> will over time generate all
-													// possible combinations of refinements
+					// possible combinations of refinements
 					if (!contains(r, newCandidates)) { // do not consider duplicates
 						newCandidates.add(r);
 					}
@@ -99,11 +99,11 @@ public class DFDCValidationUtil {
 	}
 
 	public static boolean isRefinable(Edge e) {
-		DataFlow df = (DataFlow) e;
-		if (df.getData().size() > 1) {
+		CharacterizedDataFlow cdf = (CharacterizedDataFlow) e;
+		if (cdf.getData().size() > 1) {
 			return true;
 		}
-		if (df.getData().size() > 0 && df.getData().get(0).getType() instanceof CompositeDataType) {
+		if (cdf.getData().size() > 0 && cdf.getData().get(0).getType() instanceof CompositeDataType) {
 			return true;
 		}
 

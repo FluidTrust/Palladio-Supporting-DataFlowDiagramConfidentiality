@@ -18,6 +18,7 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Process;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCTypeUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.ComponentFactory;
@@ -84,11 +85,11 @@ public class Services {
 
 	}
 
-	public void refineDF(EObject self, CharacterizedDataFlow df, DataFlowDiagram dfd) {
+	public void refineCDF(EObject self, CharacterizedDataFlow df, DataFlowDiagram dfd) {
 		if (DFDCRefinementUtil.isRefined(df.getSource()) || DFDCRefinementUtil.isRefined(df.getTarget())) {
 			return;
 		}
-		DFDCRefinementUtil.refineDF(self, df, dfd);
+		DFDCRefinementUtil.refineCDF(self, df, dfd);
 	}
 //
 	public void refineProcess(EObject newDFD, EObject p, DataFlowDiagram oldDFD, DataFlowDiagramRefinement ref) {
@@ -174,9 +175,9 @@ public class Services {
 //		return DFDValidationUtil.inputOutputIsConsistent(self);
 //	}
 //
-//	public void deleteNode(EObject self) {
-//		DFDModificationUtil.deleteNode(self);
-//	}
+	public void deleteNode(EObject self) {
+		DFDCModificationUtil.deleteNode(self);
+	}
 //
 //	public void deleteEdge(EObject self) {
 //		DFDModificationUtil.deleteEdge(self);
@@ -186,5 +187,9 @@ public class Services {
 //	public String getErrorMessage(EObject self) {
 //		return DFDErrorMessageUtil.getErrorMessage(self);
 //	}
+	
+	public CharacterizedNode getTarget(EObject self, EObject targetPin) {
+		return null;
+	}
 
 }

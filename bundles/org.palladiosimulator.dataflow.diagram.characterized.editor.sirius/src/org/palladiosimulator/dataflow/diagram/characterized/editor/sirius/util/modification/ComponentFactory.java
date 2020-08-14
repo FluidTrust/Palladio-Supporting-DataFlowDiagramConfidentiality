@@ -19,6 +19,7 @@ import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramChara
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.ComparisonUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
+import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.naming.NamingScheme;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
@@ -136,6 +137,15 @@ public class ComponentFactory {
 		return nb;
 	}
 
+	public static CharacterizedDataFlow makeSingleDataFlow(Data data, CharacterizedDataFlow df, NamingScheme ns) {
+		CharacterizedDataFlow ndf = copyCharacterizedDataFlow(df);
+		ndf.setName(data.getName());
+		ndf.getData().clear();
+		ndf.getData().add(copyData(data));
+		
+		return ndf;
+	}
+	
 	public static CharacterizedDataFlow makeSingleDataFlow(Data data, CharacterizedDataFlow df) {
 		CharacterizedDataFlow ndf = copyCharacterizedDataFlow(df);
 		ndf.setName(data.getName());
