@@ -177,7 +177,7 @@ public class ComponentFactory {
 				filter(i ->  i.getName().equals(targetPinName))
 				.findFirst().get();
 		ncdf.setTargetPin(tp);
-		return cdf;
+		return ncdf;
 	}
 	
 	public static CharacterizedDataFlow copyOutgoingCharacterizedDataflow(CharacterizedDataFlow cdf, Node cp) {
@@ -188,7 +188,7 @@ public class ComponentFactory {
 				filter(i ->  i.getName().equals(sourcePinName))
 				.findFirst().get();
 		ncdf.setSourcePin(sp);
-		return cdf;
+		return ncdf;
 	}
 
 	public static Data makeData(Entry e) {
