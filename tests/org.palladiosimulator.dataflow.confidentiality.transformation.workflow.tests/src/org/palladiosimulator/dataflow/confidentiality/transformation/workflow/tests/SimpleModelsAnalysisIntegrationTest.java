@@ -178,7 +178,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         query.bind("J$CT", "ValueCharacteristic (_NpqAg4MyEeqgDLgDYuvGtg)");
         Solution<Object> solution = query.solve();
         
-        assertNumberOfSolutionsWithoutTraversedNodes(solution, 8, Arrays.asList("P", "PIN", "CT", "V", "S"));
+        assertNumberOfSolutionsWithoutTraversedNodes(solution, 6, Arrays.asList("P", "PIN", "CT", "V", "S"));
 	}
 	
 	@Test
@@ -196,7 +196,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         prover.loadTheory(result.get());
         Query query = prover.query("characteristic(N, PIN, CT, V, S).");
         Solution<Object> solution = query.solve();
-        assertNumberOfSolutionsWithoutTraversedNodes(solution, 16, Arrays.asList("N", "PIN", "CT", "V", "S"));
+        assertNumberOfSolutionsWithoutTraversedNodes(solution, 22, Arrays.asList("N", "PIN", "CT", "V", "S"));
 	}
 	
 }

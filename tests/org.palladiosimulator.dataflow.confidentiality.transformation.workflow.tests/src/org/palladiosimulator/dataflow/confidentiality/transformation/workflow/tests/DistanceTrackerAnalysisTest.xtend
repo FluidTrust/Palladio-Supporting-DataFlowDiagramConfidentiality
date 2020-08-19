@@ -37,7 +37,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directFlow
 			
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
+		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
 	}
 	
 	protected def Solution<Object> findFlaws() {
