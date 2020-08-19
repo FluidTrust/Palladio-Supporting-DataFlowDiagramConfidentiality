@@ -684,19 +684,29 @@ mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner
 				characteristicType
 			endif;
 		var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
-		result := self.pin.map sourcePinToTerm(owner, characteristicTypeToUse, literalToUse, "S", self);
+		result := self.pin.sourcePinToTermNotMapping(owner, characteristicTypeToUse, literalToUse, "S");
 	}
 }
 
+helper DDC::Pin::sourcePinToTermNotMapping(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, stackVariable : String) : PL::CompoundTerm {
+	return object PL::CompoundTerm {
+		value := "characteristic";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+		arguments += new AtomicQuotedString(characteristicType.uniqueName());
+		arguments += new AtomicQuotedString(_literal.uniqueName());
+		arguments += object PL::CompoundTerm { value := stackVariable };
+		arguments += object PL::CompoundTerm { value := "VISITED" };
+	}
+}
+
+
 // element is required to force QVTo to create a new element even if all other parameters are the same
-mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, stackVariable : String, dummyElement : Element) : PL::CompoundTerm {
-	value := "characteristic";
-	arguments += new AtomicQuotedString(owner.uniqueName());
-	arguments += new AtomicQuotedString(self.uniqueName());
-	arguments += new AtomicQuotedString(characteristicType.uniqueName());
-	arguments += new AtomicQuotedString(_literal.uniqueName());
-	arguments += object PL::CompoundTerm { value := stackVariable };
-	arguments += object PL::CompoundTerm { value := "VISITED" };
+mapping DDC::Pin::sourcePinToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, stackVariable : String, dummyElement : Element) : PL::CompoundTerm
+{
+	init {
+		result := self.sourcePinToTermNotMapping(owner, characteristicType, _literal, stackVariable);
+	}
 }
 
 
@@ -1147,8 +1157,14 @@ query DDC::BehaviorDefinition::lastMatchingAssignment(owner : DDC::Behaving, pin
 				termsToValidate += term.oclAsType(DDC::expressions::LogicTerm).terms
 			} elif (term.oclIsKindOf(DDC::expressions::DataCharacteristicReference)) {
 				var dataReference := term.oclAsType(DDC::expressions::DataCharacteristicReference);
-				// incompatible if characteristic type is given but does not match
-				rhsIsIncompatible := not dataReference.characteristicType.oclIsUndefined() and not dataReference.characteristicType.isCompatibleTo(characteristicType);
+				rhsIsIncompatible := not (
+					// case 0: no wildcards -> compatible
+					(not dataReference.characteristicType.oclIsUndefined() and not dataReference._literal.oclIsUndefined()) or
+					// case 1: only literal wildcard -> characteristic type has to be compatbile
+					(not dataReference.characteristicType.oclIsUndefined() and dataReference._literal.oclIsUndefined() and dataReference.characteristicType.isCompatibleTo(characteristicType)) or
+					// case 2: characteristic type wildcard and literal wildcard -> compatbile
+					(dataReference.characteristicType.oclIsUndefined() and dataReference._literal.oclIsUndefined())
+				);
 			} elif (term.oclIsKindOf(DDC::expressions::ContainerCharacteristicReference)) {
 				var containerReference := term.oclAsType(DDC::expressions::ContainerCharacteristicReference);
 				// incompatible if characteristic type is given but does not match
