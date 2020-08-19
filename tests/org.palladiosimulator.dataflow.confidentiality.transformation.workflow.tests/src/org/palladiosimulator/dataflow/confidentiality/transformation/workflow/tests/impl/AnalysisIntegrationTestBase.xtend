@@ -4,6 +4,7 @@ import java.util.ArrayList
 import java.util.Collection
 import java.util.HashMap
 import java.util.Map
+import java.util.function.Function
 import java.util.function.Predicate
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.junit.jupiter.api.BeforeAll
@@ -18,6 +19,7 @@ import org.prolog4j.Solution
 import org.prolog4j.tuprolog.TuPrologProverFactory
 
 import static org.junit.jupiter.api.Assertions.*
+import java.util.LinkedHashSet
 
 class AnalysisIntegrationTestBase {
 
@@ -65,8 +67,16 @@ class AnalysisIntegrationTestBase {
 	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
 		assertNumberOfSolutions(solution, expectedAmount, variableNames, [true])
 	}
+	
+	protected static def void assertNumberOfSolutionsWithoutDuplicates(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
+		assertNumberOfSolutions(solution, expectedAmount, variableNames, [Collection<Map<String, Object>> solutions | new LinkedHashSet(solutions)])
+	}
 
 	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Predicate<Map<String, Object>> solutionFilter) {
+		assertNumberOfSolutions(solution, expectedAmount, variableNames, [Collection<Map<String, Object>> solutions | solutions.filter[it | solutionFilter.test(it)].toList])
+	}
+
+	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Function<Collection<Map<String, Object>>,Collection<Map<String,Object>>> solutionsFilter) {
 		if (expectedAmount == 0 && !solution.isSuccess) {
 			return;
 		}
@@ -79,7 +89,7 @@ class AnalysisIntegrationTestBase {
 
 		assertTrue(solution.isSuccess());
 
-		val solutions = new ArrayList
+		val Collection<Map<String, Object>> solutions = new ArrayList
 		for (var iter = solution.iterator(); iter.hasNext(); iter.next()) {
 			val solutionVariables = new HashMap();
 			for (String variableName : variableNames) {
@@ -88,7 +98,8 @@ class AnalysisIntegrationTestBase {
 			solutions += solutionVariables
 		}
 
-		val filteredSolutions = solutions.filter[s | solutionFilter.test(s)]
+		
+		val filteredSolutions = solutionsFilter.apply(solutions)
 		var solutionCounter = 0;
 		var debugMessage = "";
 		for (filteredSolution : filteredSolutions) {

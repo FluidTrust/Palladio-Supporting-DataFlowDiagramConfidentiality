@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    id="_MoDmQNSXEeqakq6offlGZg">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_PMdXNeJBEeqO9NqdRSqKUA"
+      name="Clerk US">
+    <referencedBehavior
+        href="abac_dd.xmi#_GiT_peJDEeqO9NqdRSqKUA"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_Ut6NkeJBEeqO9NqdRSqKUA"
+        name="location">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_SQJAEOJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_baQw0eJBEeqO9NqdRSqKUA"
+        name="role">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_c_En8OJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_QYu9FeJBEeqO9NqdRSqKUA"
+      name="Clerk Asia">
+    <referencedBehavior
+        href="abac_dd.xmi#_GiT_peJDEeqO9NqdRSqKUA"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_VGcCUeJBEeqO9NqdRSqKUA"
+        name="location">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_TCUq8OJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_f1BE4eJBEeqO9NqdRSqKUA"
+        name="role">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_c_En8OJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_Qx8HReJBEeqO9NqdRSqKUA"
+      name="Manager">
+    <referencedBehavior
+        href="abac_dd.xmi#_kaXNdeJDEeqO9NqdRSqKUA"/>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_4Iz4keJEEeqO9NqdRSqKUA"
+        name="location">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_SQJAEOJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_iRkm4eJBEeqO9NqdRSqKUA"
+        name="role">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
+      <values
+          href="abac_dd.xmi#_dvk30OJAEeqO9NqdRSqKUA"/>
+    </characteristics>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_mxUIpuJBEeqO9NqdRSqKUA"
+      name="Customer Store US">
+    <referencedBehavior
+        href="abac_dd.xmi#_rUIzleJBEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_odxqduJBEeqO9NqdRSqKUA"
+      name="Customer Store Asia">
+    <referencedBehavior
+        href="abac_dd.xmi#_rUIzleJBEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_pDfmpuJBEeqO9NqdRSqKUA"
+      name="Celebrity Store US">
+    <referencedBehavior
+        href="abac_dd.xmi#_rUIzleJBEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_zArBd-JBEeqO9NqdRSqKUA"
+      name="US.findCustomer">
+    <referencedBehavior
+        href="abac_dd.xmi#_vdrRSOJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_2hPlOeJBEeqO9NqdRSqKUA"
+      name="US.determineCreditLine">
+    <referencedBehavior
+        href="abac_dd.xmi#_qjqOVeJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_6GqMueJBEeqO9NqdRSqKUA"
+      name="US.registerCustomer">
+    <referencedBehavior
+        href="abac_dd.xmi#_qjqOVeJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_8g7PueJBEeqO9NqdRSqKUA"
+      name="US.registerCelebrity">
+    <referencedBehavior
+        href="abac_dd.xmi#_qjqOVeJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_xin5qeJCEeqO9NqdRSqKUA"
+      name="US.moveCustomer">
+    <referencedBehavior
+        href="abac_dd.xmi#_-7BJCOJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_zuZNqeJCEeqO9NqdRSqKUA"
+      name="Asia.findCustomer">
+    <referencedBehavior
+        href="abac_dd.xmi#_vdrRSOJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
+      id="_17_GmeJCEeqO9NqdRSqKUA"
+      name="Asia.determineCreditLine">
+    <referencedBehavior
+        href="abac_dd.xmi#_qjqOVeJAEeqO9NqdRSqKUA"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_9dYJieJEEeqO9NqdRSqKUA"
+      name="customerName"
+      target="_zArBd-JBEeqO9NqdRSqKUA"
+      source="_PMdXNeJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_H1uvUeJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_yD4egOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_uPo-m-JFEeqO9NqdRSqKUA"
+      name="customers"
+      target="_zArBd-JBEeqO9NqdRSqKUA"
+      source="_mxUIpuJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_scRgUeJBEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_ybCaQOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_xwl82-JFEeqO9NqdRSqKUA"
+      name="customer"
+      target="_2hPlOeJBEeqO9NqdRSqKUA"
+      source="_zArBd-JBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_yrJ54eJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_rfMCcOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_5wfLm-JFEeqO9NqdRSqKUA"
+      name="creditLine"
+      target="_PMdXNeJBEeqO9NqdRSqKUA"
+      source="_2hPlOeJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_rubYUeJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_Hi1BcOJDEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_Dpvvu-JGEeqO9NqdRSqKUA"
+      name="customerDetails"
+      target="_6GqMueJBEeqO9NqdRSqKUA"
+      source="_PMdXNeJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_IDjv8eJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_rfMCcOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_GW6gm-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_mxUIpuJBEeqO9NqdRSqKUA"
+      source="_6GqMueJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_rubYUeJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_sMMc8OJBEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_LcqSa-JGEeqO9NqdRSqKUA"
+      name="customerName"
+      target="_zArBd-JBEeqO9NqdRSqKUA"
+      source="_Qx8HReJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_mKXygeJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_yD4egOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_RVnp2-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_Qx8HReJBEeqO9NqdRSqKUA"
+      source="_zArBd-JBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_yrJ54eJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_0SrJ8OJDEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_VNhIe-JGEeqO9NqdRSqKUA"
+      name="celebrityCustomerDetails"
+      target="_8g7PueJBEeqO9NqdRSqKUA"
+      source="_Qx8HReJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_uZfJAeJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_rfMCcOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_ZjnmC-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_pDfmpuJBEeqO9NqdRSqKUA"
+      source="_8g7PueJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_rubYUeJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_sMMc8OJBEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_euWli-JGEeqO9NqdRSqKUA"
+      name="customerName"
+      target="_xin5qeJCEeqO9NqdRSqKUA"
+      source="_Qx8HReJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_mKXygeJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_pwK0gOJDEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_h4Zfq-JGEeqO9NqdRSqKUA"
+      name="customers"
+      target="_xin5qeJCEeqO9NqdRSqKUA"
+      source="_mxUIpuJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_scRgUeJBEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_BTli4OJBEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_lCnY6-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_odxqduJBEeqO9NqdRSqKUA"
+      source="_xin5qeJCEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_B2usMeJBEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_sMMc8OJBEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_rFL_W-JGEeqO9NqdRSqKUA"
+      name="customerName"
+      target="_zuZNqeJCEeqO9NqdRSqKUA"
+      source="_QYu9FeJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_H1uvUeJDEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_yD4egOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_wT4Ry-JGEeqO9NqdRSqKUA"
+      name="customers"
+      target="_zuZNqeJCEeqO9NqdRSqKUA"
+      source="_odxqduJBEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_scRgUeJBEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_ybCaQOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_0V0dO-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_QYu9FeJBEeqO9NqdRSqKUA"
+      source="_zuZNqeJCEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_yrJ54eJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_Hi1BcOJDEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_219eu-JGEeqO9NqdRSqKUA"
+      name="customer"
+      target="_17_GmeJCEeqO9NqdRSqKUA"
+      source="_zuZNqeJCEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_yrJ54eJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_rfMCcOJAEeqO9NqdRSqKUA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_5VFzm-JGEeqO9NqdRSqKUA"
+      name="creditLine"
+      target="_QYu9FeJBEeqO9NqdRSqKUA"
+      source="_17_GmeJCEeqO9NqdRSqKUA">
+    <sourcePin
+        href="abac_dd.xmi#_rubYUeJAEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="abac_dd.xmi#_Hi1BcOJDEeqO9NqdRSqKUA"/>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_uQQ_ANMCEeqMaJ4277tZGA">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_h6k4o-JAEeqO9NqdRSqKUA" name="CustomerLocation" type="_4VYuS-I_EeqO9NqdRSqKUA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_j_v1Y-JAEeqO9NqdRSqKUA" name="EmployeeLocation" type="_4VYuS-I_EeqO9NqdRSqKUA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_lmMOw-JAEeqO9NqdRSqKUA" name="CustomerStatus" type="_fOGrVOJAEeqO9NqdRSqKUA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_nNduk-JAEeqO9NqdRSqKUA" name="EmployeeRole" type="_bAD9lOJAEeqO9NqdRSqKUA"/>
+  <enumerations id="_4VYuS-I_EeqO9NqdRSqKUA" name="Location">
+    <literals id="_SQJAEOJAEeqO9NqdRSqKUA" name="USA"/>
+    <literals id="_TCUq8OJAEeqO9NqdRSqKUA" name="Asia"/>
+  </enumerations>
+  <enumerations id="_bAD9lOJAEeqO9NqdRSqKUA" name="Role">
+    <literals id="_c_En8OJAEeqO9NqdRSqKUA" name="Clerk"/>
+    <literals id="_dvk30OJAEeqO9NqdRSqKUA" name="Manager"/>
+  </enumerations>
+  <enumerations id="_fOGrVOJAEeqO9NqdRSqKUA" name="Status">
+    <literals id="_gYqZ8OJAEeqO9NqdRSqKUA" name="Regular"/>
+    <literals id="_hCxt8OJAEeqO9NqdRSqKUA" name="Celebrity"/>
+  </enumerations>
+  <behaviorDefinitions id="_qjqOVeJAEeqO9NqdRSqKUA" name="Forwarder">
+    <inputs id="_rfMCcOJAEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_rubYUeJAEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_tFstQuJAEeqO9NqdRSqKUA">
+      <lhs id="_tuGxEOJAEeqO9NqdRSqKUA" pin="_rubYUeJAEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_uAlBKOJAEeqO9NqdRSqKUA" pin="_rfMCcOJAEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_vdrRSOJAEeqO9NqdRSqKUA" name="Joiner">
+    <inputs id="_yD4egOJAEeqO9NqdRSqKUA" name="input1"/>
+    <inputs id="_ybCaQOJAEeqO9NqdRSqKUA" name="input2"/>
+    <outputs id="_yrJ54eJAEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_1b3G8uJAEeqO9NqdRSqKUA">
+      <lhs id="_3q6_gOJAEeqO9NqdRSqKUA" pin="_yrJ54eJAEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:Or" id="_4TnXNeJAEeqO9NqdRSqKUA">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_4u2ht-JAEeqO9NqdRSqKUA" pin="_yD4egOJAEeqO9NqdRSqKUA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_8Wy4z-JAEeqO9NqdRSqKUA" pin="_ybCaQOJAEeqO9NqdRSqKUA"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_-7BJCOJAEeqO9NqdRSqKUA" name="Location Changer US to Asia">
+    <inputs id="_BTli4OJBEeqO9NqdRSqKUA" name="input"/>
+    <inputs id="_pwK0gOJDEeqO9NqdRSqKUA" name="selector"/>
+    <outputs id="_B2usMeJBEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_CJG1ouJBEeqO9NqdRSqKUA">
+      <lhs id="_D2sY0OJBEeqO9NqdRSqKUA" pin="_B2usMeJBEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_ELyfGOJBEeqO9NqdRSqKUA" pin="_BTli4OJBEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_ChZZ0uJBEeqO9NqdRSqKUA">
+      <lhs id="_FQHC0OJBEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" pin="_B2usMeJBEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:False" id="_F2MLYuJBEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_Gfaun-JBEeqO9NqdRSqKUA">
+      <lhs id="_G1ivkOJBEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" literal="_TCUq8OJAEeqO9NqdRSqKUA" pin="_B2usMeJBEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_HJx6MeJBEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_rUIzleJBEeqO9NqdRSqKUA" name="Store">
+    <inputs id="_sMMc8OJBEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_scRgUeJBEeqO9NqdRSqKUA" name="output"/>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_GiT_peJDEeqO9NqdRSqKUA" name="Clerk">
+    <inputs id="_Hi1BcOJDEeqO9NqdRSqKUA" name="creditLine"/>
+    <outputs id="_H1uvUeJDEeqO9NqdRSqKUA" name="customerName"/>
+    <outputs id="_IDjv8eJDEeqO9NqdRSqKUA" name="customerDetails"/>
+    <assignments id="_MRESMuJDEeqO9NqdRSqKUA">
+      <lhs id="_M6wIYOJDEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" pin="_IDjv8eJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:ContainerCharacteristicReference" id="_OWEP1-JDEeqO9NqdRSqKUA" characteristicType="_j_v1Y-JAEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_MoNm4uJDEeqO9NqdRSqKUA">
+      <lhs id="_QempoOJDEeqO9NqdRSqKUA" characteristicType="_lmMOw-JAEeqO9NqdRSqKUA" literal="_gYqZ8OJAEeqO9NqdRSqKUA" pin="_IDjv8eJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_UB6YUeJDEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_W8QpkuJDEeqO9NqdRSqKUA">
+      <lhs id="_XzDHoOJDEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" pin="_H1uvUeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:ContainerCharacteristicReference" id="_YpBGV-JDEeqO9NqdRSqKUA" characteristicType="_j_v1Y-JAEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_XVDkH-JDEeqO9NqdRSqKUA">
+      <lhs id="_YPvqsOJDEeqO9NqdRSqKUA" characteristicType="_lmMOw-JAEeqO9NqdRSqKUA" literal="_gYqZ8OJAEeqO9NqdRSqKUA" pin="_H1uvUeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_ZX6MoeJDEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_kaXNdeJDEeqO9NqdRSqKUA" name="Manager">
+    <inputs id="_0SrJ8OJDEeqO9NqdRSqKUA" name="customer"/>
+    <outputs id="_mKXygeJDEeqO9NqdRSqKUA" name="customerName"/>
+    <outputs id="_uZfJAeJDEeqO9NqdRSqKUA" name="celebrityCustomerDetails"/>
+    <assignments id="_n8pzAuJEEeqO9NqdRSqKUA">
+      <lhs id="_pNE5EOJEEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" pin="_uZfJAeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:ContainerCharacteristicReference" id="_q8-wd-JEEeqO9NqdRSqKUA" characteristicType="_j_v1Y-JAEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_oVd7ouJEEeqO9NqdRSqKUA">
+      <lhs id="_snYcwOJEEeqO9NqdRSqKUA" characteristicType="_lmMOw-JAEeqO9NqdRSqKUA" literal="_hCxt8OJAEeqO9NqdRSqKUA" pin="_uZfJAeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_uubBweJEEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_oth2UuJEEeqO9NqdRSqKUA">
+      <lhs id="_vk5WwOJEEeqO9NqdRSqKUA" characteristicType="_h6k4o-JAEeqO9NqdRSqKUA" pin="_mKXygeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:ContainerCharacteristicReference" id="_w--vJ-JEEeqO9NqdRSqKUA" characteristicType="_j_v1Y-JAEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_zYHJv-JEEeqO9NqdRSqKUA">
+      <lhs id="_0IXh8OJEEeqO9NqdRSqKUA" characteristicType="_lmMOw-JAEeqO9NqdRSqKUA" literal="_gYqZ8OJAEeqO9NqdRSqKUA" pin="_mKXygeJDEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_0j6OceJEEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>
