@@ -120,10 +120,11 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 	}
 	
 	@Test
-	public void testCopyCompatibleContainerCharacteristics() {
+	public void testCopyCompatibleContainerCharacteristics() throws IOException {
 		builder.addDFD(getRelativeURI("models/unitTestExamples/dfd_copyCompatibleContainerCharacteristic.xmi"));
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID);
+		builder.setDefaultCharacteristicsUsage(false);
 		var workflow = builder.build();
 
 		workflow.run();
@@ -136,7 +137,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutionsWithoutTraversedNodes(solution, 2, Arrays.asList("P", "PIN", "CT", "V", "S"));
 	}
 	
 	@Test
@@ -178,7 +179,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         query.bind("J$CT", "ValueCharacteristic (_NpqAg4MyEeqgDLgDYuvGtg)");
         Solution<Object> solution = query.solve();
         
-        assertNumberOfSolutionsWithoutTraversedNodes(solution, 6, Arrays.asList("P", "PIN", "CT", "V", "S"));
+        assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("P", "PIN", "CT", "V", "S"));
 	}
 	
 	@Test

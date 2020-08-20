@@ -36,7 +36,7 @@ class ContactSMSAnalysisTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directCCDFlow
 		
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
+		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
 	}
 	
 	protected def Solution<Object> findFlaws() {

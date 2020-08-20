@@ -36,7 +36,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 3, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT", "S"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 1, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT", "S"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 1, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT", "S"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 1, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
 	}
 
 	protected def Solution<Object> findFlaws() {

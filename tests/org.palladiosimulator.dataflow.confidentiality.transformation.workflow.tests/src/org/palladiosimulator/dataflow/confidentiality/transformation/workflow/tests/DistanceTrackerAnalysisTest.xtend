@@ -37,7 +37,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directFlow
 			
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
+		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
 	}
 	
 	protected def Solution<Object> findFlaws() {
@@ -48,7 +48,7 @@ class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
 		workflow.run()
 		var result = workflow.getSerializedPrologProgram()
 		assertFalse(result.isEmpty())
-		
+
 		prover.loadTheory(result.get())
 		var queryString = '''
 			inputPin(P, PIN),

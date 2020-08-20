@@ -30,7 +30,7 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 	def void testWriteViolation() {
 		builder.addDFD(getRelativeURI("models/evaluation/mac/mac_dfd_writeViolation.xmi"))
 		initProver()
-		assertNumberOfSolutions(findWriteViolation(), 3, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
+		assertNumberOfSolutions(findWriteViolation(), 2, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
 	}
 	
 	@Test

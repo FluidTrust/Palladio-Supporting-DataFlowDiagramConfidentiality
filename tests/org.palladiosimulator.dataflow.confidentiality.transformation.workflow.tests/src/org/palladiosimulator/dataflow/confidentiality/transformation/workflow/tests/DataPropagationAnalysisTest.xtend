@@ -94,7 +94,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testFlawByProcessContainerReference() {
-		assertFlawCount("DFDC_Process_ContainerReference", 2)
+		assertFlawCount("DFDC_Process_ContainerReference", 1)
 	}
 	
 	@Test
@@ -104,7 +104,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testFlawByProcessConstantTrue() {
-		assertFlawCount("DFDC_Process_ConstantTrue", 2)
+		assertFlawCount("DFDC_Process_ConstantTrue", 1)
 	}
 	
 	@Test

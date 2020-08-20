@@ -37,7 +37,7 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directCCDFlow
 
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 9, #["N", "PIN", "R", "D", "S"])
+		assertNumberOfSolutions(solution, 3, #["N", "PIN", "R", "D", "S"])
 	}
 
 	@Test

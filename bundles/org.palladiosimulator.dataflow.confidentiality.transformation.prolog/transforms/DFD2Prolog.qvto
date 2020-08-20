@@ -257,7 +257,6 @@ mapping DFD::DataFlowDiagram::createFlowSelectionHelpers() : List(PL::Clause) {
 
 mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 	result += object PL::Comment { value := "Find valid flow selection for node P" };
-	
 	result += object PL::Rule {
 		head := object PL::CompoundTerm {
 			value := "validFlowSelection";
@@ -460,47 +459,47 @@ mapping DDC::Pin::inputPinToCharacteristicRuleHead(owner : DDC::Behaving) : PL::
 	arguments += new AtomicQuotedString(self.uniqueName());
 	arguments += object PL::CompoundTerm { value := "CT" };
 	arguments += object PL::CompoundTerm { value := "V" };
-	arguments += object PL::CompoundTerm { value := "SHEAD" };
+	arguments += object PL::_List {
+		heads += object PL::CompoundTerm { value := "F" };
+		tails += object PL::CompoundTerm { value := "S" };
+	};
 	arguments += object PL::CompoundTerm { value := "VISITED" };
 }
 
 mapping DDC::Pin::inputPinToCharacteristicRuleBody(owner : DDC::Behaving) : PL::expressions::LogicalAnd {
-	var flowFinding := object PL::CompoundTerm {
-		value := "inputFlow";
-		arguments += new AtomicQuotedString(owner.uniqueName());
-		arguments += new AtomicQuotedString(self.uniqueName());
-		arguments += object PL::CompoundTerm { value := "SHEAD" };
-		arguments += object PL::CompoundTerm { value := "F" };
-		arguments += object PL::CompoundTerm { value := "VISITED" };
-	};
-	
-	var incomingDataFlowTerm := object PL::CompoundTerm {
+	left := object PL::expressions::LogicalAnd {
+
+	left := object PL::CompoundTerm {
 		value := "dataflow";
 		arguments += object PL::CompoundTerm { value := "F" };
-		arguments += object PL::CompoundTerm { value := "PSRC" };
-		arguments += object PL::CompoundTerm { value := "PINSRC" };
+		arguments += object PL::CompoundTerm { value := "P" };
+		arguments += object PL::CompoundTerm { value := "PIN" };
 		arguments += new AtomicQuotedString(owner.uniqueName());
 		arguments += new AtomicQuotedString(self.uniqueName());
 	};
 	
-	var sourceCharacteristicTerm := object PL::CompoundTerm {
+	right := object PL::CompoundTerm {
+		value := "intersection";
+		arguments += object PL::_List {
+			heads += object PL::CompoundTerm { value := "F" };
+		};
+		arguments += object PL::CompoundTerm { value := "VISITED" };
+		arguments += object PL::_List {};
+	};
+	
+	};
+	right := object PL::CompoundTerm {
 		value := "characteristic";
-		arguments += object PL::CompoundTerm { value := "PSRC" };
-		arguments += object PL::CompoundTerm { value := "PINSRC" };
+		arguments += object PL::CompoundTerm { value := "P" };
+		arguments += object PL::CompoundTerm { value := "PIN" };
 		arguments += object PL::CompoundTerm { value := "CT" };
 		arguments += object PL::CompoundTerm { value := "V" };
-		arguments += object PL::CompoundTerm { value := "_" };
+		arguments += object PL::CompoundTerm { value := "S" };
 		arguments += object PL::_List {
 			heads += object PL::CompoundTerm { value := "F" };
 			tails += object PL::CompoundTerm { value := "VISITED" };
 		};
 	};
-	
-	left := object PL::expressions::LogicalAnd {
-		left := flowFinding;
-		right := incomingDataFlowTerm;
-	};
-	right := sourceCharacteristicTerm;
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignment(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
@@ -516,18 +515,44 @@ when {owner.oclIsKindOf(DFDC::CharacterizedStore)}
 	assert fatal (not self.inputs->isEmpty()) with log ("Store has to have at least one input.");
 	assert warning (not self.inputs->isEmpty()) with log ("Store has more than one input. Results will be non-deterministic.");
 	
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true, true);
 	body := self.inputs->any(true).map storeBehaviorBody(owner, characteristicType, _literal, self);
 }
 
 mapping DDC::Pin::storeBehaviorBody(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, dummy : Element) : PL::expressions::LogicalAnd {
-	left := object PL::CompoundTerm {
-		value := "validFlowSelection";
+	var inputFlowClause := object PL::CompoundTerm {
+		value := "inputFlow";
 		arguments += new AtomicQuotedString(owner.uniqueName());
-		arguments += object PL::CompoundTerm { value := "S" };
+		arguments += new AtomicQuotedString(self.uniqueName());
+		arguments += object PL::CompoundTerm { value := "_" };
+		arguments += object PL::CompoundTerm { value := "F" };
 		arguments += object PL::CompoundTerm { value := "VISITED" };
 	};
-	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "_", self);
+	
+	// TODO replace by sourcePinToTerm
+	var characteristicClause := object PL::CompoundTerm {
+		value := "characteristic";
+		arguments += new AtomicQuotedString(owner.uniqueName());
+		arguments += new AtomicQuotedString(self.uniqueName());
+		arguments += new AtomicQuotedString(characteristicType.uniqueName());
+		arguments += new AtomicQuotedString(_literal.uniqueName());
+		arguments += object PL::_List { 
+			heads += object PL::CompoundTerm { value := "F" };
+			tails += object PL::CompoundTerm { value := "_" };			
+		};
+		arguments += object PL::CompoundTerm { value := "VISITED" };
+	};
+	
+	var emptyStackClause := object PL::expressions::Unification {
+		left := object PL::CompoundTerm { value := "S" };
+		right := object PL::_List {};
+	};
+
+	left := object PL::expressions::LogicalAnd {
+		left := inputFlowClause;
+		right := characteristicClause;
+	};
+	right := emptyStackClause;
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentWithAssignments(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
@@ -535,13 +560,79 @@ when {not self.lastMatchingAssignment(owner, pin, characteristicType, _literal).
 {
 	var assignment := self.lastMatchingAssignment(owner, pin, characteristicType, _literal);
 	var requireStack := not assignment.rhs.oclIsKindOf(DDC::expressions::False);
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, requireStack);
-	body := assignment.rhs.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+	var requireVisited := not assignment.rhs.oclIsKindOf(DDC::expressions::Constant);
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, requireStack, requireVisited);
+	body := assignment.rhs.map rhsTermToRuleBody(owner, characteristicType, _literal, requireStack);
 }
 
-mapping DDC::BehaviorDefinition::behaviorToAssignmentHead(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, requireStack : Boolean) : PL::CompoundTerm {
+mapping DDC::expressions::Term::rhsTermToRuleBody(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, requireStack : Boolean) : PL::expressions::LogicalAnd {
+	var inputPins := owner.behavior.inputs;
+	var stackVarsList := object PL::_List {};
+	var stackBuilderClause := object PL::expressions::Unification {
+		left := object PL::CompoundTerm { value := "S" };
+		right := stackVarsList;
+	};
+	var lastTerm := result;
+	right :=  object PL::expressions::LogicalAnd {
+		left := self.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
+		right := stackBuilderClause;
+	};		
+	var i := 0;
+	inputPins->forEach(inputPin) {	
+		var inputPinNumber := inputPin.getPinNumber().toString();
+		var inputFlowClause := object PL::CompoundTerm {
+			value := "inputFlow";
+			arguments += new AtomicQuotedString(owner.uniqueName());
+			arguments += new AtomicQuotedString(inputPin.uniqueName());
+			arguments += object PL::CompoundTerm { value := if inputPins->size() > 1 then "FLOWS" else "_" endif };
+			arguments += object PL::CompoundTerm { value := "F" + inputPinNumber };
+			arguments += object PL::CompoundTerm { value := "VISITED" };
+		};
+		var stackVarClause := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "S" + inputPinNumber };
+			right := object PL::_List {
+				heads += object PL::CompoundTerm { value := "F" + inputPinNumber };
+				tails += object PL::CompoundTerm { value := "_" };					
+			};
+		};
+		
+		var newLastTerm := object PL::expressions::LogicalAnd {
+			right := inputFlowClause;
+		};
+		
+		// lastTerm.right != null
+		// lastTerm.left == null
+		lastTerm.left := object PL::expressions::LogicalAnd {
+			left := newLastTerm;
+			right := stackVarClause;
+		};
+		lastTerm := newLastTerm;
+		stackVarsList.heads += object PL::CompoundTerm { value := "S" + inputPinNumber };
+	};
+	lastTerm.left := object PL::True {};
+}
+
+query DDC::Pin::getPinNumber() : Integer {
+	return if self.owner.inputs->includes(self) then
+		self.owner.inputs->indexOf(self)
+	else
+		self.owner.outputs->indexOf(self)
+	endif;
+}
+
+query DDC::expressions::Term::getReferencedInputPins() : OrderedSet(DDC::Pin) {
+	if (self.oclIsKindOf(DDC::expressions::LogicTerm)) {
+		return self.oclAsType(DDC::expressions::LogicTerm).terms->getReferencedInputPins()->flatten()->asOrderedSet();
+	};
+	if (self.oclIsKindOf(DDC::expressions::DataCharacteristicReference)) {
+		return self.oclAsType(DDC::expressions::DataCharacteristicReference).pin->asOrderedSet();
+	};
+	return self->selectByKind(DDC::Pin)->asOrderedSet(); // empty set
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentHead(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, requireStack : Boolean, requireVisited : Boolean) : PL::CompoundTerm {
 	var stackName := if requireStack then "S" else "_" endif;
-	var visitedName := if requireStack then "VISITED" else "_" endif;
+	var visitedName := if requireVisited then "VISITED" else "_" endif;
 	value := "characteristic";
 	arguments += new AtomicQuotedString(owner.uniqueName());
 	arguments += new AtomicQuotedString(pin.uniqueName());
@@ -570,12 +661,8 @@ disjuncts DDC::expressions::True::constantToConstant,
 {
 }
 
-mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm
+mapping DDC::expressions::True::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::True
 {
-	value := "validFlowSelection";
-	arguments += new AtomicQuotedString(owner.uniqueName());
-	arguments += object PL::CompoundTerm { value := "S" };
-	arguments += object PL::CompoundTerm { value := "VISITED" };
 }
 
 mapping DDC::expressions::False::constantToConstant(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::False
@@ -596,7 +683,7 @@ mapping DDC::expressions::Not::logicalTermToLogicalTerm(owner : DDC::Behaving, c
 	expr := self.term.map rhsTermToCharacteristicRuleExpression(owner, characteristicType, _literal);
 }
 
-mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::LogicalAnd {
+mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) :  PL::CompoundTerm {
 	var characteristicTypeToUse := 
 		if not self.characteristicType.oclIsUndefined() and self.characteristicType.oclIsKindOf(DDC::EnumCharacteristicType) then
 			self.characteristicType.oclAsType(DDC::EnumCharacteristicType)
@@ -605,18 +692,10 @@ mapping DDC::expressions::ContainerCharacteristicReference::containerReferenceTo
 		endif;
 	var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
 	
-	left := object PL::CompoundTerm {
-		value := "nodeCharacteristic";
-		arguments += new AtomicQuotedString(owner.uniqueName());
-		arguments += new AtomicQuotedString(characteristicTypeToUse.uniqueName());
-		arguments += new AtomicQuotedString(_literal.uniqueName());
-	};
-	right := object PL::CompoundTerm {
-		value := "validFlowSelection";
-		arguments += new AtomicQuotedString(owner.uniqueName());
-		arguments += object PL::CompoundTerm { value := "S" };
-		arguments += object PL::CompoundTerm { value := "VISITED" };
-	}
+	value := "nodeCharacteristic";
+	arguments += new AtomicQuotedString(owner.uniqueName());
+	arguments += new AtomicQuotedString(characteristicTypeToUse.uniqueName());
+	arguments += new AtomicQuotedString(_literal.uniqueName());
 }
 
 mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner : DDC::Behaving, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::CompoundTerm {
@@ -628,7 +707,7 @@ mapping DDC::expressions::DataCharacteristicReference::dataReferenceToTerm(owner
 				characteristicType
 			endif;
 		var literalToUse := if not self._literal.oclIsUndefined() then self._literal else _literal endif;
-		result := self.pin.sourcePinToTermNotMapping(owner, characteristicTypeToUse, literalToUse, "S");
+		result := self.pin.sourcePinToTermNotMapping(owner, characteristicTypeToUse, literalToUse, "S" + self.pin.getPinNumber().toString());
 	}
 }
 
@@ -732,12 +811,10 @@ merges
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesSelf(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { characteristicType = getVisitedNodesCharacteristicType() and _literal = owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
 {
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
-	body := object PL::CompoundTerm {
-		value := "validFlowSelection";
-		arguments += new AtomicQuotedString(owner.uniqueName());
-		arguments += object PL::CompoundTerm { value := "S" };
-		arguments += object PL::CompoundTerm { value := "VISITED" };
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true, false);
+	body := object PL::expressions::Unification {
+		left := object PL::CompoundTerm { value := "S" };
+		right := object PL::_List {};
 	};
 }
 
@@ -746,7 +823,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> 
 {
 	var referencedInputPins := self.assignments.rhs.allSubobjects()->union(self.assignments.rhs)->selectByKind(DDC::expressions::DataCharacteristicReference).pin->asSet()->sortedBy(oclAsType(Identifier).id);
 	var hasReferences := not referencedInputPins->isEmpty();
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasReferences);
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasReferences, hasReferences);
 
 	if(not hasReferences) {
 		body := object PL::False {};
@@ -761,7 +838,7 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthersForStores(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { owner.oclIsKindOf(DFDC::CharacterizedStore) and characteristicType = getVisitedNodesCharacteristicType() and _literal <> owner.oclAsType(DFD::Node).map nodeToEnumLiteral()}
 {
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true);
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true, true);
 	
 	assert fatal (self.inputs->size() = 1);
 	var inputPin := self.inputs->any(true);
