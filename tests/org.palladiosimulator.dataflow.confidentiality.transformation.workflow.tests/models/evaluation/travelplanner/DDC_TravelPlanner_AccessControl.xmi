@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_coomgNVeEeqRbpVUMz5XAq">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_k9jB49vTEeqNdo_V4bA-xw" name="AccessPermissions" type="_puzKZNvTEeqNdo_V4bA-xw"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_JvuuQ9vqEeqNdo_V4bA-xw" name="Roles" type="_puzKZNvTEeqNdo_V4bA-xw"/>
+  <enumerations id="_puzKZNvTEeqNdo_V4bA-xw" name="Roles">
+    <literals id="_qiLIENvTEeqNdo_V4bA-xw" name="Agency"/>
+    <literals id="_sJIe0NvTEeqNdo_V4bA-xw" name="Airline"/>
+    <literals id="_tkFZ4NvTEeqNdo_V4bA-xw" name="User"/>
+  </enumerations>
+  <behaviorDefinitions id="_xH2bldvTEeqNdo_V4bA-xw" name="Forward">
+    <inputs id="_zHeJ8NvTEeqNdo_V4bA-xw" name="input"/>
+    <outputs id="_2C0gwdvTEeqNdo_V4bA-xw" name="output"/>
+    <assignments id="_264xMtvTEeqNdo_V4bA-xw">
+      <lhs id="_3YEccNvTEeqNdo_V4bA-xw" pin="_2C0gwdvTEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_5G-1WNvTEeqNdo_V4bA-xw" pin="_zHeJ8NvTEeqNdo_V4bA-xw"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_64bk2NvTEeqNdo_V4bA-xw" name="JoinerOneOutput">
+    <inputs id="_8-t74NvTEeqNdo_V4bA-xw" name="input1"/>
+    <inputs id="_-A2uUNvTEeqNdo_V4bA-xw" name="input2"/>
+    <outputs id="_-tw3odvTEeqNdo_V4bA-xw" name="output"/>
+    <assignments id="__rm_8tvTEeqNdo_V4bA-xw">
+      <lhs id="_AefOYNvUEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_-tw3odvTEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:And" id="_EfuPMtvUEeqNdo_V4bA-xw">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_FA97F9vUEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_8-t74NvTEeqNdo_V4bA-xw"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_FnAAXdvUEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_-A2uUNvTEeqNdo_V4bA-xw"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_Va4rqNvbEeqNdo_V4bA-xw" name="JoinerTwoOutput">
+    <inputs id="_XlN1MNvbEeqNdo_V4bA-xw" name="input1"/>
+    <inputs id="_X-45cNvbEeqNdo_V4bA-xw" name="input2"/>
+    <outputs id="_YOWRwdvbEeqNdo_V4bA-xw" name="output1"/>
+    <outputs id="_YgJMYdvbEeqNdo_V4bA-xw" name="output2"/>
+    <assignments id="_ZywxMtvjEeqNdo_V4bA-xw">
+      <lhs id="_nor_MNvjEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_YOWRwdvbEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:And" id="_oEbgBNvjEeqNdo_V4bA-xw">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_qAVMB9vjEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_XlN1MNvbEeqNdo_V4bA-xw"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_qpNw_9vjEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_X-45cNvbEeqNdo_V4bA-xw"/>
+      </rhs>
+    </assignments>
+    <assignments id="_6YbbQuLHEeqO9NqdRSqKUA">
+      <lhs id="_62zZUOLHEeqO9NqdRSqKUA" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_YgJMYdvbEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:And" id="_7N2nZOLHEeqO9NqdRSqKUA">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_71cy5-LHEeqO9NqdRSqKUA" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_XlN1MNvbEeqNdo_V4bA-xw"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_8XCdD-LHEeqO9NqdRSqKUA" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_X-45cNvbEeqNdo_V4bA-xw"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_iS5kFdvUEeqNdo_V4bA-xw" name="Database">
+    <inputs id="_jjMuUNvUEeqNdo_V4bA-xw" name="input"/>
+    <outputs id="_j3IW8dvUEeqNdo_V4bA-xw" name="output"/>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_nFg-hdvUEeqNdo_V4bA-xw" name="DeclassificationToIncludeAirline">
+    <inputs id="_qC7K0NvUEeqNdo_V4bA-xw" name="input"/>
+    <outputs id="_qSc0kdvUEeqNdo_V4bA-xw" name="output"/>
+    <assignments id="_rxp9gtvUEeqNdo_V4bA-xw">
+      <lhs id="_sPXNMNvUEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_qSc0kdvUEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_Eoze6OLIEeqO9NqdRSqKUA" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" pin="_qC7K0NvUEeqNdo_V4bA-xw"/>
+    </assignments>
+    <assignments id="_y74vktvUEeqNdo_V4bA-xw">
+      <lhs id="_zTjBoNvUEeqNdo_V4bA-xw" characteristicType="_k9jB49vTEeqNdo_V4bA-xw" literal="_sJIe0NvTEeqNdo_V4bA-xw" pin="_qSc0kdvUEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:True" id="_0l-S0dvUEeqNdo_V4bA-xw"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_Nlp-VdvnEeqNdo_V4bA-xw" name="Forwarder2">
+    <inputs id="_Ov91UNvnEeqNdo_V4bA-xw" name="input1"/>
+    <inputs id="_PfDv8NvnEeqNdo_V4bA-xw" name="input2"/>
+    <outputs id="_PNHrYdvnEeqNdo_V4bA-xw" name="output1"/>
+    <outputs id="_PvCFodvnEeqNdo_V4bA-xw" name="output2"/>
+    <assignments id="_TLZe0tvnEeqNdo_V4bA-xw">
+      <lhs id="_T3K_sNvnEeqNdo_V4bA-xw" pin="_PNHrYdvnEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_U9ThWNvnEeqNdo_V4bA-xw" pin="_Ov91UNvnEeqNdo_V4bA-xw"/>
+    </assignments>
+    <assignments id="_TlPiMtvnEeqNdo_V4bA-xw">
+      <lhs id="_V58vwNvnEeqNdo_V4bA-xw" pin="_PvCFodvnEeqNdo_V4bA-xw"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_WsRkmNvnEeqNdo_V4bA-xw" pin="_PfDv8NvnEeqNdo_V4bA-xw"/>
+    </assignments>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

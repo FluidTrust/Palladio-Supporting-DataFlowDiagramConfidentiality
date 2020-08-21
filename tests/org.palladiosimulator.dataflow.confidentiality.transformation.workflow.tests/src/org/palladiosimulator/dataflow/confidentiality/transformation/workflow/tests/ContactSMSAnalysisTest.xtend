@@ -2,6 +2,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 
 import java.util.Arrays
 import org.eclipse.xtext.resource.SaveOptions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
@@ -13,18 +14,23 @@ import org.prolog4j.Solution
 import static org.junit.jupiter.api.Assertions.*
 
 class ContactSMSAnalysisTest extends AnalysisIntegrationTestBase {
-	
+
+	@BeforeEach
+	def void setupBuilder() {
+		builder.setDefaultCharacteristicsUsage(false)
+	}
+
 	@Test
 	def void testNoFlaws() {
-		builder.addDFD(getRelativeURI("models/evaluation/contactsms/DFDC_ContactSMS.xmi"))
+		builder.addDFD(getRelativeURI("models/evaluation/contactsms/DFDC_ContactSMS_AccessControl.xmi"))
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
 	}
 	
 	@Test
 	def void testNoDeclassification() {		
-		var dfd = loadAndInitDFD("models/evaluation/contactsms/DDC_ContactSMS.xmi",
-			"models/evaluation/contactsms/DFDC_ContactSMS.xmi")
+		var dfd = loadAndInitDFD("models/evaluation/contactsms/DDC_ContactSMS_AccessControl.xmi",
+			"models/evaluation/contactsms/DFDC_ContactSMS_AccessControl.xmi")
 		
 		// add possible data flow of contact to SMS sending process
 		var directCCDFlow = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow
@@ -32,7 +38,7 @@ class ContactSMSAnalysisTest extends AnalysisIntegrationTestBase {
 		directCCDFlow.source = dfd.nodes.filter(CharacterizedProcess).findFirst[name.toLowerCase.contains("selectcontact")]
 		directCCDFlow.sourcePin = (directCCDFlow.source as Behaving).behavior.outputs.iterator.next
 		directCCDFlow.target = dfd.nodes.filter(CharacterizedProcess).findFirst[name.toLowerCase.contains("sendsms")]
-		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.findFirst[name.toLowerCase.contains("number")]
+		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(1)
 		dfd.edges += directCCDFlow
 		
 		var solution = findFlaws()

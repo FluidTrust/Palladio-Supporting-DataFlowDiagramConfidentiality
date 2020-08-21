@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_fCiJk0NEEeq3NrD2DjPidQ" name="AccessRights" type="_FddZBFGLEeq8MuaPiZgRhQ"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_FddZBFGLEeq8MuaPiZgRhQ"/>
+  <enumerations id="_FddZBFGLEeq8MuaPiZgRhQ" name="Roles">
+    <literals id="_GlhNR1GLEeq8MuaPiZgRhQ" name="User"/>
+    <literals id="_JHaiQFGLEeq8MuaPiZgRhQ" name="TrackingService"/>
+    <literals id="_Kfr8wFGLEeq8MuaPiZgRhQ" name="DistanceTracker"/>
+  </enumerations>
+  <behaviorDefinitions id="_21WsleMIEeqO9NqdRSqKUA" name="Forwarder">
+    <inputs id="_6P5g0OMIEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_6k2dIeMIEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_63P0suMIEeqO9NqdRSqKUA">
+      <lhs id="_7Ol9sOMIEeqO9NqdRSqKUA" pin="_6k2dIeMIEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_7mT6KOMIEeqO9NqdRSqKUA" pin="_6P5g0OMIEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_BGxSBeMJEeqO9NqdRSqKUA" name="Store">
+    <inputs id="_CBHaYOMJEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_CWPV0eMJEeqO9NqdRSqKUA" name="output"/>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_WKBileN7EeqO9NqdRSqKUA" name="DeclassifyDistance">
+    <inputs id="_XyfVMON7EeqO9NqdRSqKUA" name="input"/>
+    <inputs id="_ZITRkON7EeqO9NqdRSqKUA" name="consent"/>
+    <outputs id="_YNlVweN7EeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_bOmPsuN7EeqO9NqdRSqKUA">
+      <lhs id="_bnOLEON7EeqO9NqdRSqKUA" pin="_YNlVweN7EeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_cB1DeON7EeqO9NqdRSqKUA" pin="_XyfVMON7EeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_dhVHX-N7EeqO9NqdRSqKUA">
+      <lhs id="_d3LbgON7EeqO9NqdRSqKUA" characteristicType="_fCiJk0NEEeq3NrD2DjPidQ" literal="_Kfr8wFGLEeq8MuaPiZgRhQ" pin="_YNlVweN7EeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_f0994eN7EeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_Gn1xpeN8EeqO9NqdRSqKUA" name="DeclassifyLocation">
+    <inputs id="_J8ziUON8EeqO9NqdRSqKUA" name="input"/>
+    <inputs id="_TXy2EON8EeqO9NqdRSqKUA" name="consent"/>
+    <outputs id="_KTrxQeN8EeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_L1uy0uN8EeqO9NqdRSqKUA">
+      <lhs id="_MQDXUON8EeqO9NqdRSqKUA" pin="_KTrxQeN8EeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_MsXf6ON8EeqO9NqdRSqKUA" pin="_J8ziUON8EeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_OIBln-N8EeqO9NqdRSqKUA">
+      <lhs id="_Okv90ON8EeqO9NqdRSqKUA" characteristicType="_fCiJk0NEEeq3NrD2DjPidQ" literal="_JHaiQFGLEeq8MuaPiZgRhQ" pin="_KTrxQeN8EeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_O_GXgeN8EeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

@@ -2,6 +2,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 
 import java.util.Arrays
 import org.eclipse.xtext.resource.SaveOptions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
@@ -12,18 +13,23 @@ import org.prolog4j.Solution
 import static org.junit.jupiter.api.Assertions.*
 
 class DistanceTrackerAnalysisTest extends AnalysisIntegrationTestBase {
-	
+
+	@BeforeEach
+	def void setupBuilder() {
+		builder.setDefaultCharacteristicsUsage(false)
+	}
+
 	@Test
 	def void testNoFlaws() {
-		builder.addDFD(getRelativeURI("models/evaluation/distancetracker/DFDC_DistanceTracker.xmi"))
+		builder.addDFD(getRelativeURI("models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi"))
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
 	}
 	
 	@Test
 	def void testUnconfirmedDistance() {
-		var dfd = loadAndInitDFD("models/evaluation/distancetracker/DDC_DistanceTracker.xmi",
-			"models/evaluation/distancetracker/DFDC_DistanceTracker.xmi")
+		var dfd = loadAndInitDFD("models/evaluation/distancetracker/DDC_DistanceTracker_AccessControl.xmi",
+			"models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi")
 		
 		// add direct data flow of unconfirmed distance data
 		var targetNode = dfd.nodes.filter(CharacterizedProcess).findFirst[name.toLowerCase.contains("recorddist")]

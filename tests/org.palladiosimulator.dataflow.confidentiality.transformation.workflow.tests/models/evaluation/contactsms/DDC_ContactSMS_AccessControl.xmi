@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_YG--oENCEeqZ7Kg2_yifbw">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_fCiJk0NEEeq3NrD2DjPidQ" name="AccessRights" type="_oxiwtFGWEeqNss2H0GFEyA"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_oxiwtFGWEeqNss2H0GFEyA"/>
+  <enumerations id="_oxiwtFGWEeqNss2H0GFEyA" name="Roles">
+    <literals id="_pwUtIFGWEeqNss2H0GFEyA" name="User"/>
+    <literals id="_sW8xIFGWEeqNss2H0GFEyA" name="ContactManager"/>
+    <literals id="_tKef0FGWEeqNss2H0GFEyA" name="SMSManager"/>
+  </enumerations>
+  <behaviorDefinitions id="_iD52deOCEeqO9NqdRSqKUA" name="Store">
+    <inputs id="_i68zMOOCEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_jI36ceOCEeqO9NqdRSqKUA" name="output"/>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_ksRm5eOCEeqO9NqdRSqKUA" name="Forwarder">
+    <inputs id="_ln13QOOCEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_l4CPYeOCEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_mF8vkuOCEeqO9NqdRSqKUA">
+      <lhs id="_najyEOOCEeqO9NqdRSqKUA" pin="_l4CPYeOCEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_nqVTeOOCEeqO9NqdRSqKUA" pin="_ln13QOOCEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_3IK6deOCEeqO9NqdRSqKUA" name="Syncer">
+    <inputs id="_4A6gUOOCEeqO9NqdRSqKUA" name="input"/>
+    <inputs id="_4Xks0OOCEeqO9NqdRSqKUA" name="waitFor"/>
+    <outputs id="_4n_uceOCEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_46ksMuOCEeqO9NqdRSqKUA">
+      <lhs id="_5Oj_MOOCEeqO9NqdRSqKUA" pin="_4n_uceOCEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_5mYpWOOCEeqO9NqdRSqKUA" pin="_4A6gUOOCEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_DFpZFeODEeqO9NqdRSqKUA" name="Declassify Number">
+    <inputs id="_ESx6kOODEeqO9NqdRSqKUA" name="input"/>
+    <outputs id="_EoGDQeODEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_E5zeUuODEeqO9NqdRSqKUA">
+      <lhs id="_GkNxsOODEeqO9NqdRSqKUA" pin="_EoGDQeODEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_G32faOODEeqO9NqdRSqKUA" pin="_ESx6kOODEeqO9NqdRSqKUA"/>
+    </assignments>
+    <assignments id="_GPdCouODEeqO9NqdRSqKUA">
+      <lhs id="_IQJvEOODEeqO9NqdRSqKUA" characteristicType="_fCiJk0NEEeq3NrD2DjPidQ" literal="_tKef0FGWEeqNss2H0GFEyA" pin="_EoGDQeODEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:True" id="_JQQhMeODEeqO9NqdRSqKUA"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_SUlodeODEeqO9NqdRSqKUA" name="Joiner">
+    <inputs id="_TMReYOODEeqO9NqdRSqKUA" name="input1"/>
+    <inputs id="_ThwmMOODEeqO9NqdRSqKUA" name="input2"/>
+    <outputs id="_Twx5oeODEeqO9NqdRSqKUA" name="output"/>
+    <assignments id="_UB6F4uODEeqO9NqdRSqKUA">
+      <lhs id="_Wf81oOODEeqO9NqdRSqKUA" pin="_Twx5oeODEeqO9NqdRSqKUA"/>
+      <rhs xsi:type="expressions:And" id="_XLE2ROODEeqO9NqdRSqKUA">
+        <left xsi:type="expressions:DataCharacteristicReference" id="_Xn1qx-ODEeqO9NqdRSqKUA" pin="_TMReYOODEeqO9NqdRSqKUA"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_YGlcT-ODEeqO9NqdRSqKUA" pin="_ThwmMOODEeqO9NqdRSqKUA"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

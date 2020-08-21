@@ -11,16 +11,6 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_rYJfNVGZEeqNss2H0GFEyA"
       name="User">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
-        id="_u2oYQFGZEeqNss2H0GFEyA"
-        name="roles">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
-      <values
-          href="DDC_ContactSMS.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
     <ownedBehavior
         id="_0DoBkVGZEeqNss2H0GFEyA">
       <inputs
@@ -42,9 +32,9 @@
             pin="_0WlZ0VGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -57,9 +47,9 @@
             pin="_0WlZ0VGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -72,9 +62,9 @@
             pin="_1UfzkVGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -87,9 +77,9 @@
             pin="_1UfzkVGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -102,9 +92,9 @@
             pin="_2G450VGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -117,368 +107,270 @@
             pin="_2G450VGZEeqNss2H0GFEyA">
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_ContactSMS.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
+              href="DDC_ContactSMS_AccessControl.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
             id="_gHJaIVGbEeqNss2H0GFEyA"/>
       </assignments>
     </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_u2oYQFGZEeqNss2H0GFEyA"
+        name="roles">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+      <values
+          href="DDC_ContactSMS_AccessControl.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
+    </characteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_sj3rd1GZEeqNss2H0GFEyA"
       name="addContact">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_7g9V0FGZEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_-oDCkVGZEeqNss2H0GFEyA">
-      <inputs
-          id="__A9R0FGZEeqNss2H0GFEyA"
-          name="contact"/>
-      <outputs
-          id="__mBGsVGZEeqNss2H0GFEyA"
-          name="contact"/>
-      <assignments
-          id="_CJphElGaEeqNss2H0GFEyA">
-        <lhs
-            id="_Cn8moFGaEeqNss2H0GFEyA"
-            pin="__mBGsVGZEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:DataCharacteristicReference"
-            id="_D8Xb51GaEeqNss2H0GFEyA"
-            pin="__A9R0FGZEeqNss2H0GFEyA"/>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_FrsEeVGaEeqNss2H0GFEyA"
       name="deleteContact">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_HDYQIFGaEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_JmNZQVGaEeqNss2H0GFEyA">
-      <inputs
-          id="_KJoPYFGaEeqNss2H0GFEyA"
-          name="contact"/>
-      <outputs
-          id="_KeuVoVGaEeqNss2H0GFEyA"
-          name="contact"/>
-      <assignments
-          id="_MFpQIlGaEeqNss2H0GFEyA">
-        <lhs
-            id="_MirxcFGaEeqNss2H0GFEyA"
-            pin="_KeuVoVGaEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:DataCharacteristicReference"
-            id="_NRVnN1GaEeqNss2H0GFEyA"
-            pin="_KJoPYFGaEeqNss2H0GFEyA"/>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_OPJ6WVGaEeqNss2H0GFEyA"
       name="listContacts">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_PaynAFGaEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_RL4xMVGaEeqNss2H0GFEyA">
-      <inputs
-          id="_RlWaEFGaEeqNss2H0GFEyA"
-          name="contacts"/>
-      <outputs
-          id="_SNv20VGaEeqNss2H0GFEyA"
-          name="contacts"/>
-      <assignments
-          id="_Tso2slGaEeqNss2H0GFEyA">
-        <lhs
-            id="_UCHXcFGaEeqNss2H0GFEyA"
-            pin="_SNv20VGaEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:DataCharacteristicReference"
-            id="_UwxNNlGaEeqNss2H0GFEyA"
-            pin="_RlWaEFGaEeqNss2H0GFEyA"/>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_WyVcWVGaEeqNss2H0GFEyA"
       name="selectContact">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_3IK6deOCEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_YUcvUFGaEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_aPEB4VGaEeqNss2H0GFEyA">
-      <inputs
-          id="_au70wFGaEeqNss2H0GFEyA"
-          name="contacts"/>
-      <inputs
-          id="_cFWOEFGaEeqNss2H0GFEyA"
-          name="criteria"/>
-      <outputs
-          id="_bIEGcVGaEeqNss2H0GFEyA"
-          name="contact"/>
-      <assignments
-          id="_dorCAlGaEeqNss2H0GFEyA">
-        <lhs
-            id="_d-yb8FGaEeqNss2H0GFEyA"
-            pin="_bIEGcVGaEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:DataCharacteristicReference"
-            id="_eXmkl1GaEeqNss2H0GFEyA"
-            pin="_au70wFGaEeqNss2H0GFEyA"/>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_gHvFeVGaEeqNss2H0GFEyA"
       name="extractNumber">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_DFpZFeODEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_hsnYkFGaEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_jRazMVGaEeqNss2H0GFEyA">
-      <inputs
-          id="_jmqDYFGaEeqNss2H0GFEyA"
-          name="contact"/>
-      <outputs
-          id="_kGOUQVGaEeqNss2H0GFEyA"
-          name="number"/>
-      <assignments
-          id="_kY-4MlGaEeqNss2H0GFEyA">
-        <lhs
-            id="_maljkFGaEeqNss2H0GFEyA"
-            pin="_kGOUQVGaEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:DataCharacteristicReference"
-            id="_my1rh1GaEeqNss2H0GFEyA"
-            pin="_jmqDYFGaEeqNss2H0GFEyA"/>
-      </assignments>
-      <assignments
-          id="_oGuVSlGaEeqNss2H0GFEyA">
-        <lhs
-            id="_oj4LUFGaEeqNss2H0GFEyA"
-            pin="_kGOUQVGaEeqNss2H0GFEyA">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_ContactSMS.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
-          <literal
-              href="DDC_ContactSMS.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
-        </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_rNNlEVGaEeqNss2H0GFEyA"/>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_r7sbuVGaEeqNss2H0GFEyA"
       name="sendSMS">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_SUlodeODEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_tX4F0FGaEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_u-mzEVGaEeqNss2H0GFEyA">
-      <inputs
-          id="_vYQpMFGaEeqNss2H0GFEyA"
-          name="number"/>
-      <inputs
-          id="_vsoWsFGaEeqNss2H0GFEyA"
-          name="message"/>
-      <outputs
-          id="_wBzVcVGaEeqNss2H0GFEyA"
-          name="sms"/>
-      <assignments
-          id="_yqgdElGaEeqNss2H0GFEyA">
-        <lhs
-            id="_zQrsQFGaEeqNss2H0GFEyA"
-            pin="_wBzVcVGaEeqNss2H0GFEyA"/>
-        <rhs
-            xsi:type="expressions:And"
-            id="_2Nv6VFGaEeqNss2H0GFEyA">
-          <left
-              xsi:type="expressions:DataCharacteristicReference"
-              id="_3M1_1lGaEeqNss2H0GFEyA"
-              pin="_vsoWsFGaEeqNss2H0GFEyA"/>
-          <right
-              xsi:type="expressions:DataCharacteristicReference"
-              id="_4eE-PVGaEeqNss2H0GFEyA"
-              pin="_vYQpMFGaEeqNss2H0GFEyA"/>
-        </rhs>
-      </assignments>
-    </ownedBehavior>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="__7pjBVGaEeqNss2H0GFEyA"
       name="SMSGateway">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
-        id="_BKCowFGbEeqNss2H0GFEyA"
-        name="roles">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
-      <values
-          href="DDC_ContactSMS.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
-    </characteristics>
     <ownedBehavior
         id="_DLUkAVGbEeqNss2H0GFEyA">
       <inputs
           id="_Ds8DUFGbEeqNss2H0GFEyA"
           name="sms"/>
     </ownedBehavior>
+    <characteristics
+        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+        id="_BKCowFGbEeqNss2H0GFEyA"
+        name="roles">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+      <values
+          href="DDC_ContactSMS_AccessControl.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
+    </characteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_e7TmNlGoEeqNss2H0GFEyA"
       name="ContactStore">
+    <referencedBehavior
+        href="DDC_ContactSMS_AccessControl.xmi#_iD52deOCEeqO9NqdRSqKUA"/>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
         id="_jyG9EFGoEeqNss2H0GFEyA"
         name="roles">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_ContactSMS.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_ContactSMS.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
+          href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
     </characteristics>
-    <ownedBehavior
-        id="_hc0gsVGoEeqNss2H0GFEyA">
-      <inputs
-          id="_h4dT0FGoEeqNss2H0GFEyA"
-          name="contact"/>
-      <outputs
-          id="_iKCMAVGoEeqNss2H0GFEyA"
-          name="contact"/>
-    </ownedBehavior>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_FFLoolGbEeqNss2H0GFEyA"
       name="contact"
       target="_sj3rd1GZEeqNss2H0GFEyA"
       source="_rYJfNVGZEeqNss2H0GFEyA"
-      sourcePin="_0WlZ0VGZEeqNss2H0GFEyA"
-      targetPin="__A9R0FGZEeqNss2H0GFEyA"/>
+      sourcePin="_0WlZ0VGZEeqNss2H0GFEyA">
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_ln13QOOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_G-laSlGbEeqNss2H0GFEyA"
       name="contact"
       target="_FrsEeVGaEeqNss2H0GFEyA"
       source="_rYJfNVGZEeqNss2H0GFEyA"
-      sourcePin="_0WlZ0VGZEeqNss2H0GFEyA"
-      targetPin="_KJoPYFGaEeqNss2H0GFEyA"/>
+      sourcePin="_0WlZ0VGZEeqNss2H0GFEyA">
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_ln13QOOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_MZwCelGbEeqNss2H0GFEyA"
       name="contacts"
       target="_rYJfNVGZEeqNss2H0GFEyA"
       source="_OPJ6WVGaEeqNss2H0GFEyA"
-      sourcePin="_SNv20VGaEeqNss2H0GFEyA"
-      targetPin="_0_WC8FGZEeqNss2H0GFEyA"/>
+      targetPin="_0_WC8FGZEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_l4CPYeOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_ihv0WlGbEeqNss2H0GFEyA"
       name="criteria"
       target="_WyVcWVGaEeqNss2H0GFEyA"
       source="_rYJfNVGZEeqNss2H0GFEyA"
-      sourcePin="_1UfzkVGZEeqNss2H0GFEyA"
-      targetPin="_cFWOEFGaEeqNss2H0GFEyA"/>
+      sourcePin="_1UfzkVGZEeqNss2H0GFEyA">
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_4Xks0OOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_ley0SlGbEeqNss2H0GFEyA"
       name="contacts"
       target="_WyVcWVGaEeqNss2H0GFEyA"
-      source="_OPJ6WVGaEeqNss2H0GFEyA"
-      sourcePin="_SNv20VGaEeqNss2H0GFEyA"
-      targetPin="_au70wFGaEeqNss2H0GFEyA"/>
+      source="_OPJ6WVGaEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_l4CPYeOCEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_4A6gUOOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_oDgzylGbEeqNss2H0GFEyA"
       name="contact"
       target="_gHvFeVGaEeqNss2H0GFEyA"
-      source="_WyVcWVGaEeqNss2H0GFEyA"
-      sourcePin="_bIEGcVGaEeqNss2H0GFEyA"
-      targetPin="_jmqDYFGaEeqNss2H0GFEyA"/>
+      source="_WyVcWVGaEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_4n_uceOCEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_ESx6kOODEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_qe7tWlGbEeqNss2H0GFEyA"
       name="message"
       target="_r7sbuVGaEeqNss2H0GFEyA"
       source="_rYJfNVGZEeqNss2H0GFEyA"
-      sourcePin="_2G450VGZEeqNss2H0GFEyA"
-      targetPin="_vsoWsFGaEeqNss2H0GFEyA"/>
+      sourcePin="_2G450VGZEeqNss2H0GFEyA">
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_TMReYOODEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_tSBgClGbEeqNss2H0GFEyA"
       name="number"
       target="_r7sbuVGaEeqNss2H0GFEyA"
-      source="_gHvFeVGaEeqNss2H0GFEyA"
-      sourcePin="_kGOUQVGaEeqNss2H0GFEyA"
-      targetPin="_vYQpMFGaEeqNss2H0GFEyA"/>
+      source="_gHvFeVGaEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_EoGDQeODEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_ThwmMOODEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_vy8kqlGbEeqNss2H0GFEyA"
       name="sms"
       target="__7pjBVGaEeqNss2H0GFEyA"
       source="_r7sbuVGaEeqNss2H0GFEyA"
-      sourcePin="_wBzVcVGaEeqNss2H0GFEyA"
-      targetPin="_Ds8DUFGbEeqNss2H0GFEyA"/>
+      targetPin="_Ds8DUFGbEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_Twx5oeODEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_l9VeiVGoEeqNss2H0GFEyA"
       name="contact"
       target="_e7TmNlGoEeqNss2H0GFEyA"
-      source="_sj3rd1GZEeqNss2H0GFEyA"
-      sourcePin="__mBGsVGZEeqNss2H0GFEyA"
-      targetPin="_h4dT0FGoEeqNss2H0GFEyA"/>
+      source="_sj3rd1GZEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_l4CPYeOCEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_i68zMOOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_qknyulGoEeqNss2H0GFEyA"
       name="contact"
       target="_e7TmNlGoEeqNss2H0GFEyA"
-      source="_FrsEeVGaEeqNss2H0GFEyA"
-      sourcePin="_KeuVoVGaEeqNss2H0GFEyA"
-      targetPin="_h4dT0FGoEeqNss2H0GFEyA"/>
+      source="_FrsEeVGaEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_l4CPYeOCEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_i68zMOOCEeqO9NqdRSqKUA"/>
+  </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_oEvP6lGoEeqNss2H0GFEyA"
       name="contact"
       target="_OPJ6WVGaEeqNss2H0GFEyA"
-      source="_e7TmNlGoEeqNss2H0GFEyA"
-      sourcePin="_iKCMAVGoEeqNss2H0GFEyA"
-      targetPin="_RlWaEFGaEeqNss2H0GFEyA"/>
+      source="_e7TmNlGoEeqNss2H0GFEyA">
+    <sourcePin
+        href="DDC_ContactSMS_AccessControl.xmi#_jI36ceOCEeqO9NqdRSqKUA"/>
+    <targetPin
+        href="DDC_ContactSMS_AccessControl.xmi#_ln13QOOCEeqO9NqdRSqKUA"/>
+  </edges>
 </DataFlowDiagram:DataFlowDiagram>
