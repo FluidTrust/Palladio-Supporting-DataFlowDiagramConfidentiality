@@ -16,7 +16,7 @@ class DistanceTrackerAccessControlTest extends AccessControlAnalysesIflow {
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi"))
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
+		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "S"))
 	}
 	
 	@Test
@@ -36,6 +36,6 @@ class DistanceTrackerAccessControlTest extends AccessControlAnalysesIflow {
 		dfd.edges += directFlow
 			
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "MATCH", "S"))
+		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES", "S"))
 	}
 }

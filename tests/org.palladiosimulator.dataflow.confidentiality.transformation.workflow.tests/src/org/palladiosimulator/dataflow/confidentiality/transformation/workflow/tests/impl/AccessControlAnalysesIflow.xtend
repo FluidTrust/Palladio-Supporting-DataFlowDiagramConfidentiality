@@ -44,8 +44,7 @@ class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 			inputPin(P, PIN),
 			bagof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
 			bagof(A, characteristic(P, PIN, ?CTRIGHTS, A, S), REQ),
-			intersection(REQ, ROLES, MATCH),
-			length(MATCH, 0).
+			intersection(REQ, ROLES, []).
 		'''
 		var query = prover.query(queryString)
 		query.bind("J$CTROLES", '''«roleName» («roleId»)'''.toString)

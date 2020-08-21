@@ -17,7 +17,7 @@ class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/travelplanner/DFDC_TravelPlanner_AccessControl.xmi"))
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
+		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES"))
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow
 		dfd.edges += directCCDFlow
 		
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "REQ", "ROLES", "MATCH"))
+		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "REQ", "ROLES"))
 	}
 
 }
