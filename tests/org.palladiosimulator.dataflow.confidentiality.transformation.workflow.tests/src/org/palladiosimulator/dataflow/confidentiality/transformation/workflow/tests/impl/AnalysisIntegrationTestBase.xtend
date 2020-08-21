@@ -35,7 +35,6 @@ class AnalysisIntegrationTestBase {
 	static def void init() {
 		StandaloneUtil.init();
 		proverFactory = new TuPrologProverFactory()
-		
 	}
 
 	@BeforeEach
