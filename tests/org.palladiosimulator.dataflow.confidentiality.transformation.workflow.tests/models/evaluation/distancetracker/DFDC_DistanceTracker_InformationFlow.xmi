@@ -27,6 +27,8 @@
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
               href="DDC_DistanceTracker_InformationFlow.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
+          <literal
+              href="DDC_DistanceTracker_InformationFlow.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
@@ -41,26 +43,11 @@
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
               href="DDC_DistanceTracker_InformationFlow.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
           <literal
-              href="DDC_DistanceTracker_InformationFlow.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-        </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_lJDoEVGLEeq8MuaPiZgRhQ"/>
-      </assignments>
-      <assignments
-          id="_lu9xilGLEeq8MuaPiZgRhQ">
-        <lhs
-            id="_meRHgFGLEeq8MuaPiZgRhQ"
-            pin="_b8-TAVGLEeq8MuaPiZgRhQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_DistanceTracker_InformationFlow.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
-          <literal
               href="DDC_DistanceTracker_InformationFlow.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
         </lhs>
         <rhs
             xsi:type="expressions:True"
-            id="_o51LAVGLEeq8MuaPiZgRhQ"/>
+            id="_lJDoEVGLEeq8MuaPiZgRhQ"/>
       </assignments>
     </ownedBehavior>
     <characteristics
