@@ -30,7 +30,7 @@ class JPMailAnalysisTest extends InformationFlowAnalysesTuma {
 		directFlow.target = targetNode
 		directFlow.targetPin = targetNode.behavior.inputs.iterator.next
 		dfd.edges += directFlow
-		
+
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN"))
 	}

@@ -33,7 +33,7 @@ class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow
 		directCCDFlow.target = dfd.nodes.filter(CharacterizedProcess).findFirst["User.bookFlight" == name]
 		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(1)
 		dfd.edges += directCCDFlow
-		
+
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "REQ", "ROLES"))
 	}

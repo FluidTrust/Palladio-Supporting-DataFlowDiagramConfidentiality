@@ -33,7 +33,7 @@ class ContactSMSInformationFlowTest extends InformationFlowAnalysesIflow {
 		directCCDFlow.target = dfd.nodes.filter(CharacterizedProcess).findFirst[name.toLowerCase.contains("sendsms")]
 		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(1)
 		dfd.edges += directCCDFlow
-		
+
 		var solution = findFlaws()
 		assertNumberOfSolutionsWithoutDuplicates(solution, 2, Arrays.asList("P", "PIN", "V_LEVEL", "V_CLEAR"))
 	}
