@@ -16,11 +16,12 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Process;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
+import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCErrorMessageUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCTypeUtil;
+import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCValidationUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.ComponentFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.DFDCModificationUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.QueryUtil;
@@ -79,9 +80,9 @@ public class Services {
 		return DFDCRefinementUtil.needsRef(source, target) && getAllRefinements(self, source, target).isEmpty();
 	}
 
-	public void addNewRefinedDF(EObject self, EObject source, EObject target) {
+	public void addNewRefinedDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
 
-		DFDCRefinementUtil.addNewRefinedDF(self, source, target);
+		DFDCRefinementUtil.addNewRefinedDF(self, sourcePin, targetPin, sourceNode, targetNode);
 
 	}
 
@@ -95,13 +96,7 @@ public class Services {
 	public void refineProcess(EObject newDFD, EObject p, DataFlowDiagram oldDFD, DataFlowDiagramRefinement ref) {
 		DFDCModificationUtil.refineProcess(newDFD, p, oldDFD, ref);
 	}
-//
-//	public void createLeveledDFD(List<DataFlow> inc, List<DataFlow> out, Process p, DataFlowDiagram oldDFD,
-//			DataFlowDiagram newDFD, DataFlowDiagramRefinement ref) {
-//
-//		DFDModificationUtil.createLeveledDFD(inc, out, p, oldDFD, newDFD, ref);
-//
-//	}
+
 
 	public void loadResources(EObject self) {
 		ResourceDialog r = new ResourceDialog(Display.getCurrent().getActiveShell(),
@@ -116,44 +111,44 @@ public class Services {
 
 	}
 
-//	
-//	public boolean isValidData(EObject self) {
-//		Data data = (Data) self;
-//		return data.getName() != null && !data.getName().isBlank() && data.getType() != null;
-//
-//	}
-//
-//	public boolean isValidData(EObject self, EObject entry) {
-//		Data data = (Data) entry;
-//		return data.getName() != null && !data.getName().isBlank() && data.getType() != null;
-//
-//	}
-//
+	
+	public boolean isValidData(EObject self) {
+		Data data = (Data) self;
+		return data.getName() != null && !data.getName().isBlank() && data.getType() != null;
+
+	}
+
+	public boolean isValidData(EObject self, EObject entry) {
+		Data data = (Data) entry;
+		return data.getName() != null && !data.getName().isBlank() && data.getType() != null;
+
+	}
+
 	public List<EdgeRefinement> getAllRefinements(EObject self, EObject source, EObject target) {
 		return DFDCRefinementUtil.getAllRefinements(self, source, target);
 
 	}
 
-//
-//	public boolean canCreateDF(EObject self) {
-//		return DFDRefinementUtil.getCurrentRefinement() != null;
-//	}
-//
-//	public void stopDFCreation(EObject self) {
-//		DFDRefinementUtil.setCurrentRefinement(null);
-//	}
-//
-//	public void setRef(EObject self, EdgeRefinement er) {
-//		DFDRefinementUtil.setCurrentRefinement(er);
-//	}
-//
-//	public void addRefiningDF(EObject self, EObject source, EObject target) {
-//		ComponentFactory.createDF(self, source, target, true);
-//
-//	}
-//
-	public void addDF(EObject self, EObject source, EObject target) {
-		ComponentFactory.createCDF(self, source, target, false);
+
+	public boolean canCreateDF(EObject self) {
+		return DFDCRefinementUtil.getCurrentRefinement() != null;
+	}
+
+	public void stopDFCreation(EObject self) {
+		DFDCRefinementUtil.setCurrentRefinement(null);
+	}
+
+	public void setRef(EObject self, EdgeRefinement er) {
+		DFDCRefinementUtil.setCurrentRefinement(er);
+	}
+
+	public void addRefiningDF(EObject self, EObject sourcePin, EObject targetPin, EObject source, EObject target) {
+		ComponentFactory.createCDF(self, sourcePin, targetPin, source, target, true);
+
+	}
+
+	public void addCDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
+		ComponentFactory.createCDF(self, sourcePin, targetPin, sourceNode, targetNode, false);
 	}
 //
 	public boolean canConnect(EObject self, EObject source, EObject target) {
@@ -170,23 +165,23 @@ public class Services {
 				&& !getAllRefinements(self, source, target).isEmpty();
 
 	}
-//
-//	public boolean inputOutputIsConsistent(EObject self) {
-//		return DFDValidationUtil.inputOutputIsConsistent(self);
-//	}
-//
+
+	public boolean inputOutputIsConsistent(EObject self) {
+		return DFDCValidationUtil.inputOutputIsConsistent(self);
+	}
+
 	public void deleteNode(EObject self) {
 		DFDCModificationUtil.deleteNode(self);
 	}
-//
-//	public void deleteEdge(EObject self) {
-//		DFDModificationUtil.deleteEdge(self);
-//
-//	}
-//
-//	public String getErrorMessage(EObject self) {
-//		return DFDErrorMessageUtil.getErrorMessage(self);
-//	}
+
+	public void deleteEdge(EObject self) {
+		DFDCModificationUtil.deleteEdge(self);
+
+	}
+
+	public String getErrorMessage(EObject self) {
+		return DFDCErrorMessageUtil.getErrorMessage(self);
+	}
 	
 	public CharacterizedNode getTarget(EObject self, EObject targetPin) {
 		return null;

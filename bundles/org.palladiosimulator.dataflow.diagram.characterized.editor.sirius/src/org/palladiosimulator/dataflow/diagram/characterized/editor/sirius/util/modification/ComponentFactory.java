@@ -1,15 +1,14 @@
 package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramFactory;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.ExternalActor;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Process;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Store;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.Characteristic;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedActorProcess;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor;
@@ -17,6 +16,7 @@ import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramChara
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedStore;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.EnumCharacteristic;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.ComparisonUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.naming.NamingScheme;
@@ -24,24 +24,28 @@ import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedFactory;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Literal;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.impl.BehavingImpl;
 
 
 
 public class ComponentFactory {
 
 
-	public static void createCDF(EObject self, EObject source, EObject target, boolean needsRef) {
+	public static void createCDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode, boolean needsRef) {
 		CharacterizedDataFlow df = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow();
-		DataFlowDiagram sourceDFD = (DataFlowDiagram) source.eContainer();
-		DataFlowDiagram targetDFD = (DataFlowDiagram) target.eContainer();
+		DataFlowDiagram sourceDFD = (DataFlowDiagram) sourceNode.eContainer();
+		DataFlowDiagram targetDFD = (DataFlowDiagram) targetNode.eContainer();
 
-		//TODO pins?
-		df.setSource((Node) source);
-		df.setTarget((Node) target);
+	
+		df.setSource((Node) sourceNode);
+		df.setTarget((Node) targetNode);
+		df.setSourcePin((Pin) sourcePin);
+		df.setTargetPin((Pin) targetPin);
+		
+		
 		df.setName("new Data Flow");
 		sourceDFD.getEdges().add(df);
 		if (!ComparisonUtil.isEqual(sourceDFD, targetDFD)) { // needed for visibility
@@ -69,21 +73,46 @@ public class ComponentFactory {
 			else cp= DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedProcess();
 			cp.setName(name);
 			copyBehavior((CharacterizedNode) n, (CharacterizedNode) cp);
+			copyCharacteristics((CharacterizedNode) n, (CharacterizedNode) cp);
 			copy=cp;
 		} else if (n instanceof CharacterizedExternalActor) {
 			CharacterizedExternalActor cea = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedExternalActor();
 			cea.setName(name);
 			copyBehavior((CharacterizedNode) n, (CharacterizedNode) cea);
+			copyCharacteristics((CharacterizedNode) n, (CharacterizedNode) cea);
 			copy = cea;
 		} else if (n instanceof CharacterizedStore) {
 			CharacterizedStore cs = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedStore();
 			cs.setName(name);
 			copyBehavior((CharacterizedNode) n, (CharacterizedNode) cs);
+			copyCharacteristics((CharacterizedNode) n, (CharacterizedNode) cs);
 			copy = cs;
 		}
 
 		return copy;
 	}
+	
+	public static void copyCharacteristics(CharacterizedNode cn, CharacterizedNode ncn) {
+		EList<Characteristic> characteristics = cn.getCharacteristics();
+		if(characteristics!=null) {
+			for(Characteristic c: characteristics) {
+				EnumCharacteristic ec = (EnumCharacteristic) c;
+				EnumCharacteristic nec = DataFlowDiagramCharacterizedFactory.eINSTANCE.createEnumCharacteristic();
+				nec.setName(ec.getName());
+				nec.setType(ec.getType());
+				for(Literal l: ec.getValues()) {
+					Literal nl = DataDictionaryCharacterizedFactory.eINSTANCE.createLiteral();
+					nl.setName(l.getName());
+					nl.setEnum(l.getEnum());
+					nec.getValues().add(nl);
+				}
+				ncn.getCharacteristics().add(nec);
+			}
+		}
+		
+	}
+	
+	
 
 	public static void copyBehavior(CharacterizedNode p, CharacterizedNode np) {
 		if(p.getOwnedBehavior()!=null) {
@@ -94,6 +123,8 @@ public class ComponentFactory {
 		}
 
 	}
+	
+	
 	public static Pin copyPin(Pin p) {
 		Pin np = DataDictionaryCharacterizedFactory.eINSTANCE.createPin();
 		np.setName(p.getName());
@@ -142,6 +173,19 @@ public class ComponentFactory {
 		ndf.setName(data.getName());
 		ndf.getData().clear();
 		ndf.getData().add(copyData(data));
+		
+		Pin sourcePin = df.getSourcePin();
+		Pin newSourcePin = copyPin(sourcePin);
+		
+		newSourcePin.setName(ns.makeIncrementedSuffix(sourcePin.getName()));
+		ndf.setSourcePin(newSourcePin);
+		((CharacterizedNode) df.getSource()).getBehavior().getOutputs().add(newSourcePin);
+		
+		Pin targetPin = df.getTargetPin();
+		Pin newTargetPin = copyPin(targetPin);
+		newTargetPin.setName(ns.makeSuffix(targetPin.getName()));
+		ndf.setTargetPin(newTargetPin);
+		((CharacterizedNode) df.getTarget()).getBehavior().getInputs().add(newTargetPin);
 		
 		return ndf;
 	}

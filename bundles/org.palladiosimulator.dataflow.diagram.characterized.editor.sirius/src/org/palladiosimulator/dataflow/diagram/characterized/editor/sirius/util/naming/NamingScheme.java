@@ -9,5 +9,6 @@ package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.
 public interface NamingScheme {
 
 	public String makeSuffix(String name);
+	public String makeIncrementedSuffix(String name);
 
 }
