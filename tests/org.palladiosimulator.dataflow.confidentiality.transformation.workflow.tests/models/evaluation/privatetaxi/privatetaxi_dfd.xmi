@@ -28,6 +28,21 @@
       <outputs
           id="_Eva-8eHxEeqO9NqdRSqKUA"
           name="destination"/>
+      <assignments
+          id="_B23_YuiSEeqREp9GtzX8tg">
+        <lhs
+            id="_Cb9pcOiSEeqREp9GtzX8tg"
+            pin="_ECSzMeHxEeqO9NqdRSqKUA">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="privatetatxi_dd.xmi#_jQ2QA-HoEeqO9NqdRSqKUA"/>
+          <literal
+              href="privatetatxi_dd.xmi#_pX3RkOHoEeqO9NqdRSqKUA"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_EWSoIeiSEeqREp9GtzX8tg"/>
+      </assignments>
     </ownedBehavior>
     <characteristics
         xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
