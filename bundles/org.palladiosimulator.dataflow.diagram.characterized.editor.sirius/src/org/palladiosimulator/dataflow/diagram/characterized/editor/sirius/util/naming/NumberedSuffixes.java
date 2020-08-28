@@ -21,7 +21,15 @@ public class NumberedSuffixes implements NamingScheme {
 	@Override
 	public String makeSuffix(String name) {
 
-		return name + "." + this.index++;
+		return name + "." + this.index;
 	}
+	
 
+	@Override
+	public String makeIncrementedSuffix(String name) {
+
+		return name + "." + ++this.index;
+	}
+	
+	
 }

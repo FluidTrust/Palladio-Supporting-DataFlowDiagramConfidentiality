@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius" version="12.0.0.2017041100">
   <ownedViewpoints name="Data Flows Confidentiality">
+    <validationSet>
+      <ownedRules xsi:type="validation:SemanticValidationRule" name="loopCDF" level="WARNING" message="This dataflow is a loop." targetClass="DataFlowDiagramCharacterized::CharacterizedDataFlow">
+        <audits auditExpression="aql:self.targetPin &lt;> self.sourcePin"/>
+      </ownedRules>
+      <ownedRules xsi:type="validation:SemanticValidationRule" name="inputOutPutIsConsistent" level="ERROR" message="service:getErrorMessage()" targetClass="DataFlowDiagram::Node">
+        <audits auditExpression="service:inputOutputIsConsistent()"/>
+      </ownedRules>
+    </validationSet>
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Characterization Extension" viewpointURI="viewpoint:/org.palladiosimulator.dataflow.diagram.editor.sirius/Dataflows" representationName="DFD Editor">
       <metamodel href="http://palladiosimulator.org/dataflow/diagram/1.0#/"/>
       <metamodel href="http://palladiosimulator.org/dataflow/diagram/characterized/1.0#/"/>
@@ -278,38 +286,42 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:Switch">
-                  <cases conditionExpression="service:needsRefDialog(source, target)">
-                    <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add DataFlow">
-                      <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                        <initialOperation>
-                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:stopDFCreation()"/>
-                        </initialOperation>
-                      </buttons>
-                      <buttons labelExpression="OK" isEnabledExpression="service:canCreateDF()" default="true" closeDialogOnClick="true">
-                        <initialOperation>
-                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addRefiningDF(source, target)"/>
-                        </initialOperation>
-                      </buttons>
-                      <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
-                      <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
-                        <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(source, target)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagram::DataFlow).name" numberOfColumns="2">
-                          <initialOperation>
-                            <firstModelOperations xsi:type="tool_1:Let" variableName="ref" valueExpression="aql:newValue">
-                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRef(ref)"/>
-                            </firstModelOperations>
-                          </initialOperation>
-                        </controls>
-                      </groups>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().eContainer()">
+                <subModelOperations xsi:type="tool_1:Let" variableName="sourceNode" valueExpression="aql:source.eContainer().eContainer()">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="targetNode" valueExpression="aql:target.eContainer().eContainer()">
+                    <subModelOperations xsi:type="tool_1:Switch">
+                      <cases conditionExpression="service:needsRefDialog(sourceNode, targetNode)">
+                        <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add DataFlow">
+                          <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                            <initialOperation>
+                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:stopDFCreation()"/>
+                            </initialOperation>
+                          </buttons>
+                          <buttons labelExpression="OK" isEnabledExpression="service:canCreateDF()" default="true" closeDialogOnClick="true">
+                            <initialOperation>
+                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addRefiningDF(source, target, sourceNode, targetNode)"/>
+                            </initialOperation>
+                          </buttons>
+                          <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
+                          <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
+                            <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(source, target)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
+                              <initialOperation>
+                                <firstModelOperations xsi:type="tool_1:Let" variableName="ref" valueExpression="aql:newValue">
+                                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRef(ref)"/>
+                                </firstModelOperations>
+                              </initialOperation>
+                            </controls>
+                          </groups>
+                        </subModelOperations>
+                      </cases>
+                      <cases conditionExpression="service:needsRef(sourceNode, targetNode)">
+                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addNewRefinedDF(source, target, sourceNode, targetNode)"/>
+                      </cases>
+                      <default>
+                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addCDF(source, target, sourceNode, targetNode)"/>
+                      </default>
                     </subModelOperations>
-                  </cases>
-                  <cases conditionExpression="service:needsRef(source, target)">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addNewRefinedDF(source, target)"/>
-                  </cases>
-                  <default>
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addDF(source, target)"/>
-                  </default>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -387,6 +399,36 @@
                 <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:navigateUp(dfd)">
                   <subModelOperations xsi:type="tool:Navigation">
                     <diagramDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInputPin" label="new Input Pin" precondition="aql:self.ownedBehavior->notEmpty()" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createOutputPin" label="new Output Pin" precondition="aql:self.ownedBehavior->notEmpty()" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
+                    </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>

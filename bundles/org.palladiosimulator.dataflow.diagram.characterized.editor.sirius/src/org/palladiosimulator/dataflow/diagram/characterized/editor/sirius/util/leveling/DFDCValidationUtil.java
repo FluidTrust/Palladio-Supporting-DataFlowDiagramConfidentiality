@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Edge;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
@@ -103,7 +102,9 @@ public class DFDCValidationUtil {
 		if (cdf.getData().size() > 1) {
 			return true;
 		}
-		if (cdf.getData().size() > 0 && cdf.getData().get(0).getType() instanceof CompositeDataType) {
+		if (cdf.getData().size() > 0 && cdf.getData().get(0).getType() instanceof CompositeDataType
+				// composite type must contain entries to be refined
+				&&  !((CompositeDataType) cdf.getData().get(0).getType()).getComponents().isEmpty()) {
 			return true;
 		}
 

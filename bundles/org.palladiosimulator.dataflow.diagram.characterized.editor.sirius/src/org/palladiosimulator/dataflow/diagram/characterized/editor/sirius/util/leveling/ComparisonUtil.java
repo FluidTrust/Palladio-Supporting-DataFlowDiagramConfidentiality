@@ -5,13 +5,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedStore;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.CollectionDataType;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.CompositeDataType;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataType;
@@ -19,10 +15,7 @@ import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.PrimitiveDataType;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedFactory;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Entity;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
 
 /**
  * 

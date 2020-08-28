@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramFactory;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRefinement;
@@ -16,17 +15,16 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Edge;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.ComponentFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.QueryUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.naming.NamingScheme;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.naming.NumberedSuffixes;
-//import org.palladiosimulator.dataflow.diagram.editor.sirius.util.modification.ComponentFactory;
-//import org.palladiosimulator.dataflow.diagram.editor.sirius.util.naming.NamingScheme;
-//import org.palladiosimulator.dataflow.diagram.editor.sirius.util.naming.NumberedSuffixes;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.CompositeDataType;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataType;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 
 
 /**
@@ -58,7 +56,6 @@ public class DFDCRefinementUtil {
 			}
 
 		} 
-		// TODO composite data types
 		else {
 			// one df per type
 			Data origin = df.getData().get(0);
@@ -110,24 +107,26 @@ public class DFDCRefinementUtil {
 	}
 
 	
-	// FIXME does not work without pins
-	public static void addNewRefinedDF(EObject self, EObject source, EObject target) {
+		public static void addNewRefinedDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
 
-		DataFlowDiagram sourceDFD = (DataFlowDiagram) source.eContainer();
+		DataFlowDiagram sourceDFD = (DataFlowDiagram) sourceNode.eContainer();
 		CharacterizedDataFlow df = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow();
-		df.setSource((Node) source);
-		df.setTarget((Node) target);
+		df.setSource((Node) sourceNode);
+		df.setTarget((Node) targetNode);
+		df.setSourcePin((Pin) sourcePin);
+		df.setTargetPin((Pin) targetPin);
 		df.setName("new Data Flow");
-		if (QueryUtil.isSameDFD(source, target)) { // to/from refinedNode
+		
+		if (QueryUtil.isSameDFD(sourceNode, targetNode)) { // to/from refinedNode
 			sourceDFD.getEdges().add(df);
 
-			if (isRefined(source) && isRefined(target)) {
-				DataFlowDiagramRefinement sourceRef = getRefinement(source);
+			if (isRefined(sourceNode) && isRefined(targetNode)) {
+				DataFlowDiagramRefinement sourceRef = getRefinement(sourceNode);
 				addToRef(df, null, sourceRef);
-				DataFlowDiagramRefinement targetRef = getRefinement(target);
+				DataFlowDiagramRefinement targetRef = getRefinement(targetNode);
 				addToRef(df, null, targetRef);
 			} else {
-				DataFlowDiagramRefinement ref = isRefined(source) ? getRefinement(source) : getRefinement(target);
+				DataFlowDiagramRefinement ref = isRefined(sourceNode) ? getRefinement(sourceNode) : getRefinement(targetNode);
 				addToRef(df, null, ref);
 			}
 		}
@@ -194,37 +193,50 @@ public class DFDCRefinementUtil {
 
 		if (df.getData().size() > 1) {
 			// one df per data
+			NamingScheme namingScheme = new NumberedSuffixes(0);
+			Pin sourcePin = df.getSourcePin();
+			Pin targetPin = df.getTargetPin();
 			for (Data d : df.getData()) {
-				NamingScheme namingScheme = new NumberedSuffixes(1);
-				CharacterizedDataFlow ndf = ComponentFactory.makeSingleDataFlow(d, df);
+				CharacterizedDataFlow ndf = ComponentFactory.makeSingleDataFlow(d, df, namingScheme);
 				dfd.getEdges().add(ndf);
 				if (ref != null) {
 					ref.getRefiningEdges().add(ndf);
 				}
 
 			}
+			
+			// TODO deal with assignments that contain these pins
+			((CharacterizedNode) df.getSource()).getBehavior().getOutputs().remove(sourcePin);
+			((CharacterizedNode) df.getTarget()).getBehavior().getInputs().remove(targetPin);
+			
 			dfd.getEdges().remove(df);
 
 		} 
-//		 TODO composite data types
 		else {
 			// one df per type
 			Data origin = df.getData().get(0);
 			DataType type = origin.getType();
 			if (type instanceof CompositeDataType) {
+				Pin sourcePin = df.getSourcePin();
+				Pin targetPin = df.getTargetPin();
 				String name = origin.getName();
-				NamingScheme namingScheme = new NumberedSuffixes(1);
+				NamingScheme namingScheme = new NumberedSuffixes(0);
 				List<CharacterizedDataFlow> dfs = new ArrayList<CharacterizedDataFlow>();
 				List<Entry> entries = DFDCTypeUtil.refineDT(type, session);
 				for (Entry e : entries) {
 					Data data = ComponentFactory.makeData(e);
-					CharacterizedDataFlow ndf = ComponentFactory.makeSingleDataFlow(data, df);
+					CharacterizedDataFlow ndf = ComponentFactory.makeSingleDataFlow(data, df, namingScheme);
 					ndf.setName(namingScheme.makeSuffix(name));
 					dfs.add(ndf);
 					if (ref != null) {
 						ref.getRefiningEdges().add(ndf);
 					}
+					// TODO deal with assignments that contain these pins
+					((CharacterizedNode) df.getSource()).getBehavior().getOutputs().remove(sourcePin);
+					((CharacterizedNode) df.getTarget()).getBehavior().getInputs().remove(targetPin);
 				}
+				
+			
 				dfd.getEdges().remove(df);
 				dfd.getEdges().addAll(dfs);
 			}
