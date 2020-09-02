@@ -34,11 +34,11 @@
   <characteristicTypes
       xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
       id="_9fV10-HrEeqO9NqdRSqKUA"
-      name="HasRole"
+      name="IsEntity"
       type="_8KxzdOHnEeqO9NqdRSqKUA"/>
   <enumerations
       id="_8KxzdOHnEeqO9NqdRSqKUA"
-      name="Roles">
+      name="Entities">
     <literals
         id="_9TtxcOHnEeqO9NqdRSqKUA"
         name="Driver"/>

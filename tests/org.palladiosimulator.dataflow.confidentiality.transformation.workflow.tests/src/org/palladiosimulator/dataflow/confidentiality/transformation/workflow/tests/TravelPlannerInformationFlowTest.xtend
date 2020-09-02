@@ -33,7 +33,7 @@ class TravelPlannerInformationFlowTest extends InformationFlowAnalysesIflow {
 		directCCDFlow.target = dfd.nodes.filter(CharacterizedProcess).findFirst["User.bookFlight" == name]
 		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(1)
 		dfd.edges += directCCDFlow
-		
+
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN", "V_LEVEL", "V_CLEAR", "S"))
 	}

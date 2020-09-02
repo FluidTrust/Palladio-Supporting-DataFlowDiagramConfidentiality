@@ -81,7 +81,7 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		dfd.edges += joinedFlow
 
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 3, #["N", "PIN", "R", "D", "S"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 6, #["N", "PIN", "R", "D", "S"])
 	}
 
 	protected def Solution<Object> findFlaws() {
@@ -104,7 +104,7 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 			D = 'Route (_ogEG4OHoEeqO9NqdRSqKUA)'
 		),
 		inputPin(N,PIN),
-		nodeCharacteristic(N, 'HasRole (_9fV10-HrEeqO9NqdRSqKUA)', R),
+		nodeCharacteristic(N, 'IsEntity (_9fV10-HrEeqO9NqdRSqKUA)', R),
 		characteristic(N, PIN, 'CriticalDataType (_jQ2QA-HoEeqO9NqdRSqKUA)', D, S).
 		'''
 		var query = prover.query(queryString)

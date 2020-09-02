@@ -30,6 +30,7 @@ mapping DFD::DataFlowDiagram::diagramToProgram() : PL::Program {
 	clauses += self.map createDiscontiguousDirective();
 	clauses += self.map createFlowSelectionHelpers();
 	clauses += self.map createFlowStackHelpers();
+	clauses += self.map createCharacteristicCollectionHelpers();
 	clauses += self.map createShortcuts();
 	clauses += new Comment("");
 	clauses += new Comment("Types and characteristics");
@@ -322,6 +323,275 @@ mapping DFD::DataFlowDiagram::createFlowStackHelpers() : List(PL::Clause) {
 		};
 	};
 	
+}
+
+mapping DFD::DataFlowDiagram::createCharacteristicCollectionHelpers() : List(PL::Clause) {
+	result += new Comment("");
+	result += new Comment("Helpers for collecting all available characteristics");
+	result += new Comment("");
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "setof_characteristics";
+			arguments += object PL::CompoundTerm { value := "N" };
+			arguments += object PL::CompoundTerm { value := "PIN" };
+			arguments += object PL::CompoundTerm { value := "CT" };
+			arguments += object PL::CompoundTerm { value := "RESULT" };
+			arguments += object PL::CompoundTerm { value := "S" };
+		};
+		var findAllClause := object PL::CompoundTerm {
+			value := "findall";
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "S" };
+				heads += object PL::CompoundTerm { value := "V" };
+			};
+			arguments += object PL::CompoundTerm {
+					value := "characteristic";
+					arguments += object PL::CompoundTerm { value := "N" };
+					arguments += object PL::CompoundTerm { value := "PIN" };
+					arguments += object PL::CompoundTerm { value := "CT" };
+					arguments += object PL::CompoundTerm { value := "V" };
+					arguments += object PL::CompoundTerm { value := "S" };
+			};
+			arguments += object PL::CompoundTerm { value := "TMP" };
+		};
+		var findAllValuesClause := object PL::CompoundTerm {
+			value := "findAllValues";
+			arguments += object PL::CompoundTerm { value := "TMP" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "RESULT" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := findAllClause;
+			right := findAllValuesClause;
+		};
+	};
+	
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "findAllValues";
+			arguments += object PL::_List { };
+			arguments += object PL::CompoundTerm { value := "_" };
+			arguments += object PL::_List { };
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "findAllValues";
+			arguments += object PL::CompoundTerm { value := "LIST" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var findStacksTerm := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::CompoundTerm { value := "LIST" };
+			arguments += object PL::CompoundTerm { value := "STACKS" };
+		};
+		var memberTerm := object PL::CompoundTerm {
+			value := "member";
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "STACKS" };
+		};
+		var valuesForSameStackTerm := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::CompoundTerm { value := "LIST" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := findStacksTerm;
+				right := memberTerm;
+			};
+			right := valuesForSameStackTerm;
+		};
+	};
+	
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::_List { };
+			arguments += object PL::_List { };
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::_List {
+				heads += object PL::_List {
+					heads += object PL::CompoundTerm { value := "S" };
+					heads += object PL::CompoundTerm { value := "_" };
+				};
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var findStacksTerm := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::CompoundTerm { value := "T" };
+			arguments += object PL::CompoundTerm { value := "R2" };
+		};
+		var unifiesWithAnyTerm := object PL::expressions::NotProvable {
+			expr := object PL::CompoundTerm {
+				value := "unifiesWithAny";
+				arguments += object PL::CompoundTerm { value := "S" };
+				arguments += object PL::CompoundTerm { value := "R2" };
+			};
+		};
+		var unificationTerm := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "R" };
+			right := object PL::_List {
+				heads += object PL::CompoundTerm { value := "S" };
+				tails += object PL::CompoundTerm { value := "R2" };
+			};
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := findStacksTerm;
+				right := unifiesWithAnyTerm;
+			};
+			right := unificationTerm;
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::_List {
+				heads += object PL::_List {
+					heads += object PL::CompoundTerm { value := "S" };
+					heads += object PL::CompoundTerm { value := "_" };
+				};
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var findStacksTerm := object PL::CompoundTerm {
+			value := "findStacks";
+			arguments += object PL::CompoundTerm { value := "T" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var unifiesWithAnyTerm := object PL::CompoundTerm {
+			value := "unifiesWithAny";
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := findStacksTerm;
+			right := unifiesWithAnyTerm;
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "unifiesWithAny";
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "H" };
+				tails += object PL::CompoundTerm { value := "_" };
+			};
+		};
+		body := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "S" };
+			right := object PL::CompoundTerm { value := "H" };
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "unifiesWithAny";
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::_List {
+				heads += object PL::CompoundTerm { value := "_" };
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+		};
+		body := object PL::CompoundTerm {
+			value := "unifiesWithAny";
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "T" };
+		};
+	};
+	
+	result += object PL::Fact {
+		head := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::_List { };
+			arguments += object PL::CompoundTerm { value := "_" };
+			arguments += object PL::_List { };
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::_List {
+				heads += object PL::_List {
+					heads += object PL::CompoundTerm { value := "SV" };
+					heads += object PL::CompoundTerm { value := "V" };
+				};
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var unificationTerm := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "SV" };
+			right := object PL::CompoundTerm { value := "S" };
+		};
+		var valuesForSameStackTerm := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::CompoundTerm { value := "T" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R2" };
+		};
+		var mergeTerm := object PL::CompoundTerm {
+			value := "list_to_set";
+			arguments += object PL::_List { 
+				heads += object PL::CompoundTerm { value := "V" };
+				tails += object PL::CompoundTerm { value := "R2" };
+			};
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := object PL::expressions::LogicalAnd {
+				left := unificationTerm;
+				right := valuesForSameStackTerm;
+			};
+			right := mergeTerm;
+		};
+	};
+	
+	result += object PL::Rule {
+		head := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::_List {
+				heads += object PL::_List {
+					heads += object PL::CompoundTerm { value := "SV" };
+					heads += object PL::CompoundTerm { value := "_" };
+				};
+				tails += object PL::CompoundTerm { value := "T" };
+			};
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		var notUnifiableTerm := object PL::expressions::NotUnifiable {
+			left := object PL::CompoundTerm { value := "SV" };
+			right := object PL::CompoundTerm { value := "S" };
+		};
+		var valuesForSameStackTerm := object PL::CompoundTerm {
+			value := "valuesForSameStack";
+			arguments += object PL::CompoundTerm { value := "T" };
+			arguments += object PL::CompoundTerm { value := "S" };
+			arguments += object PL::CompoundTerm { value := "R" };
+		};
+		body := object PL::expressions::LogicalAnd {
+			left := notUnifiableTerm;
+			right := valuesForSameStackTerm;
+		};
+	};
 }
 
 mapping DFD::DataFlowDiagram::createShortcuts() : List(PL::Clause) {
