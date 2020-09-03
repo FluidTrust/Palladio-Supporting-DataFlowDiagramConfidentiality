@@ -119,7 +119,8 @@ public class ComponentFactory {
 			np.setOwnedBehavior(copyBehaviorDefinition(p.getOwnedBehavior()));
 		}
 		if(p.getReferencedBehavior()!=null) {
-			np.setReferencedBehavior(copyBehaviorDefinition(p.getOwnedBehavior()));
+//			
+			np.setReferencedBehavior(copyBehaviorDefinition(p.getReferencedBehavior()));
 		}
 
 	}
