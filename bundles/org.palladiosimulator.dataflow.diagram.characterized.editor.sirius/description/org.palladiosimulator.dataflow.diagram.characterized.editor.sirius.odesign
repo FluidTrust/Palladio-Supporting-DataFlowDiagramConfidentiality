@@ -119,7 +119,7 @@
             </style>
           </borderedNodeMappings>
           <conditionnalStyles predicateExpression="aql:self.oclIsKindOf(DataFlowDiagramCharacterized::CharacterizedActorProcess)">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorProcess-unmodifiable.svg">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorProcess-unmodifiable.svg">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
@@ -176,7 +176,7 @@
           </borderedNodeMappings>
           <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ReadOnlyStoreNode']"/>
         </nodeMappings>
-        <edgeMappings name="CharacterizedDataFlowEdge" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteEdge']" semanticCandidatesExpression="aql:self.edges" doubleClickDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='refineCDF']" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedExternalActorNode']/@borderedNodeMappings[name='ReadOnlyExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedStoreNode']/@borderedNodeMappings[name='ReadOnlyStoreOutputPin']" targetMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessInputPin']" targetFinderExpression="aql:self.targetPin" sourceFinderExpression="aql:self.sourcePin" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" useDomainElement="true" reconnections="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFTarget'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFSource']">
+        <edgeMappings name="CharacterizedDataFlowEdge" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteEdge']" semanticCandidatesExpression="aql:self.edges" doubleClickDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='refineCDF']" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedExternalActorNode']/@borderedNodeMappings[name='ReadOnlyExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedStoreNode']/@borderedNodeMappings[name='ReadOnlyStoreOutputPin']" targetMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedExternalActorNode']/@borderedNodeMappings[name='ReadOnlyExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedStoreNode']/@borderedNodeMappings[name='ReadOnlyStoreInputPin']" targetFinderExpression="aql:self.targetPin" sourceFinderExpression="aql:self.sourcePin" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" useDomainElement="true" reconnections="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFTarget'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFSource']">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.data.type.name+': '+self.data.name.concat(' ')">
@@ -272,7 +272,7 @@
                           </buttons>
                           <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
                           <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
-                            <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(source, target)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
+                            <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(sourceNode, targetNode)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
                               <initialOperation>
                                 <firstModelOperations xsi:type="tool_1:Let" variableName="ref" valueExpression="aql:newValue">
                                   <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRef(ref)"/>
@@ -347,8 +347,15 @@
             <element name="element"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="targetPin" valueExpression="aql:target"/>
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="aql:target.eContainer().eContainer()"/>
+                <subModelOperations xsi:type="tool_1:Let" variableName="sourceNode" valueExpression="aql:source.eContainer().eContainer()">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="targetNode" valueExpression="aql:target.eContainer().eContainer()">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="targetPin" valueExpression="aql:target"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="aql:target.eContainer().eContainer()"/>
+                      <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnect(source, target, sourceNode, targetNode)"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
             <edgeView name="edgeView"/>
@@ -383,32 +390,66 @@
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:deleteEdge()"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInputPin" label="new Input Pin" precondition="aql:self.ownedBehavior->notEmpty()" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInputPin" label="new Input Pin" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.ownedBehavior->isEmpty() and self.referencedBehavior->isEmpty()">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::BehaviorDefinition" referenceName="ownedBehavior" variableName="new behavior">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new behavior"/>
                     </subModelOperations>
-                  </subModelOperations>
+                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="aql:self.eContainer()">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:self.ownedBehavior->notEmpty()">
+                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createOutputPin" label="new Output Pin" precondition="aql:self.ownedBehavior->notEmpty()" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createOutputPin" label="new Output Pin" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.ownedBehavior->isEmpty() and self.referencedBehavior->isEmpty()">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::BehaviorDefinition" referenceName="ownedBehavior" variableName="new behavior">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new behavior"/>
+                      <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="aql:self.eContainer()">
+                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
+                          </subModelOperations>
+                        </subModelOperations>
+                      </subModelOperations>
                     </subModelOperations>
-                  </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:self.ownedBehavior->notEmpty()">
+                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -541,10 +582,10 @@
         </controls>
       </groups>
       <groups name="Behavior Description" labelExpression="Behavior Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="BehaviorName" labelExpression="Name" valueExpression="aql:self.behavior.name">
+        <controls xsi:type="properties:TextDescription" name="BehaviorName" labelExpression="Name" isEnabledExpression="aql:self.ownedBehavior->notEmpty()" valueExpression="aql:self.behavior.name">
           <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool_1:SetValue" featureName="self.behavior.name" valueExpression="var:newValue"/>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.behavior">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
@@ -553,6 +594,11 @@
           <controls xsi:type="properties:LabelDescription" name="LHS Pin" labelExpression="Pin" valueExpression="aql:self.behavior.assignments.lhs.pin.name"/>
           <controls xsi:type="properties:LabelDescription" name="LHS Literal" labelExpression="Literal" isEnabledExpression="aql:self.behavior.assignments.lhs.literal->notEmpty()" valueExpression="aql:self.behavior.assignments.lhs.literal.name"/>
           <controls xsi:type="properties:LabelDescription" name="LHS Characteristic Type" labelExpression="Characteristic Type" valueExpression="aql:self.behavior.assignments.lhs.characteristicType.name"/>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Select Referenced Behavior">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
         </controls>
         <validationSet>
           <propertyValidationRules name="BehaviorNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.3/@controls.0">

@@ -39,8 +39,8 @@ public class QueryUtil {
 	}
 
 	
-	public static boolean isSameDFD(EObject a, EObject b) {
-		return ComparisonUtil.isEqual(a.eContainer(), b.eContainer());
+	public static boolean isSameDFD(EObject nodeA, EObject nodeB) {
+		return ComparisonUtil.isEqual(nodeA.eContainer(), nodeB.eContainer());
 	}
 	
 	public static boolean hasEmptyEdgeRefinements(Node n) {
@@ -62,16 +62,30 @@ public class QueryUtil {
 		return false;
 
 	}
-//
+	
+	/**
+	 * 
+	 * @param pin
+	 * @return whether a dataflow goes through this pin
+	 */
+	public static boolean isPartOfDF(EObject pin) {
+		List<EObject> inputRefs = getInverseReferences(pin, "targetPin").stream()
+				.filter(r -> r instanceof CharacterizedDataFlow).collect(Collectors.toList());
+		List<EObject> outputRefs = getInverseReferences(pin, "sourcePin").stream()
+				.filter(r -> r instanceof CharacterizedDataFlow).collect(Collectors.toList());
+		return !inputRefs.isEmpty() || !outputRefs.isEmpty();
+	}
+	
+
 	public static boolean isBorderNode(Node n) {
 		return getContexts(n).size() > 1;
 	}
 	
 	public static Set<DataFlowDiagram> getContexts(Node n) {
 		List<EObject> inputRefs = getInverseReferences(n, "target").stream()
-				.filter(r -> r instanceof DataFlow).collect(Collectors.toList());
+				.filter(r -> r instanceof CharacterizedDataFlow).collect(Collectors.toList());
 		List<EObject> outputRefs = getInverseReferences(n, "source").stream()
-				.filter(r -> r instanceof DataFlow).collect(Collectors.toList());
+				.filter(r -> r instanceof CharacterizedDataFlow).collect(Collectors.toList());
 		Set<DataFlowDiagram> contexts = new HashSet<DataFlowDiagram>();
 		for (EObject eo : inputRefs) {
 			contexts.add((DataFlowDiagram) eo.eContainer());
