@@ -51,8 +51,8 @@ class InformationFlowAnalysesIflow extends AnalysisIntegrationTestBase {
 			N_LEVEL > N_CLEAR.
 		'''
 		var query = prover.query(queryString)
-		query.bind("J$CTSECLEVEL", '''«classificationName» («classificationId»)'''.toString)
-		query.bind("J$CTCLEARANCE", '''«clearanceName» («clearanceId»)'''.toString)
+		query.bind("CTSECLEVEL", '''«classificationName» («classificationId»)'''.toString)
+		query.bind("CTCLEARANCE", '''«clearanceName» («clearanceId»)'''.toString)
 		var solution = query.solve()
 		solution
 	}

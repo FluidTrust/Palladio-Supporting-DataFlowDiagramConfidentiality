@@ -48,11 +48,13 @@
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
-			<unit id="org.prolog4j.tuprolog.feature.feature.group" version="tbd"/>
+			<unit id="org.prolog4j.swicli.feature.feature.group" version="tbd"/>
+			<unit id="org.prolog4j.swicli.enabler.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog4j/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
-			<unit id="org.prolog4j.tuprolog.feature.feature.group" version="tbd"/>
+			<unit id="org.prolog4j.swicli.feature.feature.group" version="tbd"/>
+			<unit id="org.prolog4j.swicli.enabler.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-supporting-prolog4j/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">

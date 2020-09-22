@@ -27,12 +27,12 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-		query.bind("J$P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
-		query.bind("J$CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
+		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
+		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 1, Arrays.asList("V", "S"));
 	}
 	
 	@Test
@@ -48,12 +48,12 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-		query.bind("J$P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
-		query.bind("J$CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
+		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
+		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 2, Arrays.asList("V", "S"));
 	}
 	
 	@Test
@@ -69,12 +69,12 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-		query.bind("J$P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
-		query.bind("J$CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
+		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
+		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 2, Arrays.asList("V", "S"));
 	}
 	
 	@Test
@@ -90,12 +90,12 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-		query.bind("J$P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
-		query.bind("J$CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
+		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
+		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 2, Arrays.asList("V", "S"));
 	}
 	
 	@Test
@@ -111,12 +111,12 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-		query.bind("J$P", "A2 (_I1hvJUz4EeqyWs80cS8siQ)");
-		query.bind("J$PIN", "A2.in (_LEsVYEz4EeqyWs80cS8siQ)");
-		query.bind("J$CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
+		query.bind("P", "A2 (_I1hvJUz4EeqyWs80cS8siQ)");
+		query.bind("PIN", "A2.in (_LEsVYEz4EeqyWs80cS8siQ)");
+		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutions(solution, 1, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutions(solution, 1, Arrays.asList("V", "S"));
 	}
 	
 	@Test
@@ -133,11 +133,11 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, CT, V, S).");
-		query.bind("J$P", "P1 - SetToContainer (_44_t0ksyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
+		query.bind("P", "P1 - SetToContainer (_44_t0ksyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutionsWithoutTraversedNodes(solution, 2, Arrays.asList("P", "PIN", "CT", "V", "S"));
+		assertNumberOfSolutionsWithoutTraversedNodes(solution, 2, Arrays.asList("CT", "V", "S"));
 	}
 	
 	@Test
@@ -153,11 +153,11 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 		prover.loadTheory(result.get());
 		Query query = prover.query("characteristic(?P, ?PIN, CT, V, S).");
-		query.bind("J$P", "A1 (_21ryRUsyEeqBeZX3QKuNVA)");
-		query.bind("J$PIN", "A1.in (_kYwxUFSxEeqnLp_48pbpVA)");
+		query.bind("P", "A1 (_21ryRUsyEeqBeZX3QKuNVA)");
+		query.bind("PIN", "A1.in (_kYwxUFSxEeqnLp_48pbpVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutionsWithoutTraversedNodes(solution, 1, Arrays.asList("P", "PIN", "CT", "V"));
+		assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("CT", "V", "S"));
 	}
 
 
@@ -173,13 +173,13 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         assertFalse(result.isEmpty());
         
         prover.loadTheory(result.get());
-        Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
-        query.bind("J$P", "P5 (_A95iyYM2EeqgDLgDYuvGtg)");
-        query.bind("J$PIN", "P5.out (_Eo6b8YM2EeqgDLgDYuvGtg)");
-        query.bind("J$CT", "ValueCharacteristic (_NpqAg4MyEeqgDLgDYuvGtg)");
+        Query query = prover.query("CT=?CTV, characteristic(?P, ?PIN, CT, V, S).");
+        query.bind("P", "P5 (_A95iyYM2EeqgDLgDYuvGtg)");
+        query.bind("PIN", "P5.out (_Eo6b8YM2EeqgDLgDYuvGtg)");
+        query.bind("CTV", "ValueCharacteristic (_NpqAg4MyEeqgDLgDYuvGtg)");
         Solution<Object> solution = query.solve();
         
-        assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("P", "PIN", "CT", "V", "S"));
+        assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("CT", "V", "S"));
 	}
 	
 	@Test

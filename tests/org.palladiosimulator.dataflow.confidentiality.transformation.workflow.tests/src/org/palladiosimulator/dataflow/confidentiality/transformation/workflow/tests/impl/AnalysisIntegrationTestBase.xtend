@@ -1,8 +1,10 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl;
 
 import java.util.ArrayList
+import java.util.Arrays
 import java.util.Collection
 import java.util.HashMap
+import java.util.LinkedHashSet
 import java.util.Map
 import java.util.function.Function
 import java.util.function.Predicate
@@ -16,10 +18,12 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
 import org.prolog4j.IProverFactory
 import org.prolog4j.Prover
 import org.prolog4j.Solution
-import org.prolog4j.tuprolog.TuPrologProverFactory
+import org.prolog4j.swicli.DefaultSWIPrologExecutableProvider
+import org.prolog4j.swicli.SWIPrologCLIProverFactory
+import org.prolog4j.swicli.SWIPrologCLIProverFactory.SWIPrologExecutableProviderStandalone
+import org.prolog4j.swicli.enabler.SWIPrologEmbeddedFallbackExecutableProvider
 
 import static org.junit.jupiter.api.Assertions.*
-import java.util.LinkedHashSet
 
 class AnalysisIntegrationTestBase {
 
@@ -34,7 +38,10 @@ class AnalysisIntegrationTestBase {
 	@BeforeAll
 	static def void init() {
 		StandaloneUtil.init();
-		proverFactory = new TuPrologProverFactory()
+		var factory = new SWIPrologCLIProverFactory(
+			Arrays.asList(new SWIPrologExecutableProviderStandalone(new DefaultSWIPrologExecutableProvider(), 2),
+				new SWIPrologExecutableProviderStandalone(new SWIPrologEmbeddedFallbackExecutableProvider(), 1)));
+		proverFactory = factory;
 	}
 
 	@BeforeEach

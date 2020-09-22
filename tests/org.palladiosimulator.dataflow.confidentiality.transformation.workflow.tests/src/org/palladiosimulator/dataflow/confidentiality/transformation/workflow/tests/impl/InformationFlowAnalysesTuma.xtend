@@ -29,10 +29,10 @@ class InformationFlowAnalysesTuma extends AnalysisIntegrationTestBase {
 			characteristic(P, PIN, ?CTLEVEL, ?CLEVEL, S).
 		'''
 		var query = prover.query(queryString)
-		query.bind("J$CTZONE", "ZoneMembership (_R8xrE1IoEeqxoa0IdF5JoA)")
-		query.bind("J$CZONE", "AttackZone (_exuVgFIuEeqkVaPUPi-ogw)")
-		query.bind("J$CTLEVEL", "ConfidentialityRequirements (_LNbeM1IoEeqxoa0IdF5JoA)")
-		query.bind("J$CLEVEL", "High (_PtJx0FIoEeqxoa0IdF5JoA)")
+		query.bind("CTZONE", "ZoneMembership (_R8xrE1IoEeqxoa0IdF5JoA)")
+		query.bind("CZONE", "AttackZone (_exuVgFIuEeqkVaPUPi-ogw)")
+		query.bind("CTLEVEL", "ConfidentialityRequirements (_LNbeM1IoEeqxoa0IdF5JoA)")
+		query.bind("CLEVEL", "High (_PtJx0FIoEeqxoa0IdF5JoA)")
 		var solution = query.solve()
 		solution
 	}

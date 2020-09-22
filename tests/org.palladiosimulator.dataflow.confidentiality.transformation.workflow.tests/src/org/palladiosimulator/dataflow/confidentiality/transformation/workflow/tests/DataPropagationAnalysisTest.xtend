@@ -197,10 +197,10 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 			characteristic(P, PIN, ?CTLEVEL, ?CLEVEL, S).
 		'''
 		var query = prover.query(queryString)
-		query.bind("J$CTGRANTS", "AllowedLevel (_Kqg1s11dEequxah3HlaYJg)")
-		query.bind("J$CGRANTS", "Low (_xzDM4F1cEequxah3HlaYJg)")
-		query.bind("J$CTLEVEL", "Level (_yuQ3811cEequxah3HlaYJg)")
-		query.bind("J$CLEVEL", "High (_w90ODl1cEequxah3HlaYJg)")
+		query.bind("CTGRANTS", "AllowedLevel (_Kqg1s11dEequxah3HlaYJg)")
+		query.bind("CGRANTS", "Low (_xzDM4F1cEequxah3HlaYJg)")
+		query.bind("CTLEVEL", "Level (_yuQ3811cEequxah3HlaYJg)")
+		query.bind("CLEVEL", "High (_w90ODl1cEequxah3HlaYJg)")
 		var solution = query.solve()
 		solution
 	}
@@ -212,10 +212,10 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 			\+ characteristic(P, PIN, ?CTLEVEL, ?CLEVEL, S).
 		'''
 		var query = prover.query(queryString)
-		query.bind("J$CTGRANTS", "AllowedLevel (_Kqg1s11dEequxah3HlaYJg)")
-		query.bind("J$CGRANTS", "Low (_xzDM4F1cEequxah3HlaYJg)")
-		query.bind("J$CTLEVEL", "Level (_yuQ3811cEequxah3HlaYJg)")
-		query.bind("J$CLEVEL", "Low (_xzDM4F1cEequxah3HlaYJg)")
+		query.bind("CTGRANTS", "AllowedLevel (_Kqg1s11dEequxah3HlaYJg)")
+		query.bind("CGRANTS", "Low (_xzDM4F1cEequxah3HlaYJg)")
+		query.bind("CTLEVEL", "Level (_yuQ3811cEequxah3HlaYJg)")
+		query.bind("CLEVEL", "Low (_xzDM4F1cEequxah3HlaYJg)")
 		var solution = query.solve()
 		solution
 	}
