@@ -91,7 +91,13 @@ public class DFDCModificationUtil {
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param newDFD newly created dfd
+	 * @param p to be refined process
+	 * @param oldDFD
+	 * @param ref current dfd refinement
+	 */
 	public static void refineProcess(EObject newDFD, EObject p, DataFlowDiagram oldDFD, DataFlowDiagramRefinement ref) {
 		List<Edge> edges = oldDFD.getEdges();
 		List<CharacterizedDataFlow> incoming = new ArrayList<CharacterizedDataFlow>();
@@ -113,20 +119,32 @@ public class DFDCModificationUtil {
 		createLeveledDFD(incoming, outgoing, (CharacterizedProcess) p, oldDFD, (DataFlowDiagram) newDFD, ref);
 	}
 
+	/**
+	 * 
+	 * @param in incoming characterized dataflows to p
+	 * @param out outgoing characterized dataflows from p
+	 * @param p to be refined process
+	 * @param oldDFD
+	 * @param newDFD
+	 * @param ref current dfd refinement
+	 */
 	public static void createLeveledDFD(List<CharacterizedDataFlow> in, List<CharacterizedDataFlow> out,
 			CharacterizedProcess p, DataFlowDiagram oldDFD, DataFlowDiagram newDFD, DataFlowDiagramRefinement ref) {
 
+		// copy process (including, pins, behavior, characteristics)
 		Node newCharacterizedProcess = ComponentFactory.copyNode(p);
 		newDFD.getNodes().add(newCharacterizedProcess);
 
 		for (CharacterizedDataFlow cdf : in) {
 			CharacterizedDataFlow ncdf = ComponentFactory.copyIncomingCharacterizedDataflow(cdf, newCharacterizedProcess);
+			// copy incoming dataflows and add to edges of new dfd and to refinement
 			newDFD.getEdges().add(ncdf);
 			DFDCRefinementUtil.addToRef(cdf, ncdf, ref);
 		}
 
 		for (CharacterizedDataFlow cdf : out) {
 			CharacterizedDataFlow ncdf = ComponentFactory.copyOutgoingCharacterizedDataflow(cdf, newCharacterizedProcess);
+			// copy outgoing dataflows and add to edges of new dfd and to refinement
 			newDFD.getEdges().add(ncdf);			
 			DFDCRefinementUtil.addToRef(cdf, ncdf, ref);
 		}

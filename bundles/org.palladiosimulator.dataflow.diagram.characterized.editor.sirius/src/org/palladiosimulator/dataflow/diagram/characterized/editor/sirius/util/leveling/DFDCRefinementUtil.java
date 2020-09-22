@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
+import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramFactory;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRefinement;
@@ -78,10 +79,10 @@ public class DFDCRefinementUtil {
 
 	}
 
-	public static boolean needsRef(EObject a, EObject b) {
-		boolean sameDFD = QueryUtil.isSameDFD(a, b);
-		boolean toRef = isRefined(a);
-		boolean fromRef = isRefined(b);
+	public static boolean needsRef(EObject nodeA, EObject nodeB) {
+		boolean sameDFD = QueryUtil.isSameDFD(nodeA, nodeB);
+		boolean toRef = isRefined(nodeA);
+		boolean fromRef = isRefined(nodeB);
 		return (!sameDFD || toRef || fromRef);
 	}
 
@@ -96,17 +97,36 @@ public class DFDCRefinementUtil {
 		return (EdgeRefinement) refs.get(0);
 	}
 
+	/**
+	 * 
+	 * @param self characterized process
+	 * @return whether a refinedProcess reference exists for this process otherwise the process is not refined
+	 */
 	public static boolean isRefined(EObject self) {
 		List<EObject> refs = QueryUtil.getInverseReferences(self, "refinedProcess");
 		return !refs.isEmpty();
 	}
 
+	
+	/**
+	 * 
+	 * @param self a data flow diagram
+	 * @return whether a refinedDiagram reference exists for this dfd otherwise the dfd is not refined
+	 */
 	public static boolean isRefinedDFD(EObject self) {
 		List<EObject> refs = QueryUtil.getInverseReferences(self, "refiningDiagram");
 		return !refs.isEmpty();
 	}
 
 	
+		/**
+		 * 
+		 * @param self
+		 * @param sourcePin
+		 * @param targetPin
+		 * @param sourceNode
+		 * @param targetNode
+		 */
 		public static void addNewRefinedDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
 
 		DataFlowDiagram sourceDFD = (DataFlowDiagram) sourceNode.eContainer();
@@ -136,8 +156,8 @@ public class DFDCRefinementUtil {
 		return upper.getRefinedBy().stream().map(r -> r.getRefiningDiagram())
 				.anyMatch(d -> ComparisonUtil.isEqual(d, lower));
 	}
-//
-	public static List<EdgeRefinement> getAllRefinements(EObject self, EObject source, EObject target) {
+
+	public static List<EdgeRefinement> getAllRefinements(EObject source, EObject target) {
 		List<EdgeRefinement> refs = new ArrayList<EdgeRefinement>();
 
 		DataFlowDiagram sourceDFD = (DataFlowDiagram) source.eContainer();
@@ -169,6 +189,8 @@ public class DFDCRefinementUtil {
 				.collect(Collectors.toList());
 	}
 
+	
+	// TODO make void?
 	public static EdgeRefinement addToRef(CharacterizedDataFlow cdf, CharacterizedDataFlow ncdf, DataFlowDiagramRefinement ref) {
 		EdgeRefinement er = DataFlowDiagramFactory.eINSTANCE.createEdgeRefinement();
 		er.setRefinedEdge(cdf);

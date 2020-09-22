@@ -37,30 +37,51 @@ public class Services {
 	 * for documentation on how to write service methods.
 	 */
 
-	public EObject navigateUp(EObject self, EObject dfd) {
-		return dfd.eContainer().eContainer();
-	}
 
+	/**
+	 * navigate to refining diagram 
+	 * 
+	 * @param self
+	 * @param element refined Process
+	 * @return refining diagram
+	 */
 	public EObject navigateDown(EObject self, EObject element) {
 		return DFDCRefinementUtil.getRefinement(element).getRefiningDiagram();
 
 	}
 
+	
+	/**
+	 * 
+	 * @param self
+	 * @return
+	 */
 	public boolean canReconnectSource(EObject self) {
-		return !QueryUtil.isBorderNode(((DataFlow) self).getSource());
+		return !QueryUtil.isBorderNode(((CharacterizedDataFlow) self).getSource());
 
 	}
 
 	public boolean canReconnectTarget(EObject self) {
-		return !QueryUtil.isBorderNode(((DataFlow) self).getTarget());
+		return !QueryUtil.isBorderNode(((CharacterizedDataFlow) self).getTarget());
 
 	}
 
+	
+	/**
+	 * 
+	 * @param self
+	 * @return list of data types for data flows
+	 */
 	public List<EObject> listDataTypes(EObject self) {
 		Session session = SessionManager.INSTANCE.getSession(self);
 		return DFDCTypeUtil.getDataTypes(session);
 	}
 
+	/**
+	 * 
+	 * @param self characterized process
+	 * @return
+	 */
 	public boolean isRefined(EObject self) {
 		return DFDCRefinementUtil.isRefined(self);
 	}
@@ -70,14 +91,14 @@ public class Services {
 	}
 
 
-	public boolean needsRefDialog(EObject self, EObject source, EObject target) {
-		return DFDCRefinementUtil.needsRef(source, target) && !getAllRefinements(self, source, target).isEmpty(); // <->
+	public boolean needsRefDialog(EObject self, EObject sourceNode, EObject targetNode) {
+		return DFDCRefinementUtil.needsRef(sourceNode, targetNode) && !getAllRefinements(sourceNode, targetNode).isEmpty(); // <->
 																													// if
 																													// cross-dfd;
 	}
 
 	public boolean needsRef(EObject self, EObject source, EObject target) {
-		return DFDCRefinementUtil.needsRef(source, target) && getAllRefinements(self, source, target).isEmpty();
+		return DFDCRefinementUtil.needsRef(source, target) && getAllRefinements(source, target).isEmpty();
 	}
 
 	public void addNewRefinedDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
@@ -124,8 +145,8 @@ public class Services {
 
 	}
 
-	public List<EdgeRefinement> getAllRefinements(EObject self, EObject source, EObject target) {
-		return DFDCRefinementUtil.getAllRefinements(self, source, target);
+	public List<EdgeRefinement> getAllRefinements(EObject source, EObject target) {
+		return DFDCRefinementUtil.getAllRefinements(source, target);
 
 	}
 
@@ -150,19 +171,35 @@ public class Services {
 	public void addCDF(EObject self, EObject sourcePin, EObject targetPin, EObject sourceNode, EObject targetNode) {
 		ComponentFactory.createCDF(self, sourcePin, targetPin, sourceNode, targetNode, false);
 	}
-//
+
+	/**
+	 * 
+	 * @param self source pin
+	 * @param source source pin
+	 * @param target target pin
+	 * @return
+	 */
 	public boolean canConnect(EObject self, EObject source, EObject target) {
-		if (!DFDCRefinementUtil.isRefinedDFD(self.eContainer())) {
+		Node sourceNode = (Node) source.eContainer().eContainer();
+		Node targetNode = (Node) target.eContainer().eContainer();
+		DataFlowDiagram dfd = (DataFlowDiagram) sourceNode.eContainer();
+		// no dataflow goes through out- or input pins already
+		if(QueryUtil.isPartOfDF(source) ||  QueryUtil.isPartOfDF(target)) {
+			return false;
+		}
+		
+		if (!DFDCRefinementUtil.isRefinedDFD(dfd)) {
 			return true;
 		}
 
-		// TODO handle pins
-		if (!QueryUtil.isBorderNode((Node) source) && !QueryUtil.isBorderNode((Node) target)) {
+		
+		
+		if (!QueryUtil.isBorderNode(sourceNode) && !QueryUtil.isBorderNode(targetNode)) {
 			return true;
 		}
 
-		return !(QueryUtil.isBorderNode((Node) source) && QueryUtil.isBorderNode((Node) target))
-				&& !getAllRefinements(self, source, target).isEmpty();
+		return !(QueryUtil.isBorderNode(sourceNode) && QueryUtil.isBorderNode(targetNode))
+				&& !getAllRefinements(sourceNode, targetNode).isEmpty();
 
 	}
 
