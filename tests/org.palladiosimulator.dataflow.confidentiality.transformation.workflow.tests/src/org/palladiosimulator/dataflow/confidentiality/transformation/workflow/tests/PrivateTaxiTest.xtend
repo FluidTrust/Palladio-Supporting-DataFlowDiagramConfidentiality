@@ -41,7 +41,7 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 	}
 
 	@Test
-	def void testCombinationOfUserAndRoute() {		
+	def void testCombinationOfUserAndRoute() {
 		val dfd = loadAndInitDFD("models/evaluation/privatetaxi/privatetatxi_dd.xmi",
 			"models/evaluation/privatetaxi/privatetaxi_dfd.xmi")
 		EcoreUtil.resolveAll(dfd.eResource.resourceSet)
@@ -81,7 +81,7 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		dfd.edges += joinedFlow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 6, #["N", "PIN", "R", "D", "S"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["N", "PIN", "R", "D", "S"])
 	}
 
 	protected def Solution<Object> findFlaws() {

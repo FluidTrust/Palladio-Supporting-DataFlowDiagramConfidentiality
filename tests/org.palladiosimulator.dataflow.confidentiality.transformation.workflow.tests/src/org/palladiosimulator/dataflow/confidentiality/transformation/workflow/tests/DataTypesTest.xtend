@@ -52,9 +52,9 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 		compositeDataTypeEntry(DT, ?ENAME, ET),
 		dataType(ET).'''
 		var query = prover.query(queryString)
-		query.bind("J$DATATYPE", dataType)
-		query.bind("J$ENAME", entryName)
-		query.bind("J$ETYPE", entryType)
+		query.bind("DATATYPE", dataType)
+		query.bind("ENAME", entryName)
+		query.bind("ETYPE", entryType)
 		var solution = query.solve()
 		assertTrue(solution.success)
 	}
@@ -65,7 +65,7 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 		\+collectionDataType(DT, _),
 		compositeDataType(DT).'''
 		var query = prover.query(queryString)
-		query.bind("J$DATATYPE", dataType)
+		query.bind("DATATYPE", dataType)
 		var solution = query.solve()
 		assertTrue(solution.success)
 	}
@@ -76,8 +76,8 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 		collectionDataType(DT, ?INNERTYPE),
 		\+compositeDataType(DT).'''
 		var query = prover.query(queryString)
-		query.bind("J$DATATYPE", dataType)
-		query.bind("J$INNERTYPE", innerType)
+		query.bind("DATATYPE", dataType)
+		query.bind("INNERTYPE", innerType)
 		var solution = query.solve()
 		assertTrue(solution.success)
 	}
@@ -88,7 +88,7 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 		\+collectionDataType(DT, _),
 		\+compositeDataType(DT).'''
 		var query = prover.query(queryString)
-		query.bind("J$DATATYPE", dataType)
+		query.bind("DATATYPE", dataType)
 		var solution = query.solve()
 		assertTrue(solution.success)
 	}
@@ -96,10 +96,10 @@ class DataTypesTest extends AnalysisIntegrationTestBase {
 	protected def assertDataFlowData(String dataFlow, String dataId, String dataName, String dataType) {
 		var queryString = '''dataflowData(?DF, ?ID, ?NAME, ?TYPE).'''
 		var query = prover.query(queryString)
-		query.bind("J$DF", dataFlow)
-		query.bind("J$ID", dataId)
-		query.bind("J$NAME", dataName)
-		query.bind("J$TYPE", dataType)
+		query.bind("DF", dataFlow)
+		query.bind("ID", dataId)
+		query.bind("NAME", dataName)
+		query.bind("TYPE", dataType)
 		var solution = query.solve()
 		assertTrue(solution.success)
 	}
