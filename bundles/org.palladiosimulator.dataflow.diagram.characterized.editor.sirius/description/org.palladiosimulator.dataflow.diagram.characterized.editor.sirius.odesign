@@ -467,7 +467,7 @@
     <metamodels href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"/>
     <metamodels href="http://sdq.ipd.uka.de/Identifier/2.1#/"/>
     <categories name="DFDC Category">
-      <pages name="DFC Editor Page" labelExpression="EditChar" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3">
+      <pages name="DFC Editor Page" documentation="should extend df editor page of original editor, old page still shows up though" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3">
         <extends href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@extensions.0/@categories.0/@pages.0"/>
       </pages>
       <groups name="Characteristics" labelExpression="Properties" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic" semanticCandidateExpression="var:self">
@@ -574,14 +574,14 @@
           </propertyValidationRules>
         </validationSet>
       </groups>
-      <groups name="DFDC" labelExpression="Actions" domainClass="DataFlowDiagram::DataFlowDiagram" semanticCandidateExpression="var:self">
+      <groups name="DFDC" documentation="add, edit or remove pieces of data to/of a dataflow" labelExpression="Actions" domainClass="DataFlowDiagram::DataFlowDiagram" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:ButtonDescription" name="openDialog" labelExpression="Load characterized data dictionary" buttonLabelExpression="open">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:loadResources()"/>
           </initialOperation>
         </controls>
       </groups>
-      <groups name="Behavior Description" labelExpression="Behavior Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
+      <groups name="Behavior Description" documentation="very basic display of behaviors, name can only be edited for ownedBehaviors not for referenced ones" labelExpression="Behavior Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="BehaviorName" labelExpression="Name" isEnabledExpression="aql:self.ownedBehavior->notEmpty()" valueExpression="aql:self.behavior.name">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.behavior">

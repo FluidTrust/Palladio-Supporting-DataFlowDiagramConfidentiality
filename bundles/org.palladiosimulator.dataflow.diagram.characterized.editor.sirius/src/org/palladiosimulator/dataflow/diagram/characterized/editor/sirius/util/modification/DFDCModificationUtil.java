@@ -52,7 +52,7 @@ public class DFDCModificationUtil {
 		dfd.getEdges().remove(self);
 	}
 
-	// TODO check this
+
 	public static void deleteNode(EObject self) {
 
 		List<EObject> refiningRefs = QueryUtil.getInverseReferences(self, "refinedProcess");

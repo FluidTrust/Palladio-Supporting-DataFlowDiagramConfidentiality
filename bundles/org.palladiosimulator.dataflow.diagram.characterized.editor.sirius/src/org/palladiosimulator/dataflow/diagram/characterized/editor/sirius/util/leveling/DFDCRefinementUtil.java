@@ -190,7 +190,7 @@ public class DFDCRefinementUtil {
 	}
 
 	
-	// TODO make void?
+
 	public static EdgeRefinement addToRef(CharacterizedDataFlow cdf, CharacterizedDataFlow ncdf, DataFlowDiagramRefinement ref) {
 		EdgeRefinement er = DataFlowDiagramFactory.eINSTANCE.createEdgeRefinement();
 		er.setRefinedEdge(cdf);
@@ -227,7 +227,7 @@ public class DFDCRefinementUtil {
 
 			}
 			
-			// TODO deal with assignments that contain these pins
+			// TODO deal with assignments that reference these pins
 			((CharacterizedNode) df.getSource()).getBehavior().getOutputs().remove(sourcePin);
 			((CharacterizedNode) df.getTarget()).getBehavior().getInputs().remove(targetPin);
 			
@@ -253,7 +253,7 @@ public class DFDCRefinementUtil {
 					if (ref != null) {
 						ref.getRefiningEdges().add(ndf);
 					}
-					// TODO deal with assignments that contain these pins
+					// TODO deal with assignments that reference these pins
 					((CharacterizedNode) df.getSource()).getBehavior().getOutputs().remove(sourcePin);
 					((CharacterizedNode) df.getTarget()).getBehavior().getInputs().remove(targetPin);
 				}
