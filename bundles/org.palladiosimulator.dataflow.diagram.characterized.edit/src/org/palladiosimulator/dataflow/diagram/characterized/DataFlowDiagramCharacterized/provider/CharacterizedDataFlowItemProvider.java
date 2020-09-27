@@ -120,6 +120,14 @@ public class CharacterizedDataFlowItemProvider extends CharacterizedDataFlowItem
 		}
 		return super.getText(object);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+    @Override
+    public Object getImage(Object object) {
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/CharacterizedDataFlow.png"));
+    }
 
 	@Override
 	public void notifyChanged(Notification notification) {
