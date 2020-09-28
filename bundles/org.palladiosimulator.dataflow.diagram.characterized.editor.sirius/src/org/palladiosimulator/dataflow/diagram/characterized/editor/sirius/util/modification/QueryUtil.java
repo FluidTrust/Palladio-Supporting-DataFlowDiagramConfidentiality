@@ -23,15 +23,15 @@ import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.l
 
 public class QueryUtil {
 
-	// TODO how to handle pins?
-	public static boolean canReconnect(EObject self, EObject source, EObject target) {
-		CharacterizedDataFlow cdf = (CharacterizedDataFlow) self;
-		Node newTarget = (Node) target;
-		Node oldTarget = cdf.getTarget();
-		Node oldSource = cdf.getSource();		
-		return !((isBorderNode(newTarget) && isBorderNode(oldTarget)) || (isBorderNode(newTarget) && isBorderNode(oldSource)));
-
-	}
+//	// TODO how to handle pins?
+//	public static boolean canReconnect(EObject self, EObject source, EObject target) {
+//		CharacterizedDataFlow cdf = (CharacterizedDataFlow) self;
+//		Node newTarget = (Node) target;
+//		Node oldTarget = cdf.getTarget();
+//		Node oldSource = cdf.getSource();		
+//		return !((isBorderNode(newTarget) && isBorderNode(oldTarget)) || (isBorderNode(newTarget) && isBorderNode(oldSource)));
+//
+//	}
 	
 	
 	public static List<EObject> getInverseReferences(EObject o, String ref){
