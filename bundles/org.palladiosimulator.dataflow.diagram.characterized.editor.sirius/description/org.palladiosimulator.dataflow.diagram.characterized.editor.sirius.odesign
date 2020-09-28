@@ -372,7 +372,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
                 <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnectTarget()">
-                  <subModelOperations xsi:type="tool_1:Let" variableName="newTargetNode" valueExpression="aql:targetView.eContainer().semanticElements->any(true)">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="newTargetNode" valueExpression="aql:targetView.eContainer().semanticElements->first()">
                     <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:newTargetNode"/>
                     <subModelOperations xsi:type="tool_1:SetValue" featureName="targetPin" valueExpression="var:target"/>
                   </subModelOperations>
@@ -390,7 +390,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
                 <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnectSource()">
-                  <subModelOperations xsi:type="tool_1:Let" variableName="newSourceNode" valueExpression="aql:targetView.eContainer().semanticElements->any(true)">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="newSourceNode" valueExpression="aql:targetView.eContainer().semanticElements->first()">
                     <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:newSourceNode"/>
                     <subModelOperations xsi:type="tool_1:SetValue" featureName="sourcePin" valueExpression="var:target"/>
                   </subModelOperations>
