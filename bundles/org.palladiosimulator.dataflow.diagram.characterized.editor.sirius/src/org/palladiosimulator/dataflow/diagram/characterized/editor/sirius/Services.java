@@ -1,6 +1,10 @@
 package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
@@ -9,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DNode;
 import org.eclipse.sirius.tools.api.command.semantic.AddSemanticResourceCommand;
@@ -22,6 +27,7 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.emf.DefaultResourcesLoadedAdapter;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCErrorMessageUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
@@ -30,6 +36,7 @@ import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.l
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.ComponentFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.DFDCModificationUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.QueryUtil;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 
 /**
@@ -109,7 +116,7 @@ public class Services {
     }
 
     /**
-     * Indicates if the source and target of an edge matches it semantic content.
+     * Indicates if the source and target of an edge match their semantic content.
      * 
      * It is crucial to check the views of the pins to derive the real source and target nodes from
      * reused behaviors as well as from owned behaviors. The parent views of the pin views are the
@@ -140,6 +147,102 @@ public class Services {
             System.err.println(e);
             return false;
         }
+    }
+    
+    /**
+     * Determines {@link Pin} elements for inputs that are available for the given node in the given diagram.
+     * This method is meant to be used by read only nodes in refined diagrams.
+     * 
+     * @param node
+     *            The node to determine the pins for.
+     * @param diagram
+     *            The current diagram view.
+     * @return The set of available pins.
+     * @see Services#getPinCandidates(DDiagram, CharacterizedNode, Function)
+     */
+    public Collection<Pin> getInputPinCandidates(CharacterizedNode node, DDiagram diagram) {
+        return getPinCandidates(diagram, node, BehaviorDefinition::getInputs);
+    }
+    
+    /**
+     * Determines {@link Pin} elements for outputs that are available for the given node in the given diagram.
+     * This method is meant to be used by read only nodes in refined diagrams.
+     * 
+     * @param node
+     *            The node to determine the pins for.
+     * @param diagram
+     *            The current diagram view.
+     * @return The set of available pins.
+     * @see Services#getPinCandidates(DDiagram, CharacterizedNode, Function)
+     */
+    public Collection<Pin> getOutputPinCandidates(CharacterizedNode node, DDiagram diagram) {
+        return getPinCandidates(diagram, node, BehaviorDefinition::getOutputs);
+    }
+    
+    /**
+     * Determines {@link Pin} elements that are available for the given node in the given diagram.
+     * This method is meant to be used by read only nodes in refined diagrams.
+     * 
+     * The method assumes that every passed node is a read only node. The pins shown for a read only
+     * node must only be pins that are used by the refined process in the upper level diagram.
+     * 
+     * @param diagram
+     *            The current diagram view.
+     * @param node
+     *            The node to determine the pins for.
+     * @param pinGet
+     *            A function mapping a given behavior to pins (used to select input or output pins).
+     * @return The set of available pins.
+     */
+    protected Collection<Pin> getPinCandidates(DDiagram diagram, CharacterizedNode node,
+            Function<BehaviorDefinition, Collection<Pin>> pinGet) {
+        // find the semantic element of the current diagram
+        var refiningDfd = diagram.getOwnedDiagramElements()
+            .stream()
+            .filter(DNode.class::isInstance)
+            .map(DNode.class::cast)
+            .filter(n -> "CharacterizedProcessNode".equals(n.getActualMapping()
+                .getName()))
+            .findFirst()
+            .map(DNode::getSemanticElements)
+            .map(c -> c.get(0))
+            .map(EObject::eContainer)
+            .filter(DataFlowDiagram.class::isInstance)
+            .map(DataFlowDiagram.class::cast)
+            .orElse((DataFlowDiagram) node.eContainer());
+
+        // get all pin candidates
+        var pins = pinGet.apply(node.getBehavior());
+
+        // if the node child of the same semantic diagram as the current diagram, all pins are
+        // relevant
+        var refinedDfd = (DataFlowDiagram) node.eContainer();
+        if (refinedDfd == refiningDfd) {
+            return pins;
+        }
+
+        // only the pins used by the refined process are relevant in the current diagram
+        var refinedProcessCandidate = refinedDfd.getRefinedBy()
+            .stream()
+            .filter(r -> r.getRefiningDiagram() == refiningDfd)
+            .findFirst()
+            .map(DataFlowDiagramRefinement::getRefinedProcess);
+        if (!refinedProcessCandidate.isPresent()) {
+            return pins;
+        }
+        var refinedProcess = (CharacterizedProcess) refinedProcessCandidate.get();
+        var usedPins = refinedDfd.getEdges()
+            .stream()
+            .filter(CharacterizedDataFlow.class::isInstance)
+            .map(CharacterizedDataFlow.class::cast)
+            .filter(df -> Arrays.asList(df.getSource(), df.getTarget())
+                .contains(refinedProcess))
+            .flatMap(df -> Arrays.asList(df.getSourcePin(), df.getTargetPin())
+                .stream())
+            .collect(Collectors.toSet());
+        return pins.stream()
+            .filter(usedPins::contains)
+            .collect(Collectors.toList());
     }
     
     
