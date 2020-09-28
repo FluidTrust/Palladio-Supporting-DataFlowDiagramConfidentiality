@@ -62,10 +62,12 @@ Workflow {
 	}
 
 	component = GapPatternPostProcessor {
+		// dictionary
 		folders = {
 			gen = "platform:/resource/${dataDictionaryProjectName}.edit/src-gen"
 			src = "platform:/resource/${dataDictionaryProjectName}.edit/src"
 		}
+		// diagram
 		folders = {
 			gen = "platform:/resource/${dataFlowDiagramProjectName}/src-gen"
 			src = "platform:/resource/${dataFlowDiagramProjectName}/src"
@@ -73,6 +75,10 @@ Workflow {
 		folders = {
 			gen = "platform:/resource/${dataFlowDiagramProjectName}.edit/src-gen"
 			src = "platform:/resource/${dataFlowDiagramProjectName}.edit/src"
+		}
+		folders = {
+			gen = "platform:/resource/${dataFlowDiagramProjectName}.editor/src-gen"
+			src = "platform:/resource/${dataFlowDiagramProjectName}.editor/src"
 		}
 	}
 

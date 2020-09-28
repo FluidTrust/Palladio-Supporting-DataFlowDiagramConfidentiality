@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    id="_rphjEAFhEeugPIAarorGFw">
+  <behaviorDefinitions
+      id="_sIUX5QFhEeugPIAarorGFw"
+      name="StoreBehavior">
+    <inputs
+        id="_tuIfIAFhEeugPIAarorGFw"
+        name="input"/>
+    <outputs
+        id="_uArnsQFhEeugPIAarorGFw"
+        name="output"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>

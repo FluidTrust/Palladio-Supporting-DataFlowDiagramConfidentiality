@@ -3,13 +3,19 @@ package org.palladiosimulator.dataflow.diagram.characterized.editor.sirius;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.ui.dialogs.ResourceDialog;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.tools.api.command.semantic.AddSemanticResourceCommand;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.palladiosimulator.dataflow.confidentiality.defaultmodels.DefaultModelConstants;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRefinement;
@@ -30,12 +36,53 @@ import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.m
  */
 public class Services {
 
+    private static class DefaultResourcesLoadedAdapter implements Adapter {
+
+        private Notifier notifier;
+        
+        @Override
+        public void notifyChanged(Notification notification) {
+            // intentionally left blank
+        }
+
+        @Override
+        public Notifier getTarget() {
+            return notifier;
+        }
+
+        @Override
+        public void setTarget(Notifier newTarget) {
+            this.notifier = newTarget;
+        }
+
+        @Override
+        public boolean isAdapterForType(Object type) {
+            return false;
+        }
+        
+    }
+    
+    private static final Adapter DEFAULT_RESOURCES_LOADED_ADAPTER = new DefaultResourcesLoadedAdapter();
+    
 	/**
 	 * See
 	 * http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.sirius.doc%2Fdoc%2Findex.html&cp=24
 	 * for documentation on how to write service methods.
 	 */
-
+    
+    public boolean loadDefaultResources(EObject self, DDiagramElement diagramElement) {
+        if (!diagramElement.getParentDiagram().eAdapters().contains(DEFAULT_RESOURCES_LOADED_ADAPTER)) {
+            diagramElement.getParentDiagram().eAdapters().add(DEFAULT_RESOURCES_LOADED_ADAPTER);
+            var session = SessionManager.INSTANCE.getSession(self);
+            var commandStack = session.getTransactionalEditingDomain().getCommandStack();
+            for (var dictionaryURI : DefaultModelConstants.getDefaultDataDictionaries()) {
+                var command = new AddSemanticResourceCommand(session, dictionaryURI, new NullProgressMonitor());
+                commandStack.execute(command);
+            }
+        }
+        return false;
+    }
+    
 
 	/**
 	 * navigate to refining diagram 

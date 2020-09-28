@@ -19,5 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.palladiosimulator.dataflow.dictionary.edit;visibility:=reexport,
  org.palladiosimulator.dataflow.dictionary.characterized.edit;visibility:=reexport,
  org.palladiosimulator.dataflow.diagram.edit;visibility:=reexport,
- de.uka.ipd.sdq.identifier.edit;visibility:=reexport
+ de.uka.ipd.sdq.identifier.edit;visibility:=reexport,
+ org.palladiosimulator.dataflow.confidentiality.resources;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy

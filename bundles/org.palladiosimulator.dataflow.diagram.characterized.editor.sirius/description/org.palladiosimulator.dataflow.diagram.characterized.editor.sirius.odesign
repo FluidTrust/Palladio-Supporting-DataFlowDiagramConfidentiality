@@ -479,6 +479,12 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+        <customization>
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:loadDefaultResources(view)">
+            <featureCustomizations xsi:type="description:EReferenceCustomization" applyOnAll="true" referenceName="strokeColor"/>
+            <featureCustomizations xsi:type="description:EAttributeCustomization"/>
+          </vsmElementCustomizations>
+        </customization>
       </layers>
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.Services"/>
