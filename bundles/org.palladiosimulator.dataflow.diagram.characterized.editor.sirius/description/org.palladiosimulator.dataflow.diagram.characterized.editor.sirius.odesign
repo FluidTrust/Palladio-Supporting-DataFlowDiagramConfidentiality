@@ -49,14 +49,14 @@
         </nodeMappings>
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedStoreNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedStore">
           <borderedNodeMappings name="StoreInputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="StoreOutputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -73,14 +73,14 @@
         </nodeMappings>
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedExternalActorNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor">
           <borderedNodeMappings name="ExternalActorInputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="ExternalActorOutputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -98,14 +98,14 @@
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedProcessNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedProcess">
           <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
           <borderedNodeMappings name="ReadOnlyProcessInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="ReadOnlyProcessOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
@@ -129,14 +129,14 @@
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedExternalActorNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor">
           <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
           <borderedNodeMappings name="ReadOnlyExternalActorInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="ReadOnlyExternalActorOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
@@ -154,14 +154,14 @@
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedStoreNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedStore">
           <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
           <borderedNodeMappings name="ReadOnlyStoreInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="ReadOnlyStoreOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
@@ -259,46 +259,48 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createCDF" label="new Characterized Data Flow" precondition="service:canConnect(preSource, preTarget)" edgeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@edgeMappings[name='CharacterizedDataFlowEdge']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createCDF" label="new Characterized Data Flow" edgeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@edgeMappings[name='CharacterizedDataFlowEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().eContainer()">
-                <subModelOperations xsi:type="tool_1:Let" variableName="sourceNode" valueExpression="aql:source.eContainer().eContainer()">
-                  <subModelOperations xsi:type="tool_1:Let" variableName="targetNode" valueExpression="aql:target.eContainer().eContainer()">
-                    <subModelOperations xsi:type="tool_1:Switch">
-                      <cases conditionExpression="service:needsRefDialog(sourceNode, targetNode)">
-                        <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add DataFlow">
-                          <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                            <initialOperation>
-                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:stopDFCreation()"/>
-                            </initialOperation>
-                          </buttons>
-                          <buttons labelExpression="OK" isEnabledExpression="service:canCreateDF()" default="true" closeDialogOnClick="true">
-                            <initialOperation>
-                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addRefiningDF(source, target, sourceNode, targetNode)"/>
-                            </initialOperation>
-                          </buttons>
-                          <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
-                          <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
-                            <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(sourceNode, targetNode)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
+                <subModelOperations xsi:type="tool_1:Let" variableName="sourceNode" valueExpression="aql:sourceView.eContainer().semanticElements->first()">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="targetNode" valueExpression="aql:targetView.eContainer().semanticElements->first()">
+                    <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canConnect(sourceNode, source, targetNode, target)">
+                      <subModelOperations xsi:type="tool_1:Switch">
+                        <cases conditionExpression="service:needsRefDialog(sourceNode, targetNode)">
+                          <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add DataFlow">
+                            <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
                               <initialOperation>
-                                <firstModelOperations xsi:type="tool_1:Let" variableName="ref" valueExpression="aql:newValue">
-                                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRef(ref)"/>
-                                </firstModelOperations>
+                                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:stopDFCreation()"/>
                               </initialOperation>
-                            </controls>
-                          </groups>
-                        </subModelOperations>
-                      </cases>
-                      <cases conditionExpression="service:needsRef(sourceNode, targetNode)">
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addNewRefinedDF(source, target, sourceNode, targetNode)"/>
-                      </cases>
-                      <default>
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addCDF(source, target, sourceNode, targetNode)"/>
-                      </default>
+                            </buttons>
+                            <buttons labelExpression="OK" isEnabledExpression="service:canCreateDF()" default="true" closeDialogOnClick="true">
+                              <initialOperation>
+                                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addRefiningDF(source, target, sourceNode, targetNode)"/>
+                              </initialOperation>
+                            </buttons>
+                            <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
+                            <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
+                              <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(sourceNode, targetNode)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
+                                <initialOperation>
+                                  <firstModelOperations xsi:type="tool_1:Let" variableName="ref" valueExpression="aql:newValue">
+                                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRef(ref)"/>
+                                  </firstModelOperations>
+                                </initialOperation>
+                              </controls>
+                            </groups>
+                          </subModelOperations>
+                        </cases>
+                        <cases conditionExpression="service:needsRef(sourceNode, targetNode)">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addNewRefinedDF(source, target, sourceNode, targetNode)"/>
+                        </cases>
+                        <default>
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addCDF(source, target, sourceNode, targetNode)"/>
+                        </default>
+                      </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>

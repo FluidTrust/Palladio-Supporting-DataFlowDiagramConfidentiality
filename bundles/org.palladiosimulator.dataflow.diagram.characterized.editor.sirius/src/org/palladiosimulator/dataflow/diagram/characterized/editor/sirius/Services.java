@@ -30,6 +30,7 @@ import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.l
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.ComponentFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.DFDCModificationUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.modification.QueryUtil;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 
 /**
  * The services class used by VSM.
@@ -223,12 +224,10 @@ public class Services {
 	 * @param target target pin
 	 * @return
 	 */
-	public boolean canConnect(EObject self, EObject source, EObject target) {
-		Node sourceNode = (Node) source.eContainer().eContainer();
-		Node targetNode = (Node) target.eContainer().eContainer();
+	public boolean canConnect(EObject self, Node sourceNode, Pin sourcePin, Node targetNode, Pin targetPin) {
 		DataFlowDiagram dfd = (DataFlowDiagram) sourceNode.eContainer();
 		// no dataflow goes through out- or input pins already
-		if(QueryUtil.isPartOfDF(source) ||  QueryUtil.isPartOfDF(target)) {
+		if(QueryUtil.isPartOfDF(sourcePin) ||  QueryUtil.isPartOfDF(targetPin)) {
 			return false;
 		}
 		
@@ -244,7 +243,6 @@ public class Services {
 
 		return !(QueryUtil.isBorderNode(sourceNode) && QueryUtil.isBorderNode(targetNode))
 				&& !getAllRefinements(sourceNode, targetNode).isEmpty();
-
 	}
 
 	public boolean inputOutputIsConsistent(EObject self) {
