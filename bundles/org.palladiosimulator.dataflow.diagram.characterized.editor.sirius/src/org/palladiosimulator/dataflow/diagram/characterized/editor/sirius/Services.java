@@ -11,7 +11,6 @@ import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlow;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
@@ -63,9 +62,7 @@ public class Services {
 
 	public boolean canReconnectTarget(EObject self) {
 		return !QueryUtil.isBorderNode(((CharacterizedDataFlow) self).getTarget());
-
 	}
-
 	
 	/**
 	 * 

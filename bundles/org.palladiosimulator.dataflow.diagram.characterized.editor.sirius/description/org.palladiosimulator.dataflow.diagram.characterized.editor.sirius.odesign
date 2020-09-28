@@ -237,6 +237,17 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedActorProcess" label="new CharacteristizedActorProcess" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagramCharacterized::CharacterizedActorProcess" referenceName="nodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new characterized actor process"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
           <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacteristic" label="new Characteristic" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessCharacteristic'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreNodeCharacteristic'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorCharacteristic']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
@@ -347,13 +358,10 @@
             <element name="element"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool_1:Let" variableName="sourceNode" valueExpression="aql:source.eContainer().eContainer()">
-                  <subModelOperations xsi:type="tool_1:Let" variableName="targetNode" valueExpression="aql:target.eContainer().eContainer()">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="targetPin" valueExpression="aql:target"/>
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="aql:target.eContainer().eContainer()"/>
-                      <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnect(source, target, sourceNode, targetNode)"/>
-                    </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnectTarget()">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="newTargetNode" valueExpression="aql:targetView.eContainer().semanticElements->any(true)">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:newTargetNode"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="targetPin" valueExpression="var:target"/>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
@@ -368,8 +376,12 @@
             <element name="element"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="sourcePin" valueExpression="aql:target"/>
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="aql:target.eContainer().eContainer()"/>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="service:canReconnectSource()">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="newSourceNode" valueExpression="aql:targetView.eContainer().semanticElements->any(true)">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:newSourceNode"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="sourcePin" valueExpression="var:target"/>
+                  </subModelOperations>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
             <edgeView name="edgeView"/>
