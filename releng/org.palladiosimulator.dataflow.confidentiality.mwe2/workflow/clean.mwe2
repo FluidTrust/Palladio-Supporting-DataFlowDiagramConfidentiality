@@ -23,10 +23,10 @@ Workflow {
 		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/src-gen"
 		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.edit/src-gen"
 		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.editor/src-gen"
-		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl/src-gen"
-		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.ide/src-gen"
-		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.tests/src-gen"
-		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.ui/src-gen"
-		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.behavior.dsl.ui.tests/src-gen"
+		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.dsl/src-gen"
+		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.dsl.ide/src-gen"
+		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.dsl.tests/src-gen"
+		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui/src-gen"
+		directory = "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.tests/src-gen"
 	}
 }
