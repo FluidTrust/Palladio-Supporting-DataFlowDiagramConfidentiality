@@ -26,7 +26,7 @@
 						<configuration>
 							<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 							<arguments>
-								<argument>/${project.basedir}/workflow/GenerateBehaviorDefinition.mwe2</argument>
+								<argument>/${project.basedir}/workflow/GenerateCharacterizedDataDictionary.mwe2</argument>
 								<argument>-p</argument>
 								<argument>workspaceRoot=/${maven.multiModuleProjectDirectory}</argument>
 							</arguments>

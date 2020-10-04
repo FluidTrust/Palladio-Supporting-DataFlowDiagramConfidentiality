@@ -379,18 +379,16 @@ public class Services {
      */
     public boolean canConnect(EObject self, Node sourceNode, Pin sourcePin, Node targetNode, Pin targetPin) {
         DataFlowDiagram dfd = (DataFlowDiagram) sourceNode.eContainer();
-        // no dataflow goes through out- or input pins already
-        if (QueryUtil.isPartOfDF(sourcePin) || QueryUtil.isPartOfDF(targetPin)) {
-            return false;
+
+        // none of the involved nodes is a read only node
+        if (!QueryUtil.isBorderNode(sourceNode) && !QueryUtil.isBorderNode(targetNode)) {
+            return true;
         }
 
         if (!DFDCRefinementUtil.isRefinedDFD(dfd)) {
             return true;
         }
 
-        if (!QueryUtil.isBorderNode(sourceNode) && !QueryUtil.isBorderNode(targetNode)) {
-            return true;
-        }
 
         return !(QueryUtil.isBorderNode(sourceNode) && QueryUtil.isBorderNode(targetNode))
                 && !getAllRefinements(sourceNode, targetNode).isEmpty();
