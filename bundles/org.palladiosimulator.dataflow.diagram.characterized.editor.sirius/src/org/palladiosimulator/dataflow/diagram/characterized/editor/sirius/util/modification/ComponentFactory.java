@@ -158,7 +158,7 @@ public class ComponentFactory {
 
 	private static EnumCharacteristicReference copyECR(EnumCharacteristicReference ecr, List<Pin> pins) {
 
-		EnumCharacteristicReference necr;
+		EnumCharacteristicReference necr = null;
 		if (ecr instanceof DataCharacteristicReference) {
 			necr = ExpressionsFactory.eINSTANCE.createDataCharacteristicReference();
 			String pinName = ((DataCharacteristicReference) ecr).getPin().getName();
@@ -168,9 +168,8 @@ public class ComponentFactory {
 			}
 		} else if (ecr instanceof ContainerCharacteristicReference) {
 			necr = ExpressionsFactory.eINSTANCE.createContainerCharacteristicReference();
-		} else
-			necr = ExpressionsFactory.eINSTANCE.createEnumCharacteristicReference();
-
+		}
+		
 		if (ecr.getCharacteristicType() != null)
 			necr.setCharacteristicType(ecr.getCharacteristicType());
 		if (ecr.getLiteral() != null)
