@@ -1081,11 +1081,15 @@ merges
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesSelf(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { characteristicType = getVisitedNodesCharacteristicType() and _literal = owner.oclAsType(DFD::Node).map nodeToEnumLiteral() } 
 {
-	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, true, false);
-	body := object PL::expressions::Unification {
-		left := object PL::CompoundTerm { value := "S" };
-		right := object PL::_List {};
-	};
+	var hasInputs := not self.inputs->isEmpty();	
+	head := self.map behaviorToAssignmentHead(owner, pin, characteristicType, _literal, hasInputs, hasInputs);
+
+	if(not hasInputs) {
+		body := object PL::True {};
+	} else {
+		body := self.map behaviorToAssignmentForVisitedNodesOthersBody(self.inputs->select(oclIsInvalid()), owner, pin, characteristicType, _literal);
+	}
+	
 }
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthers(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
@@ -1098,12 +1102,69 @@ when { characteristicType = getVisitedNodesCharacteristicType() and _literal <> 
 	if(not hasReferences) {
 		body := object PL::False {};
 	} else {
+		body := self.map behaviorToAssignmentForVisitedNodesOthersBody(referencedInputPins, owner, pin, characteristicType, _literal);
+	}
+}
+
+mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthersBody(referencedInputPins : OrderedSet(DDC::Pin), owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::expressions::LogicalAnd {
+
+	var characteristicTerm : PL::expressions::Expression;
+	if (not referencedInputPins->isEmpty()) {
 		var firstPin = referencedInputPins->at(1);
 		var remainingPins = referencedInputPins->excluding(firstPin)->sortedBy(oclAsType(Identifier).id);
-		body := firstPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, remainingPins);
-	}
+		characteristicTerm := firstPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, remainingPins);
+	} else {
+		characteristicTerm := object PL::True {};
+	};
+
+	var inputPins := owner.behavior.inputs;
+	var stackVarsList := object PL::_List {};
+	var stackBuilderClause := object PL::expressions::Unification {
+		left := object PL::CompoundTerm { value := "S" };
+		right := stackVarsList;
+	};
+	var lastTerm := result;
 	
+	right :=  object PL::expressions::LogicalAnd {
+		left := characteristicTerm;
+		right := stackBuilderClause;
+	};		
+	var i := 0;
+	inputPins->forEach(inputPin) {	
+		var inputPinNumber := inputPin.getPinNumber().toString();
+		var inputFlowClause := object PL::CompoundTerm {
+			value := "inputFlow";
+			arguments += new AtomicQuotedString(owner.uniqueName());
+			arguments += new AtomicQuotedString(inputPin.uniqueName());
+			arguments += object PL::CompoundTerm { value := if inputPins->size() > 1 then "FLOWS" else "_" endif };
+			arguments += object PL::CompoundTerm { value := "F" + inputPinNumber };
+			arguments += object PL::CompoundTerm { value := "VISITED" };
+		};
+		var stackVarClause := object PL::expressions::Unification {
+			left := object PL::CompoundTerm { value := "S" + inputPinNumber };
+			right := object PL::_List {
+				heads += object PL::CompoundTerm { value := "F" + inputPinNumber };
+				tails += object PL::CompoundTerm { value := "_" };					
+			};
+		};
+		
+		var newLastTerm := object PL::expressions::LogicalAnd {
+			right := inputFlowClause;
+		};
+		
+		// lastTerm.right != null
+		// lastTerm.left == null
+		lastTerm.left := object PL::expressions::LogicalAnd {
+			left := newLastTerm;
+			right := stackVarClause;
+		};
+		lastTerm := newLastTerm;
+		stackVarsList.heads += object PL::CompoundTerm { value := "S" + inputPinNumber };
+	};
+	lastTerm.left := object PL::True {};
 }
+
+
 
 mapping DDC::BehaviorDefinition::behaviorToAssignmentForVisitedNodesOthersForStores(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal) : PL::Rule
 when { owner.oclIsKindOf(DFDC::CharacterizedStore) and characteristicType = getVisitedNodesCharacteristicType() and _literal <> owner.oclAsType(DFD::Node).map nodeToEnumLiteral()}
@@ -1131,14 +1192,14 @@ when {remainingPins->size() > 0}
 	var newRemainingPins := remainingPins->excluding(nextPin)->sortedBy(oclAsType(Identifier).id);
 	left := nextPin.map referencedPinToReferenceForVisitedNodes(owner, pin, characteristicType, _literal, newRemainingPins);
 	var dummy := createDummyIdentifier(remainingPins->including(self));
-	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "S", dummy);
+	right := self.map sourcePinToTerm(owner, characteristicType, _literal, "S" + owner.behavior.inputs->indexOf(self).toString(), dummy);
 }
 
 mapping DDC::Pin::referencedPinToReferenceForVisitedNodesNoRemainingPins(owner : DDC::Behaving, pin : DDC::Pin, characteristicType : DDC::EnumCharacteristicType, _literal : DDC::Literal, remainingPins : OrderedSet(DDC::Pin)) : PL::expressions::LogicalOr
 when {remainingPins->size() = 0}
 {
 	var dummy := createDummyIdentifier(remainingPins->including(self));
-	left := self.map sourcePinToTerm(owner, characteristicType, _literal, "S", dummy);
+	left := self.map sourcePinToTerm(owner, characteristicType, _literal, "S" + owner.behavior.inputs->indexOf(self).toString(), dummy);
 	right := object PL::False {};
 }
 

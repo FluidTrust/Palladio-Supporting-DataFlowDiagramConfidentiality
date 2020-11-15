@@ -157,7 +157,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		query.bind("PIN", "A1.in (_kYwxUFSxEeqnLp_48pbpVA)");
 		Solution<Object> solution = query.solve();
 		
-		assertNumberOfSolutionsWithoutTraversedNodes(solution, 4, Arrays.asList("CT", "V", "S"));
+		assertNumberOfSolutionsWithoutTraversedNodes(solution, 1, Arrays.asList("CT", "V", "S"));
 	}
 
 

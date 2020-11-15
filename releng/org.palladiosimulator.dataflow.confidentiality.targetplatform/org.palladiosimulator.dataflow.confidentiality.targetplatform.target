@@ -65,5 +65,13 @@
 			<unit id="tools.mdsd.library.standalone.initialization.log4j.feature.feature.group" version="tbd"/>
 			<repository location="https://updatesite.mdsd.tools/library-standaloneinitialization/releases/latest"/>
 		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
+			<unit id="tools.mdsd.license.epl2.feature.group" version="tbd"/>
+			<repository location="https://updatesite.mdsd.tools/build-licensefeature/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
+			<unit id="tools.mdsd.license.epl2.feature.group" version="tbd"/>
+			<repository location="https://updatesite.mdsd.tools/build-licensefeature//releases/latest"/>
+		</location>
 	</locations>
 </target>
