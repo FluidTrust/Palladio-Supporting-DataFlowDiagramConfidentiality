@@ -1,4 +1,5 @@
 bin/
+test-bin/
 target/
 src-gen/
 xtend-gen/
