@@ -4,7 +4,7 @@ import java.util.Arrays
 import java.util.concurrent.Callable
 import org.eclipse.xtext.resource.SaveOptions
 import org.junit.jupiter.api.Test
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
 import org.prolog4j.Solution
 
@@ -222,7 +222,7 @@ class DataPropagationAnalysisTest extends AnalysisIntegrationTestBase {
 
 	protected def Solution<Object> findFlaws(Callable<Solution<Object>> solutionProvider) {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID)
+		builder.setNameDerivationMethod(NameGenerationStrategie.DETAILED)
 		var workflow = builder.build()
 
 		workflow.run()

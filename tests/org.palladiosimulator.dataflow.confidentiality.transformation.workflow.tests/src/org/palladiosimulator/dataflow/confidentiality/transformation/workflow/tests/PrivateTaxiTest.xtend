@@ -3,7 +3,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.resource.SaveOptions
 import org.junit.jupiter.api.Test
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedStore
@@ -81,13 +81,12 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		dfd.edges += joinedFlow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["N", "PIN", "R", "D", "S"])
+		assertNumberOfSolutions(solution, 6, #["N", "PIN", "R", "D", "S"])
 	}
 
 	protected def Solution<Object> findFlaws() {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.nameDerivationMethod = NameDerivationMethod.NAME_AND_ID
-		builder.defaultCharacteristicsUsage = false
+		builder.nameDerivationMethod = NameGenerationStrategie.DETAILED
 		var workflow = builder.build()
 
 		workflow.run()

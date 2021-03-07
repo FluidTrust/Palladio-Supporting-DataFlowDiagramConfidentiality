@@ -1,91 +1,67 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.DefaultCharacteristicsUsage;
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.DFD2PrologTransformationBuilder;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
+import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 
+import de.uka.ipd.sdq.workflow.jobs.AbstractBlackboardInteractingJob;
+import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
-import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.ModelLocation;
-import de.uka.ipd.sdq.workflow.mdsd.blackboard.ResourceSetPartition;
-import de.uka.ipd.sdq.workflow.mdsd.emf.qvto.QVTOTransformationJob;
-import de.uka.ipd.sdq.workflow.mdsd.emf.qvto.QVTOTransformationJobConfiguration;
 
-public class TransformDFDToPrologJob extends QVTOTransformationJob {
+public class TransformDFDToPrologJob<T extends KeyValueMDSDBlackboard> extends AbstractBlackboardInteractingJob<T> {
 
-    private static final String TRANSFORMATION_BUNDLE_ID = "org.palladiosimulator.dataflow.confidentiality.transformation.prolog";
-    private static final String TRANSFORMATION_PATH = "transforms/DFD2Prolog.qvto";
-    private static final URI DEFAULT_CHARACTERISTICS_URI = URI
-        .createURI("pathmap://DFD_DEFAULT_MODELS/defaultCharacteristicTypes.xmi");
-    private final ModelLocation defaultCharacteristicTypesLocation;
-    protected MDSDBlackboard blackboard;
+    private final ModelLocation dfdLocation;
+    private final ModelLocation prologLocation;
+    private final String traceKey;
+    private final DFD2PrologTransformationBuilder transformationBuilder;
 
-    public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation, ModelLocation traceLocation,
-            NameDerivationMethod nameDerivationMethod, DefaultCharacteristicsUsage defaultCharacteristicsUsage) {
-        super(createQVTOConfiguration(dfdLocation, prologLocation, traceLocation, nameDerivationMethod,
-                defaultCharacteristicsUsage));
-        defaultCharacteristicTypesLocation = createDefaultCharacteristicTypeLocation(dfdLocation);
+    public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation, String traceKey,
+            NameGenerationStrategie nameGenerationStrategy) {
+        this.dfdLocation = dfdLocation;
+        this.prologLocation = prologLocation;
+        this.traceKey = traceKey;
+        this.transformationBuilder = DFD2PrologTransformationBuilder.create()
+            .setNameProvider(nameGenerationStrategy);
     }
 
-    public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation,
-            ModelLocation traceLocation) {
-        this(dfdLocation, prologLocation, traceLocation, NameDerivationMethod.NAME_AND_ID,
-                DefaultCharacteristicsUsage.TRUE);
+    @Override
+    public String getName() {
+        return "Transform DFD to Prolog";
     }
 
     @Override
     public void execute(IProgressMonitor monitor) throws JobFailedException, UserCanceledException {
-        loadDefaultCharacteristicTypesModel();
         monitor.beginTask("Transform DFD to Prolog", 1);
-        super.execute(monitor);
+
+        var dfds = getBlackboard().getContents(dfdLocation)
+            .stream()
+            .filter(DataFlowDiagram.class::isInstance)
+            .map(DataFlowDiagram.class::cast)
+            .collect(Collectors.toList());
+        if (dfds.size() != 1) {
+            new JobFailedException("There is not exactly one " + DataFlowDiagram.class.getSimpleName() + " available.");
+        }
+
+        var transformation = transformationBuilder.build();
+        var result = transformation.transform(dfds.get(0));
+
+        getBlackboard().setContents(prologLocation, Arrays.asList(result.getProgram()));
+        getBlackboard().put(traceKey, result.getTrace());
+        
         monitor.worked(1);
         monitor.done();
     }
 
-    protected void loadDefaultCharacteristicTypesModel() {
-        ResourceSetPartition partition = blackboard.getPartition(defaultCharacteristicTypesLocation.getPartitionID());
-        partition.loadModel(defaultCharacteristicTypesLocation.getModelID());
-    }
-
-    protected static QVTOTransformationJobConfiguration createQVTOConfiguration(ModelLocation dfdLocation,
-            ModelLocation prologLocation, ModelLocation traceLocation, NameDerivationMethod nameDerivationMethod,
-            DefaultCharacteristicsUsage defaultCharacteristicsUsage) {
-        var transformationConfiguration = new QVTOTransformationJobConfiguration();
-
-        // script path
-        var uriString = String.format("/%s/%s", TRANSFORMATION_BUNDLE_ID, TRANSFORMATION_PATH);
-        transformationConfiguration.setScriptFileURI(URI.createPlatformPluginURI(uriString, false));
-
-        // involved models
-        var defaultCharacteristicTypesLocation = createDefaultCharacteristicTypeLocation(dfdLocation);
-        transformationConfiguration
-            .setInoutModels(new ModelLocation[] { dfdLocation, defaultCharacteristicTypesLocation, prologLocation });
-
-        transformationConfiguration.setTraceLocation(traceLocation);
-
-        // init options
-        Map<String, Object> options = new HashMap<>();
-        options.put(NameDerivationMethod.QVTO_PROPERTY_KEY, nameDerivationMethod.getQvtoPropertyValue());
-        options.put(DefaultCharacteristicsUsage.QVTO_PROPERTY_KEY, defaultCharacteristicsUsage.getQvtoPropertyValue());
-        transformationConfiguration.setOptions(options);
-
-        // job creation
-        return transformationConfiguration;
-    }
-
-    protected static ModelLocation createDefaultCharacteristicTypeLocation(ModelLocation dfdLocation) {
-        return new ModelLocation(dfdLocation.getPartitionID(), DEFAULT_CHARACTERISTICS_URI);
-    }
-
     @Override
-    public void setBlackboard(MDSDBlackboard blackboard) {
-        super.setBlackboard(blackboard);
-        this.blackboard = blackboard;
+    public void cleanup(IProgressMonitor arg0) throws CleanupFailedException {
+        // nothing to do here
     }
 
 }

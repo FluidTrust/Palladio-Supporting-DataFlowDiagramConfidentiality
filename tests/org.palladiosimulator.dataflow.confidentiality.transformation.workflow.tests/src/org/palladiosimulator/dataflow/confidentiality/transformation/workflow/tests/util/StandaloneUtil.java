@@ -1,7 +1,7 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util;
 
 import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.DFD2PrologTransformation;
 import org.palladiosimulator.supporting.prolog.PrologStandaloneSetup;
 
 import tools.mdsd.library.standalone.initialization.StandaloneInitializationException;
@@ -17,7 +17,7 @@ public class StandaloneUtil {
 
     public static void init() throws StandaloneInitializationException {
         StandaloneInitializer initializer = StandaloneInitializerBuilder.builder()
-            .registerProjectURI(NameDerivationMethod.class,
+            .registerProjectURI(DFD2PrologTransformation.class,
                     "org.palladiosimulator.dataflow.confidentiality.transformation.prolog")
             .registerProjectURI(StandaloneUtil.class,
                     "org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests")

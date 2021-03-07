@@ -17,7 +17,7 @@ class ContactSMSAccessControlTest extends AccessControlAnalysesIflow {
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/contactsms/DFDC_ContactSMS_AccessControl.xmi"))
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES"))
+		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "S"))
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ class ContactSMSAccessControlTest extends AccessControlAnalysesIflow {
 		dfd.edges += directCCDFlow
 		
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 2, Arrays.asList("P", "REQ", "ROLES"))
+		assertNumberOfSolutions(solution, 4, Arrays.asList("P", "REQ", "ROLES", "S"))
 	}
 	
 

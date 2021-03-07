@@ -3,7 +3,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 import java.util.Arrays
 import org.eclipse.xtext.resource.SaveOptions
 import org.junit.jupiter.api.Test
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
 
 import static org.junit.jupiter.api.Assertions.*
@@ -14,36 +14,36 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 	def void testNoFlaw() {
 		builder.addDFD(getRelativeURI("models/evaluation/mac/mac_dfd.xmi"))
 		initProver()
-		assertNumberOfSolutions(findReadViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
-		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
+		assertNumberOfSolutions(findReadViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
+		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
 	}
 	
 	@Test
 	def void testReadViolation() {
 		builder.addDFD(getRelativeURI("models/evaluation/mac/mac_dfd_readViolation.xmi"))
 		initProver()
-		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
-		assertNumberOfSolutions(findReadViolation(), 2, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
+		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
+		assertNumberOfSolutions(findReadViolation(), 2, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
 	}
 	
 	@Test
 	def void testWriteViolation() {
 		builder.addDFD(getRelativeURI("models/evaluation/mac/mac_dfd_writeViolation.xmi"))
 		initProver()
-		assertNumberOfSolutions(findWriteViolation(), 2, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
+		assertNumberOfSolutions(findWriteViolation(), 2, Arrays.asList("N", "CLEARANCE", "STORE", "CLASSIFICATION", "S"))
 	}
 	
 	@Test
 	def void testNoFlawAfterIntegrityViolation() {
 		builder.addDFD(getRelativeURI("models/evaluation/mac/mac_dfd_integrityViolation.xmi"))
 		initProver()
-		assertNumberOfSolutions(findReadViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
-		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE"))
+		assertNumberOfSolutions(findReadViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
+		assertNumberOfSolutions(findWriteViolation(), 0, Arrays.asList("N", "CLASSIFICATION", "CLEARANCE", "S"))
 	}
 	
 	protected def initProver() {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.setNameDerivationMethod(NameDerivationMethod.NAME_AND_ID)
+		builder.setNameDerivationMethod(NameGenerationStrategie.DETAILED)
 		var workflow = builder.build()
 
 		workflow.run()
@@ -53,8 +53,7 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 		prover.loadTheory(result.get())
 		prover.addTheory(
 			getAnalysisRules("Classification (_VD0vQ9MDEeqMaJ4277tZGA)",
-				"Clearance (_um9nwNMCEeqMaJ4277tZGA)",
-				"TraversedNodes (_067sYYISEeqR5tyIqE6kZA)")
+				"Clearance (_um9nwNMCEeqMaJ4277tZGA)")
 			)
 	}
 	
@@ -63,7 +62,7 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 	}
 	
 	protected def findWriteViolation() {
-		findViolation("writeViolation(N, CLASSIFICATION, CLEARANCE, S).")
+		findViolation("writeViolation(N, CLEARANCE, STORE, CLASSIFICATION, S).")
 	}
 	
 	protected def findViolation(String queryString) {
@@ -72,7 +71,7 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 		solution
 	}
 	
-	protected def String getAnalysisRules(String classificationType, String clearanceType, String traversedNodesType) '''
+	protected def String getAnalysisRules(String classificationType, String clearanceType) '''
 		readViolation(N, CLASSIFICATION_VALUE, CLEARANCE_VALUE, S) :-
 			CLASSIFICATION_TYPE = '«classificationType»',
 			CLEARANCE_TYPE = '«clearanceType»',
@@ -83,15 +82,14 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 			characteristicTypeValue(CLEARANCE_TYPE, CLEARANCE_VALUE, CLEARANCE_INDEX),
 			CLEARANCE_INDEX > CLASSIFICATION_INDEX.
 		
-		writeViolation(N, CLASSIFICATION_VALUE, CLEARANCE_VALUE, S) :-
-			TRAVERSEDNODES_TYPE = '«traversedNodesType»',
+		writeViolation(N, CLEARANCE_VALUE, STORE, CLASSIFICATION_VALUE, S) :-
 			CLEARANCE_TYPE = '«clearanceType»',
 			CLASSIFICATION_TYPE = '«classificationType»',
 			nodeCandidate(N, CLEARANCE_VALUE),
-			nodeLiteral(NOTETYPE_VALUE, N),
 			store(STORE),
 			inputPin(STORE, PIN),
-			characteristic(STORE, PIN, TRAVERSEDNODES_TYPE, NOTETYPE_VALUE, S),
+			flowStack(STORE, PIN, S),
+			traversedNode(S, N),
 			nodeCharacteristic(STORE, CLASSIFICATION_TYPE, CLASSIFICATION_VALUE),
 			characteristicTypeValue(CLASSIFICATION_TYPE, CLASSIFICATION_VALUE, CLASSIFICATION_INDEX),
 			characteristicTypeValue(CLEARANCE_TYPE, CLEARANCE_VALUE, CLEARANCE_INDEX),

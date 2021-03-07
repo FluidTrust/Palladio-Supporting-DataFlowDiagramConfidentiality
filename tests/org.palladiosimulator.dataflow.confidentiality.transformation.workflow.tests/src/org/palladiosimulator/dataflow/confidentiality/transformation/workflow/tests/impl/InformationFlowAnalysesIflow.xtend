@@ -1,9 +1,9 @@
 package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl
 
 import org.eclipse.xtext.resource.SaveOptions
-import org.junit.jupiter.api.BeforeEach
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie
 import org.prolog4j.Solution
+
 import static org.junit.jupiter.api.Assertions.*
 
 class InformationFlowAnalysesIflow extends AnalysisIntegrationTestBase {
@@ -24,15 +24,9 @@ class InformationFlowAnalysesIflow extends AnalysisIntegrationTestBase {
 		this.clearanceId = clearanceId
 	}
 	
-	@BeforeEach
-	def void setupBuilder() {
-		builder.setDefaultCharacteristicsUsage(false)
-	}
-	
 	protected def Solution<Object> findFlaws() {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.nameDerivationMethod = NameDerivationMethod.NAME_AND_ID
-		builder.defaultCharacteristicsUsage = false
+		builder.nameDerivationMethod = NameGenerationStrategie.DETAILED
 		var workflow = builder.build()
 		
 		workflow.run()
