@@ -2,7 +2,7 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 
 import org.eclipse.xtext.resource.SaveOptions
 import org.junit.jupiter.api.Test
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AnalysisIntegrationTestBase
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess
@@ -75,8 +75,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 
 	protected def Solution<Object> findFlaws() {
 		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.nameDerivationMethod = NameDerivationMethod.NAME_AND_ID
-		builder.defaultCharacteristicsUsage = false
+		builder.nameDerivationMethod = NameGenerationStrategie.DETAILED
 		var workflow = builder.build()
 
 		workflow.run()

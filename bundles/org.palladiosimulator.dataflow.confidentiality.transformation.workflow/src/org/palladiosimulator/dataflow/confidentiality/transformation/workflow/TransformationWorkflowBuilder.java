@@ -10,12 +10,10 @@ import org.apache.commons.lang3.Validate;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.DefaultCharacteristicsUsage;
-import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration.NameDerivationMethod;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.NameGenerationStrategie;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.impl.TransformDFDToPrologWorkflowImpl;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.CopyModelJob;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.DFDToPrologTraceCreationJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.LoadModelJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.SerializeModelToStringJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.TransformDFDToPrologJob;
@@ -34,7 +32,6 @@ public class TransformationWorkflowBuilder {
 	private static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
 	private static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
 	private static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
-	private static final ModelLocation DEFAULT_TRACE_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.trace"));
 	private static final String DEFAULT_TRACE_KEY = "trace";
 	private static final String DEFAULT_PROLOG_KEY = "prolog";
 	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
@@ -42,8 +39,7 @@ public class TransformationWorkflowBuilder {
 	private ModelLocation dfdLocation;
 	private WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
 	private IProgressMonitor progressMonitor = new NullProgressMonitor();
-	private NameDerivationMethod nameDerivationMethod = NameDerivationMethod.ID;
-	private DefaultCharacteristicsUsage defaultCharacteristicsUsage = DefaultCharacteristicsUsage.TRUE;
+	private NameGenerationStrategie nameDerivationMethod = NameGenerationStrategie.SHORTED_ID;
 	
 	public TransformationWorkflowBuilder() {
 		
@@ -75,14 +71,9 @@ public class TransformationWorkflowBuilder {
 		return this;
 	}
 	
-	public TransformationWorkflowBuilder setNameDerivationMethod(NameDerivationMethod method) {
+	public TransformationWorkflowBuilder setNameDerivationMethod(NameGenerationStrategie method) {
 		this.nameDerivationMethod = method;
 		return this;
-	}
-	
-	public TransformationWorkflowBuilder setDefaultCharacteristicsUsage(boolean usage) {
-	    this.defaultCharacteristicsUsage = usage ? DefaultCharacteristicsUsage.TRUE : DefaultCharacteristicsUsage.FALSE;
-	    return this;
 	}
 	
 	public TransformationWorkflowBuilder addSerializeToString() {
@@ -129,13 +120,9 @@ public class TransformationWorkflowBuilder {
 
         // create transformation job
         blackboard.addPartition(DEFAULT_PROLOG_LOCATION.getPartitionID(), new ResourceSetPartition());
-        var transformJob = new TransformDFDToPrologJob(dfdLocation, DEFAULT_PROLOG_LOCATION, DEFAULT_TRACE_LOCATION,
-                nameDerivationMethod, defaultCharacteristicsUsage);
+        
+        var transformJob = new TransformDFDToPrologJob<KeyValueMDSDBlackboard>(dfdLocation, DEFAULT_PROLOG_LOCATION, DEFAULT_TRACE_KEY, nameDerivationMethod);
         jobSequence.add(transformJob);
-
-        // create trace transformation job
-        var traceJob = new DFDToPrologTraceCreationJob<>(DEFAULT_TRACE_LOCATION, DEFAULT_TRACE_KEY);
-        jobSequence.add(traceJob);
 
         // create serialization job
         jobSequence.addAll(serializationJobs);

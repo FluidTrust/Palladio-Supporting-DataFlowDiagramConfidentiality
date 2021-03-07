@@ -44,8 +44,8 @@ public class TraceTransformationJobTest extends AnalysisIntegrationTestBase {
         assertEquals(expectedComponents, dfdComponents.size());
         
         for (Component dfdComponent : dfdComponents) {
-            String componentId = trace.getFactId(dfdComponent);
-            Component recordedComponent = trace.getDfdComponent(componentId);
+            String componentId = trace.getFactId(dfdComponent).get();
+            Component recordedComponent = trace.resolveDfdElement(trace.getDfdId(componentId).get(), Component.class).get();
             assertEquals(dfdComponent, recordedComponent);
         }
     }

@@ -3,14 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.palladiosimulator.dataflow.confidentiality.transformation.prolog;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.m2m.qvt.oml;visibility:=reexport,
  org.palladiosimulator.supporting.prolog.model;bundle-version="4.2.0",
  org.palladiosimulator.dataflow.diagram.characterized;bundle-version="0.1.0",
  org.palladiosimulator.dataflow.dictionary.characterized;bundle-version="0.1.0",
- org.eclipse.m2m.qvt.oml.runtime
+ org.eclipse.xtend.lib;bundle-version="2.24.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: org.palladiosimulator.dataflow.confidentiality.transformation.prolog.Activator
 Automatic-Module-Name: org.palladiosimulator.dataflow.transformation.prolog
-Export-Package: org.palladiosimulator.dataflow.confidentiality.transformation.prolog;x-friends:="org.palladiosimulator.dataflow.transformation.workflow.tests",
- org.palladiosimulator.dataflow.confidentiality.transformation.prolog.configuration
+Export-Package: org.palladiosimulator.dataflow.confidentiality.transformation.prolog,
+ org.palladiosimulator.dataflow.confidentiality.transformation.prolog.naming

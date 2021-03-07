@@ -3,8 +3,8 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.i
 import java.util.Optional;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.DFD2PrologTransformationTrace;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.TransformDFDToPrologWorkflow;
-import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.DFD2PrologTransformationTrace;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.blackboards.KeyValueMDSDBlackboard;
 
 import de.uka.ipd.sdq.workflow.BlackboardBasedWorkflow;
