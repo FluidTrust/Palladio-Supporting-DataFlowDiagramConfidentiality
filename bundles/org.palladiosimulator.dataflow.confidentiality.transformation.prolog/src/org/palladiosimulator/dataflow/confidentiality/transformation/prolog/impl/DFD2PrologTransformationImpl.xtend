@@ -236,14 +236,6 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		node.behavior.inputs.forEach[pin |
 			clauses += createFact(createCompoundTerm("inputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
-			clauses += createRule(
-				createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(node), "CT".toVar, "V".toVar, createList(#["F"], #["S"]), "VISITED".toVar),
-				createConjunction(
-					createCompoundTerm("dataflow", "F".toVar, "P".toVar, "PIN".toVar, node.uniqueQuotedString, pin.getUniqueQuotedString(node)),
-					createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
-					createCompoundTerm("characteristic", "P".toVar, "PIN".toVar, "CT".toVar, "V".toVar, "S".toVar, createList(#["F"], #["VISITED"]))
-				)
-			)
 		]
 		node.behavior.outputs.forEach[pin |
 			clauses += createFact(createCompoundTerm("outputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
@@ -508,7 +500,18 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("involvesNode", createList(#["_"], #["T"]), "N".toVar),
 			createCompoundTerm("involvesNode", "T", "N")
-		))		
+		))
+		
+		add(createHeaderComment("HELPER: find input characteristics"))
+		add(createRule(
+			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, createList(#["F"], #["S"]), "VISITED".toVar),
+			createConjunction(
+				createCompoundTerm("inputPin", "N", "PIN"),
+				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "N", "PIN"),
+				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
+				createCompoundTerm("characteristic", "NSRC".toVar, "PINSRC".toVar, "CT".toVar, "V".toVar, "S".toVar, createList(#["F"], #["VISITED"]))
+			)
+		))
 	}
 
 	// queries
