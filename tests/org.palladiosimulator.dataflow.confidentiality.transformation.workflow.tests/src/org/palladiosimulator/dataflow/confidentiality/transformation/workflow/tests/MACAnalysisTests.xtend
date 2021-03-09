@@ -88,7 +88,7 @@ class MACAnalysisTests extends AnalysisIntegrationTestBase {
 			nodeCandidate(N, CLEARANCE_VALUE),
 			store(STORE),
 			inputPin(STORE, PIN),
-			flowStack(STORE, PIN, S),
+			flowTree(STORE, PIN, S),
 			traversedNode(S, N),
 			nodeCharacteristic(STORE, CLASSIFICATION_TYPE, CLASSIFICATION_VALUE),
 			characteristicTypeValue(CLASSIFICATION_TYPE, CLASSIFICATION_VALUE, CLASSIFICATION_INDEX),

@@ -161,7 +161,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 
 
 	@Test
-	public void testFlowStack() {
+	public void testFlowTree() {
 	    builder.addDFD(getRelativeURI("models/unitTestExamples/DFDC_FlowStack.xmi"));
         builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
         builder.setNameDerivationMethod(NameGenerationStrategie.DETAILED);

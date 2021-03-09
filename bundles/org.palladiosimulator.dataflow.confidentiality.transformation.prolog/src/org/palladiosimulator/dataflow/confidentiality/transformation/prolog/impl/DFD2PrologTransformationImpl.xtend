@@ -150,8 +150,8 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		process.transformNode("process", [node, pin, ct, l |
 			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
 			val transformedAssignment = assignmentToTransform.transformAssignment(node, pin, ct, l)
-			if (assignmentToTransform.needsFlowStack) {
-				val flowClauses = new ArrayList<Expression>(createFlowStackClauses(node, node.behavior.inputs))
+			if (assignmentToTransform.needsFlowTree) {
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
 				flowClauses += transformedAssignment
 				createRule(
 					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, "S".toVar, "VISITED".toVar),
@@ -176,7 +176,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	protected def dispatch transformNode(CharacterizedExternalActor actor) {
 		actor.transformNode("actor", [node, pin, ct, l|
 			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
-			if (assignmentToTransform.needsFlowStack) {
+			if (assignmentToTransform.needsFlowTree) {
 				throw new IllegalArgumentException("Actors must not refer to input pins in their behavior.")
 			} else {
 				createRule(
@@ -189,7 +189,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	
 	protected def dispatch transformNode(CharacterizedStore store) {
 		store.transformNode("store", [node, pin, ct, l|
-				val flowClauses = new ArrayList<Expression>(createFlowStackClauses(node, node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
 				val term = dfdExpressionsFactory.createDataCharacteristicReference
 				term.pin = node.behavior.inputs.get(0)
 				term.characteristicType = ct
@@ -251,22 +251,22 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	}
 	
 	/**
-	 * Creates all clauses required to build a valid flow stack.
+	 * Creates all clauses required to build a valid flow tree.
 	 * 
-	 * This includes the selection of a flow for every input pin as well as building the appropriate flow stack variables.
-	 * The flow stack variable Sn represents the flow stack to be used for the input pin n.
+	 * This includes the selection of a flow for every input pin as well as building the appropriate flow tree variables.
+	 * The flow tree variable Sn represents the flow tree to be used for the input pin n.
 	 */
-	protected def createFlowStackClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
+	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
 		val clauses = new ArrayList<Expression>
 		val hasMultipleInputs = inputPins.size > 1
-		val stackList = createList
+		val treeList = createList
 		for (var i = 0; i < inputPins.size; i++) {
 			val inputPin = inputPins.get(i)
 			clauses += createCompoundTerm("inputFlow", node.uniqueQuotedString, inputPin.getUniqueQuotedString(node), (hasMultipleInputs ? "FLOWS" : "_").toVar, '''F«i»'''.toVar, "VISITED".toVar)
 			clauses += createUnification('''S«i»'''.toVar, createList(#['''F«i»'''], #["_"]))
-			stackList.heads += '''S«i»'''.toVar
+			treeList.heads += '''S«i»'''.toVar
 		}
-		clauses += createUnification("S".toVar, stackList)
+		clauses += createUnification("S".toVar, treeList)
 		clauses
 	}
 	
@@ -308,14 +308,14 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	protected def dispatch Expression transformAssignmentTerm(DataCharacteristicReference rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
 		var referencedCharacteristicType = rhs.characteristicType ?: ct
 		var referencedLiteral = rhs.literal ?: l
-		var stackVariable = '''S«node.behavior.inputs.indexOf(rhs.pin)»''' 
+		var treeVariable = '''S«node.behavior.inputs.indexOf(rhs.pin)»''' 
 		createCompoundTerm(
 			"characteristic",
 			node.uniqueQuotedString,
 			rhs.pin.getUniqueQuotedString(node),
 			referencedCharacteristicType.uniqueQuotedString,
 			referencedLiteral.uniqueQuotedString,
-			stackVariable.toVar,
+			treeVariable.toVar,
 			"VISITED".toVar
 		)
 	}
@@ -413,18 +413,18 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("setof_characteristics", "N", "PIN", "CT", "RESULT", "S"),
 			createConjunction(
-				createCompoundTerm("flowStack", "N".toVar, "PIN".toVar, "S".toVar),
+				createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar),
 				createCompoundTerm("setof", "V".toVar, createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"), "RESULT".toVar)
 			)
 		))
 
-		add(createHeaderComment("HELPER: create valid stack"))
+		add(createHeaderComment("HELPER: create valid flow tree"))
 		add(createRule(
-			createCompoundTerm("flowStack", "N", "PIN", "S"),
-			createCompoundTerm("flowStack", "N".toVar, "PIN".toVar, createList(#["S"]), createList)
+			createCompoundTerm("flowTree", "N", "PIN", "S"),
+			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList(#["S"]), createList)
 		))
 		add(createRule(
-			createCompoundTerm("flowStack", "N".toVar, "PIN".toVar, createList, "_".toVar),
+			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList, "_".toVar),
 			createConjunction(
 				createCompoundTerm("actor", "N"),
 				createCompoundTerm("outputPin", "N", "PIN"),
@@ -433,11 +433,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		))
 		
 		add(createRule(
-			createCompoundTerm("flowStack", "N", "PIN", "S", "VISITED"),
+			createCompoundTerm("flowTree", "N", "PIN", "S", "VISITED"),
 			createConjunction(
 				createCompoundTerm("inputPin", "N", "PIN"),
 				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "N", "PIN"),
-				createCompoundTerm("flowStack", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
+				createCompoundTerm("flowTree", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
 				createUnification("S".toVar, createListExpressions(#[createList(#["F"], #["TMP"])]))
 			)
 		))
@@ -451,28 +451,28 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		val processOrStore = dfd.nodes.exists[n | n instanceof CharacterizedStore] ? processOrStoreDisjunction : processFact
 		
 		add(createRule(
-			createCompoundTerm("flowStack", "N", "PIN", "S", "VISITED"),
+			createCompoundTerm("flowTree", "N", "PIN", "S", "VISITED"),
 			createConjunction(
 				createCompoundTerm("outputPin", "N", "PIN"),
 				processOrStore,
 				createCompoundTerm("inputFlowsSelection", "N", "FLOWS"),
-				createCompoundTerm("flowStackForFlows", "N", "S", "FLOWS", "VISITED")
+				createCompoundTerm("flowTreeForFlows", "N", "S", "FLOWS", "VISITED")
 			)
 		))
-		add(createFact(createCompoundTerm("flowStackForFlows", "_".toVar, createList, createList, "_".toVar)))
+		add(createFact(createCompoundTerm("flowTreeForFlows", "_".toVar, createList, createList, "_".toVar)))
 		add(createRule(
-			createCompoundTerm("flowStackForFlows", "N".toVar, "S".toVar, createList(#["F"], #["T"]), "VISITED".toVar),
+			createCompoundTerm("flowTreeForFlows", "N".toVar, "S".toVar, createList(#["F"], #["T"]), "VISITED".toVar),
 			createConjunction(
 				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
-				createCompoundTerm("flowStackForFlows", "N", "STAIL", "T", "VISITED"),
+				createCompoundTerm("flowTreeForFlows", "N", "STAIL", "T", "VISITED"),
 				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "_", "_"),
-				createCompoundTerm("flowStack", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
+				createCompoundTerm("flowTree", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
 				createUnification("SHEAD".toVar, createList(#["F"], #["TMP"])),
 				createUnification("S".toVar, createList(#["SHEAD"], #["STAIL"]))
 			)
 		))
 		
-		add(createHeaderComment("HELPER: find traversed nodes from stack"))
+		add(createHeaderComment("HELPER: find traversed nodes from flow tree"))
 		add(createRule(
 			createCompoundTerm("traversedNode", "S", "N"),
 			createConjunction(
@@ -560,11 +560,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		sequence.toMap[id].values.toList.sortBy[name]
 	}
 	
-	protected static def needsFlowStack(Optional<Assignment> assignment) {
-		assignment.map[needsFlowStack].orElse(false)
+	protected static def needsFlowTree(Optional<Assignment> assignment) {
+		assignment.map[needsFlowTree].orElse(false)
 	}
 	
-	protected static def needsFlowStack(Assignment assignment) {
+	protected static def needsFlowTree(Assignment assignment) {
 		assignment.rhs instanceof DataCharacteristicReference || !assignment.rhs.eAllContents.filter(DataCharacteristicReference).empty
 	}
 	
