@@ -50,6 +50,7 @@ import org.palladiosimulator.supporting.prolog.model.prolog.Rule
 import org.palladiosimulator.supporting.prolog.model.prolog.directives.Discontiguous
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.Expression
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.ExpressionsFactory
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 
@@ -112,9 +113,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		}
 		facts
 	}
-	
 
-	
 	protected def dispatch transformDataType(CollectionDataType dataType) {
 		val facts = new ArrayList<Fact>
 		facts += (dataType as DataType)._transformDataType
@@ -150,7 +149,8 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		process.transformNode("process", [node, pin, ct, l |
 			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
 			val transformedAssignment = assignmentToTransform.transformAssignment(node, pin, ct, l)
-			if (assignmentToTransform.needsFlowTree) {
+			val needsFlowTree = assignmentToTransform.needsFlowTree
+			if (needsFlowTree) {
 				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
 				flowClauses += transformedAssignment
 				createRule(
@@ -158,8 +158,9 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 					createConjunction(flowClauses)
 				)
 			} else {
+				val fsVar = process.needsEmptyFlowTree ? createList : "_".toVar
 				createRule(
-					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, "_".toVar, "_".toVar),
+					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, fsVar, "_".toVar),
 					createConjunction(transformedAssignment)
 				)
 			}
@@ -421,7 +422,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createHeaderComment("HELPER: create valid flow tree"))
 		add(createRule(
 			createCompoundTerm("flowTree", "N", "PIN", "S"),
-			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList(#["S"]), createList)
+			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar, createList)
 		))
 		add(createRule(
 			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList, "_".toVar),
@@ -438,7 +439,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("inputPin", "N", "PIN"),
 				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "N", "PIN"),
 				createCompoundTerm("flowTree", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
-				createUnification("S".toVar, createListExpressions(#[createList(#["F"], #["TMP"])]))
+				createUnification("S".toVar, createList(#["F"], #["TMP"]))
 			)
 		))
 		
@@ -451,10 +452,20 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		val processOrStore = dfd.nodes.exists[n | n instanceof CharacterizedStore] ? processOrStoreDisjunction : processFact
 		
 		add(createRule(
+			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList, "_".toVar),
+			createConjunction(
+				createCompoundTerm("outputPin", "N", "PIN"),
+				EcoreUtil.copy(processOrStore),
+				createNotProvable(createCompoundTerm("inputPin", "N", "_")),
+				createCut
+			)
+		))
+		
+		add(createRule(
 			createCompoundTerm("flowTree", "N", "PIN", "S", "VISITED"),
 			createConjunction(
 				createCompoundTerm("outputPin", "N", "PIN"),
-				processOrStore,
+				EcoreUtil.copy(processOrStore),
 				createCompoundTerm("inputFlowsSelection", "N", "FLOWS"),
 				createCompoundTerm("flowTreeForFlows", "N", "S", "FLOWS", "VISITED")
 			)
@@ -562,6 +573,13 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	
 	protected static def needsFlowTree(Optional<Assignment> assignment) {
 		assignment.map[needsFlowTree].orElse(false)
+	}
+	
+	protected static def needsEmptyFlowTree(CharacterizedNode node) {
+		if (node instanceof CharacterizedExternalActor) {
+			return true
+		}
+		node.behavior.inputs.empty
 	}
 	
 	protected static def needsFlowTree(Assignment assignment) {
