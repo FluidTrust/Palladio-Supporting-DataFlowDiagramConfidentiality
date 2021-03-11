@@ -50,7 +50,6 @@ import org.palladiosimulator.supporting.prolog.model.prolog.Rule
 import org.palladiosimulator.supporting.prolog.model.prolog.directives.Discontiguous
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.Expression
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.ExpressionsFactory
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 
@@ -452,20 +451,10 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		val processOrStore = dfd.nodes.exists[n | n instanceof CharacterizedStore] ? processOrStoreDisjunction : processFact
 		
 		add(createRule(
-			createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, createList, "_".toVar),
-			createConjunction(
-				createCompoundTerm("outputPin", "N", "PIN"),
-				EcoreUtil.copy(processOrStore),
-				createNotProvable(createCompoundTerm("inputPin", "N", "_")),
-				createCut
-			)
-		))
-		
-		add(createRule(
 			createCompoundTerm("flowTree", "N", "PIN", "S", "VISITED"),
 			createConjunction(
 				createCompoundTerm("outputPin", "N", "PIN"),
-				EcoreUtil.copy(processOrStore),
+				processOrStore,
 				createCompoundTerm("inputFlowsSelection", "N", "FLOWS"),
 				createCompoundTerm("flowTreeForFlows", "N", "S", "FLOWS", "VISITED")
 			)
