@@ -150,6 +150,8 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			val transformedAssignment = assignmentToTransform.transformAssignment(node, pin, ct, l)
 			val needsFlowTree = assignmentToTransform.needsFlowTree
 			if (needsFlowTree) {
+				// the flow tree has to be bound before the assignments can use them because the assignment
+				// could be a pure negation, which is not able to bind a valid flow stack.
 				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
 				flowClauses += transformedAssignment
 				createRule(
@@ -189,6 +191,8 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	
 	protected def dispatch transformNode(CharacterizedStore store) {
 		store.transformNode("store", [node, pin, ct, l|
+				// the flow tree has to be bound before the assignments can use them because the assignment
+				// could be a pure negation, which is not able to bind a valid flow stack.
 				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
 				val term = dfdExpressionsFactory.createDataCharacteristicReference
 				term.pin = node.behavior.inputs.get(0)
