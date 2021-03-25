@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.palladiosimulator.dataflow.confidentiality.ui.wizard.category"
+            name="DataFlow Confidentiality">
+      </category>
+      <wizard
+            canFinishEarly="true"
+            category="org.palladiosimulator.dataflow.confidentiality.ui.wizard.category"
+            class="org.palladiosimulator.dataflow.confidentiality.ui.wizard.NewDFDConfidentialityProjectWizard"
+            finalPerspective="org.eclipse.sirius.ui.tools.perspective.modeling"
+            id="org.palladiosimulator.dataflow.confidentiality.ui.wizard.project"
+            name="DataFlow Confidentiality Project"
+            project="true">
+      </wizard>
+   </extension>
+
+</plugin>

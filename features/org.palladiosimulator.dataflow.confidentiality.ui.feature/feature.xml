@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.dataflow.confidentiality.ui.feature"
+      label="DFD Confidentiality UI"
+      version="1.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license.epl2"
+      license-feature-version="1.0.0">
+
+   <includes
+         id="org.palladiosimulator.dataflow.confidentiality.editor.sirius.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.dataflow.confidentiality.editor.tree.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.dataflow.confidentiality.model.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.dataflow.confidentiality.transformation.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.dataflow.dictionary.characterized.dsl.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.palladiosimulator.branding"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.dataflow.confidentiality.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
