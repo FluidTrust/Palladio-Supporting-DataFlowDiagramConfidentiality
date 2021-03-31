@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Entity;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.Behaving;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataType;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 import org.palladiosimulator.supporting.prolog.model.prolog.Program;
 

@@ -42,8 +42,8 @@
           id="_KnIY0FQNEeqnLp_48pbpVA"
           name="SMSManager.in.deviceId"/>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_apykIVQNEeqnLp_48pbpVA"
         name="trust">
       <type
@@ -51,7 +51,7 @@
           href="DDC_DroidBench.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_DroidBench.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_Nn40F1QNEeqnLp_48pbpVA"

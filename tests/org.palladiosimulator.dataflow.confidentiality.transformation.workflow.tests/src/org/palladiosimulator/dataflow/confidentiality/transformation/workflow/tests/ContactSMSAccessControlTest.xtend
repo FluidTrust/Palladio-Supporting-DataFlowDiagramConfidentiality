@@ -3,9 +3,9 @@ package org.palladiosimulator.dataflow.confidentiality.transformation.workflow.t
 import java.util.Arrays
 import org.junit.jupiter.api.Test
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl.AccessControlAnalysesIflow
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.Behaving
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving
 
 class ContactSMSAccessControlTest extends AccessControlAnalysesIflow {
 

@@ -37,8 +37,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_GjnIwdVhEeqRbpVUMz5XAQ"
         name="identity">
       <type
@@ -46,7 +46,7 @@
           href="dac_dd.xmi#_o7_1k9VeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_kF3NENVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_Glj7ddVfEeqRbpVUMz5XAQ"
@@ -77,8 +77,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_Mew4kdVhEeqRbpVUMz5XAQ"
         name="identity">
       <type
@@ -86,7 +86,7 @@
           href="dac_dd.xmi#_o7_1k9VeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_lwXnENVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_ICcJJdVfEeqRbpVUMz5XAQ"
@@ -117,8 +117,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SWyb4dVhEeqRbpVUMz5XAQ"
         name="identity">
       <type
@@ -126,7 +126,7 @@
           href="dac_dd.xmi#_o7_1k9VeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_marvYNVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_JEgDFdVfEeqRbpVUMz5XAQ"
@@ -157,8 +157,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_WwV2EdVhEeqRbpVUMz5XAQ"
         name="identity">
       <type
@@ -166,7 +166,7 @@
           href="dac_dd.xmi#_o7_1k9VeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_nJlcwNVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_bt1Dx9VhEeqRbpVUMz5XAQ"
@@ -185,8 +185,8 @@
       name="Family Pictures">
     <referencedBehavior
         href="dac_dd.xmi#_Bda89dVfEeqRbpVUMz5XAQ"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_p63UwdViEeqRbpVUMz5XAQ"
         name="owner">
       <type
@@ -194,9 +194,9 @@
           href="dac_dd.xmi#_uEVoY9VeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_kF3NENVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    </ownedCharacteristics>
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_tIZAsdViEeqRbpVUMz5XAQ"
         name="read access">
       <type
@@ -208,9 +208,9 @@
           href="dac_dd.xmi#_lwXnENVeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_kF3NENVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    </ownedCharacteristics>
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_vdXUAdViEeqRbpVUMz5XAQ"
         name="write access">
       <type
@@ -220,7 +220,7 @@
           href="dac_dd.xmi#_lwXnENVeEeqRbpVUMz5XAQ"/>
       <values
           href="dac_dd.xmi#_kF3NENVeEeqRbpVUMz5XAQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_lovNudVhEeqRbpVUMz5XAQ"

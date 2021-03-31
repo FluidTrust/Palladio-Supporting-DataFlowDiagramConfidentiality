@@ -73,15 +73,15 @@
           id="_fNwI6l1gEequxah3HlaYJg"
           name="Attacker.in"/>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_cDyHQV1gEequxah3HlaYJg">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_UnitCases.xmi#_Kqg1s11dEequxah3HlaYJg"/>
       <values
           href="DDC_UnitCases.xmi#_xzDM4F1cEequxah3HlaYJg"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_HTGN-V1dEequxah3HlaYJg"

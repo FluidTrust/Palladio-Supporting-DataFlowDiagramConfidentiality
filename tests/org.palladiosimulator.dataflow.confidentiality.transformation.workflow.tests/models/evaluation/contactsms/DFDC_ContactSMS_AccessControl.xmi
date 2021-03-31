@@ -116,8 +116,8 @@
             id="_gHJaIVGbEeqNss2H0GFEyA"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_u2oYQFGZEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -125,15 +125,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_pwUtIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_sj3rd1GZEeqNss2H0GFEyA"
       name="addContact">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_7g9V0FGZEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -141,15 +141,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_FrsEeVGaEeqNss2H0GFEyA"
       name="deleteContact">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_HDYQIFGaEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -157,15 +157,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_OPJ6WVGaEeqNss2H0GFEyA"
       name="listContacts">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_ksRm5eOCEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_PaynAFGaEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -173,15 +173,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_WyVcWVGaEeqNss2H0GFEyA"
       name="selectContact">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_3IK6deOCEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_YUcvUFGaEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -189,15 +189,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_gHvFeVGaEeqNss2H0GFEyA"
       name="extractNumber">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_DFpZFeODEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_hsnYkFGaEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -205,15 +205,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_r7sbuVGaEeqNss2H0GFEyA"
       name="sendSMS">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_SUlodeODEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_tX4F0FGaEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -221,7 +221,7 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="__7pjBVGaEeqNss2H0GFEyA"
@@ -232,8 +232,8 @@
           id="_Ds8DUFGbEeqNss2H0GFEyA"
           name="sms"/>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_BKCowFGbEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -241,15 +241,15 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_tKef0FGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_e7TmNlGoEeqNss2H0GFEyA"
       name="ContactStore">
     <referencedBehavior
         href="DDC_ContactSMS_AccessControl.xmi#_iD52deOCEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_jyG9EFGoEeqNss2H0GFEyA"
         name="roles">
       <type
@@ -257,7 +257,7 @@
           href="DDC_ContactSMS_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_ContactSMS_AccessControl.xmi#_sW8xIFGWEeqNss2H0GFEyA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_FFLoolGbEeqNss2H0GFEyA"

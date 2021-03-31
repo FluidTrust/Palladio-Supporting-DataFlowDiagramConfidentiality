@@ -63,8 +63,8 @@
             id="_o51LAVGLEeq8MuaPiZgRhQ"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_DD6uwFGLEeq8MuaPiZgRhQ"
         name="roles">
       <type
@@ -72,7 +72,7 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_tI3XSFGLEeq8MuaPiZgRhQ"
@@ -80,8 +80,8 @@
       actor="_A9vFZVGLEeq8MuaPiZgRhQ">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_WKBileN7EeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_z6TO0FGLEeq8MuaPiZgRhQ"
         name="roles">
       <type
@@ -89,15 +89,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_QFIs51GMEeq8MuaPiZgRhQ"
       name="recordUserLocation">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_UxmcAFGMEeq8MuaPiZgRhQ"
         name="roles">
       <type
@@ -105,15 +105,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_J7aDplGOEeqgwc19jCODXg"
       name="LocationStore">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_WHatgFGOEeqgwc19jCODXg"
         name="roles">
       <type
@@ -121,15 +121,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_g7vLt1GOEeqgwc19jCODXg"
       name="calculateDistance">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_iYig4FGOEeqgwc19jCODXg"
         name="roles">
       <type
@@ -137,15 +137,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_uaGOSVGOEeqgwc19jCODXg"
       name="confirmDistance">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_Gn1xpeN8EeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_winZ8FGOEeqgwc19jCODXg"
         name="roles">
       <type
@@ -153,15 +153,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_LFSAV1GPEeqgwc19jCODXg"
       name="recordDistance">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_OKlkYFGPEeqgwc19jCODXg"
         name="roles">
       <type
@@ -169,15 +169,15 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_Y7xPBlGPEeqgwc19jCODXg"
       name="DistanceStore">
     <referencedBehavior
         href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_aXtokFGPEeqgwc19jCODXg"
         name="roles">
       <type
@@ -185,7 +185,7 @@
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_EtJg-VGMEeq8MuaPiZgRhQ"

@@ -61,8 +61,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_k6jO4dSZEeqakq6offlGZg"
         name="clearance">
       <type
@@ -70,7 +70,7 @@
           href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_QMTwJdSXEeqakq6offlGZg"
@@ -125,8 +125,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_QvgVEdSdEeqakq6offlGZg"
         name="clearance">
       <type
@@ -134,7 +134,7 @@
           href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_UPU5pdSXEeqakq6offlGZg"
@@ -186,8 +186,8 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ztxxodSkEeqakq6offlGZg"
         name="clearance">
       <type
@@ -195,15 +195,15 @@
           href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_NKGRdtSZEeqakq6offlGZg"
       name="Weather Information">
     <referencedBehavior
         href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_gV4UkdS_EeqGKakHh_u4hw"
         name="classification">
       <type
@@ -211,7 +211,7 @@
           href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_Jx2GyNSaEeqakq6offlGZg"
@@ -239,8 +239,8 @@
       name="PlaneStore">
     <referencedBehavior
         href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_befu4dS_EeqGKakHh_u4hw"
         name="classification">
       <type
@@ -248,7 +248,7 @@
           href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_MDKFSNSeEeqakq6offlGZg"
@@ -290,8 +290,8 @@
       name="MilitaryPlaneStore">
     <referencedBehavior
         href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ox4QgdS_EeqGKakHh_u4hw"
         name="classification">
       <type
@@ -299,7 +299,7 @@
           href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
       <values
           href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_czT5qNSnEeqakq6offlGZg"

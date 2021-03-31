@@ -1,13 +1,13 @@
-package org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.provider;
+package org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.provider;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.EnumCharacteristic;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.provider.util.ItemPropertyDescriptorDecorator;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.CharacteristicType;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.provider.util.ItemPropertyDescriptorDecorator;
 
 public class EnumCharacteristicItemProvider extends EnumCharacteristicItemProviderGen {
 

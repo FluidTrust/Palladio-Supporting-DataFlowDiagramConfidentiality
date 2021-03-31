@@ -36,8 +36,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_44_t0ksyEeqBeZX3QKuNVA"
       name="P1 - SetToContainer">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_z3SeQFFjEeq3PP7CXEkBmQ"
         name="testCharacteristic">
       <type
@@ -47,7 +47,7 @@
           href="dd_simple.xmi#_uO90EEsyEeqBeZX3QKuNVA"/>
       <values
           href="dd_simple.xmi#_thylAEsyEeqBeZX3QKuNVA"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_59hs8UsyEeqBeZX3QKuNVA">
       <inputs

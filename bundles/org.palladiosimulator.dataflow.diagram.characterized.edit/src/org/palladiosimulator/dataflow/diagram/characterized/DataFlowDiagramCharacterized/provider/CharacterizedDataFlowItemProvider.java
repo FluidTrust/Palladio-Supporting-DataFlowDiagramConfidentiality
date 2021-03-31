@@ -11,10 +11,10 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Entity;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.Behaving;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedPackage;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.provider.util.ItemPropertyDescriptorDecorator;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
 

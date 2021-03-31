@@ -11,8 +11,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_NRXjJUNGEeqMccFFI9r5HQ"
       name="User">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_gcvL0ENGEeqMccFFI9r5HQ"
         name="Roles">
       <type
@@ -20,7 +20,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_a2t7UENCEeqZ7Kg2_yifbw"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_j6FccUNGEeqMccFFI9r5HQ">
       <outputs
@@ -84,8 +84,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_6KBx10nHEeqvK9OBmXfwBQ"
       name="formulateSearch">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_8I8VkEnHEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -93,7 +93,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_c0qj0ENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_-omO4UnHEeqvK9OBmXfwBQ">
       <inputs
@@ -117,8 +117,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_i7aZWUnLEeqvK9OBmXfwBQ"
       name="queryFlights">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_l6RXIEnLEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -126,7 +126,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_drKuAENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_o8-6MUnLEeqvK9OBmXfwBQ">
       <inputs
@@ -153,8 +153,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_-IB7qUnLEeqvK9OBmXfwBQ"
       name="formatResults">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="__jJ10EnLEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -162,7 +162,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_c0qj0ENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_FImbYUnMEeqvK9OBmXfwBQ">
       <inputs
@@ -187,8 +187,8 @@
       id="_SbNg-knMEeqvK9OBmXfwBQ"
       name="selectFlight"
       actor="_NRXjJUNGEeqMccFFI9r5HQ">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_U5fhQEnMEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -196,7 +196,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_a2t7UENCEeqZ7Kg2_yifbw"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_XaxyQUnMEeqvK9OBmXfwBQ">
       <inputs
@@ -220,8 +220,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_g0_p-UnMEeqvK9OBmXfwBQ"
       name="declassifyCcd">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_kii5wEnMEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -229,7 +229,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_a2t7UENCEeqZ7Kg2_yifbw"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_mwJZwUnMEeqvK9OBmXfwBQ">
       <inputs
@@ -271,8 +271,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_FU84iUnQEeqvK9OBmXfwBQ"
       name="findCcd">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_HeTxsEnQEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -280,7 +280,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_a2t7UENCEeqZ7Kg2_yifbw"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_Ji0nIUnQEeqvK9OBmXfwBQ">
       <inputs
@@ -304,8 +304,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_ZVGNGUnQEeqvK9OBmXfwBQ"
       name="bookFlight">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_eBPzIEnQEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -313,7 +313,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_drKuAENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_gZHCYUnQEeqvK9OBmXfwBQ">
       <inputs
@@ -360,8 +360,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_WhQXAknREeqvK9OBmXfwBQ"
       name="calculateCommission">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_au4OAEnREeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -369,7 +369,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_drKuAENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_dUciEUnREeqvK9OBmXfwBQ">
       <inputs
@@ -418,8 +418,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_ufTrmUnREeqvK9OBmXfwBQ"
       name="validateCommission">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_wb7JQEnREeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -427,7 +427,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_c0qj0ENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_ylxKoUnREeqvK9OBmXfwBQ">
       <inputs
@@ -490,8 +490,8 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_k1KFBUnSEeqvK9OBmXfwBQ"
       name="FlightPlanner">
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_nqt84EnSEeqvK9OBmXfwBQ"
         name="roles">
       <type
@@ -499,7 +499,7 @@
           href="DataDictionaryCharacterized.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
           href="DataDictionaryCharacterized.xmi#_drKuAENEEeq3NrD2DjPidQ"/>
-    </characteristics>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_p9LuwUnSEeqvK9OBmXfwBQ">
       <outputs

@@ -191,8 +191,8 @@
       name="StunTurnA.publishPort">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_5KTzgV1KEequxah3HlaYJg"
         name="trust">
       <type
@@ -200,15 +200,15 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_bILAaVysEeqKwtlhILVboQ"
       name="StunTurnA.receivePort">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_-6HO8V1KEequxah3HlaYJg"
         name="trust">
       <type
@@ -216,15 +216,15 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_d7YH2VysEeqKwtlhILVboQ"
       name="StunTurnB.publishPort">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_AoVEQV1LEequxah3HlaYJg"
         name="trust">
       <type
@@ -232,15 +232,15 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_fuu72VysEeqKwtlhILVboQ"
       name="StunTurnB.receivePort">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_Cbg5IV1LEequxah3HlaYJg"
         name="trust">
       <type
@@ -248,15 +248,15 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_hdYO-VysEeqKwtlhILVboQ"
       name="SignalingServer.dispatchInitialSessionData">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_EnK4YV1LEequxah3HlaYJg"
         name="trust">
       <type
@@ -264,15 +264,15 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_klZv2VysEeqKwtlhILVboQ"
       name="SignalingServer.dispatchResponseSessionData">
     <referencedBehavior
         href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_GuSV4V1LEequxah3HlaYJg"
         name="trust">
       <type
@@ -280,7 +280,7 @@
           href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_m326wVysEeqKwtlhILVboQ"

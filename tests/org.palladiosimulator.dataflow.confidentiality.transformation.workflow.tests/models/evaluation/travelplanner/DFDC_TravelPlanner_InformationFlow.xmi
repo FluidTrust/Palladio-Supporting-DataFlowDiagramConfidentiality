@@ -54,8 +54,8 @@
             id="_j6btIdvVEeqNdo_V4bA-xw"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_UdSpsdvVEeqNdo_V4bA-xw"
         name="clearance">
       <type
@@ -63,7 +63,7 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_tkFZ4NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_PR93hdvZEeqNdo_V4bA-xw"
@@ -90,8 +90,8 @@
             id="_raS0IdvZEeqNdo_V4bA-xw"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_hB6rEdvZEeqNdo_V4bA-xw"
         name="clearance">
       <type
@@ -99,15 +99,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_ua6FdtvZEeqNdo_V4bA-xw"
       name="Airline.FlightStorage">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_iS5kFdvUEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xa"
         name="clearance">
       <type
@@ -115,15 +115,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_zkkt9tvZEeqNdo_V4bA-xw"
       name="CCD.CCDStorage">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_iS5kFdvUEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xg"
         name="clearance">
       <type
@@ -131,15 +131,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_tkFZ4NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_2nivuNvZEeqNdo_V4bA-xw"
       name="Airline.BookingStorage">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_iS5kFdvUEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xb"
         name="clearance">
       <type
@@ -147,7 +147,7 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_W3oy-NvaEeqNdo_V4bA-xw"
@@ -161,8 +161,8 @@
       name="TA.redirectRequest">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xw"
         name="clearance">
       <type
@@ -170,15 +170,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_qiLIENvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_k5pVJ9vaEeqNdo_V4bA-xw"
       name="Airline.filterFlights">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_64bk2NvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xc"
         name="clearance">
       <type
@@ -186,15 +186,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_vxwuN9vaEeqNdo_V4bA-xw"
       name="TA.redirectFlights">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xy"
         name="clearance">
       <type
@@ -202,7 +202,7 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_qiLIENvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_Bg7eqNvbEeqNdo_V4bA-xw"
@@ -223,8 +223,8 @@
       name="CCD.readCCD">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xh"
         name="clearance">
       <type
@@ -232,15 +232,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_tkFZ4NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_qTOyidvmEeqNdo_V4bA-xw"
       name="CCD.declassifyCCD">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_nFg-hdvUEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xi"
         name="clearance">
       <type
@@ -248,15 +248,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_tkFZ4NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_AYs019vnEeqNdo_V4bA-xw"
       name="Airline.processBooking">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_64bk2NvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xd"
         name="clearance">
       <type
@@ -264,15 +264,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_-SFbt9voEeqNdo_V4bA-xw"
       name="Airline.sendCommission">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xe"
         name="clearance">
       <type
@@ -280,15 +280,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_CVWc2dvpEeqNdo_V4bA-xw"
       name="TA.confirmCommission">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xz"
         name="clearance">
       <type
@@ -296,15 +296,15 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_qiLIENvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_EoxQ-dvpEeqNdo_V4bA-xw"
       name="Airline.confirmBooking">
     <referencedBehavior
         href="DDC_TravelPlanner_InformationFlow.xmi#_xH2bldvTEeqNdo_V4bA-xw"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SUGjEdvqEeqNdo_V4bA-xf"
         name="clearance">
       <type
@@ -312,7 +312,7 @@
           href="DDC_TravelPlanner_InformationFlow.xmi#_JvuuQ9vqEeqNdo_V4bA-xw"/>
       <values
           href="DDC_TravelPlanner_InformationFlow.xmi#_sJIe0NvTEeqNdo_V4bA-xw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_8tXeedvZEeqNdo_V4bA-xw"

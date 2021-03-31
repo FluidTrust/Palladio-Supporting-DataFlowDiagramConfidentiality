@@ -44,8 +44,8 @@
             id="_EWSoIeiSEeqREp9GtzX8tg"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_5PO2EeHsEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -53,7 +53,7 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_1zz4FeHsEeqO9NqdRSqKUA"
@@ -130,8 +130,8 @@
             id="_8ixN8eHtEeqO9NqdRSqKUA"/>
       </assignments>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_7aga0eHsEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -139,7 +139,7 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_2buMpeHsEeqO9NqdRSqKUA"
@@ -189,8 +189,8 @@
       name="Driver.createCredentials">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_a6hsAeHtEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -198,15 +198,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_jtTJNuHtEeqO9NqdRSqKUA"
       name="Driver.CredentialsStore">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_lfDaseHtEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -214,15 +214,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_-nISZuHtEeqO9NqdRSqKUA"
       name="Driver.KeyStore">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_CHeMoeHuEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -230,15 +230,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_LU17J-HuEeqO9NqdRSqKUA"
       name="Driver.createRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA2"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_NshkMeHuEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -246,15 +246,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_czrwluHuEeqO9NqdRSqKUA"
       name="Driver.readCalcDistanceKey">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ezRCseHuEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -262,15 +262,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_iu4jt-HuEeqO9NqdRSqKUA"
       name="Driver.encryptRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_zYhoxeHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_k8oNoeHuEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -278,15 +278,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_FOLM9-HwEeqO9NqdRSqKUA"
       name="Driver.registerPublicKey">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_IX0eceHwEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -294,15 +294,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_QKcGN-HwEeqO9NqdRSqKUA"
       name="Driver.readRiderRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_qkNTeOHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_UWHcceHwEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -310,15 +310,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_XGZLt-HwEeqO9NqdRSqKUA"
       name="Driver.decryptRiderRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_QIqzVeHqEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ZP09YeHwEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -326,15 +326,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_9TtxcOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_OPWdF-HxEeqO9NqdRSqKUA"
       name="Rider.createCredentials">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_QVylIeHxEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -342,15 +342,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_am5BhuHxEeqO9NqdRSqKUA"
       name="Rider.CredentialsStore">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_cwVaQeHxEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -358,15 +358,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_jro_h-HxEeqO9NqdRSqKUA"
       name="Rider.createRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA2"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_l-M4AeHxEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -374,15 +374,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_xSBVqeHxEeqO9NqdRSqKUA"
       name="Rider.encryptRouteForDistance">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_zYhoxeHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_1KMhEeHxEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -390,15 +390,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_69Hh-eHxEeqO9NqdRSqKUA"
       name="Rider.readCalcDistanceKey">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_9vHIceHxEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -406,15 +406,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_QtbMmeHyEeqO9NqdRSqKUA"
       name="Rider.findMatches">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_SblXgeHyEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -422,15 +422,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_UGHmueHyEeqO9NqdRSqKUA"
       name="Rider.selectMatch">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_XBiO8eHyEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -438,15 +438,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_c-Pd-eHyEeqO9NqdRSqKUA"
       name="Rider.sendRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_qkNTeOHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_fE3MMeHyEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -454,15 +454,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_jQBlGeHyEeqO9NqdRSqKUA"
       name="Rider.encryptRouteForDriver">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_zYhoxeHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_l4I20eHyEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -470,15 +470,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-JVK0OHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_wAo7aeHzEeqO9NqdRSqKUA"
       name="Taxi.createUser">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ysVsoeHzEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -486,15 +486,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_9GDSduHzEeqO9NqdRSqKUA"
       name="Taxi.UserStore">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="__HNR4eHzEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -502,15 +502,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_BiJqWOH0EeqO9NqdRSqKUA"
       name="Taxi.DriverKeys">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_Dn-HUeH0EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -518,15 +518,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_Gq9XOOH0EeqO9NqdRSqKUA"
       name="Taxi.RouteForDriverStorage">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_KficEeH0EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -534,15 +534,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_MHdcKOH0EeqO9NqdRSqKUA"
       name="Taxi.RouteStorage">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ObD2ceH0EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -550,15 +550,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_zL0zGeH1EeqO9NqdRSqKUA"
       name="Taxi.findUser">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_2cxmceH1EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -566,15 +566,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_H9ww-eH2EeqO9NqdRSqKUA"
       name="Taxi.storeRoute">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_qkNTeOHpEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_JvzWUeH2EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -582,15 +582,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="__6cTaeH4EeqO9NqdRSqKUA"
       name="Taxi.findMatches">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_xm8BReHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_D7SSoeH5EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -598,15 +598,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_fSMj-eH6EeqO9NqdRSqKUA"
       name="Taxi.findProximity">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_k3weQeH6EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -614,15 +614,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_z3BS6eH6EeqO9NqdRSqKUA"
       name="Taxi.storeRouteForDriver">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_244hYeH6EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -630,15 +630,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_DkbhkOHoEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_DoHsyeH-EeqO9NqdRSqKUA"
       name="Distance.decryptRoutes">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_QIqzVeHqEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_GOlYseH-EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -646,15 +646,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-1E2gOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_Hys22eH-EeqO9NqdRSqKUA"
       name="Distance.calcProximity">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_jRN8FeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_K5Oi4eH-EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -662,15 +662,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-1E2gOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_NZhVaeH-EeqO9NqdRSqKUA"
       name="Distance.readPublicKey">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_j9fJBeHnEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_P0ZcYeH-EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -678,15 +678,15 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-1E2gOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_SrBEOOH-EeqO9NqdRSqKUA"
       name="Distance.KeyStore">
     <referencedBehavior
         href="privatetatxi_dd.xmi#_vzE6JeHrEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_VCkKYeH-EeqO9NqdRSqKUA"
         name="role">
       <type
@@ -694,7 +694,7 @@
           href="privatetatxi_dd.xmi#_9fV10-HrEeqO9NqdRSqKUA"/>
       <values
           href="privatetatxi_dd.xmi#_-1E2gOHnEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_ebX8meHtEeqO9NqdRSqKUA"

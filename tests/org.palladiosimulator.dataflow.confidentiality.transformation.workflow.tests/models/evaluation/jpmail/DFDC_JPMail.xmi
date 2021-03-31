@@ -133,8 +133,8 @@
       name="SMTP">
     <referencedBehavior
         href="DDC_JPMail.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_yTZ6wVQCEeqwY5tipD4jOw"
         name="trust">
       <type
@@ -142,15 +142,15 @@
           href="DDC_JPMail.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_JPMail.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_09osaVQCEeqwY5tipD4jOw"
       name="POP3">
     <referencedBehavior
         href="DDC_JPMail.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_-UtzsVQGEeqnLp_48pbpVA"
         name="trust">
       <type
@@ -158,7 +158,7 @@
           href="DDC_JPMail.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_JPMail.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_3qG5uVQCEeqwY5tipD4jOw"

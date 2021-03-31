@@ -12,8 +12,8 @@
       name="Clerk US">
     <referencedBehavior
         href="abac_dd.xmi#_GiT_peJDEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_Ut6NkeJBEeqO9NqdRSqKUA"
         name="location">
       <type
@@ -21,9 +21,9 @@
           href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_SQJAEOJAEeqO9NqdRSqKUA"/>
-    </characteristics>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    </ownedCharacteristics>
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_baQw0eJBEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -31,15 +31,15 @@
           href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_c_En8OJAEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_QYu9FeJBEeqO9NqdRSqKUA"
       name="Clerk Asia">
     <referencedBehavior
         href="abac_dd.xmi#_GiT_peJDEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_VGcCUeJBEeqO9NqdRSqKUA"
         name="location">
       <type
@@ -47,9 +47,9 @@
           href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_TCUq8OJAEeqO9NqdRSqKUA"/>
-    </characteristics>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    </ownedCharacteristics>
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_f1BE4eJBEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -57,15 +57,15 @@
           href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_c_En8OJAEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_Qx8HReJBEeqO9NqdRSqKUA"
       name="Manager">
     <referencedBehavior
         href="abac_dd.xmi#_kaXNdeJDEeqO9NqdRSqKUA"/>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_4Iz4keJEEeqO9NqdRSqKUA"
         name="location">
       <type
@@ -73,9 +73,9 @@
           href="abac_dd.xmi#_j_v1Y-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_SQJAEOJAEeqO9NqdRSqKUA"/>
-    </characteristics>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    </ownedCharacteristics>
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_iRkm4eJBEeqO9NqdRSqKUA"
         name="role">
       <type
@@ -83,7 +83,7 @@
           href="abac_dd.xmi#_nNduk-JAEeqO9NqdRSqKUA"/>
       <values
           href="abac_dd.xmi#_dvk30OJAEeqO9NqdRSqKUA"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_mxUIpuJBEeqO9NqdRSqKUA"

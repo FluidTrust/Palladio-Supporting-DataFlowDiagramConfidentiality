@@ -16,6 +16,8 @@
         eType="#//Enumeration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDefinitions" upperBound="-1"
         eType="#//BehaviorDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristics" upperBound="-1"
+        eType="#//Characteristic" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacteristicType" abstract="true"
       eSuperTypes="#//Entity"/>
@@ -60,23 +62,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="#//expressions/Term"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Behaving" abstract="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="exactlyOneBehaviorHasToBeSpecified"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-      <details key="exactlyOneBehaviorHasToBeSpecified" value="self.ownedBehavior->including(self.referencedBehavior)->selectByKind(BehaviorDefinition)->size() = 1"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1"
-        eType="#//BehaviorDefinition" changeable="false" volatile="true" transient="true"
-        derived="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Characteristic" abstract="true" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//CharacteristicType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumCharacteristic" eSuperTypes="#//Characteristic">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Literal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumCharacteristicType"
+        lowerBound="1" eType="#//EnumCharacteristicType" changeable="false" volatile="true"
+        transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-        <details key="derivation" value="self.ownedBehavior->including(self.referencedBehavior)->selectByKind(BehaviorDefinition)->any(true)"/>
+        <details key="derivation" value="self.type.oclAsType(DataDictionaryCharacterized::EnumCharacteristicType)"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBehavior" eType="#//BehaviorDefinition"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedBehavior" eType="#//BehaviorDefinition"/>
   </eClassifiers>
   <eSubpackages name="expressions" nsURI="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
       nsPrefix="expressions">

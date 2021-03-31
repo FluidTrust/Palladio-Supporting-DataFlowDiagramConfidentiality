@@ -42,8 +42,8 @@
           id="_uuJ4EFQSEeqnLp_48pbpVA"
           name="Logger.in.logMessage"/>
     </ownedBehavior>
-    <characteristics
-        xsi:type="DataFlowDiagramCharacterized:EnumCharacteristic"
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_MBGYQVQUEeqnLp_48pbpVA"
         name="trust">
       <type
@@ -51,7 +51,7 @@
           href="DDC_DroidBench.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
       <values
           href="DDC_DroidBench.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
-    </characteristics>
+    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_sFTmhFQSEeqnLp_48pbpVA"
