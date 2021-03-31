@@ -82,7 +82,7 @@ EnumCharacteristicReference returns ex::Term:
 ;
 
 ContainerCharacteristicReference returns ex::ContainerCharacteristicReference:
-	{ex::ContainerCharacteristicReference} 'container' (
+	{ex::ContainerCharacteristicReference} 'container' '.' (
 		(characteristicType=[CharacteristicType|NameString] '.' (literal=[Literal|NameString] | '*')) | '*' '.' '*'
 	)
 ;
