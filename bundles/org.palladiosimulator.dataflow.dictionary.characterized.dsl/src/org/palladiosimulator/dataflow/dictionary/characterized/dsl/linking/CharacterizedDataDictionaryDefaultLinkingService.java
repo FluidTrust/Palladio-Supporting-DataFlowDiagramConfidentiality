@@ -48,7 +48,7 @@ public class CharacterizedDataDictionaryDefaultLinkingService extends DefaultLin
     protected List<Literal> filterLiteralsByNode(List<Literal> literals, INode node) {
         var nodeText = Optional.ofNullable(node)
             .map(INode::getText)
-            .map(text -> valueConverterService.toValue(text, "STRING", node))
+            .map(text -> valueConverterService.toValue(text, "NameString", node))
             .map(String.class::cast);
         if (nodeText.isEmpty()) {
             return literals;

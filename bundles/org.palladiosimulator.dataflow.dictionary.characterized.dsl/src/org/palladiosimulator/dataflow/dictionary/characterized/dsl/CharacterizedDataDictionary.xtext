@@ -3,8 +3,6 @@ grammar org.palladiosimulator.dataflow.dictionary.characterized.dsl.Characterize
 import "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore"
 import "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//expressions" as ex
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-//import "http://sdq.ipd.uka.de/Identifier/2.1"
-//import "http://palladiosimulator.org/dataflow/dictionary/1.0" as DataDictionary
 
 DataDictionaryCharacterized returns DataDictionaryCharacterized:
 	{DataDictionaryCharacterized}
@@ -12,6 +10,7 @@ DataDictionaryCharacterized returns DataDictionaryCharacterized:
 	(
 		enumerations+=Enumeration |
 		characteristicTypes+=CharacteristicType |
+		characteristics+=Characteristic |
 		behaviorDefinitions+=BehaviorDefinition
 	)*;
 
@@ -31,13 +30,23 @@ CharacteristicType:
 
 
 EnumCharacteristicType:
-	'enumcharacteristic' name=NameString 'using' type=[Enumeration|NameString]
+	'enumCharacteristicType' name=NameString 'using' type=[Enumeration|NameString]
+;
+
+Characteristic:
+	EnumCharacteristic
+;
+
+EnumCharacteristic:
+	'enumCharacteristic' name=NameString 'using' type=[EnumCharacteristicType|NameString] '{'
+		values+=[Literal|NameString] (',' values+=[Literal|NameString])*
+	'}'
 ;
 
 BehaviorDefinition:
 	'behavior' name=NameString '{'
-		('input' inputs+=Pin)*
-		('output' outputs+=Pin)*
+		('inputPins' inputs+=Pin (',' inputs+=Pin)*)?
+		('outputPins' outputs+=Pin (',' outputs+=Pin)*)?
 		assignments+=Assignment*
 	'}'
 ;
@@ -47,7 +56,7 @@ Pin:
 ;
 
 Assignment:
-	lhs=DataCharacteristicReference ':=' rhs=Term
+	lhs=OutputDataCharacteristicReference ':=' rhs=Term
 ;
 
 Term returns ex::Term:
@@ -78,7 +87,7 @@ True returns ex::Term:
 ;
 
 EnumCharacteristicReference returns ex::Term:
-	ContainerCharacteristicReference | DataCharacteristicReference
+	ContainerCharacteristicReference | InputDataCharacteristicReference
 ;
 
 ContainerCharacteristicReference returns ex::ContainerCharacteristicReference:
@@ -87,13 +96,18 @@ ContainerCharacteristicReference returns ex::ContainerCharacteristicReference:
 	)
 ;
 
-DataCharacteristicReference returns ex::DataCharacteristicReference:
-	{ex::DataCharacteristicReference}
+OutputDataCharacteristicReference returns ex::DataCharacteristicReference:
+		pin=[Pin|NameString] '.' (
+			(characteristicType=[CharacteristicType|NameString] '.' (literal=[Literal|NameString] | '*')) | '*' '.' '*'
+	)
+;
+
+InputDataCharacteristicReference returns ex::DataCharacteristicReference:
 		pin=[Pin|NameString] '.' (
 			(characteristicType=[CharacteristicType|NameString] '.' (literal=[Literal|NameString] | '*')) | '*' '.' '*'
 	)
 ;
 
 NameString returns ecore::EString:
-	STRING
+	(ID|STRING)
 ;

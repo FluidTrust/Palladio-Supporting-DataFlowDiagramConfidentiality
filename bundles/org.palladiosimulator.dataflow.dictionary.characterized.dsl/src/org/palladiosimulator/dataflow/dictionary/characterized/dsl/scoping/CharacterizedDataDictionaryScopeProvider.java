@@ -13,8 +13,12 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.CharacteristicReference;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsPackage;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.Term;
 
 /**
  * This class contains custom scoping description.
@@ -28,12 +32,17 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
     public IScope getScope(EObject context, EReference reference) {
         var superScope = super.getScope(context, reference);
         if (reference == ExpressionsPackage.Literals.DATA_CHARACTERISTIC_REFERENCE__PIN) {
+            var characteristicReference = Optional.ofNullable(context).filter(DataCharacteristicReference.class::isInstance).map(DataCharacteristicReference.class::cast);
             var behaviorDefinition = findParentOfType(context, BehaviorDefinition.class);
             var usablePins = new ArrayList<>();
-            behaviorDefinition.map(BehaviorDefinition::getInputs)
+            if (characteristicReference.map(this::isLhs).orElse(true)) {
+                behaviorDefinition.map(BehaviorDefinition::getOutputs)
                 .ifPresent(usablePins::addAll);
-            behaviorDefinition.map(BehaviorDefinition::getOutputs)
+            }
+            if (characteristicReference.map(this::isRhs).orElse(true)) {
+                behaviorDefinition.map(BehaviorDefinition::getInputs)
                 .ifPresent(usablePins::addAll);
+            }
             return new FilteringScope(superScope, description -> usablePins.contains(description.getEObjectOrProxy()));
         }
         if (reference == ExpressionsPackage.Literals.ENUM_CHARACTERISTIC_REFERENCE__LITERAL) {
@@ -58,5 +67,36 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
         }
         return Optional.empty();
     }
+    
+    protected boolean isLhs(CharacteristicReference reference) {
+        Optional<Assignment> assignment = findParentOfType(reference, Assignment.class);
+        if (!assignment.isPresent()) {
+            return false;
+        }
+        return assignment.get().getLhs() == reference;
+    }
 
+    protected boolean isRhs(CharacteristicReference reference) {
+        Optional<Assignment> assignment = findParentOfType(reference, Assignment.class);
+        if (!assignment.isPresent()) {
+            return false;
+        }
+        
+        Term rhsTerm = assignment.get().getRhs();
+        if (rhsTerm == reference) {
+            return true;
+        }
+        if (rhsTerm == null) {
+            return false;
+        }
+
+        for (var iter = rhsTerm.eAllContents(); iter.hasNext();) {
+            if (iter.next() == reference) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
 }

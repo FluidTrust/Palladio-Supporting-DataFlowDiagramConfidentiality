@@ -3,10 +3,60 @@
  */
 package org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.contentassist;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 /**
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
- * on how to customize the content assistant.
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist on how to
+ * customize the content assistant.
  */
 public class CharacterizedDataDictionaryProposalProvider extends AbstractCharacterizedDataDictionaryProposalProvider {
+
+    @Override
+    public void completeOutputDataCharacteristicReference_Pin(EObject model, Assignment assignment,
+            ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+        completeDataCharacteristicReference_Pin(model, assignment, context, acceptor, BehaviorDefinition::getOutputs);
+    }
+
+    @Override
+    public void completeInputDataCharacteristicReference_Pin(EObject model, Assignment assignment,
+            ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+        completeDataCharacteristicReference_Pin(model, assignment, context, acceptor, BehaviorDefinition::getInputs);
+    }
+
+    protected void completeDataCharacteristicReference_Pin(EObject model, Assignment assignment,
+            ContentAssistContext context, ICompletionProposalAcceptor acceptor,
+            Function<BehaviorDefinition, Collection<Pin>> pinGetter) {
+        Predicate<IEObjectDescription> predicate = findParent(model, BehaviorDefinition.class).map(pinGetter::apply)
+            .map(collection -> (Predicate<IEObjectDescription>) ((IEObjectDescription description) -> collection
+                .contains(description.getEObjectOrProxy())))
+            .orElse(Predicates.alwaysTrue());
+        lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static <T extends EObject> Optional<T> findParent(EObject element, Class<T> parentType) {
+        EObject currentElement = element;
+        while (currentElement != null) {
+            if (parentType.isInstance(currentElement)) {
+                return Optional.of((T) currentElement);
+            }
+            currentElement = currentElement.eContainer();
+        }
+        return Optional.empty();
+    }
+
 }
