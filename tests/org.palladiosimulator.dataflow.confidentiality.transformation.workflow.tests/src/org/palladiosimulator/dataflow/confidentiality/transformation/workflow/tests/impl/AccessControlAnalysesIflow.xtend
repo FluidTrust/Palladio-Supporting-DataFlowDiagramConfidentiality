@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.*
 
 class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 
-	val String roleId
-	val String accessRightsId
-	val String roleName
-	val String accessRightsName
+	protected val String roleId
+	protected val String accessRightsId
+	protected val String roleName
+	protected val String accessRightsName
 	
 	new (String roleId, String accessRightsId) {
 		this("Roles", roleId, "AccessRights", accessRightsId)
@@ -34,6 +34,12 @@ class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 		assertFalse(result.isEmpty())
 
 		prover.loadTheory(result.get())
+
+		var solution = query.solve()
+		solution
+	}
+	
+	protected def getQuery() {
 		var queryString = '''
 			inputPin(P, PIN),
 			setof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
@@ -44,8 +50,7 @@ class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 		var query = prover.query(queryString)
 		query.bind("CTROLES", '''«roleName» («roleId»)'''.toString)
 		query.bind("CTRIGHTS", '''«accessRightsName» («accessRightsId»)'''.toString)
-		var solution = query.solve()
-		solution
+		
 	}
 
 }

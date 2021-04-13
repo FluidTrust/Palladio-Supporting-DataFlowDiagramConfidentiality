@@ -20,7 +20,7 @@ public class TransformDFDToPrologJob<T extends KeyValueMDSDBlackboard> extends A
     private final ModelLocation dfdLocation;
     private final ModelLocation prologLocation;
     private final String traceKey;
-    private final DFD2PrologTransformationBuilder transformationBuilder;
+    private DFD2PrologTransformationBuilder transformationBuilder;
 
     public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation, String traceKey,
             NameGenerationStrategie nameGenerationStrategy) {
@@ -30,6 +30,10 @@ public class TransformDFDToPrologJob<T extends KeyValueMDSDBlackboard> extends A
         this.transformationBuilder = DFD2PrologTransformationBuilder.create()
             .setNameProvider(nameGenerationStrategy);
     }
+    
+    public void setTransformationBuilder(DFD2PrologTransformationBuilder builder) {
+    	this.transformationBuilder = builder;
+    }
 
     @Override
     public String getName() {
@@ -38,7 +42,7 @@ public class TransformDFDToPrologJob<T extends KeyValueMDSDBlackboard> extends A
 
     @Override
     public void execute(IProgressMonitor monitor) throws JobFailedException, UserCanceledException {
-        monitor.beginTask("Transform DFD to Prolog", 1);
+        monitor.beginTask(getName(), 1);
 
         var dfds = getBlackboard().getContents(dfdLocation)
             .stream()

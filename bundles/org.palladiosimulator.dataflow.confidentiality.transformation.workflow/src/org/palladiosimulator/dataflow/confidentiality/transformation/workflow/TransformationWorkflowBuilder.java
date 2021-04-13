@@ -21,6 +21,7 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataDictionary;
 
 import de.uka.ipd.sdq.workflow.WorkflowExceptionHandler;
+import de.uka.ipd.sdq.workflow.blackboard.Blackboard;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.ModelLocation;
@@ -32,13 +33,13 @@ public class TransformationWorkflowBuilder {
 	private static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
 	private static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
 	private static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
-	private static final String DEFAULT_TRACE_KEY = "trace";
-	private static final String DEFAULT_PROLOG_KEY = "prolog";
+	protected static final String DEFAULT_TRACE_KEY = "trace";
+	protected static final String DEFAULT_PROLOG_KEY = "prolog";
 	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
 	private final Collection<IJob> serializationJobs = new ArrayList<>();
 	private ModelLocation dfdLocation;
-	private WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
-	private IProgressMonitor progressMonitor = new NullProgressMonitor();
+	protected WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
+	protected IProgressMonitor progressMonitor = new NullProgressMonitor();
 	private NameGenerationStrategie nameDerivationMethod = NameGenerationStrategie.SHORTED_ID;
 	
 	public TransformationWorkflowBuilder() {
@@ -81,10 +82,9 @@ public class TransformationWorkflowBuilder {
 		return this;
 	}
 	
-	public TransformationWorkflowBuilder addSerializeToString(Map<Object, Object> saveOptions) {
-		serializationJobs.removeIf(SerializeModelToStringJob.class::isInstance);
-		var serializeJob = new SerializeModelToStringJob(DEFAULT_PROLOG_LOCATION, saveOptions, DEFAULT_PROLOG_KEY);
-		serializationJobs.add(serializeJob);
+	public TransformationWorkflowBuilder addSerializeToString(Map<Object, Object> saveOptions) {		
+		addSerializeToString(DEFAULT_PROLOG_LOCATION, saveOptions, DEFAULT_PROLOG_KEY, serializationJobs);
+		
 		return this;
 	}
 	
@@ -94,20 +94,56 @@ public class TransformationWorkflowBuilder {
 	}
 	
 	public TransformationWorkflowBuilder addSerializeModelToFile(URI destinationURI, Map<String, Object> saveOptions) {
-		var serializationJob = new SequentialBlackboardInteractingJob<>("Model Serialization Sequential Job");
-		serializationJobs.removeIf(j -> serializationJob.getName().equals(j.getName()));
+		addSerializeModelToFile(DEFAULT_PROLOG_LOCATION, destinationURI, saveOptions, serializationJobs);
+		return this;
+	}
+	
+	protected Collection<IJob> getSerializationJobs() {
+		return this.serializationJobs;
+	}
+	
+	protected ModelLocation getDFDLocation() {
+		return this.dfdLocation;
+	}
+	
+	protected KeyValueMDSDBlackboard getBlackboard() {
+		return this.blackboard;
+	}
+	
+	protected ModelLocation getPrologLocation() {
+		return DEFAULT_PROLOG_LOCATION;
+	}
+	
+	protected NameGenerationStrategie getNameGenerationStrategie() {
+		return this.nameDerivationMethod;
+	}
+	
+    public TransformDFDToPrologWorkflow build() {
+        // create workflow
+        return new TransformDFDToPrologWorkflowImpl(createJobSequence(), progressMonitor, workflowExceptionHandler, blackboard,
+                DEFAULT_PROLOG_KEY, DEFAULT_TRACE_KEY);
+    }
+	
+	protected void addSerializeToString(ModelLocation modelToSerialize, Map<Object, Object> saveOptions, String targetKey, Collection<IJob> serializationCollection) {
+		serializationCollection.removeIf(SerializeModelToStringJob.class::isInstance);
+		var serializeJob = new SerializeModelToStringJob(modelToSerialize, saveOptions, targetKey);
+		serializationCollection.add(serializeJob);
+	}
+	
+	protected void addSerializeModelToFile(ModelLocation modelToSerialize, URI destinationURI, Map<String, Object> saveOptions, Collection<IJob> serializationCollection) {
+		var serializationJob = new SequentialBlackboardInteractingJob<>("DFD Model Serialization Sequential Job");
+		serializationCollection.removeIf(j -> serializationJob.getName().equals(j.getName()));
 		var destinationLocation = new ModelLocation("serialization", destinationURI);
 		var copyJob = new CopyModelJob<>(DEFAULT_PROLOG_LOCATION, destinationLocation);
 		var saveJob = new SavePartitionToDiskJob(destinationLocation.getPartitionID(), saveOptions);
 		blackboard.addPartition(destinationLocation.getPartitionID(), new ResourceSetPartition());
 		serializationJob.add(copyJob);
 		serializationJob.add(saveJob);
-		serializationJobs.add(serializationJob);
-		return this;
+		serializationCollection.add(serializationJob);
 	}
 	
-    public TransformDFDToPrologWorkflow build() {
-        // validate state
+	protected SequentialBlackboardInteractingJob<Blackboard<?>> createJobSequence() {
+		// validate state
         Validate.validState(dfdLocation != null, "A DFD diagram has to be given");
         Validate.validState(!serializationJobs.isEmpty(), "At least one serialization option has to be given");
 
@@ -126,9 +162,7 @@ public class TransformationWorkflowBuilder {
 
         // create serialization job
         jobSequence.addAll(serializationJobs);
-
-        // create workflow
-        return new TransformDFDToPrologWorkflowImpl(jobSequence, progressMonitor, workflowExceptionHandler, blackboard,
-                DEFAULT_PROLOG_KEY, DEFAULT_TRACE_KEY);
-    }
+        
+        return jobSequence;
+	}
 }
