@@ -50,20 +50,21 @@ import org.palladiosimulator.supporting.prolog.model.prolog.Rule
 import org.palladiosimulator.supporting.prolog.model.prolog.directives.Discontiguous
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.Expression
 import org.palladiosimulator.supporting.prolog.model.prolog.expressions.ExpressionsFactory
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.CharacteristicType
 
 class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 
-	static val extension PrologFactory prologFactory = PrologFactory.eINSTANCE
-	static val extension ExpressionsFactory prologExpressionsFactory = ExpressionsFactory.eINSTANCE
-	static val extension PrologCreateUtils prologCreateUtils = new PrologCreateUtils
-	val extension UniqueNameUtils uniqueNameUtils
+	protected static val extension PrologFactory prologFactory = PrologFactory.eINSTANCE
+	protected static val extension ExpressionsFactory prologExpressionsFactory = ExpressionsFactory.eINSTANCE
+	protected static val extension PrologCreateUtils prologCreateUtils = new PrologCreateUtils
+	protected val extension UniqueNameUtils uniqueNameUtils
 	val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
-	val stagedTraces = new HashMap<EObject, Runnable>
-	var DFD2PrologTransformationWritableTrace trace
-	var Program program	
+	protected val stagedTraces = new HashMap<EObject, Runnable>
+	protected var DFD2PrologTransformationWritableTrace trace
+	protected var Program program	
 	var Iterable<EnumCharacteristicType> characteristicTypesInBehaviors
 	var Iterable<EnumCharacteristicType> characteristicTypesInNodes
-	var Iterable<DataType> usedDataTypes
+	protected var Iterable<DataType> usedDataTypes
 
 	new(UniqueNameProvider nameProvider) {
 		this.uniqueNameUtils = new UniqueNameUtils(nameProvider)
@@ -75,7 +76,8 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		addPreamble(dfd)
 		
 		add(createHeaderComment("Characteristic types"))
-		#[characteristicTypesInBehaviors, characteristicTypesInNodes].flatten.distinct.forEach[transformCharacteristicType.add]
+		var charTypes = #[characteristicTypesInBehaviors, characteristicTypesInNodes].flatten.distinct as Iterable<EnumCharacteristicType>
+		charTypes.forEach[transformCharacteristicType.add]
 		
 		add(createHeaderComment("Nodes"))
 		dfd.nodes.forEach[transformNode.add]
@@ -101,7 +103,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		this.usedDataTypes = dfd.findAllUsedDataTypes
 	}
 
-	protected def transformCharacteristicType(EnumCharacteristicType characteristicType) {
+	protected def dispatch transformCharacteristicType(EnumCharacteristicType characteristicType) {
 		val facts = new ArrayList
 		facts += createFact(createCompoundTerm("characteristicType", characteristicType.uniqueQuotedString))
 		facts.last.stageTrace[trace.add(characteristicType, characteristicType.uniqueQuotedString.value)]
@@ -221,7 +223,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		throw new IllegalArgumentException("Plain edges are not supported as of now.")
 	}
 	
-	protected def transformNode(CharacterizedNode node, String factName, OutputBehaviorCreator outputBehaviorCreator) {
+	protected def dispatch transformNode(CharacterizedNode node, String factName, OutputBehaviorCreator outputBehaviorCreator) {
 		val clauses = new ArrayList<Clause>
 		
 		// type-specific fact
@@ -395,32 +397,9 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			)
 		))
 
-		add(createHeaderComment("HELPER: Shortcuts for common use cases"))
-		add(createComment("Shortcut for characteristic queries"))
-		add(createRule(
-			createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
-			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, "S".toVar, createList)
-		))
-		
-		if (!dfd.nodes.filter(CharacterizedActorProcess).empty) {
-			add(createComment("Always inherit node characteristics from parent"))
-			add(createRule(
-				createCompoundTerm("nodeCharacteristic", "N", "CT", "V"),
-				createConjunction(
-					createCompoundTerm("actorProcess", "N", "A"),
-					createCompoundTerm("nodeCharacteristic", "A", "CT", "V")
-				)
-			))			
-		}
 
-		add(createHeaderComment("HELPER: collect all available data characteristics"))
-		add(createRule(
-			createCompoundTerm("setof_characteristics", "N", "PIN", "CT", "RESULT", "S"),
-			createConjunction(
-				createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar),
-				createCompoundTerm("setof", "V".toVar, createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"), "RESULT".toVar)
-			)
-		))
+
+		
 
 		add(createHeaderComment("HELPER: create valid flow tree"))
 		add(createRule(
@@ -506,6 +485,37 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			createCompoundTerm("involvesNode", "T", "N")
 		))
 		
+		addCharacteristicHelper(dfd)
+	}
+	
+	protected def void addCharacteristicHelper(DataFlowDiagram dfd) {
+		add(createHeaderComment("HELPER: Shortcuts for common use cases"))
+		add(createComment("Shortcut for characteristic queries"))
+		add(createRule(
+			createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, "S".toVar, createList)
+		))
+		
+		if (!dfd.nodes.filter(CharacterizedActorProcess).empty) {
+			add(createComment("Always inherit node characteristics from parent"))
+			add(createRule(
+				createCompoundTerm("nodeCharacteristic", "N", "CT", "V"),
+				createConjunction(
+					createCompoundTerm("actorProcess", "N", "A"),
+					createCompoundTerm("nodeCharacteristic", "A", "CT", "V")
+				)
+			))			
+		}
+		
+		add(createHeaderComment("HELPER: collect all available data characteristics"))
+		add(createRule(
+			createCompoundTerm("setof_characteristics", "N", "PIN", "CT", "RESULT", "S"),
+			createConjunction(
+				createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar),
+				createCompoundTerm("setof", "V".toVar, createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"), "RESULT".toVar)
+			)
+		))
+		
 		add(createHeaderComment("HELPER: find input characteristics"))
 		add(createRule(
 			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, createList(#["F"], #["S"]), "VISITED".toVar),
@@ -521,13 +531,13 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	// queries
 	protected def static Iterable<EnumCharacteristicType> findAllCharacteristicTypesInNodes(DataFlowDiagram dfd) {
 		val characterizedNodes = dfd.eAllContents.filter(CharacterizedNode)
-		characterizedNodes.flatMap[characteristics.iterator].filter(EnumCharacteristic).map[enumCharacteristicType].distinct
+		characterizedNodes.flatMap[characteristics.iterator].filter(EnumCharacteristic).map[enumCharacteristicType].distinct as Iterable<EnumCharacteristicType>
 	}
 	
 	protected def static Iterable<EnumCharacteristicType> findAllCharacteristicTypesInBehaviors(DataFlowDiagram dfd) {
 		val characterizedNodes = dfd.eAllContents.filter(CharacterizedNode)
 		val assignments = characterizedNodes.map[behavior].flatMap[assignments.iterator].toSet
-		assignments.map[lhs].map[characteristicType].filter(EnumCharacteristicType).distinct
+		assignments.map[lhs].map[characteristicType].filter(EnumCharacteristicType).distinct as Iterable<EnumCharacteristicType>
 	}
 	
 	protected def static Iterable<DataType> findAllUsedDataTypes(DataFlowDiagram dfd) {
@@ -552,11 +562,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		#[]
 	}
 	
-	protected def static Iterable<EnumCharacteristicType> distinct(Iterable<EnumCharacteristicType> sequence) {
+	protected def static Iterable<? extends CharacteristicType> distinct(Iterable<? extends CharacteristicType> sequence) {
 		sequence.iterator.distinct
 	}
 	
-	protected def static Iterable<EnumCharacteristicType> distinct(Iterator<EnumCharacteristicType> sequence) {
+	protected def static Iterable<? extends CharacteristicType> distinct(Iterator<? extends CharacteristicType> sequence) {
 		sequence.toMap[id].values.toList.sortBy[name]
 	}
 	

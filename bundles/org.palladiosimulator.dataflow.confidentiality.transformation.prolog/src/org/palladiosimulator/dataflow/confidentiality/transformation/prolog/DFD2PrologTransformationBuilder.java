@@ -8,7 +8,7 @@ public class DFD2PrologTransformationBuilder {
 
     private UniqueNameProvider nameProvider = new IdShortingUniqueNameProvider();
 
-    private DFD2PrologTransformationBuilder() {
+    protected DFD2PrologTransformationBuilder() {
     }
 
     public DFD2PrologTransformationBuilder setNameProvider(UniqueNameProvider nameProvider) {
@@ -28,6 +28,10 @@ public class DFD2PrologTransformationBuilder {
     
     public static DFD2PrologTransformationBuilder create() {
         return new DFD2PrologTransformationBuilder();
+    }
+    
+    public UniqueNameProvider getNameProvider() {
+    	return this.nameProvider;
     }
 
 }
