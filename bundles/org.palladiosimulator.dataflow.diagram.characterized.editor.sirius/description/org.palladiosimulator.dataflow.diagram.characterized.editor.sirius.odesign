@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:properties-ext-widgets-reference="http://www.eclipse.org/sirius/properties/1.0.0/ext/widgets/reference" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius" version="12.0.0.2017041100">
   <ownedViewpoints name="Data Flows Confidentiality">
-    <validationSet>
-      <ownedRules xsi:type="validation:SemanticValidationRule" name="loopCDF" level="WARNING" message="This dataflow is a loop." targetClass="DataFlowDiagramCharacterized::CharacterizedDataFlow">
-        <audits auditExpression="aql:self.targetPin &lt;> self.sourcePin"/>
-      </ownedRules>
-      <ownedRules xsi:type="validation:SemanticValidationRule" name="inputOutPutIsConsistent" level="ERROR" message="service:getErrorMessage()" targetClass="DataFlowDiagram::Node">
-        <audits auditExpression="service:inputOutputIsConsistent()"/>
-      </ownedRules>
-    </validationSet>
-    <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Characterization Extension" viewpointURI="viewpoint:/org.palladiosimulator.dataflow.diagram.editor.sirius/Dataflows" representationName="DFD Editor">
-      <metamodel href="http://palladiosimulator.org/dataflow/diagram/1.0#/"/>
-      <metamodel href="http://palladiosimulator.org/dataflow/diagram/characterized/1.0#/"/>
-      <metamodel href="http://palladiosimulator.org/dataflow/dictionary/1.0#/"/>
-      <metamodel href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#/"/>
-      <metamodel href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"/>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Characterized DFD" initialisation="true" domainClass="DataFlowDiagram::DataFlowDiagram" enablePopupBars="true">
+      <metamodel href="../../org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.ecore#/"/>
+      <metamodel href="../../org.palladiosimulator.dataflow.diagram.characterized/model/DataFlowDiagramCharacterized.ecore#/"/>
+      <metamodel href="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.ecore#/"/>
+      <metamodel href="../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#/"/>
+      <metamodel href="../../org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//expressions"/>
       <metamodel href="http://sdq.ipd.uka.de/Identifier/2.1#/"/>
-      <layers name="Characterization" optional="false">
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedProcessNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" doubleClickDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='refineCharacterizedProcess']" domainClass="DataFlowDiagramCharacterized::CharacterizedProcess">
-          <borderedNodeMappings name="ProcessInputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
+      <defaultLayer name="Default">
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedProcessNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedProcess" inheritsAncestorFilters="false">
+          <borderedNodeMappings name="ProcessInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
-          <borderedNodeMappings name="ProcessOutputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
+          <borderedNodeMappings name="ProcessOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -44,24 +36,16 @@
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
-          <conditionnalStyles predicateExpression="service:isRefined()">
-            <style xsi:type="style:EllipseNodeDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelPosition="node" resizeKind="NSEW" horizontalDiameterComputationExpression="14" verticalDiameterComputationExpression="7">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </conditionnalStyles>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ProcessNode']"/>
         </nodeMappings>
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedStoreNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedStore">
-          <borderedNodeMappings name="StoreInputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedStoreNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedStore" inheritsAncestorFilters="false">
+          <borderedNodeMappings name="StoreInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
-          <borderedNodeMappings name="StoreOutputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
+          <borderedNodeMappings name="StoreOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -75,17 +59,20 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
             </style>
           </borderedNodeMappings>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='StoreNode']"/>
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" labelPosition="node" workspacePath="/org.palladiosimulator.dataflow.diagram.editor.sirius/icons/store.svg">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
         </nodeMappings>
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedExternalActorNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor">
-          <borderedNodeMappings name="ExternalActorInputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="CharacterizedExternalActorNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='deleteNode']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor" inheritsAncestorFilters="false">
+          <borderedNodeMappings name="ExternalActorInputPin" semanticCandidatesExpression="aql:self.behavior.inputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
-          <borderedNodeMappings name="ExternalActorOutputPin" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editPinName']" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
+          <borderedNodeMappings name="ExternalActorOutputPin" semanticCandidatesExpression="aql:self.behavior.outputs" domainClass="DataDictionaryCharacterized::Pin">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -104,90 +91,8 @@
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ExternalActorNode']"/>
         </nodeMappings>
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedProcessNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedProcess">
-          <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
-          <borderedNodeMappings name="ReadOnlyProcessInputPin" semanticCandidatesExpression="service:getInputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyProcessOutputPin" semanticCandidatesExpression="service:getOutputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyProcessCharacteristic" semanticCandidatesExpression="aql:self.characteristics" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic">
-            <style xsi:type="style:SquareDescription" labelSize="10" showIcon="false" labelExpression="aql:self.type.name+': '+self.values.name.concat(' ')" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </borderedNodeMappings>
-          <conditionnalStyles predicateExpression="aql:self.oclIsKindOf(DataFlowDiagramCharacterized::CharacterizedActorProcess)">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorProcess-unmodifiable.svg">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </style>
-          </conditionnalStyles>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ReadOnlyProcessNode']"/>
-        </nodeMappings>
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedExternalActorNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedExternalActor">
-          <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
-          <borderedNodeMappings name="ReadOnlyExternalActorInputPin" semanticCandidatesExpression="service:getInputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyExternalActorOutputPin" semanticCandidatesExpression="service:getOutputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyExternalActorCharacteristic" semanticCandidatesExpression="aql:self.characteristics" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic">
-            <style xsi:type="style:SquareDescription" labelSize="10" showIcon="false" labelExpression="aql:self.type.name+': '+self.values.name.concat(' ')" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </borderedNodeMappings>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ReadOnlyExternalActorNode']"/>
-        </nodeMappings>
-        <nodeMappings xsi:type="description_1:NodeMappingImport" name="ReadOnlyCharacterizedStoreNode" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteNode']" semanticCandidatesExpression="aql:self.eInverse('refiningDiagram').refinedProcess.providingNodes->union(self.eInverse('refiningDiagram').refinedProcess.requiringNodes)" domainClass="DataFlowDiagramCharacterized::CharacterizedStore">
-          <doubleClickDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='navigateUp']"/>
-          <borderedNodeMappings name="ReadOnlyStoreInputPin" semanticCandidatesExpression="service:getInputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="i" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyStoreOutputPin" semanticCandidatesExpression="service:getOutputPinCandidates(diagram)" domainClass="DataDictionaryCharacterized::Pin">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="o" tooltipExpression="aql:self.name" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </borderedNodeMappings>
-          <borderedNodeMappings name="ReadOnlyStoreCharacteristic" semanticCandidatesExpression="aql:self.characteristics" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic">
-            <style xsi:type="style:SquareDescription" labelSize="10" showIcon="false" labelExpression="aql:self.type.name+': '+self.values.name.concat(' ')" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </borderedNodeMappings>
-          <importedMapping href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ReadOnlyStoreNode']"/>
-        </nodeMappings>
-        <edgeMappings name="CharacterizedDataFlowEdge" preconditionExpression="service:isValidEdge(sourceView, targetView)" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='deleteEdge']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.edges" doubleClickDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='refineCDF']" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedExternalActorNode']/@borderedNodeMappings[name='ReadOnlyExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedStoreNode']/@borderedNodeMappings[name='ReadOnlyStoreOutputPin']" targetMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']/@borderedNodeMappings[name='ReadOnlyProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedExternalActorNode']/@borderedNodeMappings[name='ReadOnlyExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedStoreNode']/@borderedNodeMappings[name='ReadOnlyStoreInputPin']" targetFinderExpression="aql:self.targetPin" sourceFinderExpression="aql:self.sourcePin" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" useDomainElement="true" reconnections="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFTarget'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='changeCDFSource']">
+        <edgeMappings name="CharacterizedDataFlowEdge" preconditionExpression="service:isValidEdge(sourceView, targetView)" deletionDescription="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='deleteEdge']" labelDirectEdit="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.edges" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" targetMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" targetFinderExpression="aql:self.targetPin" sourceFinderExpression="aql:self.sourcePin" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" useDomainElement="true" reconnections="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='changeCDFTarget'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='changeCDFSource']">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.data.type.name+': '+self.data.name.concat(' ')">
@@ -203,10 +108,9 @@
             </style>
           </conditionnalStyles>
         </edgeMappings>
-        <edgeMappings name="ActorRelation" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']" targetFinderExpression="aql:self->filter(DataFlowDiagramCharacterized::CharacterizedActorProcess).actor" pathExpression="aql:self->filter(DataFlowDiagramCharacterized::CharacterizedActorProcess).actor">
+        <edgeMappings name="ActorRelation" sourceMapping="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']" targetFinderExpression="aql:self->filter(DataFlowDiagramCharacterized::CharacterizedActorProcess).actor" pathExpression="aql:self->filter(DataFlowDiagramCharacterized::CharacterizedActorProcess).actor">
           <deletionDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@toolSections.0/@ownedTools[name='deleteEdge']"/>
           <targetMapping xsi:type="description_1:NodeMapping" href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ExternalActorNode']"/>
-          <targetMapping xsi:type="description_1:NodeMapping" href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']/@defaultLayer/@nodeMappings[name='ReadOnlyExternalActorNode']"/>
           <style lineStyle="dash" sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription labelSize="12">
@@ -214,8 +118,8 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <toolSections name="DataFlowDiagramCharacterized Tools">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedProcess" label="new Characterized Process" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']">
+        <toolSections name="CharacterizedDFDDefaultTools">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedProcess" label="Process" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -226,7 +130,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedStore" label="new Characterized Store" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedStore" label="Store" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedStoreNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -237,7 +141,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedExternalActor" label="new Characterized External Actor" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedExternalActor" label="External Actor" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedExternalActorNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -248,29 +152,42 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedActorProcess" label="new CharacteristizedActorProcess" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacterizedActorProcess" label="Actor Process" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagramCharacterized::CharacterizedActorProcess" referenceName="nodes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new characterized actor process"/>
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Create Actor Process">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool_1:RemoveElement"/>
+                      </initialOperation>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.actor.oclIsUndefined() or self.name = &quot;&quot;">
+                          <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                        </firstModelOperations>
+                      </initialOperation>
+                    </buttons>
+                    <page name="CreateActorProcessDialogDefaultPage" labelExpression="Create Actor Process" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='createCharacterizedActorProcess']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="CreateActorProcessDialogDefaultGroup" labelExpression="Mandatory Properties" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:TextDescription" name="CreateActorProcessDialogDefaultGroupName" labelExpression="name">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                      <controls xsi:type="properties-ext-widgets-reference:ExtReferenceDescription" name="CreateActorProcessDialogDefaultGroupActor" labelExpression="actor" referenceNameExpression="actor"/>
+                    </groups>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createCharacteristic" label="new Characteristic" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessCharacteristic'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreNodeCharacteristic'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorCharacteristic']" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagramCharacterized::EnumCharacteristic" referenceName="characteristics">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new characteristic"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createCDF" label="new Characterized Data Flow" edgeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@edgeMappings[name='CharacterizedDataFlowEdge']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createCDF" label="Data Flow" edgeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@edgeMappings[name='CharacterizedDataFlowEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -293,7 +210,7 @@
                                 <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addRefiningDF(source, target, sourceNode, targetNode)"/>
                               </initialOperation>
                             </buttons>
-                            <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
+                            <page name="Default Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@toolSections.0/@ownedTools[name='createCDF']/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@cases.0/@subModelOperations.0/@groups.0"/>
                             <groups name="Default Group" labelExpression="Set the data flow to refine" semanticCandidateExpression="var:self">
                               <controls xsi:type="properties:RadioDescription" name="References" labelExpression="Available References" candidatesExpression="service:getAllRefinements(sourceNode, targetNode)" candidateDisplayExpression="aql:candidate.refinedEdge.oclAsType(DataFlowDiagramCharacterized::CharacterizedDataFlow).name" numberOfColumns="2">
                                 <initialOperation>
@@ -315,51 +232,6 @@
                     </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DoubleClickDescription" name="refineCharacterizedProcess" mappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:Switch">
-                <cases conditionExpression="service:isNotRefined(element)">
-                  <subModelOperations xsi:type="tool_1:Let" variableName="oldDFD" valueExpression="aql:self.eContainer().target">
-                    <subModelOperations xsi:type="tool_1:Let" variableName="process" valueExpression="aql:self.target">
-                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().target">
-                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagram::DataFlowDiagramRefinement" referenceName="refinedBy" variableName="refinement">
-                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:refinement">
-                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagram::DataFlowDiagram" referenceName="refiningDiagram" variableName="newDFD">
-                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:refineProcess(process,oldDFD,refinement)"/>
-                              <subModelOperations xsi:type="tool:Navigation" createIfNotExistent="true">
-                                <diagramDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']"/>
-                              </subModelOperations>
-                            </subModelOperations>
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="refiningDiagram" valueExpression="aql:newDFD"/>
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="refinedProcess" valueExpression="aql:process"/>
-                          </subModelOperations>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </subModelOperations>
-                </cases>
-                <default>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:navigateDown(element)">
-                    <subModelOperations xsi:type="tool:Navigation">
-                      <diagramDescription href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@ownedViewpoints[name='Dataflows']/@ownedRepresentations[name='DFD%20Editor']"/>
-                    </subModelOperations>
-                  </subModelOperations>
-                </default>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DoubleClickDescription" name="refineCDF" mappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@edgeMappings[name='CharacterizedDataFlowEdge']">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:Let" variableName="dfdc" valueExpression="aql:self.eContainer().target">
-                <subModelOperations xsi:type="tool_1:Let" variableName="cdf" valueExpression="aql:self.target"/>
-                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:refineCDF(cdf, dfdc)"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -415,77 +287,7 @@
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:deleteEdge()"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInputPin" label="new Input Pin" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessInputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreInputPin']" iconPath="/org.palladiosimulator.dataflow.dictionary.characterized.edit/icons/full/ctool16/CreateBehaviorDefinition_inputs_Pin.png" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:Switch">
-                  <cases conditionExpression="aql:self.ownedBehavior->isEmpty() and self.referencedBehavior->isEmpty()">
-                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::BehaviorDefinition" referenceName="ownedBehavior" variableName="new behavior">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new behavior"/>
-                    </subModelOperations>
-                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="aql:self.eContainer()">
-                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </cases>
-                  <cases conditionExpression="aql:self.ownedBehavior->notEmpty()">
-                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
-                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="inputs">
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.in.newPin'"/>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </cases>
-                  <default/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createOutputPin" label="new Output Pin" nodeMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode']/@borderedNodeMappings[name='ExternalActorOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']/@borderedNodeMappings[name='ProcessOutputPin'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']/@borderedNodeMappings[name='StoreOutputPin']" iconPath="/org.palladiosimulator.dataflow.dictionary.characterized.edit/icons/full/ctool16/CreateBehaviorDefinition_outputs_Pin.png" extraMappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedExternalActorNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedStoreNode']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:Switch">
-                  <cases conditionExpression="aql:self.ownedBehavior->isEmpty() and self.referencedBehavior->isEmpty()">
-                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::BehaviorDefinition" referenceName="ownedBehavior" variableName="new behavior">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new behavior"/>
-                      <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="aql:self.eContainer()">
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
-                          </subModelOperations>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </cases>
-                  <cases conditionExpression="aql:self.ownedBehavior->notEmpty()">
-                    <subModelOperations xsi:type="tool_1:Let" variableName="node" valueExpression="var:self">
-                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.ownedBehavior">
-                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataDictionaryCharacterized::Pin" referenceName="outputs">
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:node.name+'.out.newPin'"/>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </cases>
-                  <default/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
           <ownedTools xsi:type="tool:DirectEditLabel" name="editNodeName" inputLabelExpression="aql:self.name">
-            <mask mask="{0}"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DirectEditLabel" name="editPinName" inputLabelExpression="aql:self.name">
             <mask mask="{0}"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
@@ -493,8 +295,7 @@
           </ownedTools>
         </toolSections>
         <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="CharacterizedActorProcessAnnotation" position="NORTH" preconditionExpression="aql:self.oclIsKindOf(DataFlowDiagramCharacterized::CharacterizedActorProcess)" imageExpression="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorIcon.svg" mappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode'] //@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='ReadOnlyCharacterizedProcessNode']"/>
-          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="RefinedNodeAnnotation" position="NORTH_EAST" preconditionExpression="aql:self.eContainer().refinedBy.refinedProcess->includes(self)" imageExpression="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/refinedIcon.svg" mappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentationExtensions[name='Characterization%20Extension']/@layers[name='Characterization']/@nodeMappings[name='CharacterizedProcessNode']"/>
+          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="CharacterizedActorProcessAnnotation" position="NORTH" preconditionExpression="aql:self.oclIsKindOf(DataFlowDiagramCharacterized::CharacterizedActorProcess)" imageExpression="/org.palladiosimulator.dataflow.diagram.characterized.editor.sirius/icons/actorIcon.svg" mappings="//@ownedViewpoints[name='Data%20Flows%20Confidentiality']/@ownedRepresentations[name='Characterized%20DFD']/@defaultLayer/@nodeMappings[name='CharacterizedProcessNode']"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:loadDefaultResources(view)">
@@ -502,156 +303,23 @@
             <featureCustomizations xsi:type="description:EAttributeCustomization"/>
           </vsmElementCustomizations>
         </customization>
-      </layers>
-    </ownedRepresentationExtensions>
+      </defaultLayer>
+    </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.Services"/>
   </ownedViewpoints>
-  <extensions xsi:type="properties:ViewExtensionDescription" name="Properties DFDC">
-    <metamodels href="http://palladiosimulator.org/dataflow/diagram/1.0#/"/>
-    <metamodels href="http://palladiosimulator.org/dataflow/diagram/characterized/1.0#/"/>
-    <metamodels href="http://palladiosimulator.org/dataflow/dictionary/1.0#/"/>
-    <metamodels href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#/"/>
-    <metamodels href="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"/>
-    <metamodels href="http://sdq.ipd.uka.de/Identifier/2.1#/"/>
-    <categories name="DFDC Category">
-      <pages name="DFC Editor Page" documentation="should extend df editor page of original editor, old page still shows up though" groups="//@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3">
-        <extends href="../../org.palladiosimulator.dataflow.diagram.editor.sirius/description/diagram.editor.sirius.odesign#//@extensions.0/@categories.0/@pages.0"/>
-      </pages>
-      <groups name="Characteristics" labelExpression="Properties" domainClass="DataFlowDiagramCharacterized::EnumCharacteristic" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="CharacteristicName" labelExpression="Name" valueExpression="aql:self.name">
+  <extensions xsi:type="properties:ViewExtensionDescription" name="CharacterizedNodePropertiesView">
+    <categories name="CharacterizedNodePropertiesViewCategory">
+      <pages name="CharacterizedNodePropertiesViewCharacterizedNodeDefaultPage" labelExpression="General" domainClass="CharacterizedNode" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0"/>
+      <groups name="CharacterizedNodePropertiesViewGroup" labelExpression="Characterized Node Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="CharacterizedNodePropertiesViewGroupName" labelExpression="Name" valueExpression="aql:self.name">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <validationSet>
-          <propertyValidationRules name="CharacteristicNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.0/@controls.0">
-            <audits auditExpression="aql:self->size() > 0"/>
-          </propertyValidationRules>
-        </validationSet>
-      </groups>
-      <groups name="CDF" labelExpression="Properties" domainClass="DataFlowDiagramCharacterized::CharacterizedDataFlow" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="CharacterizedDataFlowName" labelExpression="Name" valueExpression="aql:self.name">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
-            </firstModelOperations>
-          </initialOperation>
-        </controls>
-        <controls xsi:type="properties:ListDescription" name="Data" labelExpression="Data" valueExpression="feature:data" displayExpression="aql:value.name + ' : ' + value.type.name">
-          <actions labelExpression="Add Entry">
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="DataFlowDiagram::Data" referenceName="data">
-                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add Piece Of Data">
-                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                      <initialOperation/>
-                    </buttons>
-                    <buttons labelExpression="OK" isEnabledExpression="service:isValidData()" default="true" closeDialogOnClick="true">
-                      <initialOperation/>
-                    </buttons>
-                    <page name="Add Data Page" labelExpression="New Piece of Data" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
-                    <groups name="Add Data Group" labelExpression="Enter data" semanticCandidateExpression="var:self">
-                      <controls xsi:type="properties:TextDescription" name="Name">
-                        <initialOperation>
-                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instance">
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
-                          </firstModelOperations>
-                        </initialOperation>
-                      </controls>
-                      <controls xsi:type="properties:SelectDescription" name="DataType" labelExpression="Data Type" valueExpression="feature:type" candidatesExpression="service:listDataTypes()" candidateDisplayExpression="aql:candidate.name">
-                        <initialOperation>
-                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:newValue"/>
-                          </firstModelOperations>
-                        </initialOperation>
-                      </controls>
-                    </groups>
-                  </subModelOperations>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </actions>
-          <actions labelExpression="Remove Selected Entry">
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                <subModelOperations xsi:type="tool_1:Unset" featureName="data" elementExpression="var:selection"/>
-              </firstModelOperations>
-            </initialOperation>
-          </actions>
-          <actions labelExpression="Edit Selected Entry">
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                <subModelOperations xsi:type="tool_1:Let" variableName="entry" valueExpression="aql:selection->first()"/>
-                <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Edit Entry">
-                  <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                    <initialOperation/>
-                  </buttons>
-                  <buttons labelExpression="OK" isEnabledExpression="service:isValidData(entry)" default="true" closeDialogOnClick="true">
-                    <initialOperation/>
-                  </buttons>
-                  <page name="Data Edit Page" labelExpression="Page" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.2/@initialOperation/@firstModelOperations/@subModelOperations.1/@groups.0"/>
-                  <groups name="Data Edit" labelExpression="Edit data" semanticCandidateExpression="var:self">
-                    <controls xsi:type="properties:TextDescription" name="Name" valueExpression="aql:selection->first().name">
-                      <initialOperation>
-                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:selection->first()">
-                          <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:newValue.size() > 0">
-                            <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:newValue"/>
-                          </subModelOperations>
-                        </firstModelOperations>
-                      </initialOperation>
-                    </controls>
-                    <controls xsi:type="properties:SelectDescription" name="DataType" labelExpression="Data Type" valueExpression="aql:selection->first().type" candidatesExpression="service:listDataTypes()" candidateDisplayExpression="aql:candidate.name">
-                      <initialOperation>
-                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:selection->first()">
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:newValue"/>
-                        </firstModelOperations>
-                      </initialOperation>
-                    </controls>
-                  </groups>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </actions>
-        </controls>
-        <validationSet>
-          <propertyValidationRules name="CharacterizedDataFlowNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.1/@controls.0">
-            <audits auditExpression="aql:self->size() > 0"/>
-          </propertyValidationRules>
-        </validationSet>
-      </groups>
-      <groups name="DFDC" documentation="add, edit or remove pieces of data to/of a dataflow" labelExpression="Actions" domainClass="DataFlowDiagram::DataFlowDiagram" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:ButtonDescription" name="openDialog" labelExpression="Load characterized data dictionary" buttonLabelExpression="open">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:loadResources()"/>
-          </initialOperation>
-        </controls>
-      </groups>
-      <groups name="Behavior Description" documentation="very basic display of behaviors, name can only be edited for ownedBehaviors not for referenced ones" labelExpression="Behavior Properties" domainClass="CharacterizedNode" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="BehaviorName" labelExpression="Name" isEnabledExpression="aql:self.ownedBehavior->notEmpty()" valueExpression="aql:self.behavior.name">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.behavior">
-              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
-            </firstModelOperations>
-          </initialOperation>
-        </controls>
-        <controls xsi:type="properties:LabelDescription" name="Assignments LHS" labelExpression="Assignments LHS" isEnabledExpression="aql:true" valueExpression="aql:null"/>
-        <controls xsi:type="properties:ContainerDescription" name="Assignments" label="Assignments">
-          <controls xsi:type="properties:LabelDescription" name="LHS Pin" labelExpression="Pin" valueExpression="aql:self.behavior.assignments.lhs.pin.name"/>
-          <controls xsi:type="properties:LabelDescription" name="LHS Literal" labelExpression="Literal" isEnabledExpression="aql:self.behavior.assignments.lhs.literal->notEmpty()" valueExpression="aql:self.behavior.assignments.lhs.literal.name"/>
-          <controls xsi:type="properties:LabelDescription" name="LHS Characteristic Type" labelExpression="Characteristic Type" valueExpression="aql:self.behavior.assignments.lhs.characteristicType.name"/>
-        </controls>
-        <controls xsi:type="properties:SelectDescription" name="Select Referenced Behavior">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self"/>
-          </initialOperation>
-        </controls>
-        <validationSet>
-          <propertyValidationRules name="BehaviorNameValidation" level="WARNING" message="The name should not be empty." targets="//@extensions.0/@categories.0/@groups.3/@controls.0">
-            <audits auditExpression="aql:self->size() > 0"/>
-          </propertyValidationRules>
-        </validationSet>
+        <controls xsi:type="properties-ext-widgets-reference:ExtReferenceDescription" name="CharacterizedNodePropertiesViewGroupBehaviorReference" labelExpression="Behavior" referenceNameExpression="referencedBehavior"/>
+        <controls xsi:type="properties-ext-widgets-reference:ExtReferenceDescription" name="CharacterizedNodePropertiesViewGroupCharacteristicsReference" labelExpression="Characteristics" referenceNameExpression="referencedCharacteristics"/>
       </groups>
     </categories>
   </extensions>

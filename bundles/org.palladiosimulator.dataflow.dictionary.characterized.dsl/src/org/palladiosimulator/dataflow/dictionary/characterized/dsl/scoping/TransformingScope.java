@@ -31,7 +31,7 @@ public class TransformingScope implements IScope {
 
     @Override
     public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-        return transform(delegate.getElements(name));
+        return Iterables.filter(getAllElements(), description -> description.getName().equals(name));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TransformingScope implements IScope {
 
     @Override
     public IEObjectDescription getSingleElement(QualifiedName name) {
-        return transform(delegate.getSingleElement(name));
+        return Iterables.getFirst(getElements(name), null);
     }
 
     protected Iterable<IEObjectDescription> transform(Iterable<IEObjectDescription> elements) {

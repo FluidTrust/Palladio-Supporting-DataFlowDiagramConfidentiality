@@ -4,26 +4,21 @@
 package org.palladiosimulator.dataflow.dictionary.characterized.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.palladiosimulator.dataflow.dictionary.characterized.dsl.converter.CharacterizedDataDictionaryValueConverter;
-import org.palladiosimulator.dataflow.dictionary.characterized.dsl.linking.CharacterizedDataDictionaryDefaultLinkingService;
 import org.palladiosimulator.dataflow.dictionary.characterized.dsl.service.CharacterizedDataDictionaryDerivedStateComputer;
+import org.palladiosimulator.dataflow.dictionary.characterized.dsl.service.CharacterizedDataDictionaryTransientValueService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension
  * registry.
  */
 public class CharacterizedDataDictionaryRuntimeModule extends AbstractCharacterizedDataDictionaryRuntimeModule {
-
-    @Override
-    public Class<? extends ILinkingService> bindILinkingService() {
-        return CharacterizedDataDictionaryDefaultLinkingService.class;
-    }
 
     @Override
     public Class<? extends IValueConverterService> bindIValueConverterService() {
@@ -41,6 +36,11 @@ public class CharacterizedDataDictionaryRuntimeModule extends AbstractCharacteri
 
     public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
         return DerivedStateAwareResourceDescriptionManager.class;
+    }
+
+    @Override
+    public Class<? extends ITransientValueService> bindITransientValueService() {
+        return CharacterizedDataDictionaryTransientValueService.class;
     }
 
 }

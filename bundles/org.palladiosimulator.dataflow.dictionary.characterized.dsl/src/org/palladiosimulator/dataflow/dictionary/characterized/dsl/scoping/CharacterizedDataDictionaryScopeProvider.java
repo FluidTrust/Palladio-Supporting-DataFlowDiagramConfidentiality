@@ -15,6 +15,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.CharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsPackage;
@@ -46,14 +47,21 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
             return new FilteringScope(superScope, description -> usablePins.contains(description.getEObjectOrProxy()));
         }
         if (reference == ExpressionsPackage.Literals.ENUM_CHARACTERISTIC_REFERENCE__LITERAL) {
-            return new TransformingScope(superScope, description -> Optional.ofNullable(description)
-                .map(d -> (IEObjectDescription) new AliasedEObjectDescription(
-                        QualifiedName.create(description.getQualifiedName()
-                            .getLastSegment()),
-                        d))
-                .orElse(description));
+            return buildLastSegmentScope(superScope);
+        }
+        if (reference == DataDictionaryCharacterizedPackage.Literals.ENUM_CHARACTERISTIC__VALUES) {
+            return buildLastSegmentScope(superScope);
         }
         return superScope;
+    }
+
+    protected IScope buildLastSegmentScope(IScope superScope) {
+        return new TransformingScope(superScope, description -> Optional.ofNullable(description)
+            .map(d -> (IEObjectDescription) new AliasedEObjectDescription(
+                    QualifiedName.create(description.getQualifiedName()
+                        .getLastSegment()),
+                    d))
+            .orElse(description));
     }
 
     @SuppressWarnings("unchecked")

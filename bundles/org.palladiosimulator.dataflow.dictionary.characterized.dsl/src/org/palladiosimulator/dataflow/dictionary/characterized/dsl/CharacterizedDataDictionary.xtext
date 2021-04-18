@@ -3,20 +3,44 @@ grammar org.palladiosimulator.dataflow.dictionary.characterized.dsl.Characterize
 import "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore"
 import "platform:/resource/org.palladiosimulator.dataflow.dictionary.characterized/model/DataDictionaryCharacterized.ecore#//expressions" as ex
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://palladiosimulator.org/dataflow/dictionary/1.0" as dd
 
 DataDictionaryCharacterized returns DataDictionaryCharacterized:
 	{DataDictionaryCharacterized}
-	'directory' 'id' id=STRING
+	'dictionary' 'id' id=STRING
 	(
+		entries+=DataType |
 		enumerations+=Enumeration |
 		characteristicTypes+=CharacteristicType |
 		characteristics+=Characteristic |
 		behaviorDefinitions+=BehaviorDefinition
 	)*;
 
+DataType returns dd::DataType:
+	CollectionDataType | CompositeDataType | PrimitiveDataType
+;
+
+PrimitiveDataType returns dd::PrimitiveDataType:
+	'primitiveDataType' name=NameString
+;
+
+CollectionDataType returns dd::CollectionDataType:
+	'collectionDataType' name=NameString 'using' type=[dd::DataType|NameString]
+;
+
+CompositeDataType returns dd::CompositeDataType:
+	'compositeDataType' name=NameString '{'
+		(components+=Entry)*
+	'}'
+;
+
+Entry returns dd::Entry:
+	name=NameString 'using' type=[dd::DataType|NameString]
+;
+
 Enumeration:
 	'enum' name=NameString '{'
-		literals+=Literal (',' literals+=Literal)*
+		literals+=Literal+
 	'}'
 ;
 
@@ -39,14 +63,14 @@ Characteristic:
 
 EnumCharacteristic:
 	'enumCharacteristic' name=NameString 'using' type=[EnumCharacteristicType|NameString] '{'
-		values+=[Literal|NameString] (',' values+=[Literal|NameString])*
+		values+=[Literal|NameString]+
 	'}'
 ;
 
 BehaviorDefinition:
 	'behavior' name=NameString '{'
-		('inputPins' inputs+=Pin (',' inputs+=Pin)*)?
-		('outputPins' outputs+=Pin (',' outputs+=Pin)*)?
+		('input' inputs+=Pin)*
+		('output' outputs+=Pin)*
 		assignments+=Assignment*
 	'}'
 ;

@@ -6,32 +6,109 @@ package org.palladiosimulator.dataflow.dictionary.characterized.dsl.formatting2
 import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.palladiosimulator.dataflow.dictionary.DataDictionary.CollectionDataType
+import org.palladiosimulator.dataflow.dictionary.DataDictionary.CompositeDataType
+import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry
+import org.palladiosimulator.dataflow.dictionary.DataDictionary.PrimitiveDataType
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterized
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Enumeration
 import org.palladiosimulator.dataflow.dictionary.characterized.dsl.services.CharacterizedDataDictionaryGrammarAccess
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage
 
 class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 	
 	@Inject extension CharacterizedDataDictionaryGrammarAccess
 
 	def dispatch void format(DataDictionaryCharacterized dataDictionaryCharacterized, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (enumeration : dataDictionaryCharacterized.enumerations) {
-			enumeration.format
-		}
-		for (characteristicType : dataDictionaryCharacterized.characteristicTypes) {
-			characteristicType.format
-		}
-		for (behaviorDefinition : dataDictionaryCharacterized.behaviorDefinitions) {
-			behaviorDefinition.format
-		}
+		dataDictionaryCharacterized.regionFor.keyword(dataDictionaryCharacterizedAccess.dictionaryKeyword_1).append[oneSpace]
+		dataDictionaryCharacterized.regionFor.keyword(dataDictionaryCharacterizedAccess.idKeyword_2).append[oneSpace]
+		dataDictionaryCharacterized.regionFor.assignment(dataDictionaryCharacterizedAccess.idAssignment_3).append[priority = 2; newLines = 2]
+		
+		dataDictionaryCharacterized.entries.forEach[format]
+		dataDictionaryCharacterized.enumerations.forEach[format]
+		dataDictionaryCharacterized.characteristics.forEach[format]
+		dataDictionaryCharacterized.characteristicTypes.forEach[format]
+		dataDictionaryCharacterized.behaviorDefinitions.forEach[format]
+	}
+	
+	def dispatch void format(PrimitiveDataType dataType, extension IFormattableDocument document) {
+		dataType.prepend[newLine]
+		dataType.regionFor.keyword(primitiveDataTypeAccess.primitiveDataTypeKeyword_0).append[oneSpace]
+		dataType.regionFor.assignment(primitiveDataTypeAccess.nameAssignment_1)
+		dataType.append[noSpace]
+	}
+	
+	def dispatch void format(CollectionDataType dataType, extension IFormattableDocument document) {
+		dataType.prepend[newLine]
+		dataType.regionFor.keyword(collectionDataTypeAccess.collectionDataTypeKeyword_0).append[oneSpace]
+		dataType.regionFor.assignment(collectionDataTypeAccess.nameAssignment_1).append[oneSpace]
+		dataType.regionFor.keyword(collectionDataTypeAccess.usingKeyword_2).append[oneSpace]
+		dataType.regionFor.assignment(collectionDataTypeAccess.typeAssignment_3)
+		dataType.append[noSpace]
+	}
+	
+	def dispatch void format(CompositeDataType dataType, extension IFormattableDocument document) {
+		dataType.prepend[newLine]
+		dataType.regionFor.keyword(compositeDataTypeAccess.compositeDataTypeKeyword_0).append[oneSpace]
+		dataType.regionFor.element(compositeDataTypeAccess.nameAssignment_1).append[oneSpace]
+		interior(
+			dataType.regionFor.keyword(compositeDataTypeAccess.leftCurlyBracketKeyword_2).append[newLine],
+			dataType.regionFor.keyword(compositeDataTypeAccess.rightCurlyBracketKeyword_4),
+			[indent]
+		)
+		dataType.components.forEach[format]
+		dataType.append[noSpace]
+	}
+	
+	def dispatch void format(Entry entry, extension IFormattableDocument document) {
+		entry.regionFor.assignment(entryAccess.nameAssignment_0).append[oneSpace]
+		entry.regionFor.keyword(entryAccess.usingKeyword_1).append[oneSpace]
+		entry.append[newLine]
 	}
 
 	def dispatch void format(Enumeration enumeration, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (literal : enumeration.literals) {
-			literal.format
+		enumeration.prepend[newLine]
+		enumeration.regionFor.keyword(enumerationAccess.enumKeyword_0).append[oneSpace]
+		enumeration.regionFor.assignment(enumerationAccess.nameAssignment_1).append[oneSpace]
+		interior(
+			enumeration.regionFor.keyword(enumerationAccess.leftCurlyBracketKeyword_2).append[newLine],
+			enumeration.regionFor.keyword(enumerationAccess.rightCurlyBracketKeyword_4),
+			[indent]
+		)
+		enumeration.literals.forEach[format]
+		enumeration.literals.forEach[append[newLine]]
+		enumeration.append[noSpace]
+	}
+	
+	def dispatch void format(EnumCharacteristicType type, extension IFormattableDocument document) {
+		type.prepend[newLine]
+		type.regionFor.keyword(enumCharacteristicTypeAccess.enumCharacteristicTypeKeyword_0).append[oneSpace]
+		type.regionFor.assignment(enumCharacteristicTypeAccess.nameAssignment_1).append[oneSpace]
+		type.regionFor.keyword(enumCharacteristicTypeAccess.usingKeyword_2).append[oneSpace]
+		type.append[noSpace]
+	}
+	
+	def dispatch void format(EnumCharacteristic characteristic, extension IFormattableDocument document) {
+		characteristic.prepend[newLine]
+		characteristic.regionFor.keyword(enumCharacteristicAccess.enumCharacteristicKeyword_0).append[oneSpace]
+		characteristic.regionFor.assignment(enumCharacteristicAccess.nameAssignment_1).append[oneSpace]
+		characteristic.regionFor.keyword(enumCharacteristicAccess.usingKeyword_2).append[oneSpace]
+		characteristic.regionFor.keyword(enumCharacteristicAccess.leftCurlyBracketKeyword_4).prepend[oneSpace]
+
+		interior(
+			characteristic.regionFor.keyword(enumCharacteristicAccess.leftCurlyBracketKeyword_4).append[newLine],
+			characteristic.regionFor.keyword(enumCharacteristicAccess.rightCurlyBracketKeyword_6),
+			[indent]
+		)
+
+		val firstValueRegion = characteristic.regionFor.assignment(enumCharacteristicAccess.valuesAssignment_5)
+		for (var valueRegion = firstValueRegion; valueRegion?.containingFeature === DataDictionaryCharacterizedPackage.Literals.ENUM_CHARACTERISTIC__VALUES; valueRegion = valueRegion.nextSemanticRegion) {
+			valueRegion.append[newLine]
 		}
+		
+		characteristic.append[noSpace]
 	}
 	
 	// TODO: implement for BehaviorDefinition, Assignment, And, Or, Not

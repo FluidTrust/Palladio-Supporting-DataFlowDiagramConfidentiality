@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.ComposedSwitch;
 import org.eclipse.emf.ecore.util.Switch;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataType;
+import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.util.DataDictionarySwitch;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType;
@@ -54,6 +55,11 @@ public class IdDeriver {
 
         @Override
         public String caseDataType(DataType object) {
+            return getIndexBasedSuffix(object);
+        }
+
+        @Override
+        public String caseEntry(Entry object) {
             return getIndexBasedSuffix(object);
         }
 
