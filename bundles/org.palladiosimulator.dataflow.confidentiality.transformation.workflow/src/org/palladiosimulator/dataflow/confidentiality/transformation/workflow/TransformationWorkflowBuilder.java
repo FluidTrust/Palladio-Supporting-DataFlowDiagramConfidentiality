@@ -30,14 +30,14 @@ import de.uka.ipd.sdq.workflow.mdsd.blackboard.SavePartitionToDiskJob;
 
 public class TransformationWorkflowBuilder {
 
-	private static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
-	private static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
-	private static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
+	protected static final ModelLocation DEFAULT_DFD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dfd.xmi"));
+	protected static final ModelLocation DEFAULT_DD_LOCATION = new ModelLocation("dfd", URI.createFileURI("tmp/dd.xmi"));
+	protected static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
 	protected static final String DEFAULT_TRACE_KEY = "trace";
 	protected static final String DEFAULT_PROLOG_KEY = "prolog";
 	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
 	private final Collection<IJob> serializationJobs = new ArrayList<>();
-	private ModelLocation dfdLocation;
+	protected ModelLocation dfdLocation;
 	protected WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
 	protected IProgressMonitor progressMonitor = new NullProgressMonitor();
 	private NameGenerationStrategie nameDerivationMethod = NameGenerationStrategie.SHORTED_ID;
