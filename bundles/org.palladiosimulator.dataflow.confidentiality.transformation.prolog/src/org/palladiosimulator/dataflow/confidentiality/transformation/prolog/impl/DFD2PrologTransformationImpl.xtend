@@ -76,7 +76,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		addPreamble(dfd)
 		
 		add(createHeaderComment("Characteristic types"))
-		var charTypes = #[characteristicTypesInBehaviors, characteristicTypesInNodes].flatten.distinct as Iterable<EnumCharacteristicType>
+		var charTypes = #[characteristicTypesInBehaviors, characteristicTypesInNodes].flatten.distinct
 		charTypes.forEach[transformCharacteristicType.add]
 		
 		add(createHeaderComment("Nodes"))
@@ -531,13 +531,13 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	// queries
 	protected def static Iterable<EnumCharacteristicType> findAllCharacteristicTypesInNodes(DataFlowDiagram dfd) {
 		val characterizedNodes = dfd.eAllContents.filter(CharacterizedNode)
-		characterizedNodes.flatMap[characteristics.iterator].filter(EnumCharacteristic).map[enumCharacteristicType].distinct as Iterable<EnumCharacteristicType>
+		characterizedNodes.flatMap[characteristics.iterator].filter(EnumCharacteristic).map[enumCharacteristicType].distinct
 	}
 	
 	protected def static Iterable<EnumCharacteristicType> findAllCharacteristicTypesInBehaviors(DataFlowDiagram dfd) {
 		val characterizedNodes = dfd.eAllContents.filter(CharacterizedNode)
 		val assignments = characterizedNodes.map[behavior].flatMap[assignments.iterator].toSet
-		assignments.map[lhs].map[characteristicType].filter(EnumCharacteristicType).distinct as Iterable<EnumCharacteristicType>
+		assignments.map[lhs].map[characteristicType].filter(EnumCharacteristicType).distinct
 	}
 	
 	protected def static Iterable<DataType> findAllUsedDataTypes(DataFlowDiagram dfd) {
@@ -562,11 +562,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		#[]
 	}
 	
-	protected def static Iterable<? extends CharacteristicType> distinct(Iterable<? extends CharacteristicType> sequence) {
+	protected def static <T extends CharacteristicType> Iterable<T> distinct(Iterable<T> sequence) {
 		sequence.iterator.distinct
 	}
 	
-	protected def static Iterable<? extends CharacteristicType> distinct(Iterator<? extends CharacteristicType> sequence) {
+	protected def static <T extends CharacteristicType> Iterable<T> distinct(Iterator<T> sequence) {
 		sequence.toMap[id].values.toList.sortBy[name]
 	}
 	

@@ -36,7 +36,7 @@ class AnalysisIntegrationTestBase {
 	}
 	
 	@BeforeAll
-	static def void init() {
+	protected static def void init() {
 		StandaloneUtil.init();
 		var factory = new SWIPrologCLIProverFactory(
 			Arrays.asList(new SWIPrologExecutableProviderStandalone(new DefaultSWIPrologExecutableProvider(), 2),
