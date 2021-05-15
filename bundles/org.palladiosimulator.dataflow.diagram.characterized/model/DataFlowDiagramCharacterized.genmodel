@@ -17,14 +17,9 @@
       disposableProviderFactory="true" extensibleProviderFactory="true" childCreationExtenders="true"
       ecorePackage="DataFlowDiagramCharacterized.ecore#/">
     <genClasses image="false" ecoreClass="DataFlowDiagramCharacterized.ecore#//Characterizable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Characterizable/characteristics"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="DataFlowDiagramCharacterized.ecore#//Characteristic">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Characteristic/type"/>
-    </genClasses>
-    <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//EnumCharacteristic">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//EnumCharacteristic/values"/>
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//EnumCharacteristic/enumCharacteristicType"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Characterizable/characteristics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Characterizable/ownedCharacteristics"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Characterizable/referencedCharacteristics"/>
     </genClasses>
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedExternalActor"/>
     <genClasses ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedStore"/>
@@ -37,5 +32,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//CharacterizedActorProcess/actor"/>
     </genClasses>
     <genClasses image="false" ecoreClass="DataFlowDiagramCharacterized.ecore#//CharacterizedNode"/>
+    <genClasses image="false" ecoreClass="DataFlowDiagramCharacterized.ecore#//Behaving">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Behaving/behavior"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Behaving/ownedBehavior"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataFlowDiagramCharacterized.ecore#//Behaving/referencedBehavior"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
