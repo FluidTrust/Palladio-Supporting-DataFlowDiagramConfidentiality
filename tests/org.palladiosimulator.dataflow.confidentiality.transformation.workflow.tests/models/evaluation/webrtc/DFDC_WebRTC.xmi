@@ -1,1028 +1,616 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DataFlowDiagram:DataFlowDiagram
-    xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
-    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
-    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
-    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
-    id="_jzfXIENEEeq3NrD2DjPidq">
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_eGv8RVyqEeqKwtlhILVboQ"
-      name="Alice">
-    <ownedBehavior
-        id="_lvXTcFyqEeqKwtlhILVboQ">
-      <inputs
-          id="_sUcKAFyqEeqKwtlhILVboQ"
-          name="Alice.in.BMedia"/>
-      <outputs
-          id="_mjqeMVyqEeqKwtlhILVboQ"
-          name="Alice.out.AMedia"/>
-      <outputs
-          id="_oPqtAVyqEeqKwtlhILVboQ"
-          name="Alice.out.AliceSessionData"/>
-      <assignments
-          id="_t6fh0lyqEeqKwtlhILVboQ">
-        <lhs
-            id="_2EegsFyqEeqKwtlhILVboQ"
-            pin="_mjqeMVyqEeqKwtlhILVboQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
-          <literal
-              href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+<DataFlowDiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0" xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_jzfXIENEEeq3NrD2DjPidq">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_eGv8RVyqEeqKwtlhILVboQ" name="Alice">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ahQVkLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_lvXTcFyqEeqKwtlhILVboQ">
+      <inputs id="_sUcKAFyqEeqKwtlhILVboQ" name="Alice.in.BMedia"/>
+      <outputs id="_mjqeMVyqEeqKwtlhILVboQ" name="Alice.out.AMedia"/>
+      <outputs id="_oPqtAVyqEeqKwtlhILVboQ" name="Alice.out.AliceSessionData"/>
+      <assignments id="_t6fh0lyqEeqKwtlhILVboQ">
+        <lhs id="_2EegsFyqEeqKwtlhILVboQ" pin="_mjqeMVyqEeqKwtlhILVboQ">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
         </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_3huh0VyqEeqKwtlhILVboQ"/>
+        <rhs xsi:type="expressions:True" id="_3huh0VyqEeqKwtlhILVboQ"/>
       </assignments>
-      <assignments
-          id="_33NCklyqEeqKwtlhILVboQ">
-        <lhs
-            id="_4OT7AFyqEeqKwtlhILVboQ"
-            pin="_oPqtAVyqEeqKwtlhILVboQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
-          <literal
-              href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+      <assignments id="_33NCklyqEeqKwtlhILVboQ">
+        <lhs id="_4OT7AFyqEeqKwtlhILVboQ" pin="_oPqtAVyqEeqKwtlhILVboQ">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
         </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_5mLs4VyqEeqKwtlhILVboQ"/>
+        <rhs xsi:type="expressions:True" id="_5mLs4VyqEeqKwtlhILVboQ"/>
       </assignments>
     </ownedBehavior>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_hdkuJVyqEeqKwtlhILVboQ"
-      name="AliceBrowserInitializer">
-    <ownedBehavior
-        id="_9IXaMFyqEeqKwtlhILVboQ">
-      <outputs
-          id="_adjykVyrEeqKwtlhILVboQ"
-          name="AliceBorwserInitializer.out.AliceBrowserID"/>
-      <outputs
-          id="_kumdMVyuEeqKwtlhILVboQ"
-          name="AliceBorwserInitializer.out.APort"/>
-      <assignments
-          id="_553d6lyqEeqKwtlhILVboQ">
-        <lhs
-            id="_ECkMMFyrEeqKwtlhILVboQ"
-            pin="_adjykVyrEeqKwtlhILVboQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
-          <literal
-              href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_hdkuJVyqEeqKwtlhILVboQ" name="AliceBrowserInitializer">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_acJMEbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_9IXaMFyqEeqKwtlhILVboQ">
+      <outputs id="_adjykVyrEeqKwtlhILVboQ" name="AliceBorwserInitializer.out.AliceBrowserID"/>
+      <outputs id="_kumdMVyuEeqKwtlhILVboQ" name="AliceBorwserInitializer.out.APort"/>
+      <assignments id="_553d6lyqEeqKwtlhILVboQ">
+        <lhs id="_ECkMMFyrEeqKwtlhILVboQ" pin="_adjykVyrEeqKwtlhILVboQ">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
         </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_7aHIoVyqEeqKwtlhILVboQ"/>
+        <rhs xsi:type="expressions:True" id="_7aHIoVyqEeqKwtlhILVboQ"/>
       </assignments>
     </ownedBehavior>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_izexIFyqEeqKwtlhILVboQ"
-      name="Bob">
-    <ownedBehavior
-        id="_dOZigFyrEeqKwtlhILVboQ">
-      <inputs
-          id="_hJllsFyrEeqKwtlhILVboQ"
-          name="Bob.in.AMedia"/>
-      <outputs
-          id="_eCob0VyrEeqKwtlhILVboQ"
-          name="Bob.BMedia"/>
-      <assignments
-          id="_i2XQklyrEeqKwtlhILVboQ">
-        <lhs
-            id="_jPpTQFyrEeqKwtlhILVboQ"
-            pin="_eCob0VyrEeqKwtlhILVboQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
-          <literal
-              href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_izexIFyqEeqKwtlhILVboQ" name="Bob">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_aX6zYLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_dOZigFyrEeqKwtlhILVboQ">
+      <inputs id="_hJllsFyrEeqKwtlhILVboQ" name="Bob.in.AMedia"/>
+      <outputs id="_eCob0VyrEeqKwtlhILVboQ" name="Bob.BMedia"/>
+      <assignments id="_i2XQklyrEeqKwtlhILVboQ">
+        <lhs id="_jPpTQFyrEeqKwtlhILVboQ" pin="_eCob0VyrEeqKwtlhILVboQ">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
         </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_kXmZ0VyrEeqKwtlhILVboQ"/>
+        <rhs xsi:type="expressions:True" id="_kXmZ0VyrEeqKwtlhILVboQ"/>
       </assignments>
     </ownedBehavior>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_j3ZFNVyqEeqKwtlhILVboQ"
-      name="BobBrowserInitializer">
-    <ownedBehavior
-        id="_lICYQFyrEeqKwtlhILVboQ">
-      <outputs
-          id="_ljHKu1yrEeqKwtlhILVboQ"
-          name="BobBrowserInitializer.out.BobBrowserID"/>
-      <outputs
-          id="_m7i14VyuEeqKwtlhILVboQ"
-          name="BobBrowserInitializer.out.BPort"/>
-      <assignments
-          id="_onN04lyrEeqKwtlhILVboQ">
-        <lhs
-            id="_pAaYAFyrEeqKwtlhILVboQ"
-            pin="_ljHKu1yrEeqKwtlhILVboQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
-          <literal
-              href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_j3ZFNVyqEeqKwtlhILVboQ" name="BobBrowserInitializer">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_aQZPELZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_lICYQFyrEeqKwtlhILVboQ">
+      <outputs id="_ljHKu1yrEeqKwtlhILVboQ" name="BobBrowserInitializer.out.BobBrowserID"/>
+      <outputs id="_m7i14VyuEeqKwtlhILVboQ" name="BobBrowserInitializer.out.BPort"/>
+      <assignments id="_onN04lyrEeqKwtlhILVboQ">
+        <lhs id="_pAaYAFyrEeqKwtlhILVboQ" pin="_ljHKu1yrEeqKwtlhILVboQ">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_WebRTC.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
         </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_qH2hMVyrEeqKwtlhILVboQ"/>
+        <rhs xsi:type="expressions:True" id="_qH2hMVyrEeqKwtlhILVboQ"/>
       </assignments>
     </ownedBehavior>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
-      id="_smNaBlyrEeqKwtlhILVboQ"
-      name="X">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_vV2QFVyrEeqKwtlhILVboQ"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
-      id="_ubLXllyrEeqKwtlhILVboQ"
-      name="Y">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_vV2QFVyrEeqKwtlhILVboQ"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_5Mlrt1yrEeqKwtlhILVboQ"
-      name="IDPX.storeBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_88nAuVyrEeqKwtlhILVboQ"
-      name="IDPX.readBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_NEEMd1ysEeqKwtlhILVboQ"
-      name="IDPX.transmitBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_Pm4uiVysEeqKwtlhILVboQ"
-      name="IDPY.storeBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_SWkA2VysEeqKwtlhILVboQ"
-      name="IDPY.readBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_UQ0HCVysEeqKwtlhILVboQ"
-      name="IDPY.transmitBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_WM6ASVysEeqKwtlhILVboQ"
-      name="StunTurnA.publishPort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_5KTzgV1KEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore" id="_smNaBlyrEeqKwtlhILVboQ" name="X">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZptCgbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_vV2QFVyrEeqKwtlhILVboQ"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_bILAaVysEeqKwtlhILVboQ"
-      name="StunTurnA.receivePort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_-6HO8V1KEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore" id="_ubLXllyrEeqKwtlhILVboQ" name="Y">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZkqKcbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_vV2QFVyrEeqKwtlhILVboQ"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_d7YH2VysEeqKwtlhILVboQ"
-      name="StunTurnB.publishPort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_AoVEQV1LEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_5Mlrt1yrEeqKwtlhILVboQ" name="IDPX.storeBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZPPUEbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_fuu72VysEeqKwtlhILVboQ"
-      name="StunTurnB.receivePort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_Cbg5IV1LEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_88nAuVyrEeqKwtlhILVboQ" name="IDPX.readBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZKzgAbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_hdYO-VysEeqKwtlhILVboQ"
-      name="SignalingServer.dispatchInitialSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_EnK4YV1LEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_NEEMd1ysEeqKwtlhILVboQ" name="IDPX.transmitBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZGExALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_klZv2VysEeqKwtlhILVboQ"
-      name="SignalingServer.dispatchResponseSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_GuSV4V1LEequxah3HlaYJg"
-        name="trust">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
-      <values
-          href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_Pm4uiVysEeqKwtlhILVboQ" name="IDPY.storeBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ZBHYgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
     </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_m326wVysEeqKwtlhILVboQ"
-      name="BrowserA.publishAliceBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_SWkA2VysEeqKwtlhILVboQ" name="IDPY.readBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Y7xlgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_xaqyGVysEeqKwtlhILVboQ"
-      name="BrowserA.readBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_UQ0HCVysEeqKwtlhILVboQ" name="IDPY.transmitBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Y20NALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_zhhw6VysEeqKwtlhILVboQ"
-      name="BrowserA.readOtherBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_WM6ASVysEeqKwtlhILVboQ" name="StunTurnA.publishPort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_5KTzgV1KEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_1U3WyVysEeqKwtlhILVboQ"
-      name="BrowserA.extractOtherSide">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_bILAaVysEeqKwtlhILVboQ" name="StunTurnA.receivePort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_-6HO8V1KEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_3T52WVysEeqKwtlhILVboQ"
-      name="BrowserA.initializeSession">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_d7YH2VysEeqKwtlhILVboQ" name="StunTurnB.publishPort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_AoVEQV1LEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_5kbuiVysEeqKwtlhILVboQ"
-      name="BrowserA.receiveMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_fuu72VysEeqKwtlhILVboQ" name="StunTurnB.receivePort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Cbg5IV1LEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_7RDoaVysEeqKwtlhILVboQ"
-      name="BrowserA.sendOwnMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_hdYO-VysEeqKwtlhILVboQ" name="SignalingServer.dispatchInitialSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_EnK4YV1LEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_9h5pqVysEeqKwtlhILVboQ"
-      name="BrowserA.announcePort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_klZv2VysEeqKwtlhILVboQ" name="SignalingServer.dispatchResponseSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_GuSV4V1LEequxah3HlaYJg" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_exuVgFIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="__KYqaVysEeqKwtlhILVboQ"
-      name="BrowserA.receiveOtherPort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_m326wVysEeqKwtlhILVboQ" name="BrowserA.publishAliceBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XmhCwLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_GjOgOVytEeqKwtlhILVboQ"
-      name="BrowserA.createEncryptedSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_xaqyGVysEeqKwtlhILVboQ" name="BrowserA.readBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XhD7ALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_IwLf-VytEeqKwtlhILVboQ"
-      name="BrowserA.receiveBobEncryptedSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_zhhw6VysEeqKwtlhILVboQ" name="BrowserA.readOtherBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XcBqALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_LD3Z2VytEeqKwtlhILVboQ"
-      name="BrowserA.encryptMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_1U3WyVysEeqKwtlhILVboQ" name="BrowserA.extractOtherSide">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XXM0YLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_NrZcyVytEeqKwtlhILVboQ"
-      name="BrowserA.decryptMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_3T52WVysEeqKwtlhILVboQ" name="BrowserA.initializeSession">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XRkGcLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_QKUWSVytEeqKwtlhILVboQ"
-      name="BrowserA.decryptBobSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_5kbuiVysEeqKwtlhILVboQ" name="BrowserA.receiveMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_XDE-gbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_STPxqVytEeqKwtlhILVboQ"
-      name="BrowserA.createMediaPackage">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VPA8BVypEeqKwtlhILVboQ"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_7RDoaVysEeqKwtlhILVboQ" name="BrowserA.sendOwnMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_W-dkQLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_UwxkCVytEeqKwtlhILVboQ"
-      name="BrowserA.unpackMediaPackage">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_9h5pqVysEeqKwtlhILVboQ" name="BrowserA.announcePort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_W5PGALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_aHXOOVytEeqKwtlhILVboQ"
-      name="BrowserB.announcePort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="__KYqaVysEeqKwtlhILVboQ" name="BrowserA.receiveOtherPort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Wz0agbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_ckuoiVytEeqKwtlhILVboQ"
-      name="BrowserB.receiveMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_GjOgOVytEeqKwtlhILVboQ" name="BrowserA.createEncryptedSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_WvJ88bZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_eJPIOVytEeqKwtlhILVboQ"
-      name="BrowserB.sendOwnMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_IwLf-VytEeqKwtlhILVboQ" name="BrowserA.receiveBobEncryptedSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Wp_JEbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_f37eqVytEeqKwtlhILVboQ"
-      name="BrowserB.publishBobBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_LD3Z2VytEeqKwtlhILVboQ" name="BrowserA.encryptMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Wk3_kLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_i-x62VytEeqKwtlhILVboQ"
-      name="BrowserB.readBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_NrZcyVytEeqKwtlhILVboQ" name="BrowserA.decryptMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Wf6AAbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_lQZYQVytEeqKwtlhILVboQ"
-      name="BrowserB.extractOtherSide">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_QKUWSVytEeqKwtlhILVboQ" name="BrowserA.decryptBobSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Wa3H8LZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_m3cOeVytEeqKwtlhILVboQ"
-      name="BrowserB.readOtherBrowserID">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_STPxqVytEeqKwtlhILVboQ" name="BrowserA.createMediaPackage">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_WVYLALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VPA8BVypEeqKwtlhILVboQ"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_plNcSVytEeqKwtlhILVboQ"
-      name="BrowserB.createMediaPackage">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VPA8BVypEeqKwtlhILVboQ"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_UwxkCVytEeqKwtlhILVboQ" name="BrowserA.unpackMediaPackage">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_WQlKkLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_rbMGeVytEeqKwtlhILVboQ"
-      name="BrowserB.encryptMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_aHXOOVytEeqKwtlhILVboQ" name="BrowserB.announcePort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_WBKOgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_ttVIOVytEeqKwtlhILVboQ"
-      name="BrowserB.decryptMedia">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_ckuoiVytEeqKwtlhILVboQ" name="BrowserB.receiveMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_V6mTgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_vhAFSVytEeqKwtlhILVboQ"
-      name="BrowserB.encryptSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_eJPIOVytEeqKwtlhILVboQ" name="BrowserB.sendOwnMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_V13kgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_ynCCGVytEeqKwtlhILVboQ"
-      name="BrowserB.receiveAliceEncryptedSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_f37eqVytEeqKwtlhILVboQ" name="BrowserB.publishBobBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Vv--8LZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_0X0DOVytEeqKwtlhILVboQ"
-      name="BrowserB.receiveOtherPort">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_i-x62VytEeqKwtlhILVboQ" name="BrowserB.readBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_VqpzALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_3B7gGVytEeqKwtlhILVboQ"
-      name="BrowserB.unpackMediaPackage">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_lQZYQVytEeqKwtlhILVboQ" name="BrowserB.extractOtherSide">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Vl1kcLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_4vTA2VytEeqKwtlhILVboQ"
-      name="BrowserB.createBobSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_m3cOeVytEeqKwtlhILVboQ" name="BrowserB.readOtherBrowserID">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_VhHcgLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
   </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
-      id="_A8g56VyuEeqKwtlhILVboQ"
-      name="BrowserB.decryptAliceSessionData">
-    <referencedBehavior
-        href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_plNcSVytEeqKwtlhILVboQ" name="BrowserB.createMediaPackage">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Vb7agLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VPA8BVypEeqKwtlhILVboQ"/>
   </nodes>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_QY9ZyVyuEeqKwtlhILVboQ"
-      name="AMedia"
-      target="_7RDoaVysEeqKwtlhILVboQ"
-      source="_eGv8RVyqEeqKwtlhILVboQ"
-      sourcePin="_mjqeMVyqEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_rbMGeVytEeqKwtlhILVboQ" name="BrowserB.encryptMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_VWyb0LZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_ttVIOVytEeqKwtlhILVboQ" name="BrowserB.decryptMedia">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_VQOg0bZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_vhAFSVytEeqKwtlhILVboQ" name="BrowserB.encryptSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_VEqKALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_ynCCGVytEeqKwtlhILVboQ" name="BrowserB.receiveAliceEncryptedSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_U_PegbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_0X0DOVytEeqKwtlhILVboQ" name="BrowserB.receiveOtherPort">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_U6vZALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_3B7gGVytEeqKwtlhILVboQ" name="BrowserB.unpackMediaPackage">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_U2AqAbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_4vTA2VytEeqKwtlhILVboQ" name="BrowserB.createBobSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_UwOyILZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_A8g56VyuEeqKwtlhILVboQ" name="BrowserB.decryptAliceSessionData">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_S8PsALZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_WebRTC.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_WebRTC.xmi#_fvlE4FIuEeqkVaPUPi-ogw"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_WebRTC.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_QY9ZyVyuEeqKwtlhILVboQ" name="AMedia" target="_7RDoaVysEeqKwtlhILVboQ" source="_eGv8RVyqEeqKwtlhILVboQ" sourcePin="_mjqeMVyqEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_W6l61VyuEeqKwtlhILVboQ"
-      name="BMedia"
-      target="_eGv8RVyqEeqKwtlhILVboQ"
-      source="_5kbuiVysEeqKwtlhILVboQ"
-      targetPin="_sUcKAFyqEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_W6l61VyuEeqKwtlhILVboQ" name="BMedia" target="_eGv8RVyqEeqKwtlhILVboQ" source="_5kbuiVysEeqKwtlhILVboQ" targetPin="_sUcKAFyqEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_cidiOlyuEeqKwtlhILVboQ"
-      name="AliceSessionData"
-      target="_3T52WVysEeqKwtlhILVboQ"
-      source="_eGv8RVyqEeqKwtlhILVboQ"
-      sourcePin="_oPqtAVyqEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_cidiOlyuEeqKwtlhILVboQ" name="AliceSessionData" target="_3T52WVysEeqKwtlhILVboQ" source="_eGv8RVyqEeqKwtlhILVboQ" sourcePin="_oPqtAVyqEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_g7btmlyuEeqKwtlhILVboQ"
-      name="APort"
-      target="_9h5pqVysEeqKwtlhILVboQ"
-      source="_hdkuJVyqEeqKwtlhILVboQ"
-      sourcePin="_kumdMVyuEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_g7btmlyuEeqKwtlhILVboQ" name="APort" target="_9h5pqVysEeqKwtlhILVboQ" source="_hdkuJVyqEeqKwtlhILVboQ" sourcePin="_kumdMVyuEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_q4LDilyuEeqKwtlhILVboQ"
-      name="AliceBrowserID"
-      target="_m326wVysEeqKwtlhILVboQ"
-      source="_hdkuJVyqEeqKwtlhILVboQ"
-      sourcePin="_adjykVyrEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_q4LDilyuEeqKwtlhILVboQ" name="AliceBrowserID" target="_m326wVysEeqKwtlhILVboQ" source="_hdkuJVyqEeqKwtlhILVboQ" sourcePin="_adjykVyrEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_wkP1ilyuEeqKwtlhILVboQ"
-      name="BMedia"
-      target="_5kbuiVysEeqKwtlhILVboQ"
-      source="_UwxkCVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_wkP1ilyuEeqKwtlhILVboQ" name="BMedia" target="_5kbuiVysEeqKwtlhILVboQ" source="_UwxkCVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_1TSXilyuEeqKwtlhILVboQ"
-      name="AliceSessionData"
-      target="_GjOgOVytEeqKwtlhILVboQ"
-      source="_3T52WVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_1TSXilyuEeqKwtlhILVboQ" name="AliceSessionData" target="_GjOgOVytEeqKwtlhILVboQ" source="_3T52WVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_5Sdi2lyuEeqKwtlhILVboQ"
-      name="AMedia"
-      target="_STPxqVytEeqKwtlhILVboQ"
-      source="_7RDoaVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WmnBEFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_5Sdi2lyuEeqKwtlhILVboQ" name="AMedia" target="_STPxqVytEeqKwtlhILVboQ" source="_7RDoaVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WmnBEFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_9xghAlyuEeqKwtlhILVboQ"
-      name="BPort"
-      target="_STPxqVytEeqKwtlhILVboQ"
-      source="__KYqaVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_XLXT8FypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_9xghAlyuEeqKwtlhILVboQ" name="BPort" target="_STPxqVytEeqKwtlhILVboQ" source="__KYqaVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_XLXT8FypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_BBww2lyvEeqKwtlhILVboQ"
-      name="AliceBrowserID"
-      target="_STPxqVytEeqKwtlhILVboQ"
-      source="_xaqyGVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_Xfw2oFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_BBww2lyvEeqKwtlhILVboQ" name="AliceBrowserID" target="_STPxqVytEeqKwtlhILVboQ" source="_xaqyGVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_Xfw2oFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_FICCtVyvEeqKwtlhILVboQ"
-      name="BobBrowserID"
-      target="_STPxqVytEeqKwtlhILVboQ"
-      source="_zhhw6VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_XzvikFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_FICCtVyvEeqKwtlhILVboQ" name="BobBrowserID" target="_STPxqVytEeqKwtlhILVboQ" source="_zhhw6VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_XzvikFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_J4v_qlyvEeqKwtlhILVboQ"
-      name="AMediaPackage"
-      target="_LD3Z2VytEeqKwtlhILVboQ"
-      source="_STPxqVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_YIZj8VypEeqKwtlhILVboQ"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_J4v_qlyvEeqKwtlhILVboQ" name="AMediaPackage" target="_LD3Z2VytEeqKwtlhILVboQ" source="_STPxqVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_YIZj8VypEeqKwtlhILVboQ"/>
+    <targetPin href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_Nh4pilyvEeqKwtlhILVboQ"
-      name="EncrBobSessionData"
-      target="_QKUWSVytEeqKwtlhILVboQ"
-      source="_IwLf-VytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Nh4pilyvEeqKwtlhILVboQ" name="EncrBobSessionData" target="_QKUWSVytEeqKwtlhILVboQ" source="_IwLf-VytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_RVBj-lyvEeqKwtlhILVboQ"
-      name="BobSessionData"
-      target="_1U3WyVysEeqKwtlhILVboQ"
-      source="_QKUWSVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_RVBj-lyvEeqKwtlhILVboQ" name="BobSessionData" target="_1U3WyVysEeqKwtlhILVboQ" source="_QKUWSVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_U2zoqlyvEeqKwtlhILVboQ"
-      name="BMediaPackage"
-      target="_UwxkCVytEeqKwtlhILVboQ"
-      source="_NrZcyVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_U2zoqlyvEeqKwtlhILVboQ" name="BMediaPackage" target="_UwxkCVytEeqKwtlhILVboQ" source="_NrZcyVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_a9HfmlyvEeqKwtlhILVboQ"
-      name="AliceBrowserID"
-      target="_5Mlrt1yrEeqKwtlhILVboQ"
-      source="_m326wVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_a9HfmlyvEeqKwtlhILVboQ" name="AliceBrowserID" target="_5Mlrt1yrEeqKwtlhILVboQ" source="_m326wVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_e9wqilyvEeqKwtlhILVboQ"
-      name="AliceBrowserID"
-      target="_xaqyGVysEeqKwtlhILVboQ"
-      source="_88nAuVyrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_e9wqilyvEeqKwtlhILVboQ" name="AliceBrowserID" target="_xaqyGVysEeqKwtlhILVboQ" source="_88nAuVyrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_kMZSmlyvEeqKwtlhILVboQ"
-      name="BobBrowserID"
-      target="_NEEMd1ysEeqKwtlhILVboQ"
-      source="_1U3WyVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_kMZSmlyvEeqKwtlhILVboQ" name="BobBrowserID" target="_NEEMd1ysEeqKwtlhILVboQ" source="_1U3WyVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_oKLWylyvEeqKwtlhILVboQ"
-      name="BobBrowserID"
-      target="_zhhw6VysEeqKwtlhILVboQ"
-      source="_UQ0HCVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_oKLWylyvEeqKwtlhILVboQ" name="BobBrowserID" target="_zhhw6VysEeqKwtlhILVboQ" source="_UQ0HCVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_uG_6oFyvEeqKwtlhILVboQ"
-      name="APort"
-      target="_WM6ASVysEeqKwtlhILVboQ"
-      source="_9h5pqVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_uG_6oFyvEeqKwtlhILVboQ" name="APort" target="_WM6ASVysEeqKwtlhILVboQ" source="_9h5pqVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_E1Vg-l0vEequxah3HlaYJg"
-      name="BPort"
-      target="__KYqaVysEeqKwtlhILVboQ"
-      source="_bILAaVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_E1Vg-l0vEequxah3HlaYJg" name="BPort" target="__KYqaVysEeqKwtlhILVboQ" source="_bILAaVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_J1nj-l0vEequxah3HlaYJg"
-      name="EncrAliceSessionData"
-      target="_hdYO-VysEeqKwtlhILVboQ"
-      source="_GjOgOVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_J1nj-l0vEequxah3HlaYJg" name="EncrAliceSessionData" target="_hdYO-VysEeqKwtlhILVboQ" source="_GjOgOVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_UKHSml0vEequxah3HlaYJg"
-      name="EncrBobSessionData"
-      target="_IwLf-VytEeqKwtlhILVboQ"
-      source="_klZv2VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_UKHSml0vEequxah3HlaYJg" name="EncrBobSessionData" target="_IwLf-VytEeqKwtlhILVboQ" source="_klZv2VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_OhQ-YF0wEequxah3HlaYJg"
-      name="EncrAMedia"
-      target="_ttVIOVytEeqKwtlhILVboQ"
-      source="_LD3Z2VytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_OhQ-YF0wEequxah3HlaYJg" name="EncrAMedia" target="_ttVIOVytEeqKwtlhILVboQ" source="_LD3Z2VytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_V_g4il0wEequxah3HlaYJg"
-      name="EncrBMedia"
-      target="_NrZcyVytEeqKwtlhILVboQ"
-      source="_rbMGeVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_V_g4il0wEequxah3HlaYJg" name="EncrBMedia" target="_NrZcyVytEeqKwtlhILVboQ" source="_rbMGeVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_e7y3Cl0wEequxah3HlaYJg"
-      name="AliceBrowserID"
-      target="_smNaBlyrEeqKwtlhILVboQ"
-      source="_5Mlrt1yrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_wePbgFyrEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_e7y3Cl0wEequxah3HlaYJg" name="AliceBrowserID" target="_smNaBlyrEeqKwtlhILVboQ" source="_5Mlrt1yrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_wePbgFyrEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_kjT5Kl0wEequxah3HlaYJg"
-      name="AliceBrowserID"
-      target="_88nAuVyrEeqKwtlhILVboQ"
-      source="_smNaBlyrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_xR-lkVyrEeqKwtlhILVboQ"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_kjT5Kl0wEequxah3HlaYJg" name="AliceBrowserID" target="_88nAuVyrEeqKwtlhILVboQ" source="_smNaBlyrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_xR-lkVyrEeqKwtlhILVboQ"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_qFCcWl0wEequxah3HlaYJg"
-      name="AliceBrowserID"
-      target="_NEEMd1ysEeqKwtlhILVboQ"
-      source="_88nAuVyrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_qFCcWl0wEequxah3HlaYJg" name="AliceBrowserID" target="_NEEMd1ysEeqKwtlhILVboQ" source="_88nAuVyrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_yTmZOl0wEequxah3HlaYJg"
-      name="APort"
-      target="_fuu72VysEeqKwtlhILVboQ"
-      source="_WM6ASVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_yTmZOl0wEequxah3HlaYJg" name="APort" target="_fuu72VysEeqKwtlhILVboQ" source="_WM6ASVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_3ZHhil0wEequxah3HlaYJg"
-      name="BPort"
-      target="_bILAaVysEeqKwtlhILVboQ"
-      source="_d7YH2VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_3ZHhil0wEequxah3HlaYJg" name="BPort" target="_bILAaVysEeqKwtlhILVboQ" source="_d7YH2VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_9HnVal0wEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_ubLXllyrEeqKwtlhILVboQ"
-      source="_Pm4uiVysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_wePbgFyrEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_9HnVal0wEequxah3HlaYJg" name="BobBrowserID" target="_ubLXllyrEeqKwtlhILVboQ" source="_Pm4uiVysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_wePbgFyrEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_Df2p2l0xEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_SWkA2VysEeqKwtlhILVboQ"
-      source="_ubLXllyrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_xR-lkVyrEeqKwtlhILVboQ"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Df2p2l0xEequxah3HlaYJg" name="BobBrowserID" target="_SWkA2VysEeqKwtlhILVboQ" source="_ubLXllyrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_xR-lkVyrEeqKwtlhILVboQ"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_InU5-l0xEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_UQ0HCVysEeqKwtlhILVboQ"
-      source="_SWkA2VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_InU5-l0xEequxah3HlaYJg" name="BobBrowserID" target="_UQ0HCVysEeqKwtlhILVboQ" source="_SWkA2VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_Vau7Cl0xEequxah3HlaYJg"
-      name="AMedia"
-      target="_izexIFyqEeqKwtlhILVboQ"
-      source="_ckuoiVytEeqKwtlhILVboQ"
-      targetPin="_hJllsFyrEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Vau7Cl0xEequxah3HlaYJg" name="AMedia" target="_izexIFyqEeqKwtlhILVboQ" source="_ckuoiVytEeqKwtlhILVboQ" targetPin="_hJllsFyrEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_hFlYml0xEequxah3HlaYJg"
-      name="BMedia"
-      target="_eJPIOVytEeqKwtlhILVboQ"
-      source="_izexIFyqEeqKwtlhILVboQ"
-      sourcePin="_eCob0VyrEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_hFlYml0xEequxah3HlaYJg" name="BMedia" target="_eJPIOVytEeqKwtlhILVboQ" source="_izexIFyqEeqKwtlhILVboQ" sourcePin="_eCob0VyrEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_qbnT2l0xEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_f37eqVytEeqKwtlhILVboQ"
-      source="_j3ZFNVyqEeqKwtlhILVboQ"
-      sourcePin="_ljHKu1yrEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_qbnT2l0xEequxah3HlaYJg" name="BobBrowserID" target="_f37eqVytEeqKwtlhILVboQ" source="_j3ZFNVyqEeqKwtlhILVboQ" sourcePin="_ljHKu1yrEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_wEpY6l0xEequxah3HlaYJg"
-      name="BPort"
-      target="_aHXOOVytEeqKwtlhILVboQ"
-      source="_j3ZFNVyqEeqKwtlhILVboQ"
-      sourcePin="_m7i14VyuEeqKwtlhILVboQ">
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_wEpY6l0xEequxah3HlaYJg" name="BPort" target="_aHXOOVytEeqKwtlhILVboQ" source="_j3ZFNVyqEeqKwtlhILVboQ" sourcePin="_m7i14VyuEeqKwtlhILVboQ">
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_vUCEOl1FEequxah3HlaYJg"
-      name="APort"
-      target="_0X0DOVytEeqKwtlhILVboQ"
-      source="_fuu72VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_vUCEOl1FEequxah3HlaYJg" name="APort" target="_0X0DOVytEeqKwtlhILVboQ" source="_fuu72VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_0NnpcF1FEequxah3HlaYJg"
-      name="BPort"
-      target="_d7YH2VysEeqKwtlhILVboQ"
-      source="_aHXOOVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_0NnpcF1FEequxah3HlaYJg" name="BPort" target="_d7YH2VysEeqKwtlhILVboQ" source="_aHXOOVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_WGZhql1GEequxah3HlaYJg"
-      name="EncrAliceSessionData"
-      target="_ynCCGVytEeqKwtlhILVboQ"
-      source="_hdYO-VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_WGZhql1GEequxah3HlaYJg" name="EncrAliceSessionData" target="_ynCCGVytEeqKwtlhILVboQ" source="_hdYO-VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_eFrsal1GEequxah3HlaYJg"
-      name="EncrBobSessionData"
-      target="_klZv2VysEeqKwtlhILVboQ"
-      source="_vhAFSVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_eFrsal1GEequxah3HlaYJg" name="EncrBobSessionData" target="_klZv2VysEeqKwtlhILVboQ" source="_vhAFSVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_myS3Ol1GEequxah3HlaYJg"
-      name="AliceBrowserID"
-      target="_m3cOeVytEeqKwtlhILVboQ"
-      source="_NEEMd1ysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_myS3Ol1GEequxah3HlaYJg" name="AliceBrowserID" target="_m3cOeVytEeqKwtlhILVboQ" source="_NEEMd1ysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_A6tKil1HEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_Pm4uiVysEeqKwtlhILVboQ"
-      source="_f37eqVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_A6tKil1HEequxah3HlaYJg" name="BobBrowserID" target="_Pm4uiVysEeqKwtlhILVboQ" source="_f37eqVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_IIUnyl1HEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_i-x62VytEeqKwtlhILVboQ"
-      source="_SWkA2VysEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_IIUnyl1HEequxah3HlaYJg" name="BobBrowserID" target="_i-x62VytEeqKwtlhILVboQ" source="_SWkA2VysEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_-u49yl1HEequxah3HlaYJg"
-      name="AliceBorwserID"
-      target="_UQ0HCVysEeqKwtlhILVboQ"
-      source="_lQZYQVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_-u49yl1HEequxah3HlaYJg" name="AliceBorwserID" target="_UQ0HCVysEeqKwtlhILVboQ" source="_lQZYQVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_GfmhCl1IEequxah3HlaYJg"
-      name="AliceBrowserID"
-      target="_plNcSVytEeqKwtlhILVboQ"
-      source="_m3cOeVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WmnBEFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_GfmhCl1IEequxah3HlaYJg" name="AliceBrowserID" target="_plNcSVytEeqKwtlhILVboQ" source="_m3cOeVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WmnBEFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_Yx6a4F1IEequxah3HlaYJg"
-      name="BobBrowserID"
-      target="_plNcSVytEeqKwtlhILVboQ"
-      source="_i-x62VytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_XLXT8FypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Yx6a4F1IEequxah3HlaYJg" name="BobBrowserID" target="_plNcSVytEeqKwtlhILVboQ" source="_i-x62VytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_XLXT8FypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_jCjkKl1IEequxah3HlaYJg"
-      name="BMedia"
-      target="_plNcSVytEeqKwtlhILVboQ"
-      source="_eJPIOVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_Xfw2oFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_jCjkKl1IEequxah3HlaYJg" name="BMedia" target="_plNcSVytEeqKwtlhILVboQ" source="_eJPIOVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_Xfw2oFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_rCAHBV1IEequxah3HlaYJg"
-      name="APort"
-      target="_plNcSVytEeqKwtlhILVboQ"
-      source="_0X0DOVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_XzvikFypEeqKwtlhILVboQ"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_rCAHBV1IEequxah3HlaYJg" name="APort" target="_plNcSVytEeqKwtlhILVboQ" source="_0X0DOVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_XzvikFypEeqKwtlhILVboQ"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_zdnoal1IEequxah3HlaYJg"
-      name="BMediaPackage"
-      target="_rbMGeVytEeqKwtlhILVboQ"
-      source="_plNcSVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_YIZj8VypEeqKwtlhILVboQ"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_zdnoal1IEequxah3HlaYJg" name="BMediaPackage" target="_rbMGeVytEeqKwtlhILVboQ" source="_plNcSVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_YIZj8VypEeqKwtlhILVboQ"/>
+    <targetPin href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_GsJ58F1JEequxah3HlaYJg"
-      name="AMedia"
-      target="_3B7gGVytEeqKwtlhILVboQ"
-      source="_ttVIOVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_GsJ58F1JEequxah3HlaYJg" name="AMedia" target="_3B7gGVytEeqKwtlhILVboQ" source="_ttVIOVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_L9mlWl1JEequxah3HlaYJg"
-      name="BobSessionData"
-      target="_vhAFSVytEeqKwtlhILVboQ"
-      source="_4vTA2VytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_L9mlWl1JEequxah3HlaYJg" name="BobSessionData" target="_vhAFSVytEeqKwtlhILVboQ" source="_4vTA2VytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_5qwDml1JEequxah3HlaYJg"
-      name="AliceSessionData"
-      target="_4vTA2VytEeqKwtlhILVboQ"
-      source="_A8g56VyuEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_5qwDml1JEequxah3HlaYJg" name="AliceSessionData" target="_4vTA2VytEeqKwtlhILVboQ" source="_A8g56VyuEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_Wnlbyl1JEequxah3HlaYJg"
-      name="AliceSessionData"
-      target="_lQZYQVytEeqKwtlhILVboQ"
-      source="_4vTA2VytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Wnlbyl1JEequxah3HlaYJg" name="AliceSessionData" target="_lQZYQVytEeqKwtlhILVboQ" source="_4vTA2VytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_h4g9el1JEequxah3HlaYJg"
-      name="EncrAliceSessionData"
-      target="_A8g56VyuEeqKwtlhILVboQ"
-      source="_ynCCGVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_h4g9el1JEequxah3HlaYJg" name="EncrAliceSessionData" target="_A8g56VyuEeqKwtlhILVboQ" source="_ynCCGVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
   </edges>
-  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
-      id="_octDUF1JEequxah3HlaYJg"
-      name="AMedia"
-      target="_ckuoiVytEeqKwtlhILVboQ"
-      source="_3B7gGVytEeqKwtlhILVboQ">
-    <sourcePin
-        href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
-    <targetPin
-        href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_octDUF1JEequxah3HlaYJg" name="AMedia" target="_ckuoiVytEeqKwtlhILVboQ" source="_3B7gGVytEeqKwtlhILVboQ">
+    <sourcePin href="DDC_WebRTC.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_WebRTC.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
   </edges>
 </DataFlowDiagram:DataFlowDiagram>
