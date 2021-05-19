@@ -119,7 +119,7 @@ class AnalysisIntegrationTestBase {
 		assertEquals(expectedAmount, solutionCounter, debugMessage);
 	}
 
-	protected static def getRelativeURI(String path) {
+	protected def getRelativeURI(String path) {
 		return StandaloneUtil.getRelativeURI(path)
 	}
 

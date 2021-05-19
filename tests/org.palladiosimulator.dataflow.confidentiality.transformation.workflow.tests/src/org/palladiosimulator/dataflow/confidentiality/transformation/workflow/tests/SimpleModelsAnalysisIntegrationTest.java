@@ -26,7 +26,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "?CT"));
 		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
@@ -47,7 +47,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "?CT"));
 		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
@@ -68,7 +68,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "?CT"));
 		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
@@ -89,7 +89,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "?CT"));
 		query.bind("P", "P1 - CopyInToOut (_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
@@ -110,7 +110,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, ?CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "?CT"));
 		query.bind("P", "A2 (_I1hvJUz4EeqyWs80cS8siQ)");
 		query.bind("PIN", "A2.in (_LEsVYEz4EeqyWs80cS8siQ_I1hvJUz4EeqyWs80cS8siQ)");
 		query.bind("CT", "CT_1 (_iwJnY0syEeqBeZX3QKuNVA)");
@@ -131,7 +131,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "CT"));
 		query.bind("P", "P1 - SetToContainer (_44_t0ksyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "P1.out (_8KIucUsyEeqBeZX3QKuNVA_44_t0ksyEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
@@ -151,7 +151,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
 		assertFalse(result.isEmpty());
 
 		prover.loadTheory(result.get());
-		Query query = prover.query("characteristic(?P, ?PIN, CT, V, S).");
+		Query query = prover.query(getCharacteristicQuery("?P", "?PIN", "CT"));
 		query.bind("P", "A1 (_21ryRUsyEeqBeZX3QKuNVA)");
 		query.bind("PIN", "A1.in (_kYwxUFSxEeqnLp_48pbpVA_21ryRUsyEeqBeZX3QKuNVA)");
 		Solution<Object> solution = query.solve();
@@ -172,7 +172,7 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         assertFalse(result.isEmpty());
         
         prover.loadTheory(result.get());
-        Query query = prover.query("CT=?CTV, characteristic(?P, ?PIN, CT, V, S).");
+        Query query = prover.query("CT=?CTV, " + getCharacteristicQuery("?P", "?PIN", "CT"));
         query.bind("P", "P5 (_A95iyYM2EeqgDLgDYuvGtg)");
         query.bind("PIN", "P5.out (_Eo6b8YM2EeqgDLgDYuvGtg_A95iyYM2EeqgDLgDYuvGtg)");
         query.bind("CTV", "ValueCharacteristic (_NpqAg4MyEeqgDLgDYuvGtg)");
@@ -193,9 +193,13 @@ public class SimpleModelsAnalysisIntegrationTest extends AnalysisIntegrationTest
         assertFalse(result.isEmpty());
 
         prover.loadTheory(result.get());
-        Query query = prover.query("characteristic(N, PIN, CT, V, S).");
+        Query query = prover.query(getCharacteristicQuery("N", "PIN", "CT"));
         Solution<Object> solution = query.solve();
         assertNumberOfSolutionsWithoutTraversedNodes(solution, 22, Arrays.asList("N", "PIN", "CT", "V", "S"));
+	}
+	
+	protected String getCharacteristicQuery(String node, String pin, String chartype) {
+		return "characteristic(" + node + ", " + pin + ", " + chartype + ", V, S).";
 	}
 	
 }
