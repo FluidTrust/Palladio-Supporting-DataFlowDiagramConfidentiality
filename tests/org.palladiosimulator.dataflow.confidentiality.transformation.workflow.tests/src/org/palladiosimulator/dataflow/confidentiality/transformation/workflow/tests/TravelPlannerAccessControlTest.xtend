@@ -6,6 +6,7 @@ import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.te
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving
+import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 
 class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow 
 {
@@ -26,6 +27,14 @@ class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow
 			"models/evaluation/travelplanner/DFDC_TravelPlanner_AccessControl.xmi")
 		
 		// add possible data flow from CCD store to booking process
+		dfd.addNoDeclassificationFlow
+
+		var solution = findFlaws()
+		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "REQ", "ROLES"))
+	}
+	
+	protected def void addNoDeclassificationFlow(DataFlowDiagram dfd) {
+		// add possible data flow from CCD store to booking process
 		var directCCDFlow = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow
 		directCCDFlow.name = "ccd direct"
 		directCCDFlow.source = dfd.nodes.filter(CharacterizedProcess).findFirst["CCD.readCCD" == name]
@@ -33,9 +42,6 @@ class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow
 		directCCDFlow.target = dfd.nodes.filter(CharacterizedProcess).findFirst["User.bookFlight" == name]
 		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(1)
 		dfd.edges += directCCDFlow
-
-		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 3, Arrays.asList("P", "REQ", "ROLES"))
 	}
 
 }
