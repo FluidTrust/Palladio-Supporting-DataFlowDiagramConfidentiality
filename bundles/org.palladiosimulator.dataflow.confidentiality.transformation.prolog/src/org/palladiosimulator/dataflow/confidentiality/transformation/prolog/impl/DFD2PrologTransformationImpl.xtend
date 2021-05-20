@@ -14,7 +14,6 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowEdge
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Edge
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Entity
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedActorProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor
@@ -58,14 +57,14 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	protected static val extension ExpressionsFactory prologExpressionsFactory = ExpressionsFactory.eINSTANCE
 	protected static val extension PrologCreateUtils prologCreateUtils = new PrologCreateUtils
 	protected val extension UniqueNameUtils uniqueNameUtils
-	val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
-	protected val stagedTraces = new HashMap<EObject, Runnable>
+	protected val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
+	val stagedTraces = new HashMap<EObject, Runnable>
 	protected var DFD2PrologTransformationWritableTrace trace
-	protected var Program program	
-	var Iterable<EnumCharacteristicType> characteristicTypesInBehaviors
+	var Program program	
+	protected var Iterable<EnumCharacteristicType> characteristicTypesInBehaviors
 	var Iterable<EnumCharacteristicType> characteristicTypesInNodes
-	protected var Iterable<DataType> usedDataTypes
-
+	var Iterable<DataType> usedDataTypes
+	
 	new(UniqueNameProvider nameProvider) {
 		this.uniqueNameUtils = new UniqueNameUtils(nameProvider)
 	}
@@ -101,6 +100,10 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		this.characteristicTypesInBehaviors = dfd.findAllCharacteristicTypesInBehaviors
 		this.characteristicTypesInNodes = dfd.findAllCharacteristicTypesInNodes
 		this.usedDataTypes = dfd.findAllUsedDataTypes
+	}
+	
+	protected def dispatch transformCharacteristicType(CharacteristicType characteristicType) {
+		// TODO: Error? Currently there is rule defined on how to handle this case
 	}
 
 	protected def dispatch transformCharacteristicType(EnumCharacteristicType characteristicType) {
@@ -142,28 +145,28 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		#[fact]
 	}
 	
-	interface OutputBehaviorCreator {
-	    def Rule createOutputCharacteristicRule(CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l);
+	interface DFD2PrologOutputBehaviorCreator {
+    	def Rule createOutputCharacteristicRule(DFD2PrologTransformationParameter param)
 	}
 	
 	protected def dispatch transformNode(CharacterizedProcess process) {
-		process.transformNode("process", [node, pin, ct, l |
-			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
-			val transformedAssignment = assignmentToTransform.transformAssignment(node, pin, ct, l)
+		process.transformNode("process", [param |
+			val assignmentToTransform = param.node.behavior.assignments.findLastMatchingAssignment(param.pin, param.ct, param.l)
+			val transformedAssignment = assignmentToTransform.transformAssignment(param)
 			val needsFlowTree = assignmentToTransform.needsFlowTree
 			if (needsFlowTree) {
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs))
 				flowClauses += transformedAssignment
 				createRule(
-					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, "S".toVar, "VISITED".toVar),
+					createCharacteristicTerm(process, param, "S".toVar, "VISITED".toVar),
 					createConjunction(flowClauses)
 				)
 			} else {
 				val fsVar = process.needsEmptyFlowTree ? createList : "_".toVar
 				createRule(
-					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, fsVar, "_".toVar),
+					createCharacteristicTerm(process, param, fsVar, "_".toVar),
 					createConjunction(transformedAssignment)
 				)
 			}
@@ -178,31 +181,31 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	}
 	
 	protected def dispatch transformNode(CharacterizedExternalActor actor) {
-		actor.transformNode("actor", [node, pin, ct, l|
-			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
+		actor.transformNode("actor", [param |
+			val assignmentToTransform = param.node.behavior.assignments.findLastMatchingAssignment(param.pin, param.ct, param.l)
 			if (assignmentToTransform.needsFlowTree) {
 				throw new IllegalArgumentException("Actors must not refer to input pins in their behavior.")
 			} else {
 				createRule(
-					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(node), ct.uniqueQuotedString, l.uniqueQuotedString, createList, "_".toVar),
-					createConjunction(assignmentToTransform.transformAssignment(node, pin, ct, l))
+					createCharacteristicTerm(param.node, param, createList, "_".toVar),
+					createConjunction(assignmentToTransform.transformAssignment(param))
 				)
 			}
 		])
 	}
 	
 	protected def dispatch transformNode(CharacterizedStore store) {
-		store.transformNode("store", [node, pin, ct, l|
+		store.transformNode("store", [param |
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs))
 				val term = dfdExpressionsFactory.createDataCharacteristicReference
-				term.pin = node.behavior.inputs.get(0)
-				term.characteristicType = ct
-				term.literal = l
-				flowClauses += term.transformAssignmentTerm(node, pin, ct, l)
+				term.pin = param.node.behavior.inputs.get(0)
+				term.characteristicType = param.ct
+				term.literal = param.l 
+				flowClauses += term.transformAssignmentTerm(param)
 				createRule(
-					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(node), ct.uniqueQuotedString, l.uniqueQuotedString, "S".toVar, "VISITED".toVar),
+					createCharacteristicTerm(param.node, param, "S".toVar, "VISITED".toVar),
 					createConjunction(flowClauses)
 				)
 		])
@@ -223,7 +226,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		throw new IllegalArgumentException("Plain edges are not supported as of now.")
 	}
 	
-	protected def dispatch transformNode(CharacterizedNode node, String factName, OutputBehaviorCreator outputBehaviorCreator) {
+	protected def transformNode(CharacterizedNode node, String factName, DFD2PrologOutputBehaviorCreator outputBehaviorCreator) {
 		val clauses = new ArrayList<Clause>
 		
 		// type-specific fact
@@ -234,7 +237,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		// node characteristics
 		node.characteristics.filter(EnumCharacteristic).forEach[characteristic |
 			characteristic.values.forEach[literal |
-				clauses += createFact(createCompoundTerm("nodeCharacteristic", node.uniqueQuotedString, characteristic.type.uniqueQuotedString, literal.uniqueQuotedString))
+				clauses += createFact(createNodeCharacteristicTerm(new DFD2PrologTransformationParameter(node, characteristic.enumCharacteristicType, literal)))
 			]
 		]
 		
@@ -248,7 +251,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
 			characteristicTypesInBehaviors.forEach[ct |
 				ct.type.literals.forEach[l |
-					clauses += outputBehaviorCreator.createOutputCharacteristicRule(node, pin, ct, l)
+					clauses += outputBehaviorCreator.createOutputCharacteristicRule(new DFD2PrologTransformationParameter(node, pin, ct, l))
 				]
 			]
 		]
@@ -279,65 +282,51 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	/**
 	 * Transforms the right hand side of an assignment to an expression. 
 	 */
-	protected def Expression transformAssignment(Optional<Assignment> assignment, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
-		assignment.map[rhs.transformAssignmentTerm(node, pin, ct, l)].orElse(createFalse)
+	protected def Expression transformAssignment(Optional<Assignment> assignment, DFD2PrologTransformationParameter param) {
+		assignment.map[rhs.transformAssignmentTerm(param)].orElse(createFalse)
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(True rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
+	protected def dispatch Expression transformAssignmentTerm(True rhs, DFD2PrologTransformationParameter param) {
 		createTrue
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(False rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
+	protected def dispatch Expression transformAssignmentTerm(False rhs, DFD2PrologTransformationParameter param) {
 		createFalse
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(Or rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
+	protected def dispatch Expression transformAssignmentTerm(Or rhs, DFD2PrologTransformationParameter param) {
 		createLogicalOr => [
-			left = rhs.left.transformAssignmentTerm(node, pin, ct, l)
-			right = rhs.right.transformAssignmentTerm(node, pin, ct, l)
+			left = rhs.left.transformAssignmentTerm(param)
+			right = rhs.right.transformAssignmentTerm(param)
 		]
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(And rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
+	protected def dispatch Expression transformAssignmentTerm(And rhs, DFD2PrologTransformationParameter param) {
 		createLogicalAnd => [
-			left = rhs.left.transformAssignmentTerm(node, pin, ct, l)
-			right = rhs.right.transformAssignmentTerm(node, pin, ct, l)
+			left = rhs.left.transformAssignmentTerm(param)
+			right = rhs.right.transformAssignmentTerm(param)
 		]
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(Not rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
+	protected def dispatch Expression transformAssignmentTerm(Not rhs, DFD2PrologTransformationParameter param) {
 		createNotProvable => [
-			expr = rhs.term.transformAssignmentTerm(node, pin, ct, l)
+			expr = rhs.term.transformAssignmentTerm(param)
 		]
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(DataCharacteristicReference rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
-		var referencedCharacteristicType = rhs.characteristicType ?: ct
-		var referencedLiteral = rhs.literal ?: l
-		var treeVariable = '''S«node.behavior.inputs.indexOf(rhs.pin)»''' 
-		createCompoundTerm(
-			"characteristic",
-			node.uniqueQuotedString,
-			rhs.pin.getUniqueQuotedString(node),
-			referencedCharacteristicType.uniqueQuotedString,
-			referencedLiteral.uniqueQuotedString,
-			treeVariable.toVar,
-			"VISITED".toVar
-		)
+	protected def dispatch Expression transformAssignmentTerm(DataCharacteristicReference rhs, DFD2PrologTransformationParameter param) {
+		var referencedCharacteristicType = rhs.characteristicType as EnumCharacteristicType ?: param.ct
+		var referencedLiteral = rhs.literal ?: param.l
+		var treeVariable = '''S«param.node.behavior.inputs.indexOf(rhs.pin)»''' 
+		createCharacteristicTerm(param.node, new DFD2PrologTransformationParameter(param.node, rhs.pin, referencedCharacteristicType, referencedLiteral), treeVariable.toVar,
+			"VISITED".toVar)
 	}
 	
-	protected def dispatch Expression transformAssignmentTerm(ContainerCharacteristicReference rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
-		var referencedCharacteristicType = rhs.characteristicType ?: ct
-		var referencedLiteral = rhs.literal ?: l
-		createCompoundTerm(
-			"nodeCharacteristic",
-			node.uniqueQuotedString,
-			referencedCharacteristicType.uniqueQuotedString,
-			referencedLiteral.uniqueQuotedString
-		)
+	protected def dispatch Expression transformAssignmentTerm(ContainerCharacteristicReference rhs, DFD2PrologTransformationParameter param) {
+		var referencedCharacteristicType = rhs.characteristicType as EnumCharacteristicType ?: param.ct
+		var referencedLiteral = rhs.literal ?: param.l
+		createNodeCharacteristicTerm(new DFD2PrologTransformationParameter(param.node, referencedCharacteristicType, referencedLiteral))
 	}
-
-
 
 	protected def addPreamble(DataFlowDiagram dfd) {
 		add(createHeaderComment("HELPER: input flow selection"))
@@ -396,10 +385,6 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("inputFlowSelection", "PIN", "T", "FLOW")
 			)
 		))
-
-
-
-		
 
 		add(createHeaderComment("HELPER: create valid flow tree"))
 		add(createRule(
@@ -601,8 +586,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
         return Optional.empty();
     }
     
-    protected static def isMatchingAssignment(Assignment assignment, Pin pin,
-            EnumCharacteristicType ct, Literal l) {
+    protected static def isMatchingAssignment(Assignment assignment, Pin pin, EnumCharacteristicType ct, Literal l) {
            var lhs = assignment.getLhs()
 
             // pin does not match
@@ -713,4 +697,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		}
 	}
 	
+	protected def dispatch createCharacteristicTerm(CharacterizedNode node, DFD2PrologTransformationParameter param, Expression s, Expression visited) {
+		createCompoundTerm("characteristic", param.node.uniqueQuotedString, param.pin.getUniqueQuotedString(node), param.ct.uniqueQuotedString, param.l.uniqueQuotedString, s, visited)
+	}
+	
+	protected def dispatch createNodeCharacteristicTerm(DFD2PrologTransformationParameter param) {
+		createCompoundTerm("nodeCharacteristic", param.node.uniqueQuotedString, param.ct.uniqueQuotedString, param.l.uniqueQuotedString)
+	}
 }

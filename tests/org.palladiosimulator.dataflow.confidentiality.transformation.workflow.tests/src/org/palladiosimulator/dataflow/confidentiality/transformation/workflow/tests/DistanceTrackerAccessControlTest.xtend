@@ -7,6 +7,9 @@ import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramChara
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory
 
 class DistanceTrackerAccessControlTest extends AccessControlAnalysesIflow {
+	
+	static val DFD_PATH = "models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi"
+	static val DDC_PATH = "models/evaluation/distancetracker/DDC_DistanceTracker_AccessControl.xmi"
 
 	new() {
 		super("_g8Baw0NEEeq3NrD2DjPidQ", "_fCiJk0NEEeq3NrD2DjPidQ")
@@ -14,15 +17,14 @@ class DistanceTrackerAccessControlTest extends AccessControlAnalysesIflow {
 
 	@Test
 	def void testNoFlaws() {
-		builder.addDFD(getRelativeURI("models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi"))
+		loadAndInitDFD(DDC_PATH, DFD_PATH)
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES", "S"))
 	}
 	
 	@Test
 	def void testUnconfirmedDistance() {
-		var dfd = loadAndInitDFD("models/evaluation/distancetracker/DDC_DistanceTracker_AccessControl.xmi",
-			"models/evaluation/distancetracker/DFDC_DistanceTracker_AccessControl.xmi")
+		var dfd = loadAndInitDFD(DDC_PATH, DFD_PATH)
 		
 		// add direct data flow of unconfirmed distance data
 		var targetNode = dfd.nodes.filter(CharacterizedProcess).findFirst[name.toLowerCase.contains("recorddist")]
