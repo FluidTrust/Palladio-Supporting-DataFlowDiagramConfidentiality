@@ -36,7 +36,7 @@ class AnalysisIntegrationTestBase {
 	}
 	
 	@BeforeAll
-	protected static def void init() {
+	static def void init() {
 		StandaloneUtil.init();
 		var factory = new SWIPrologCLIProverFactory(
 			Arrays.asList(new SWIPrologExecutableProviderStandalone(new DefaultSWIPrologExecutableProvider(), 2),
@@ -119,7 +119,7 @@ class AnalysisIntegrationTestBase {
 		assertEquals(expectedAmount, solutionCounter, debugMessage);
 	}
 
-	protected def getRelativeURI(String path) {
+	protected static def getRelativeURI(String path) {
 		return StandaloneUtil.getRelativeURI(path)
 	}
 

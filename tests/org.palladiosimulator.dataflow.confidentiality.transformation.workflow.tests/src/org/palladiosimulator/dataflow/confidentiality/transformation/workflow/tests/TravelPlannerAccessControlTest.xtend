@@ -10,23 +10,24 @@ import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramChara
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 
-class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow 
-{
+class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow {
+	static val DFD_PATH = "models/evaluation/travelplanner/DFDC_TravelPlanner_AccessControl.xmi"
+	static val DDC_PATH = "models/evaluation/travelplanner/DDC_TravelPlanner_AccessControl.xmi"
+	
 	new() {
 		super("Roles", "_JvuuQ9vqEeqNdo_V4bA-xw", "AccessPermissions", "_k9jB49vTEeqNdo_V4bA-xw")
 	}
 	
 	@Test
 	def void testNoFlaws() {
-		builder.addDFD(getRelativeURI("models/evaluation/travelplanner/DFDC_TravelPlanner_AccessControl.xmi"))
+		loadAndInitDFD(DDC_PATH, DFD_PATH)
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, Arrays.asList("P", "REQ", "ROLES"))
 	}
 	
 	@Test
 	def void testNoDeclassification() {		
-		var dfd = loadAndInitDFD("models/evaluation/travelplanner/DDC_TravelPlanner_AccessControl.xmi",
-			"models/evaluation/travelplanner/DFDC_TravelPlanner_AccessControl.xmi")
+		var dfd = loadAndInitDFD(DDC_PATH, DFD_PATH)
 		
 		// add possible data flow from CCD store to booking process
 		dfd.addNoDeclassificationFlow
