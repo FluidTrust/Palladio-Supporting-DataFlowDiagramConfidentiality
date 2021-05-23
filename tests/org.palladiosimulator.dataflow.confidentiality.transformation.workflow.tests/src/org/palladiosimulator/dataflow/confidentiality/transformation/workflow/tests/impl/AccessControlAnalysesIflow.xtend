@@ -37,7 +37,8 @@ class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 		var queryString = '''
 			inputPin(P, PIN),
 			setof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
-			setof_characteristics(P, PIN, ?CTRIGHTS, REQ, S),
+			flowTree(P, PIN, S),
+			setof(R, characteristic(P, PIN, ?CTRIGHTS, R, S), REQ),
 			intersection(REQ, ROLES, []).
 		'''
 		var query = prover.query(queryString)
