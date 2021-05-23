@@ -261,11 +261,12 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	 * The flow tree variable Sn represents the flow tree to be used for the input pin n.
 	 */
 	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
+		val sortedPins = inputPins.sortWith([p1,p2| p1.getUniqueQuotedString(node).value.compareTo(p2.getUniqueQuotedString(node).value)])
 		val clauses = new ArrayList<Expression>
-		val hasMultipleInputs = inputPins.size > 1
+		val hasMultipleInputs = sortedPins.size > 1
 		val treeList = createList
-		for (var i = 0; i < inputPins.size; i++) {
-			val inputPin = inputPins.get(i)
+		for (var i = 0; i < sortedPins.size; i++) {
+			val inputPin = sortedPins.get(i)
 			clauses += createCompoundTerm("inputFlow", node.uniqueQuotedString, inputPin.getUniqueQuotedString(node), (hasMultipleInputs ? "FLOWS" : "_").toVar, '''F«i»'''.toVar, "VISITED".toVar)
 			clauses += createUnification('''S«i»'''.toVar, createList(#['''F«i»'''], #["_"]))
 			treeList.heads += '''S«i»'''.toVar
@@ -352,6 +353,35 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			)
 		))
 		
+		add(createHeaderComment("HELPER: find all input pins"))
+		add(createComment('''
+			Finds all input pins PINS for a given node N. The list of pins is sorted.
+			The sorted list containing all possible pins is the only result of the clause. No subsets or unsorted lists are returned.'''))
+		add(createRule(
+			createCompoundTerm("findAllInputPins", "N", "PINS"),
+			createConjunction(
+				createCompoundTerm("findAllInputPins", "N".toVar, createList, "PINS".toVar),
+				createCompoundTerm("sort", "PINS", "PINS")
+			)
+		))
+		add(createRule(
+			createCompoundTerm("findAllInputPins", "N", "PINS", "RESULT"),
+			createConjunction(
+				createCompoundTerm("inputPin", "N", "PIN"),
+				createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList),
+				createCompoundTerm("findAllInputPins", "N".toVar, createList(#["PIN"], #["PINS"]), "RESULT".toVar)
+			)
+		))
+		add(createRule(
+			createCompoundTerm("findAllInputPins", "N", "PINS", "PINS"),
+			createNotProvable(
+				createConjunction(
+					createCompoundTerm("inputPin", "N", "PIN"),
+					createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList)
+				)
+			)
+		))
+		
 		add(createComment('''
 			Find one arbitrary set of flows (SELECTED_FLOWS) for a given node (P) in a way that for every input pin, there is exactly one input flow.
 			Using this rule in conjunction with findall would yield all possible combinations of input flows that meet the described condition.
@@ -359,7 +389,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("inputFlowsSelection", "P", "SELECTED_FLOWS"),
 			createConjunction(
-				createCompoundTerm("findall", "X".toVar, createCompoundTerm("inputPin", "P", "X"), "INPUT_PINS".toVar),
+				createCompoundTerm("findAllInputPins", "P", "INPUT_PINS"),
 				createCompoundTerm("inputPinsFlowSelection", "INPUT_PINS", "SELECTED_FLOWS")
 			)
 		))
@@ -482,23 +512,22 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			createConjunction(
 				createCompoundTerm("flatten", "S", "SFLAT"),
 				createCompoundTerm("list_to_set", "SFLAT", "FLOWS"),
-				createCompoundTerm("setof", "X".toVar, createCompoundTerm("involvesNode", "FLOWS", "X"), "NODES".toVar),
-				createCompoundTerm("member", "N", "NODES")
-				
+				createCompoundTerm("involvesNode", "FLOWS", "N"),
+				createCut				
 			)
 		))
 		add(createRule(
 			createCompoundTerm("involvesNode", createList(#["F"], #["_"]), "N".toVar),
 			createConjunction(
 				createCompoundTerm("dataflow", "F", "N", "_", "_", "_"),
-				createNotProvable(createCompoundTerm("dataflow", "F", "_", "_", "N", "_"))
+				createCut
 			)
 		))
 		add(createRule(
 			createCompoundTerm("involvesNode", createList(#["F"], #["_"]), "N".toVar),
 			createConjunction(
 				createCompoundTerm("dataflow", "F", "_", "_", "N", "_"),
-				createNotProvable(createCompoundTerm("dataflow", "F", "N", "_", "_", "_"))
+				createCut
 			)
 		))
 		add(createRule(
