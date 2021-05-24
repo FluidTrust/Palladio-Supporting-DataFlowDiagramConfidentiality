@@ -261,7 +261,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	 * The flow tree variable Sn represents the flow tree to be used for the input pin n.
 	 */
 	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
-		val sortedPins = inputPins.sortWith([p1,p2| p1.getUniqueQuotedString(node).value.compareTo(p2.getUniqueQuotedString(node).value)])
+		val sortedPins = inputPins.sortedView(node)
 		val clauses = new ArrayList<Expression>
 		val hasMultipleInputs = sortedPins.size > 1
 		val treeList = createList
@@ -313,7 +313,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	protected def dispatch Expression transformAssignmentTerm(DataCharacteristicReference rhs, CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l) {
 		var referencedCharacteristicType = rhs.characteristicType ?: ct
 		var referencedLiteral = rhs.literal ?: l
-		var treeVariable = '''S«node.behavior.inputs.indexOf(rhs.pin)»''' 
+		var treeVariable = '''S«node.behavior.inputs.sortedView(node).indexOf(rhs.pin)»''' 
 		createCompoundTerm(
 			"characteristic",
 			node.uniqueQuotedString,
@@ -681,6 +681,10 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	
 	protected static def dispatch boolean isRhsTermCompatible(Term term, EnumCharacteristicType ct, Literal l) {
 		false
+	}
+	
+	protected def sortedView(Iterable<Pin> pins, CharacterizedNode node) {
+		pins.sortWith([p1,p2| p1.getUniqueQuotedString(node).value.compareTo(p2.getUniqueQuotedString(node).value)])
 	}
 	
 	// add utils
