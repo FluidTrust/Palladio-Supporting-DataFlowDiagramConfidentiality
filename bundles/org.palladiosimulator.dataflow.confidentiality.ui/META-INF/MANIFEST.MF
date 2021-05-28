@@ -16,4 +16,6 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.118.0",
  org.palladiosimulator.dataflow.diagram,
  org.palladiosimulator.dataflow.diagram.characterized.editor.sirius,
  org.palladiosimulator.dataflow.diagram.editor.sirius,
- org.eclipse.emf.transaction;bundle-version="1.9.1"
+ org.eclipse.emf.transaction;bundle-version="1.9.1",
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl;bundle-version="1.0.0"
+Export-Package: org.palladiosimulator.dataflow.confidentiality.ui.wizard

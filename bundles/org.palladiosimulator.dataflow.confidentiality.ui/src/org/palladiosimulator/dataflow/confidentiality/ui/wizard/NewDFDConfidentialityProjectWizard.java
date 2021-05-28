@@ -7,10 +7,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -36,14 +34,10 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramFactory;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.api.CharacterizedDFDSiriusConstants;
 import org.palladiosimulator.dataflow.diagram.editor.sirius.api.DFDSiriusConstants;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedFactory;
-import org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.internal.DslActivator;
 
 public class NewDFDConfidentialityProjectWizard extends Wizard implements INewWizard {
 
@@ -90,7 +84,7 @@ public class NewDFDConfidentialityProjectWizard extends Wizard implements INewWi
         IProject newProject = createModelingProject(projectName, projectLocation, monitor);
 
         // add xtext nature
-        addXtextNature(newProject, monitor);
+        WizardUtils.addXtextNature(newProject, monitor);
 
         // create initial resources
         URI ddUri = addDd(newProject, monitor);
@@ -147,41 +141,10 @@ public class NewDFDConfidentialityProjectWizard extends Wizard implements INewWi
         session.createView(dfdViewpoint, semanticElements, monitor);
     }
 
-    protected void addXtextNature(IProject newProject, IProgressMonitor monitor) throws CoreException {
-        if (!XtextProjectHelper.hasNature(newProject)) {
-            IProjectDescription projectDescription = newProject.getDescription();
-            String[] newNatureIds = Arrays.copyOf(projectDescription.getNatureIds(),
-                    projectDescription.getNatureIds().length + 1);
-            newNatureIds[newNatureIds.length - 1] = XtextProjectHelper.NATURE_ID;
-            projectDescription.setNatureIds(newNatureIds);
-            newProject.setDescription(projectDescription, monitor);
-        }
-    }
-
     protected URI addDd(IProject project, IProgressMonitor monitor) throws CoreException {
-        ResourceSetImpl rs = new ResourceSetImpl();
-        URI ddURI = createURI(project, "dataDictionary.ddc");
-
-        Resource ddR = rs.createResource(ddURI);
-
-        // create data dictionary (textual model)
-        var ddc = DataDictionaryCharacterizedFactory.eINSTANCE.createDataDictionaryCharacterized();
-        ddc.setId(UUID.randomUUID()
-            .toString());
-        ddR.getContents()
-            .add(ddc);
-        var injector = DslActivator.getInstance()
-            .getInjector(
-                    DslActivator.ORG_PALLADIOSIMULATOR_DATAFLOW_DICTIONARY_CHARACTERIZED_DSL_CHARACTERIZEDDATADICTIONARY);
-        ISerializer serializer = injector.getInstance(ISerializer.class);
-        var ddcText = serializer.serialize(ddc);
         var ddcFile = project.getFile("dataDictionary.ddc");
-        try (InputStream sis = new StringInputStream(ddcText)) {
-            ddcFile.create(sis, true, monitor);
-        } catch (IOException e) {
-            throw new CoreException(new Status(IStatus.ERROR, getClass(), "Could not create file.", e));
-        }
-        return ddURI;
+        WizardUtils.createDataDictionary(ddcFile, new NullProgressMonitor());
+        return URI.createPlatformResourceURI(ddcFile.toString(), false);
     }
 
     protected URI addDfd(IProject project, IProgressMonitor monitor) throws CoreException {
