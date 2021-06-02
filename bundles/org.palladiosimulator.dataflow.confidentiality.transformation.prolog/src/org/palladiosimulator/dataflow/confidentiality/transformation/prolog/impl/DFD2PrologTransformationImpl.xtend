@@ -321,6 +321,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		var treeVariable = '''S«param.node.behavior.inputs.indexOf(rhs.pin)»''' 
 		createCharacteristicTerm(param.node, new DFD2PrologTransformationParameter(param.node, rhs.pin, referencedCharacteristicType, referencedLiteral), treeVariable.toVar,
 			"VISITED".toVar)
+<<<<<<< HEAD
 	}
 	
 	protected def dispatch Expression transformAssignmentTerm(ContainerCharacteristicReference rhs, DFD2PrologTransformationParameter param) {
@@ -329,6 +330,15 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		createNodeCharacteristicTerm(new DFD2PrologTransformationParameter(param.node, referencedCharacteristicType, referencedLiteral))
 
 	}
+=======
+	}
+	
+	protected def dispatch Expression transformAssignmentTerm(ContainerCharacteristicReference rhs, DFD2PrologTransformationParameter param) {
+		var referencedCharacteristicType = rhs.characteristicType as EnumCharacteristicType ?: param.ct
+		var referencedLiteral = rhs.literal ?: param.l
+		createNodeCharacteristicTerm(new DFD2PrologTransformationParameter(param.node, referencedCharacteristicType, referencedLiteral))
+	}
+>>>>>>> 50c91f308f62b738d09c7f80f2fcd1d1ed8f8739
 
 	protected def addPreamble(DataFlowDiagram dfd) {
 		add(createHeaderComment("HELPER: input flow selection"))
