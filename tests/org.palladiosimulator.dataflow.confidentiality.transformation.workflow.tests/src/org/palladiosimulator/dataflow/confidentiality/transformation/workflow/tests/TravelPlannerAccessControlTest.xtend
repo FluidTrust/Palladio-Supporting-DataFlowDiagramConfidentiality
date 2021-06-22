@@ -6,8 +6,6 @@ import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.te
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.Behaving
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.DataFlowDiagramCharacterizedFactory
-
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Behaving
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 
 class TravelPlannerAccessControlTest extends AccessControlAnalysesIflow {

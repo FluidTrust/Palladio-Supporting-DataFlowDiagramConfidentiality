@@ -23,6 +23,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//DataDictionaryCharacterized/characteristicTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//DataDictionaryCharacterized/enumerations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//DataDictionaryCharacterized/behaviorDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//DataDictionaryCharacterized/characteristics"/>
     </genClasses>
     <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//CharacteristicType"/>
     <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//EnumCharacteristicType">
@@ -46,10 +47,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Assignment/lhs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Assignment/rhs"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//Behaving">
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Behaving/behavior"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Behaving/ownedBehavior"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Behaving/referencedBehavior"/>
+    <genClasses image="false" ecoreClass="DataDictionaryCharacterized.ecore#//Characteristic">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//Characteristic/type"/>
+    </genClasses>
+    <genClasses ecoreClass="DataDictionaryCharacterized.ecore#//EnumCharacteristic">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//EnumCharacteristic/values"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference DataDictionaryCharacterized.ecore#//EnumCharacteristic/enumCharacteristicType"/>
     </genClasses>
     <nestedGenPackages prefix="Expressions" disposableProviderFactory="true" extensibleProviderFactory="true"
         childCreationExtenders="true" ecorePackage="DataDictionaryCharacterized.ecore#//expressions">
