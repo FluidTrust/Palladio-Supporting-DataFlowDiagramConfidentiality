@@ -19,16 +19,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.DialogPage;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
-import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.business.api.session.Session;
-import org.eclipse.sirius.business.api.session.SessionManager;
-import org.eclipse.sirius.tools.api.command.semantic.AddSemanticResourceCommand;
-import org.eclipse.sirius.ui.business.api.session.UserSession;
 import org.eclipse.sirius.ui.tools.api.project.ModelingProjectManager;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.ui.INewWizard;
@@ -91,7 +86,7 @@ public class NewDFDConfidentialityProjectWizard extends Wizard implements INewWi
         URI dfdUri = addDfd(newProject, monitor);
 
         // initialize session
-        Session session = createSession(newProject, monitor);
+        Session session = SiriusUtils.createSession(newProject, monitor);
 
         // add semantic resources
         registerInitialResources(session, ddUri, dfdUri, monitor);
@@ -106,25 +101,16 @@ public class NewDFDConfidentialityProjectWizard extends Wizard implements INewWi
                 monitor);
     }
 
-    protected Session createSession(IProject project, IProgressMonitor monitor) {
-        URI sessionResourceURI = URI.createPlatformResourceURI(
-                "/" + project.getName() + "/" + ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME, true);
-        Session session = SessionManager.INSTANCE.getSession(sessionResourceURI, monitor);
-        return session;
-    }
+
 
     protected void registerInitialResources(Session session, URI ddUri, URI dfdUri, IProgressMonitor monitor) {
-        TransactionalEditingDomain ted = session.getTransactionalEditingDomain();
-        ted.getCommandStack()
-            .execute(new AddSemanticResourceCommand(session, ddUri, monitor));
-        ted.getCommandStack()
-            .execute(new AddSemanticResourceCommand(session, dfdUri, monitor));
+        SiriusUtils.addSemanticResource(session, ddUri, monitor);
+        SiriusUtils.addSemanticResource(session, dfdUri, monitor);
     }
 
     protected void createViewForDFD(Session session, URI dfdUri, IProgressMonitor monitor) {
         // enable viewpoints
-        UserSession userSession = UserSession.from(session);
-        userSession.selectViewpoints(
+        SiriusUtils.enableViewpoints(session,
                 Arrays.asList(DFDSiriusConstants.VIEWPOINT_NAME, CharacterizedDFDSiriusConstants.VIEWPOINT_NAME));
 
         // create view

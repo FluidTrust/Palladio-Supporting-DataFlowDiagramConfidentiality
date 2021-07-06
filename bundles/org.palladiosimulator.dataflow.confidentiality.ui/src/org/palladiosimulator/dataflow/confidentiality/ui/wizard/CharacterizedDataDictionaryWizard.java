@@ -15,7 +15,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.serializer.ISerializer;
 import org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.internal.DslActivator;
 
 import com.google.inject.Injector;
@@ -78,13 +77,15 @@ public class CharacterizedDataDictionaryWizard extends Wizard implements INewWiz
 
     @Override
     public boolean performFinish() {
-        IPath containerPath = fileCreationPage.getContainerFullPath();
-        IPath fileToCreate = containerPath.append(fileCreationPage.getFileName());
+        IFile file = getFileToCreate();
 
-        IFile file = ResourcesPlugin.getWorkspace()
-            .getRoot()
-            .getFile(fileToCreate);
-
+        try {
+            WizardUtils.addXtextNature(file.getProject(), new NullProgressMonitor());
+        } catch (CoreException e) {
+            fileCreationPage.setErrorMessage("Could not add required Xtext nature: " + e.getLocalizedMessage());
+            return false;
+        }
+        
         try {
             WizardUtils.createDataDictionary(file, new NullProgressMonitor());
         } catch (CoreException e) {
@@ -100,6 +101,16 @@ public class CharacterizedDataDictionaryWizard extends Wizard implements INewWiz
         }
 
         return true;
+    }
+
+    protected IFile getFileToCreate() {
+        IPath containerPath = fileCreationPage.getContainerFullPath();
+        IPath fileToCreate = containerPath.append(fileCreationPage.getFileName());
+
+        IFile file = ResourcesPlugin.getWorkspace()
+            .getRoot()
+            .getFile(fileToCreate);
+        return file;
     }
 
 }
