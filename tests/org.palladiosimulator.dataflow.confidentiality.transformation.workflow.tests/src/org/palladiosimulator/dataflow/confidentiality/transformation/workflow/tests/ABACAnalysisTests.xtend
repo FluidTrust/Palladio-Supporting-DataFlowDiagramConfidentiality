@@ -14,18 +14,21 @@ import org.prolog4j.Solution
 import static org.junit.jupiter.api.Assertions.*
 
 class ABACAnalysisTests extends AnalysisIntegrationTestBase {
+	
+	static val DFD_PATH = "models/evaluation/abac/abac_dfd.xmi"
+	static val DDC_PATH = "models/evaluation/abac/abac_dd.xmi"
 
 	@Test
 	def void testNoFlaws() {
-		builder.addDFD(getRelativeURI("models/evaluation/abac/abac_dfd.xmi"))
+		//builder.addDFD(getRelativeURI(DFD_PATH))
+		loadAndInitDFD(DDC_PATH, DFD_PATH)
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT", "S"])
 	}
 	
 	@Test
 	def void testCelebrityInRegularCustomers() {		
-		var dfd = loadAndInitDFD("models/evaluation/abac/abac_dd.xmi",
-			"models/evaluation/abac/abac_dfd.xmi")
+		var dfd = loadAndInitDFD(DDC_PATH, DFD_PATH)
 
 		var flow = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow
 		flow.name = "celebrity customer details"
@@ -41,8 +44,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testAsianCustomerToUSA() {		
-		var dfd = loadAndInitDFD("models/evaluation/abac/abac_dd.xmi",
-			"models/evaluation/abac/abac_dfd.xmi")
+		var dfd = loadAndInitDFD(DDC_PATH, DFD_PATH)
 
 		var flow = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow
 		flow.name = "customer details"
@@ -58,8 +60,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 	
 	@Test
 	def void testSkipCustomerMigration() {		
-		var dfd = loadAndInitDFD("models/evaluation/abac/abac_dd.xmi",
-			"models/evaluation/abac/abac_dfd.xmi")
+		var dfd = loadAndInitDFD(DDC_PATH, DFD_PATH)
 
 		var flow = DataFlowDiagramCharacterizedFactory.eINSTANCE.createCharacterizedDataFlow
 		flow.name = "customer"
@@ -83,6 +84,12 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		assertFalse(result.isEmpty())
 
 		prover.loadTheory(result.get())
+		
+		var solution = query.solve()
+		solution
+	}
+	
+	protected def getQuery() {
 		var queryString = '''
 			actor(A),
 			inputPin(A,PIN),
@@ -98,7 +105,6 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 			).
 		'''
 		var query = prover.query(queryString)
-		var solution = query.solve()
-		solution
+		query
 	}
 }

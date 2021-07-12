@@ -62,7 +62,7 @@ class AnalysisIntegrationTestBase {
 		dfd
 	}
 
-	protected static def void assertNumberOfSolutionsWithoutTraversedNodes(Solution<Object> solution, int expectedAmount, Collection<String> variableNames) {
+	public static def void assertNumberOfSolutionsWithoutTraversedNodes(Solution<Object> solution, int expectedAmount, Collection<String> variableNames) {
 		if (!variableNames.contains("CT")) {
 			throw new IllegalArgumentException("The name of the characterstic type has to be CT.")
 		}
@@ -70,19 +70,19 @@ class AnalysisIntegrationTestBase {
 		assertNumberOfSolutions(solution, expectedAmount, variableNames, solutionFilter)
 	}
 
-	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
+	public static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
 		assertNumberOfSolutions(solution, expectedAmount, variableNames, [true])
 	}
 	
-	protected static def void assertNumberOfSolutionsWithoutDuplicates(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
+	public static def void assertNumberOfSolutionsWithoutDuplicates(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames) {
 		assertNumberOfSolutions(solution, expectedAmount, variableNames, [Collection<Map<String, Object>> solutions | new LinkedHashSet(solutions)])
 	}
 
-	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Predicate<Map<String, Object>> solutionFilter) {
+	public static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Predicate<Map<String, Object>> solutionFilter) {
 		assertNumberOfSolutions(solution, expectedAmount, variableNames, [Collection<Map<String, Object>> solutions | solutions.filter[it | solutionFilter.test(it)].toList])
 	}
 
-	protected static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Function<Collection<Map<String, Object>>,Collection<Map<String,Object>>> solutionsFilter) {
+	public static def void assertNumberOfSolutions(Solution<Object> solution, int expectedAmount, Iterable<String> variableNames, Function<Collection<Map<String, Object>>,Collection<Map<String,Object>>> solutionsFilter) {
 		if (expectedAmount == 0 && !solution.isSuccess) {
 			return;
 		}
