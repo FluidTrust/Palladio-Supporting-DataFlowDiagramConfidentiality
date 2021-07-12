@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.feature"
+      label="Transformation Workflow Tests"
+      version="1.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license.epl2"
+      license-feature-version="1.0.0">
+
+   
+   <requires>
+      <import feature="org.palladiosimulator.dataflow.confidentiality.transformation.feature" version="1.0.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
