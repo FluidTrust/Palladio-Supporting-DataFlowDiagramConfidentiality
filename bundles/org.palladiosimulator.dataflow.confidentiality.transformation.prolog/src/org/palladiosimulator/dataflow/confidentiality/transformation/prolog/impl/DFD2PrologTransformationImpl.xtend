@@ -635,22 +635,22 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
             }
 
             // lhs is compatible up to here, so test rhs
-            if (!isRhsTermCompatible(assignment.rhs, ct, l)) {
+            if (!isRhsTermCompatible(assignment.rhs, ct)) {
                 return false
             }
             
             return true;
     }
 	
-	protected static def dispatch boolean isRhsTermCompatible(Constant term, EnumCharacteristicType ct, Literal l) {
+	protected static def dispatch boolean isRhsTermCompatible(Constant term, EnumCharacteristicType ct) {
 		true
 	}
 	
-	protected static def dispatch boolean isRhsTermCompatible(LogicTerm term, EnumCharacteristicType ct, Literal l) {
-		term.terms.forall[isRhsTermCompatible(ct, l)]
+	protected static def dispatch boolean isRhsTermCompatible(LogicTerm term, EnumCharacteristicType ct) {
+		term.terms.forall[isRhsTermCompatible(ct)]
 	}
 	
-	protected static def dispatch boolean isRhsTermCompatible(EnumCharacteristicReference term, EnumCharacteristicType ct, Literal l) {
+	protected static def dispatch boolean isRhsTermCompatible(EnumCharacteristicReference term, EnumCharacteristicType ct) {
         var termCharacteristicType = term.getCharacteristicType() as EnumCharacteristicType;
         var termLiteral = term.getLiteral();
 
@@ -674,7 +674,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
         return false;
 	}
 	
-	protected static def dispatch boolean isRhsTermCompatible(Term term, EnumCharacteristicType ct, Literal l) {
+	protected static def dispatch boolean isRhsTermCompatible(Term term, EnumCharacteristicType ct) {
 		false
 	}
 	
