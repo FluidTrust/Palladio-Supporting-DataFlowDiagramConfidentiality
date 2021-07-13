@@ -38,6 +38,7 @@ class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 		dataDictionaryCharacterized.characteristics.forEach[format]
 		dataDictionaryCharacterized.characteristicTypes.forEach[format]
 		dataDictionaryCharacterized.behaviorDefinitions.forEach[format]
+		dataDictionaryCharacterized.behaviorDefinitions.forEach[prepend[newLines = 2]]
 	}
 	
 	def dispatch void format(PrimitiveDataType dataType, extension IFormattableDocument document) {
@@ -119,7 +120,6 @@ class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 	}
 	
 	def dispatch void format(BehaviorDefinition behaviorDefinition, extension IFormattableDocument document) {
-		behaviorDefinition.prepend[newLine]
 		behaviorDefinition.regionFor.keyword(behaviorDefinitionAccess.behaviorKeyword_0).append[oneSpace]
 		behaviorDefinition.regionFor.assignment(behaviorDefinitionAccess.nameAssignment_1).append[oneSpace]
 		
