@@ -77,7 +77,7 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
                 var handle = lookup.unreflect(method);
 
                 var callSite = LambdaMetafactory.metafactory(lookup, functionalInterfaceMethodName,
-                        MethodType.methodType(functionalInterface, getClass()), functionalInterfaceMethodType, handle,
+                        MethodType.methodType(functionalInterface, CharacterizedDataDictionaryScopeProvider.class), functionalInterfaceMethodType, handle,
                         functionalInterfaceMethodType);
                 var processor = (IScopeProcessor) callSite.getTarget()
                     .bindTo(this)
