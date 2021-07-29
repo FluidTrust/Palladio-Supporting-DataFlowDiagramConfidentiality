@@ -28,6 +28,7 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Enumeration;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Literal;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.CharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.EnumCharacteristicReference;
@@ -77,8 +78,8 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
                 var handle = lookup.unreflect(method);
 
                 var callSite = LambdaMetafactory.metafactory(lookup, functionalInterfaceMethodName,
-                        MethodType.methodType(functionalInterface, CharacterizedDataDictionaryScopeProvider.class), functionalInterfaceMethodType, handle,
-                        functionalInterfaceMethodType);
+                        MethodType.methodType(functionalInterface, CharacterizedDataDictionaryScopeProvider.class),
+                        functionalInterfaceMethodType, handle, functionalInterfaceMethodType);
                 var processor = (IScopeProcessor) callSite.getTarget()
                     .bindTo(this)
                     .invoke();
@@ -130,19 +131,29 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
             return scope;
         }
 
-        var newScope = scope;
-        var literals = Optional.ofNullable(context)
+        var foundEnumeration = Optional.ofNullable(context)
             .filter(EnumCharacteristicReference.class::isInstance)
             .map(EnumCharacteristicReference.class::cast)
             .map(EnumCharacteristicReference::getCharacteristicType)
             .filter(EnumCharacteristicType.class::isInstance)
             .map(EnumCharacteristicType.class::cast)
-            .map(EnumCharacteristicType::getType)
-            .map(Enumeration::getLiterals)
-            .orElse(new BasicEList<>());
-        if (!literals.isEmpty()) {
-            newScope = new FilteringScope(newScope, description -> literals.contains(description.getEObjectOrProxy()));
+            .map(EnumCharacteristicType::getType);
+        if (foundEnumeration.isEmpty()) {
+            return scope;
         }
+
+        var enumeration = foundEnumeration.get();
+        var enumerationName = enumeration.getName();
+        var literals = enumeration.getLiterals();
+
+        var newScope = new FilteringScope(scope, description -> {
+            var literal = (Literal) description.getEObjectOrProxy();
+            return literals.isEmpty() || literals.contains(description.getEObjectOrProxy())
+                    || Optional.of(literal.getEnum())
+                        .map(Enumeration::getName)
+                        .map(enumerationName::equals)
+                        .orElse(false);
+        });
 
         return buildLastSegmentScope(newScope);
     }
