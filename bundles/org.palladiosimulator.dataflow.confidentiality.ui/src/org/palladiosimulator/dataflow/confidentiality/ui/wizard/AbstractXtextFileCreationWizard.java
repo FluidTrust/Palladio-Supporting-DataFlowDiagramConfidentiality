@@ -1,6 +1,7 @@
 package org.palladiosimulator.dataflow.confidentiality.ui.wizard;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -43,30 +44,21 @@ public abstract class AbstractXtextFileCreationWizard extends Wizard implements 
     public void init(IWorkbench workbench, IStructuredSelection selection) {
         this.workbench = workbench;
         setWindowTitle(fileTypeName + " Creation");
-        fileCreationPage = new WizardNewFileCreationPage(fileTypeName + " Creation", selection);
+        fileCreationPage = new ValidatingWizardNewFileCreationPage(fileTypeName + " Creation", selection,
+                this::validateFilename);
         fileCreationPage.setAllowExistingResources(false);
         fileCreationPage.setTitle(fileTypeName + " Creation");
-        fileCreationPage.setDescription("Please select the path for creating the " + fileTypeName +  ".");
+        fileCreationPage.setDescription("Please select the path for creating the " + fileTypeName + ".");
     }
 
-    @Override
-    public boolean canFinish() {
-        getCurrentPage().ifPresent(d -> d.setErrorMessage(null));
-
-        if (!super.canFinish() || !fileCreationPage.isPageComplete()) {
-            return false;
+    protected boolean validateFilename(String filename, Consumer<String> errorMessageConsumer) {
+        var validationResult = Optional.ofNullable(filename)
+            .map(fn -> fn.endsWith("." + fileExtension))
+            .orElse(false);
+        if (!validationResult) {
+            errorMessageConsumer.accept("The file name has to end with ." + fileExtension);
         }
-
-        if (getCurrentPage().map(fileCreationPage::equals)
-            .orElse(false)) {
-            if (fileCreationPage.getFileName()
-                .endsWith("." + fileExtension)) {
-                return true;
-            }
-            getCurrentPage().ifPresent(d -> d.setErrorMessage("The file name has to end with ." + fileExtension));
-        }
-
-        return false;
+        return validationResult;
     }
 
     protected Optional<DialogPage> getCurrentPage() {
@@ -86,7 +78,7 @@ public abstract class AbstractXtextFileCreationWizard extends Wizard implements 
             fileCreationPage.setErrorMessage("Could not add required Xtext nature: " + e.getLocalizedMessage());
             return false;
         }
-        
+
         try {
             createXtextFile(file, new NullProgressMonitor());
         } catch (CoreException e) {
@@ -103,7 +95,7 @@ public abstract class AbstractXtextFileCreationWizard extends Wizard implements 
 
         return true;
     }
-    
+
     protected abstract void createXtextFile(IFile file, IProgressMonitor progressMonitor) throws CoreException;
 
     protected IFile getFileToCreate() {
