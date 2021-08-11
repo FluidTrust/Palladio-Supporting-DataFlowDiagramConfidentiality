@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*
 
 class AnalysisIntegrationTestBase {
 
-	static IProverFactory proverFactory;
+	protected static IProverFactory proverFactory;
 	protected TransformationWorkflowBuilder builder;
 	protected Prover prover;
 
