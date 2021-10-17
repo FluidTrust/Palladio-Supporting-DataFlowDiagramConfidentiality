@@ -91,38 +91,24 @@ class DACDelegationAnalysisTests extends AnalysisIntegrationTestBase {
 	}
 	
 	protected def String getAnalysisRules(String ctIdentity, String ctOwner, String ctReadAccess, String ctWriteAccess, String ctAddOwner, String ctAddReadAccess, String ctAddWriteAccess) '''
-		owner(V, STORE) :-
-			nodeCharacteristic(STORE, '«ctOwner»', V).
-		owner(V, STORE) :-
+		dynamic(STORE, CT, V) :-
 			inputPin(STORE, PIN),
-			characteristic(STORE, PIN, '«ctAddOwner»', V, S),
+			characteristic(STORE, PIN, CT, V, S),
 			actor(A),
 			flowTree(STORE, PIN, S),
 			traversedNode(S, A),
 			nodeCharacteristic(A, '«ctIdentity»', Y),
 			owner(Y, STORE).
 		
-		readAccess(V, STORE, _) :-
-			nodeCharacteristic(STORE, '«ctReadAccess»', V).
-		readAccess(V, STORE, S) :-
-			inputPin(STORE, PIN),
-			characteristic(STORE, PIN, '«ctAddReadAccess»', V, S),
-			actor(A),
-			flowTree(STORE, PIN, S),
-			traversedNode(S, A),
-			nodeCharacteristic(A, '«ctIdentity»', Y),
-			owner(Y, STORE).
-			
-		writeAccess(V, STORE, _) :-
-			nodeCharacteristic(STORE, '«ctWriteAccess»', V).
-		writeAccess(V, STORE, S) :-
-			inputPin(STORE, PIN),
-			characteristic(STORE, PIN, '«ctAddWriteAccess»', V, S),
-			actor(A),
-			flowTree(STORE, PIN, S),
-			traversedNode(S, A),
-			nodeCharacteristic(A, '«ctIdentity»', Y),
-			owner(Y, STORE).
+		owner(V, STORE) :-
+			nodeCharacteristic(STORE, '«ctOwner»', V);
+			dynamic(STORE, '«ctAddOwner»', V).
+		readAccess(V, STORE) :-
+			nodeCharacteristic(STORE, '«ctReadAccess»', V);
+			dynamic(STORE, '«ctAddReadAccess»', V).
+		writeAccess(V, STORE) :-
+			nodeCharacteristic(STORE, '«ctWriteAccess»', V);
+			dynamic(STORE, '«ctAddWriteAccess»', V).
 		
 		readViolation(A, STORE, S) :-
 			store(STORE),
@@ -131,7 +117,7 @@ class DACDelegationAnalysisTests extends AnalysisIntegrationTestBase {
 			flowTree(A, PIN, S),
 			traversedNode(S, STORE),
 			nodeCharacteristic(A, '«ctIdentity»', Y),
-			\+ readAccess(Y, STORE, _).
+			\+ readAccess(Y, STORE).
 		
 		writeViolation(A, STORE, S) :-
 			store(STORE),
@@ -140,7 +126,7 @@ class DACDelegationAnalysisTests extends AnalysisIntegrationTestBase {
 			flowTree(STORE, PIN, S),
 			traversedNode(S, A),
 			nodeCharacteristic(A, '«ctIdentity»', Y),
-			\+ writeAccess(Y, STORE, _).
+			\+ writeAccess(Y, STORE).
 	'''
 
 }
