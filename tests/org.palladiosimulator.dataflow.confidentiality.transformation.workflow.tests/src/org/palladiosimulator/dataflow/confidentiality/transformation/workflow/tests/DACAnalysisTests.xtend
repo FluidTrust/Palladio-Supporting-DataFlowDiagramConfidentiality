@@ -67,27 +67,27 @@ class DACAnalysisTests extends AnalysisIntegrationTestBase {
 	}
 	
 	protected def String getAnalysisRules(String ctIdentity, String ctReadAccess, String ctWriteAccess) '''
+		readAccess(V, STORE) :-
+			nodeCharacteristic(STORE, '«ctReadAccess»', V).
 		readViolation(A, STORE, S) :-
-			CT_IDENTITY = '«ctIdentity»',
-			CT_READ = '«ctReadAccess»',
 			store(STORE),
 			actor(A),
-			nodeCharacteristic(A, CT_IDENTITY, C_IDENTITY),
-			\+ nodeCharacteristic(STORE, CT_READ, C_IDENTITY),
 			inputPin(A, PIN),
 			flowTree(A, PIN, S),
-			traversedNode(S, STORE).
-			
+			traversedNode(S, STORE),
+			nodeCharacteristic(A, '«ctIdentity»', Y),
+			\+ readAccess(Y, STORE).
+		
+		writeAccess(V, STORE) :-
+			nodeCharacteristic(STORE, '«ctWriteAccess»', V).
 		writeViolation(A, STORE, S) :-
-			CT_IDENTITY = '«ctIdentity»',
-			CT_WRITE = '«ctWriteAccess»',
 			store(STORE),
 			actor(A),
 			inputPin(STORE, PIN),
-			nodeCharacteristic(A, CT_IDENTITY, C_IDENTITY),
-			\+ nodeCharacteristic(STORE, CT_WRITE, C_IDENTITY),
 			flowTree(STORE, PIN, S),
-			traversedNode(S, A).
+			traversedNode(S, A),
+			nodeCharacteristic(A, '«ctIdentity»', Y),
+			\+ writeAccess(Y, STORE).
 	'''
 
 }
