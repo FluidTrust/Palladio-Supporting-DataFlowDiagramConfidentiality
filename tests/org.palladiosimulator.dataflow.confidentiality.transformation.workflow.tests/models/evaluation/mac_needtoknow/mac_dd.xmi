@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDictionaryCharacterized:DataDictionaryCharacterized xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_uQQ_ANMCEeqMaJ4277tZGA">
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_IgunozANEeyxUoEkMpyhIg" name="Compartment" type="_Diek9DANEeyxUoEkMpyhIg"/>
+  <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_hedQgzANEeyxUoEkMpyhIg" name="Need to Know" type="_Diek9DANEeyxUoEkMpyhIg"/>
+  <enumerations id="_Diek9DANEeyxUoEkMpyhIg" name="Purpose">
+    <literals id="_FeC5wDANEeyxUoEkMpyhIg" name="Medical"/>
+    <literals id="_GiFwsDANEeyxUoEkMpyhIg" name="Financial"/>
+    <literals id="_Hj06gDANEeyxUoEkMpyhIg" name="Personal"/>
+  </enumerations>
+  <behaviorDefinitions id="_llun5TANEeyxUoEkMpyhIg" name="Forward">
+    <inputs id="_my0tIDANEeyxUoEkMpyhIg" name="in"/>
+    <outputs id="_nDOgoTANEeyxUoEkMpyhIg" name="out"/>
+    <assignments id="_oiZNUjANEeyxUoEkMpyhIg">
+      <lhs id="_o7dNkDANEeyxUoEkMpyhIg" pin="_nDOgoTANEeyxUoEkMpyhIg"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_pMJ8BzANEeyxUoEkMpyhIg" pin="_my0tIDANEeyxUoEkMpyhIg"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_zHIXZTANEeyxUoEkMpyhIg" name="Join">
+    <inputs id="_0Rw-gDANEeyxUoEkMpyhIg" name="in1"/>
+    <inputs id="_0fVgcDANEeyxUoEkMpyhIg" name="in2"/>
+    <outputs id="_16vugTANEeyxUoEkMpyhIg" name="out"/>
+    <assignments id="_5silIjANEeyxUoEkMpyhIg">
+      <lhs id="_6l8SUDANEeyxUoEkMpyhIg" characteristicType="_IgunozANEeyxUoEkMpyhIg" pin="_16vugTANEeyxUoEkMpyhIg"/>
+      <rhs xsi:type="expressions:Or" id="_61ct9TANEeyxUoEkMpyhIg">
+        <left xsi:type="expressions:DataCharacteristicReference" id="__cOExjANEeyxUoEkMpyhIg" characteristicType="_IgunozANEeyxUoEkMpyhIg" pin="_0Rw-gDANEeyxUoEkMpyhIg"/>
+        <right xsi:type="expressions:DataCharacteristicReference" id="_96WCXTANEeyxUoEkMpyhIg" characteristicType="_IgunozANEeyxUoEkMpyhIg" pin="_0fVgcDANEeyxUoEkMpyhIg"/>
+      </rhs>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_EOVv-DAOEeyxUoEkMpyhIg" name="Declassify">
+    <inputs id="_JUbgADAOEeyxUoEkMpyhIg" name="in"/>
+    <outputs id="_JiqJQTAOEeyxUoEkMpyhIg" name="out"/>
+    <assignments id="_LGTtUjAOEeyxUoEkMpyhIg">
+      <lhs id="_LrrrQDAOEeyxUoEkMpyhIg" pin="_JiqJQTAOEeyxUoEkMpyhIg"/>
+      <rhs xsi:type="expressions:DataCharacteristicReference" id="_L_xE5zAOEeyxUoEkMpyhIg" pin="_JUbgADAOEeyxUoEkMpyhIg"/>
+    </assignments>
+    <assignments id="_LZ7z8jAOEeyxUoEkMpyhIg">
+      <lhs id="_NU99QDAOEeyxUoEkMpyhIg" characteristicType="_IgunozANEeyxUoEkMpyhIg" pin="_JiqJQTAOEeyxUoEkMpyhIg"/>
+      <rhs xsi:type="expressions:False" id="_NoFGgjAOEeyxUoEkMpyhIg"/>
+    </assignments>
+  </behaviorDefinitions>
+  <behaviorDefinitions id="_Lvq99TAPEeyxUoEkMpyhIg" name="Store">
+    <inputs id="_M4-vYDAPEeyxUoEkMpyhIg" name="in"/>
+    <outputs id="_NEh4ETAPEeyxUoEkMpyhIg" name="out"/>
+  </behaviorDefinitions>
+</DataDictionaryCharacterized:DataDictionaryCharacterized>
