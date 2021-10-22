@@ -445,10 +445,44 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 
 		add(createHeaderComment("HELPER: collect all available data characteristics"))
 		add(createRule(
-			createCompoundTerm("setof_characteristics", "N", "PIN", "CT", "RESULT", "S"),
+			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "VALS", "S"),
 			createConjunction(
-				createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar),
-				createCompoundTerm("setof", "V".toVar, createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"), "RESULT".toVar)
+				createCompoundTerm("flowTree", "N", "PIN", "S"),
+				createCompoundTerm("allCharacteristicValues", "N".toVar, "PIN".toVar, "CT".toVar, "S".toVar, createList, "VALS".toVar)
+			)
+			
+		))
+		add(createRule(
+			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "S", "VISITED", "RESULT"),
+			createConjunction(
+				createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+				createCompoundTerm("intersection", "VISITED".toVar, createList(#["V"]), createList),
+				createDisjunction(
+					createUnification("VISITED".toVar, createList),
+					createConjunction(
+						createCompoundTerm("nth0", 0.toInt, "VISITED".toVar, "FIRSTV".toVar),
+						createStandardOrderBefore("V", "FIRSTV")
+					)
+				),
+				createCompoundTerm("allCharacteristicValues", "N".toVar, "PIN".toVar, "CT".toVar, "S".toVar, createList(#["V"], #["VISITED"]), "RESULT".toVar)
+			)
+		))
+		add(createRule(
+			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "S", "RESULT", "RESULT"),
+			createNotProvable(
+				createConjunction(
+					createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+					createCompoundTerm("intersection", "RESULT".toVar, createList(#["V"]), createList)
+				)
+			)
+		))
+		
+		add(createHeaderComment("HELPER: test if data characteristic values are exactly the given characteristic values"))
+		add(createRule(
+			createCompoundTerm("exactCharacteristicValues", "N", "PIN", "CT", "VALS", "S"),
+			createConjunction(
+				createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "V", "S"),
+				createCompoundTerm("sort", "VALS", "V")
 			)
 		))
 

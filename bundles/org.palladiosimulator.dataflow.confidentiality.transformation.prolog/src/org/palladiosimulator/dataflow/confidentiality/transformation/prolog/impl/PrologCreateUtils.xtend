@@ -141,6 +141,17 @@ class PrologCreateUtils {
 		]
 	}
 	
+	def createStandardOrderBefore(String leftVar, String rightVar) {
+		createStandardOrderBefore(leftVar.toVar, rightVar.toVar)
+	}
+	
+	def createStandardOrderBefore(Expression leftExpression, Expression rightExpression) {
+		createStandardOrderBefore => [
+			left = leftExpression
+			right = rightExpression
+		]
+	}
+	
 	def createDiscontiguousDirective(String predicateName, int arity) {
 		val directive = createDiscontiguous
 		directive.name = "discontiguous"
