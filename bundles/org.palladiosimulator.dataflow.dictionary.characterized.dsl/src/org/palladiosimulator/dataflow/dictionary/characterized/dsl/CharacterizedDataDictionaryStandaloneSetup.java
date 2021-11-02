@@ -3,6 +3,9 @@
  */
 package org.palladiosimulator.dataflow.dictionary.characterized.dsl;
 
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage;
+
+import com.google.inject.Injector;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -12,4 +15,11 @@ public class CharacterizedDataDictionaryStandaloneSetup extends CharacterizedDat
 	public static void doSetup() {
 		new CharacterizedDataDictionaryStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
+
+    @Override
+    public void register(Injector injector) {
+        DataDictionaryCharacterizedPackage.eINSTANCE.eClass(); // register DDC package
+        super.register(injector);
+    }
+
 }
