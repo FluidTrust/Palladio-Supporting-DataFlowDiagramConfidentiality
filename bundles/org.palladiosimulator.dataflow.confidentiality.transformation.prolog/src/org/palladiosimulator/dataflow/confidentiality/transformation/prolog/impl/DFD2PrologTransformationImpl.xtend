@@ -579,6 +579,53 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("characteristic", "NSRC".toVar, "PINSRC".toVar, "CT".toVar, "V".toVar, "S".toVar, createList(#["F"], #["VISITED"]))
 			)
 		))
+		
+		add(createHeaderComment("HELPER: find complement of set of characteristic type values"))
+		add(createComment("Find complement COMPLEMENT of value set VALS with the universal set defined through the values of the characteristic types CT"))
+		add(createRule(
+			createCompoundTerm("complement", "CTS", "VALS", "COMPLEMENT"),
+			createConjunction(
+				createCompoundTerm("is_set", "CTS"),
+				createCompoundTerm("universalSetForCharacteristicTypes", "CTS", "UNI"),
+				createCompoundTerm("subset", "VALS", "UNI"),
+				createCompoundTerm("subtract", "UNI", "VALS", "COMPLEMENT")
+			)
+		))
+		add(createComment("Find universal set UNI of values for characteristic types [H|T]"))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicTypes", createList(#["H"], #["T"]), "UNI".toVar),
+			createConjunction(
+				createCompoundTerm("universalSetForCharacteristicType", "H", "H_LITERALS"),
+				createCompoundTerm("universalSetForCharacteristicTypes", "T", "T_LITERALS"),
+				createCompoundTerm("append", "H_LITERALS", "T_LITERALS", "HT_LITERALS"),
+				createCompoundTerm("list_to_set", "HT_LITERALS", "UNI")
+			)
+		))
+		add(createFact(
+			createCompoundTerm("universalSetForCharacteristicTypes", createList, createList)
+		))
+		add(createComment("Find universal set UNI of values for characteristic type CT"))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT", "UNI"),
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, 0.toInt, "UNI".toVar)
+		))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, "N".toVar, createList(#["L"], #["T"])),
+			createConjunction(
+				createCompoundTerm("characteristicTypeValue", "CT", "L", "I"),
+				createNumberEqual("I", "N"),
+				createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, createPlus("N".toVar, 1.toInt), "T".toVar)
+			)
+		))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, "N".toVar, createList),
+			createNotProvable(
+				createConjunction(
+					createCompoundTerm("characteristicTypeValue", "CT", "_", "I"),
+					createNumberEqual("I", "N")
+				)
+			)
+		))
 	}
 
 	// queries
