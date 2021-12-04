@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.palladiosimulator.dataflow.diagram.characterized.editor;singleton:=true
 Automatic-Module-Name: org.palladiosimulator.dataflow.diagram.characterized.editor
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 5.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.presentation.DataFlowDiagramCharacterizedEditorPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -20,5 +20,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.palladiosimulator.dataflow.dictionary.characterized.edit;visibility:=reexport,
  org.palladiosimulator.dataflow.diagram.edit;visibility:=reexport,
  de.uka.ipd.sdq.identifier.edit;visibility:=reexport,
- org.palladiosimulator.dataflow.confidentiality.resources;bundle-version="0.1.0"
+ org.palladiosimulator.dataflow.confidentiality.resources;bundle-version="5.1.0"
 Bundle-ActivationPolicy: lazy

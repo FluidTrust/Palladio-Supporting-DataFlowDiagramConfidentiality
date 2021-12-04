@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 5.1.0.qualifier
 Automatic-Module-Name: org.palladiosimulator.dataflow.transformation.workflow.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.junit;version="4.12.0",
@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.ocl.ecore,
  de.uka.ipd.sdq.workflow.mdsd;bundle-version="4.2.0",
  org.palladiosimulator.dataflow.confidentiality.transformation.workflow,
  org.palladiosimulator.dataflow.diagram;bundle-version="0.1.0",
- org.palladiosimulator.dataflow.diagram.characterized;bundle-version="0.1.0"
+ org.palladiosimulator.dataflow.diagram.characterized;bundle-version="5.1.0"
 Export-Package: org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests,
  org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.impl,
  org.palladiosimulator.dataflow.confidentiality.transformation.workflow.tests.util

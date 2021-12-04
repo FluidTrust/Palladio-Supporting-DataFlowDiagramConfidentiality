@@ -2,13 +2,13 @@
 <feature
       id="org.palladiosimulator.dataflow.confidentiality.transformation.feature"
       label="Prolog Transformation"
-      version="0.1.0.qualifier"
+      version="5.1.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license.epl2"
       license-feature-version="1.0.0">
 
    <requires>
-      <import feature="org.palladiosimulator.dataflow.confidentiality.model.feature" version="0.1.0.qualifier"/>
+      <import feature="org.palladiosimulator.dataflow.confidentiality.model.feature" version="5.1.0" match="compatible"/>
    </requires>
 
    <plugin
