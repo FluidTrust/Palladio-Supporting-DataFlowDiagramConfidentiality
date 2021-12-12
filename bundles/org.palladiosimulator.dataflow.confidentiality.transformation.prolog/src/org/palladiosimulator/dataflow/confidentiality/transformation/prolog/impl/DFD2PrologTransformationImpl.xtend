@@ -59,14 +59,17 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	val extension UniqueNameUtils uniqueNameUtils
 	val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
 	val stagedTraces = new HashMap<EObject, Runnable>
+	val boolean performanceTweaks
 	var DFD2PrologTransformationWritableTrace trace
 	var Program program	
 	var Iterable<EnumCharacteristicType> characteristicTypesInBehaviors
 	var Iterable<EnumCharacteristicType> characteristicTypesInNodes
 	var Iterable<DataType> usedDataTypes
+	
 
-	new(UniqueNameProvider nameProvider) {
+	new(UniqueNameProvider nameProvider, boolean performanceTweaks) {
 		this.uniqueNameUtils = new UniqueNameUtils(nameProvider)
+		this.performanceTweaks = performanceTweaks
 	}
 
 	override transform(DataFlowDiagram dfd) {
@@ -237,11 +240,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		]
 		
 		// behavior
-		node.behavior.inputs.forEach[pin |
+		node.behavior.inputs.sortedView(node).forEach[pin |
 			clauses += createFact(createCompoundTerm("inputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
 		]
-		node.behavior.outputs.forEach[pin |
+		node.behavior.outputs.sortedView(node).forEach[pin |
 			clauses += createFact(createCompoundTerm("outputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
 			characteristicTypesInBehaviors.forEach[ct |
@@ -357,30 +360,40 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createComment('''
 			Finds all input pins PINS for a given node N. The list of pins is sorted.
 			The sorted list containing all possible pins is the only result of the clause. No subsets or unsorted lists are returned.'''))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS"),
-			createConjunction(
-				createCompoundTerm("findAllInputPins", "N".toVar, createList, "PINS".toVar),
-				createCompoundTerm("sort", "PINS", "PINS")
-			)
-		))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS", "RESULT"),
-			createConjunction(
-				createCompoundTerm("inputPin", "N", "PIN"),
-				createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList),
-				createCompoundTerm("findAllInputPins", "N".toVar, createList(#["PIN"], #["PINS"]), "RESULT".toVar)
-			)
-		))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS", "PINS"),
-			createNotProvable(
+		if (performanceTweaks) {
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS"),
+				createConjunction(
+					createCompoundTerm("findall", "PIN".toVar, createCompoundTerm("inputPin", "N", "PIN"), "PINS".toVar),
+					createCompoundTerm("sort", "PINS", "PINS")
+				)
+			))
+		} else {
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS"),
+				createConjunction(
+					createCompoundTerm("findAllInputPins", "N".toVar, createList, "PINS".toVar),
+					createCompoundTerm("sort", "PINS", "PINS")
+				)
+			))
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS", "RESULT"),
 				createConjunction(
 					createCompoundTerm("inputPin", "N", "PIN"),
-					createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList)
+					createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList),
+					createCompoundTerm("findAllInputPins", "N".toVar, createList(#["PIN"], #["PINS"]), "RESULT".toVar)
 				)
-			)
-		))
+			))
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS", "PINS"),
+				createNotProvable(
+					createConjunction(
+						createCompoundTerm("inputPin", "N", "PIN"),
+						createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList)
+					)
+				)
+			))
+		}
 		
 		add(createComment('''
 			Find one arbitrary set of flows (SELECTED_FLOWS) for a given node (P) in a way that for every input pin, there is exactly one input flow.

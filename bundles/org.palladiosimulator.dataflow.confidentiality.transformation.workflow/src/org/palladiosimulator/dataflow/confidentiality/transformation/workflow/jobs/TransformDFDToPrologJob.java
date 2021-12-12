@@ -23,12 +23,15 @@ public class TransformDFDToPrologJob<T extends KeyValueMDSDBlackboard> extends A
     private final DFD2PrologTransformationBuilder transformationBuilder;
 
     public TransformDFDToPrologJob(ModelLocation dfdLocation, ModelLocation prologLocation, String traceKey,
-            NameGenerationStrategie nameGenerationStrategy) {
+            NameGenerationStrategie nameGenerationStrategy, boolean usePerformanceTweaks) {
         this.dfdLocation = dfdLocation;
         this.prologLocation = prologLocation;
         this.traceKey = traceKey;
         this.transformationBuilder = DFD2PrologTransformationBuilder.create()
             .setNameProvider(nameGenerationStrategy);
+        if (usePerformanceTweaks) {
+            transformationBuilder.enablePerformanceTweaks();
+        }
     }
 
     @Override

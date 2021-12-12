@@ -17,6 +17,7 @@ import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jo
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.LoadModelJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.SerializeModelToStringJob;
 import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.TransformDFDToPrologJob;
+import org.palladiosimulator.dataflow.confidentiality.transformation.workflow.jobs.ValidateModelJob;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram;
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.DataDictionary;
 
@@ -35,12 +36,17 @@ public class TransformationWorkflowBuilder {
 	protected static final ModelLocation DEFAULT_PROLOG_LOCATION = new ModelLocation("prolog", URI.createFileURI("tmp/prolog.pl"));
 	protected static final String DEFAULT_TRACE_KEY = "trace";
 	protected static final String DEFAULT_PROLOG_KEY = "prolog";
+	protected static final String DEFAULT_DFD_VALIDATION_KEY = "dfdValidationResult";
 	private final KeyValueMDSDBlackboard blackboard = new KeyValueMDSDBlackboard();
 	private final Collection<IJob> serializationJobs = new ArrayList<>();
 	protected ModelLocation dfdLocation;
 	protected WorkflowExceptionHandler workflowExceptionHandler = new WorkflowExceptionHandler(false);
 	protected IProgressMonitor progressMonitor = new NullProgressMonitor();
 	private NameGenerationStrategie nameDerivationMethod = NameGenerationStrategie.SHORTED_ID;
+	protected String dfdValidationKey = DEFAULT_DFD_VALIDATION_KEY;
+    protected boolean failOnValidationError;
+    protected boolean enablePerformanceTweaks = false;
+    protected boolean enableDFDValidation = false;
 	
 	public TransformationWorkflowBuilder() {
 		
@@ -111,6 +117,26 @@ public class TransformationWorkflowBuilder {
 		return this;
 	}
 	
+	public TransformationWorkflowBuilder addDFDValidation(String validationKey) {
+	    this.dfdValidationKey = validationKey;
+	    return this;
+	}
+	
+	public TransformationWorkflowBuilder setFailOnValidationError() {
+	    this.failOnValidationError = true;
+	    return this;
+	}
+	
+	public TransformationWorkflowBuilder enableDFDValidation() {
+	    this.enableDFDValidation  = true;
+	    return this;
+	}
+	
+	public TransformationWorkflowBuilder enablePerformanceTweaks() {
+	    this.enablePerformanceTweaks = true;
+	    return this;
+	}
+	
     public TransformDFDToPrologWorkflow build() {
         // validate state
         Validate.validState(dfdLocation != null, "A DFD diagram has to be given");
@@ -132,8 +158,14 @@ public class TransformationWorkflowBuilder {
         // create transformation job
         blackboard.addPartition(DEFAULT_PROLOG_LOCATION.getPartitionID(), new ResourceSetPartition());
         
-        var transformJob = new TransformDFDToPrologJob<KeyValueMDSDBlackboard>(dfdLocation, DEFAULT_PROLOG_LOCATION, DEFAULT_TRACE_KEY, nameDerivationMethod);
+        var transformJob = new TransformDFDToPrologJob<KeyValueMDSDBlackboard>(dfdLocation, DEFAULT_PROLOG_LOCATION,
+                DEFAULT_TRACE_KEY, nameDerivationMethod, enablePerformanceTweaks);
         jobSequence.add(transformJob);
+        
+        if (enableDFDValidation) {
+            var validationJob = new ValidateModelJob<>(dfdLocation, dfdValidationKey, failOnValidationError);
+            jobSequence.add(validationJob);            
+        }
 
         // create serialization job
         jobSequence.addAll(serializationJobs);
