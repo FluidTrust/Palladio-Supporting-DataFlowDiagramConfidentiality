@@ -537,6 +537,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("outputPin", "N", "PIN"),
 				processOrStore,
 				createCompoundTerm("inputFlowsSelection", "N", "FLOWS"),
+				createCompoundTerm("intersection", "FLOWS".toVar, "VISITED".toVar, createList),
 				createCompoundTerm("flowTreeForFlows", "N", "S", "FLOWS", "VISITED")
 			)
 		))
@@ -544,11 +545,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("flowTreeForFlows", "N".toVar, "S".toVar, createList(#["F"], #["T"]), "VISITED".toVar),
 			createConjunction(
-				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
-				createCompoundTerm("flowTreeForFlows", "N", "STAIL", "T", "VISITED"),
 				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "_", "_"),
+				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
 				createCompoundTerm("flowTree", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
 				createUnification("SHEAD".toVar, createList(#["F"], #["TMP"])),
+				createCompoundTerm("flowTreeForFlows", "N", "STAIL", "T", "VISITED"),
 				createUnification("S".toVar, createList(#["SHEAD"], #["STAIL"]))
 			)
 		))
