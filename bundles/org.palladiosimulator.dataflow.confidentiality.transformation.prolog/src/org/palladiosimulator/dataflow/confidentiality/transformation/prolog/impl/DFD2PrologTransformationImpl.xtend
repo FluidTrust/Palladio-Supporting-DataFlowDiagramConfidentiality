@@ -147,15 +147,20 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	    def Rule createOutputCharacteristicRule(CharacterizedNode node, Pin pin, EnumCharacteristicType ct, Literal l);
 	}
 	
+	protected def getUsedPins(CharacterizedNode node, Assignment assignment) {
+		(assignment.rhs.eAllContents + #[assignment.rhs as EObject].iterator).filter(DataCharacteristicReference).map[pin].toList.sortedView(node)
+	}
+	
 	protected def dispatch transformNode(CharacterizedProcess process) {
 		process.transformNode("process", [node, pin, ct, l |
 			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
 			val transformedAssignment = assignmentToTransform.transformAssignment(node, pin, ct, l)
-			val needsFlowTree = assignmentToTransform.needsFlowTree
+			val usedPins = assignmentToTransform.map[a | getUsedPins(process, a)].orElse(#[])
+			val needsFlowTree = !usedPins.isEmpty
 			if (needsFlowTree) {
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs, usedPins))
 				flowClauses += transformedAssignment
 				createRule(
 					createCompoundTerm("characteristic", node.uniqueQuotedString, pin.getUniqueQuotedString(process as Node), ct.uniqueQuotedString, l.uniqueQuotedString, "S".toVar, "VISITED".toVar),
@@ -196,7 +201,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		store.transformNode("store", [node, pin, ct, l|
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(node, node.behavior.inputs, node.behavior.inputs))
 				val term = dfdExpressionsFactory.createDataCharacteristicReference
 				term.pin = node.behavior.inputs.get(0)
 				term.characteristicType = ct
@@ -257,14 +262,18 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		clauses
 	}
 	
+	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins, Iterable<Pin> usedPins) {
+		val sortedPins = inputPins.sortedView(node)
+		performanceTweaks ? createFlowTreeClausesPerformance(node, sortedPins, usedPins) : createFlowTreeClausesDefault(node, sortedPins)
+	}
+	
 	/**
 	 * Creates all clauses required to build a valid flow tree.
 	 * 
 	 * This includes the selection of a flow for every input pin as well as building the appropriate flow tree variables.
 	 * The flow tree variable Sn represents the flow tree to be used for the input pin n.
 	 */
-	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
-		val sortedPins = inputPins.sortedView(node)
+	protected def createFlowTreeClausesDefault(CharacterizedNode node, List<Pin> sortedPins) {
 		val clauses = new ArrayList<Expression>
 		val hasMultipleInputs = sortedPins.size > 1
 		val treeList = createList
@@ -275,6 +284,20 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			treeList.heads += '''S«i»'''.toVar
 		}
 		clauses += createUnification("S".toVar, treeList)
+		clauses
+	}
+	
+	/**
+	 * Creates the clauses required to refer to a part of an already initialized flow tree.
+	 * 
+	 * This implementation assumes that the given flow tree S has already been fully instantiated.
+	 */
+	protected def createFlowTreeClausesPerformance(CharacterizedNode node, List<Pin> sortedPins, Iterable<Pin> usedPins) {
+		val clauses = new ArrayList<Expression>
+		for (usedPin : usedPins) {
+			var index = sortedPins.indexOf(usedPin)
+			clauses += createCompoundTerm("nth0", index.toInt, "S".toVar, '''S«index»'''.toVar)
+		}
 		clauses
 	}
 	
