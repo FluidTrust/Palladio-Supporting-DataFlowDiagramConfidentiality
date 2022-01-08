@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor
 
-class PrivateTaxiTestArbitraryLattice extends AnalysisIntegrationTestBase {
+class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 
 	boolean initialized
 

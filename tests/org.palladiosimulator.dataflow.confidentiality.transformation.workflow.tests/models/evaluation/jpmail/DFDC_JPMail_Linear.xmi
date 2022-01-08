@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0" xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_jzfXIENEEeq3NrD2DjPidQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_9a0qNVP5EeqwY5tipD4jOw" name="Alice">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_09inILZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_A5g-oFP6EeqwY5tipD4jOw">
+      <outputs id="_CD1csVP6EeqwY5tipD4jOw" name="alice.out.emailbodyandheader"/>
+      <assignments id="_ETZEglP6EeqwY5tipD4jOw">
+        <lhs id="_Eu1DUFP6EeqwY5tipD4jOw" pin="_CD1csVP6EeqwY5tipD4jOw">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_GGFKIVP6EeqwY5tipD4jOw"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_BUuk51QDEeqwY5tipD4jOw" name="Bob">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_2WVmEbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_DqZbwFQDEeqwY5tipD4jOw">
+      <inputs id="_EOQ90FQDEeqwY5tipD4jOw" name="Bob.in.emailBodyAndHeader"/>
+      <outputs id="_b9Wz4VQEEeqwY5tipD4jOw" name="Bob.out.privateKey"/>
+      <outputs id="_2uUqEVQGEeqnLp_48pbpVA" name="Bob.out.publicKey"/>
+      <assignments id="_dt0E4lQEEeqwY5tipD4jOw">
+        <lhs id="_eL_OoFQEEeqwY5tipD4jOw" pin="_b9Wz4VQEEeqwY5tipD4jOw">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_fpVWYVQEEeqwY5tipD4jOw"/>
+      </assignments>
+      <assignments id="_4AomglQGEeqnLp_48pbpVA">
+        <lhs id="_4VA7EFQGEeqnLp_48pbpVA" pin="_2uUqEVQGEeqnLp_48pbpVA">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_JPMail_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_54e48VQGEeqnLp_48pbpVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_omAEh1QGEeqnLp_48pbpVA" name="PolicyInitialiser">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_2f-qQLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_rIIqEFQGEeqnLp_48pbpVA">
+      <outputs id="_rqyrMVQGEeqnLp_48pbpVA" name="PolicyInitialiser.out.policy"/>
+      <assignments id="_trcUUlQGEeqnLp_48pbpVA">
+        <lhs id="_uJAaEFQGEeqnLp_48pbpVA" pin="_rqyrMVQGEeqnLp_48pbpVA">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_JPMail_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_vsHyoVQGEeqnLp_48pbpVA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_O3JXJ1P6EeqwY5tipD4jOw" name="Reclassify.splitMail">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_4GcRwLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_pl5_J1QCEeqwY5tipD4jOw" name="Reclassify.authorise">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_4CF9QLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_r03xF1QCEeqwY5tipD4jOw" name="Encrypt.prepareEncryption">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_39cGwbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_uJ4gqVQCEeqwY5tipD4jOw" name="Encrypt.encrypt">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_35TNobZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_MmefWFIpEeqkVaPUPi-ogw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_wmlzp1QCEeqwY5tipD4jOw" name="SMTP">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_yTZ6wVQCEeqwY5tipD4jOw" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_09osaVQCEeqwY5tipD4jOw" name="POP3">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_-UtzsVQGEeqnLp_48pbpVA" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_3qG5uVQCEeqwY5tipD4jOw" name="Decrypt.prepareDecryption">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3cxCobZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_6in--VQCEeqwY5tipD4jOw" name="Decrypt.authoriseKeyReading">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3Yhb0bZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_82SDqVQCEeqwY5tipD4jOw" name="Decrypt.authorise">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3UOKoLZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_-8VKKVQCEeqwY5tipD4jOw" name="Decrypt.decrypt">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3P7ggbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_JPMail_Linear.xmi#_SIdkaFItEeqkVaPUPi-ogw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore" id="_TyQQIVQDEeqwY5tipD4jOw" name="PolicyDS">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3LXJkbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_VXnEYFQDEeqwY5tipD4jOw">
+      <inputs id="_VwZX0FQDEeqwY5tipD4jOw" name="PolicyDS.in"/>
+      <outputs id="_Yi24YVQDEeqwY5tipD4jOw" name="PolicyDS.out"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore" id="_btclGFQDEeqwY5tipD4jOw" name="BobDS">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3Gw9cbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_JPMail_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_JPMail_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_dHDcUFQDEeqwY5tipD4jOw">
+      <inputs id="_d23IoFQDEeqwY5tipD4jOw" name="BobDS.in"/>
+      <outputs id="_e_Xo0VQDEeqwY5tipD4jOw" name="BobDS.out"/>
+    </ownedBehavior>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_HYoBCVQDEeqwY5tipD4jOw" name="EmailBodyAndHeader" target="_O3JXJ1P6EeqwY5tipD4jOw" source="_9a0qNVP5EeqwY5tipD4jOw" sourcePin="_CD1csVP6EeqwY5tipD4jOw">
+    <targetPin href="DDC_JPMail_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_LCwJalQDEeqwY5tipD4jOw" name="Policy" target="_O3JXJ1P6EeqwY5tipD4jOw" source="_pl5_J1QCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_QxP9SlQDEeqwY5tipD4jOw" name="Policy" target="_pl5_J1QCEeqwY5tipD4jOw" source="_TyQQIVQDEeqwY5tipD4jOw" sourcePin="_Yi24YVQDEeqwY5tipD4jOw">
+    <targetPin href="DDC_JPMail_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_iYzp2lQDEeqwY5tipD4jOw" name="EmailBody,Header" target="_r03xF1QCEeqwY5tipD4jOw" source="_O3JXJ1P6EeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_n1JWulQDEeqwY5tipD4jOw" name="BobPubKey" target="_r03xF1QCEeqwY5tipD4jOw" source="_TyQQIVQDEeqwY5tipD4jOw" sourcePin="_Yi24YVQDEeqwY5tipD4jOw">
+    <targetPin href="DDC_JPMail_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_rGytqlQDEeqwY5tipD4jOw" name="EmailBody,Header,BobPubKey" target="_uJ4gqVQCEeqwY5tipD4jOw" source="_r03xF1QCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#__xKc8FIsEeqkVaPUPi-ogw"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_v3vUKlQDEeqwY5tipD4jOw" name="EmailBodyEncrypted,Header" target="_wmlzp1QCEeqwY5tipD4jOw" source="_uJ4gqVQCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_AJut8VItEeqkVaPUPi-ogw"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_z139qlQDEeqwY5tipD4jOw" name="EmailBodyEncrypted,Header" target="_09osaVQCEeqwY5tipD4jOw" source="_wmlzp1QCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_2vz_OlQDEeqwY5tipD4jOw" name="EmailBodyEncrypted,Header" target="_3qG5uVQCEeqwY5tipD4jOw" source="_09osaVQCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_5lH_elQDEeqwY5tipD4jOw" name="BobPrivateKey" target="_6in--VQCEeqwY5tipD4jOw" source="_btclGFQDEeqwY5tipD4jOw" sourcePin="_e_Xo0VQDEeqwY5tipD4jOw">
+    <targetPin href="DDC_JPMail_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_-Stv-lQDEeqwY5tipD4jOw" name="BobPrivateKey" target="_3qG5uVQCEeqwY5tipD4jOw" source="_6in--VQCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_DYQtelQEEeqwY5tipD4jOw" name="Policy" target="_82SDqVQCEeqwY5tipD4jOw" source="_TyQQIVQDEeqwY5tipD4jOw" sourcePin="_Yi24YVQDEeqwY5tipD4jOw">
+    <targetPin href="DDC_JPMail_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_HIy_2lQEEeqwY5tipD4jOw" name="Policy" target="_6in--VQCEeqwY5tipD4jOw" source="_82SDqVQCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_O_E_mlQEEeqwY5tipD4jOw" name="EmailBodyEncrypted,Header,BobPrivateKey" target="_-8VKKVQCEeqwY5tipD4jOw" source="_3qG5uVQCEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_JPMail_Linear.xmi#_TKg3QFItEeqkVaPUPi-ogw"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_V5JOulQEEeqwY5tipD4jOw" name="EmailBody,Header" target="_BUuk51QDEeqwY5tipD4jOw" source="_-8VKKVQCEeqwY5tipD4jOw" targetPin="_EOQ90FQDEeqwY5tipD4jOw">
+    <sourcePin href="DDC_JPMail_Linear.xmi#_Tf54cVItEeqkVaPUPi-ogw"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_gl-k2lQEEeqwY5tipD4jOw" name="BobPrivateKey" target="_btclGFQDEeqwY5tipD4jOw" source="_BUuk51QDEeqwY5tipD4jOw" sourcePin="_b9Wz4VQEEeqwY5tipD4jOw" targetPin="_d23IoFQDEeqwY5tipD4jOw"/>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_wUuDulQGEeqnLp_48pbpVA" name="Policy" target="_TyQQIVQDEeqwY5tipD4jOw" source="_omAEh1QGEeqnLp_48pbpVA" sourcePin="_rqyrMVQGEeqnLp_48pbpVA" targetPin="_VwZX0FQDEeqwY5tipD4jOw"/>
+</DataFlowDiagram:DataFlowDiagram>
