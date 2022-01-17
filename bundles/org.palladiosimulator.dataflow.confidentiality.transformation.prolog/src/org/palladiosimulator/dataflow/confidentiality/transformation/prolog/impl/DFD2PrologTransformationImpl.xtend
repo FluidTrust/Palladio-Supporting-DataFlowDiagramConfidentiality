@@ -151,6 +151,10 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		(assignment.rhs.eAllContents + #[assignment.rhs as EObject].iterator).filter(DataCharacteristicReference).map[pin].toList.sortedView(node)
 	}
 	
+	protected def createBehaviorFact(CharacterizedNode behaving) {
+		createFact(createCompoundTerm("behavior", behaving.uniqueQuotedString, behaving.behavior.uniqueQuotedString))
+	}
+	
 	protected def dispatch transformNode(CharacterizedProcess process) {
 		process.transformNode("process", [node, pin, ct, l |
 			val assignmentToTransform = node.behavior.assignments.findLastMatchingAssignment(pin, ct, l)
@@ -245,6 +249,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		]
 		
 		// behavior
+		clauses += node.createBehaviorFact
 		node.behavior.inputs.sortedView(node).forEach[pin |
 			clauses += createFact(createCompoundTerm("inputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]

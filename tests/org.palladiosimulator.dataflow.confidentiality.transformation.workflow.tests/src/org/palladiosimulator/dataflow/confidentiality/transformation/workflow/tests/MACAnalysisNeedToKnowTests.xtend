@@ -59,8 +59,9 @@ class MACAnalysisNeedToKnowTests extends AnalysisIntegrationTestBase {
 			(actor(N);actorProcess(N, _)),
 			inputPin(N, PIN),
 			flowTree(N, PIN, S),
-			setof(X, characteristic(N, PIN, 'Compartment (_IgunozANEeyxUoEkMpyhIg)', X, S), COMP),
-			setof(X, nodeCharacteristic(N, 'Need to Know (_hedQgzANEeyxUoEkMpyhIg)', X), NTK),
+			findall(X, characteristic(N, PIN, 'Compartment (_IgunozANEeyxUoEkMpyhIg)', X, S), L_COMP),
+			findall(X, nodeCharacteristic(N, 'Need to Know (_hedQgzANEeyxUoEkMpyhIg)', X), L_NTK),
+			sort(L_COMP, COMP), sort(L_NTK, NTK),
 			\+ subset(COMP, NTK).
 		''')
 		var solution = query.solve()

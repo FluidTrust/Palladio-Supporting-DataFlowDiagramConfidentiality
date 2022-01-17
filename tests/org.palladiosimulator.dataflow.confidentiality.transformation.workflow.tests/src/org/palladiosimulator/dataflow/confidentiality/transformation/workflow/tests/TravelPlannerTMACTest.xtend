@@ -61,8 +61,9 @@ class TravelPlannerTMACTest extends AnalysisIntegrationTestBase {
 		var queryString = '''
 			inputPin(P, PIN), flowTree(P, PIN, S),
 			((
-				setof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
-				setof(R, characteristic(P, PIN, ?CTRIGHTS, R, S), REQ),
+				findall(R, nodeCharacteristic(P, ?CTROLES, R), L_ROLES),
+				findall(R, characteristic(P, PIN, ?CTRIGHTS, R, S), L_REQ),
+				sort(L_ROLES, ROLES), sort(L_REQ, REQ),
 				intersection(REQ, ROLES, [])
 			) ; (
 				CT_CRITICALITY=?CTCRIT,

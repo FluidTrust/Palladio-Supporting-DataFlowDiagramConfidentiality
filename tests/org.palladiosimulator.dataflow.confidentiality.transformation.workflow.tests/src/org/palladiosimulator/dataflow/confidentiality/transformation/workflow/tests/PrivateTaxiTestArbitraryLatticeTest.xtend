@@ -28,7 +28,7 @@ class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/privatetaxi/privatetaxi_arbitrary_dfd.xmi"))
 		var keySolution = findKeyFlaws()
-		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN0", "PIN1", "S0", "S1", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, #["N", "PIN", "V_CLEAR", "V_CLASS", "S"])
 	}
@@ -48,7 +48,7 @@ class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 		dfd.edges += directCCDFlow
 
 		var keySolution = findKeyFlaws()
-		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN0", "PIN1", "S0", "S1", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 3, #["N", "PIN", "V_CLEAR", "V_CLASS", "S"])
 	}
@@ -94,7 +94,7 @@ class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 		dfd.edges += joinedFlow
 
 		var keySolution = findKeyFlaws()
-		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN0", "PIN1", "S0", "S1", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 6, #["N", "PIN", "V_CLEAR", "V_CLASS", "S"])
 	}
@@ -110,7 +110,7 @@ class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 		lhs.literal = lhs.literal.getEnum().literals.findFirst[name == "Driver"]
 		
 		var keySolution = findKeyFlaws()
-		assertNumberOfSolutions(keySolution, 2, #["N", "PIN0", "PIN1", "REQ", "PROV", "S0", "S1"])
+		assertNumberOfSolutions(keySolution, 1, #["N", "PIN0", "PIN1", "REQ", "PROV", "S0", "S1"])
 	}
 
 	protected def Solution<Object> findFlaws() {
@@ -125,11 +125,13 @@ class PrivateTaxiTestArbitraryLatticeTest extends AnalysisIntegrationTestBase {
 
 	protected def Solution<Object> findKeyFlaws() {
 		'''
+		behavior(N, 'Decryptor (_QIqzVeHqEeqO9NqdRSqKUA)'),
 		inputPin(N, PIN0),
 		inputPin(N, PIN1),
 		PIN0 \== PIN1,
-		setof(X, characteristic(N, PIN0, 'PrivateKeyOf (_JZLuc-HoEeqO9NqdRSqKUA)', X, S0), PROV),
-		setof(X, characteristic(N, PIN1, 'DecryptableBy (_L2LVU-HoEeqO9NqdRSqKUA)', X, S1), REQ),
+		findall(X, characteristic(N, PIN0, 'PrivateKeyOf (_JZLuc-HoEeqO9NqdRSqKUA)', X, S0), L_PROV),
+		findall(X, characteristic(N, PIN1, 'DecryptableBy (_L2LVU-HoEeqO9NqdRSqKUA)', X, S1), L_REQ),
+		sort(L_PROV, PROV), sort(L_REQ, REQ),
 		REQ \== [],
 		intersection(PROV, REQ, []).
 		'''.findFlaws
