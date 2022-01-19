@@ -22,6 +22,11 @@ Workflow {
 		}
 		
 		uriMap = {
+			from = "platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore"
+			to = "platform:/resource/de.uka.ipd.sdq.identifier/model/identifier.ecore"
+		}
+
+		uriMap = {
 			from = "platform:/plugin/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
 			to = "platform:/resource/org.palladiosimulator.dataflow.diagram/model/DataFlowDiagram.genmodel"
 		}
