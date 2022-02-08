@@ -10,12 +10,19 @@ import org.palladiosimulator.dataflow.dictionary.DataDictionary.CollectionDataTy
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.CompositeDataType
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.Entry
 import org.palladiosimulator.dataflow.dictionary.DataDictionary.PrimitiveDataType
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterized
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Enumeration
-import org.palladiosimulator.dataflow.dictionary.characterized.dsl.services.CharacterizedDataDictionaryGrammarAccess
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Enumeration
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.BinaryLogicTerm
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ContainerCharacteristicReference
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.Term
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.UnaryLogicTerm
+import org.palladiosimulator.dataflow.dictionary.characterized.dsl.services.CharacterizedDataDictionaryGrammarAccess
 
 class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 	
@@ -31,6 +38,7 @@ class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 		dataDictionaryCharacterized.characteristics.forEach[format]
 		dataDictionaryCharacterized.characteristicTypes.forEach[format]
 		dataDictionaryCharacterized.behaviorDefinitions.forEach[format]
+		dataDictionaryCharacterized.behaviorDefinitions.forEach[prepend[newLines = 2]]
 	}
 	
 	def dispatch void format(PrimitiveDataType dataType, extension IFormattableDocument document) {
@@ -111,5 +119,80 @@ class CharacterizedDataDictionaryFormatter extends AbstractFormatter2 {
 		characteristic.append[noSpace]
 	}
 	
-	// TODO: implement for BehaviorDefinition, Assignment, And, Or, Not
+	def dispatch void format(BehaviorDefinition behaviorDefinition, extension IFormattableDocument document) {
+		behaviorDefinition.regionFor.keyword(behaviorDefinitionAccess.behaviorKeyword_0).append[oneSpace]
+		behaviorDefinition.regionFor.assignment(behaviorDefinitionAccess.nameAssignment_1).append[oneSpace]
+		
+		interior(
+			behaviorDefinition.regionFor.keyword(behaviorDefinitionAccess.leftCurlyBracketKeyword_2).append[noSpace].append[newLine],
+			behaviorDefinition.regionFor.keyword(behaviorDefinitionAccess.rightCurlyBracketKeyword_6),
+			[indent]
+		)
+		
+		behaviorDefinition.allRegionsFor.keywords(behaviorDefinitionAccess.inputKeyword_3_0).forEach[append[oneSpace]]
+		behaviorDefinition.allRegionsFor.keywords(behaviorDefinitionAccess.outputKeyword_4_0).forEach[append[oneSpace]]
+		(behaviorDefinition.inputs + behaviorDefinition.outputs).forEach[append[newLine]]
+
+		behaviorDefinition.assignments.findFirst[true]?.prepend[priority = 2; newLines = 2] // conflict with pins.append[newLine]
+
+		behaviorDefinition.assignments.forEach[append[newLine]]
+		behaviorDefinition.assignments.forEach[format]
+		
+		behaviorDefinition.append[noSpace]
+	}
+	
+	
+	def dispatch void format(Assignment assignment, extension IFormattableDocument document) {
+		assignment.regionFor.keyword(assignmentAccess.colonEqualsSignKeyword_1).prepend[oneSpace].append[oneSpace]
+		assignment.lhs.format
+		assignment.rhs.format
+		assignment.append[newLine]
+	}
+	
+	def dispatch void format(DataCharacteristicReference reference, extension IFormattableDocument document) {
+		reference.formatDefault(document)
+		reference.allRegionsFor.keywords(
+			outputDataCharacteristicReferenceAccess.fullStopKeyword_1,
+			outputDataCharacteristicReferenceAccess.fullStopKeyword_2_0_1,
+			outputDataCharacteristicReferenceAccess.fullStopKeyword_2_1_1,
+			inputDataCharacteristicReferenceAccess.fullStopKeyword_1,
+			inputDataCharacteristicReferenceAccess.fullStopKeyword_2_0_1,
+			inputDataCharacteristicReferenceAccess.fullStopKeyword_2_1_1
+		).forEach[prepend[noSpace].append[noSpace]]
+	}
+	
+	def dispatch void format(ContainerCharacteristicReference reference, extension IFormattableDocument document) {
+		reference.formatDefault(document)
+		reference.allRegionsFor.keywords(
+			containerCharacteristicReferenceAccess.fullStopKeyword_2,
+			containerCharacteristicReferenceAccess.fullStopKeyword_3_0_1,
+			containerCharacteristicReferenceAccess.fullStopKeyword_3_1_1
+		).forEach[prepend[noSpace].append[noSpace]]
+	}
+	
+	def dispatch void format(BinaryLogicTerm term, extension IFormattableDocument document) {
+		term.formatDefault(document)
+		term.allRegionsFor.keywords(
+			binaryLogicTermAccess.ampersandKeyword_1_0_1,
+			binaryLogicTermAccess.verticalLineKeyword_1_1_1
+		).forEach[prepend[oneSpace].append[oneSpace]]
+		term.left.format
+		term.right.format
+	}
+	
+	def dispatch void format(UnaryLogicTerm term, extension IFormattableDocument document) {
+		term.formatDefault(document)
+		term.regionFor.keyword(unaryLogicTermAccess.exclamationMarkKeyword_1_1).append[noSpace]
+		term.term.format
+	}
+
+	protected def formatDefault(Term term, extension IFormattableDocument document) {
+		_format(term, document)
+	}
+	
+	def dispatch void format(Term term, extension IFormattableDocument document) {
+		term.regionFor.keyword(primaryTermAccess.leftParenthesisKeyword_0_0).append[noSpace]
+		term.regionFor.keyword(primaryTermAccess.rightParenthesisKeyword_0_2).prepend[noSpace]
+	}
+
 }

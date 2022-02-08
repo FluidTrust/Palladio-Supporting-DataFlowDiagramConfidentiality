@@ -18,6 +18,9 @@
    <feature id="org.palladiosimulator.dataflow.confidentiality.ui.feature">
       <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
    </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.testresources.feature">
+      <category name="org.palladiosimulator.dataflow.confidentiality.category"/>
+   </feature>
    <feature id="org.palladiosimulator.dataflow.confidentiality.model.feature.source">
       <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
    </feature>
@@ -34,6 +37,9 @@
       <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
    </feature>
    <feature id="org.palladiosimulator.dataflow.confidentiality.ui.feature.source">
+      <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
+   </feature>
+   <feature id="org.palladiosimulator.dataflow.confidentiality.testresources.feature.source">
       <category name="org.palladiosimulator.dataflow.confidentiality.source.category"/>
    </feature>
    <category-def name="org.palladiosimulator.dataflow.confidentiality.category" label="Data Flow Confidentiality">

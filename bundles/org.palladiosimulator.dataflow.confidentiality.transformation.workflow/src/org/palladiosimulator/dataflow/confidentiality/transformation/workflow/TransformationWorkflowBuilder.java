@@ -141,13 +141,13 @@ public class TransformationWorkflowBuilder {
 		serializationJob.add(saveJob);
 		serializationCollection.add(serializationJob);
 	}
-	
-	protected SequentialBlackboardInteractingJob<Blackboard<?>> createJobSequence() {
-		// validate state
+    
+    public SequentialBlackboardInteractingJob<Blackboard<?>> createJobSequence() {
+    	// validate state
         Validate.validState(dfdLocation != null, "A DFD diagram has to be given");
         Validate.validState(!serializationJobs.isEmpty(), "At least one serialization option has to be given");
-
-        // create job sequence
+    	
+    	// create job sequence
         var jobSequence = new SequentialBlackboardInteractingJob<>("DFD to Prolog Transformation");
 
         // add model loading job
@@ -162,7 +162,6 @@ public class TransformationWorkflowBuilder {
 
         // create serialization job
         jobSequence.addAll(serializationJobs);
-        
         return jobSequence;
 	}
 }

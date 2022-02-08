@@ -12,12 +12,23 @@ import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramChara
 import org.prolog4j.Solution
 
 import static org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor
 
 class PrivateTaxiTest extends AnalysisIntegrationTestBase {
+
+	boolean initialized
+
+	@BeforeEach
+	def void resetInitializationFlag() {
+		initialized = false
+	}
 
 	@Test
 	def void testNoFlaws() {
 		builder.addDFD(getRelativeURI("models/evaluation/privatetaxi/privatetaxi_dfd.xmi"))
+		var keySolution = findKeyFlaws()
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 0, #["N", "PIN", "R", "D", "S"])
 	}
@@ -36,6 +47,8 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		directCCDFlow.targetPin = (directCCDFlow.target as Behaving).behavior.inputs.get(0)
 		dfd.edges += directCCDFlow
 
+		var keySolution = findKeyFlaws()
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 3, #["N", "PIN", "R", "D", "S"])
 	}
@@ -80,21 +93,28 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		joinedFlow.targetPin = (joinedFlow.target as Behaving).behavior.inputs.findFirst["input" == name]
 		dfd.edges += joinedFlow
 
+		var keySolution = findKeyFlaws()
+		assertNumberOfSolutions(keySolution, 0, #["N", "PIN", "S", "REQ", "PROV"])
 		var solution = findFlaws()
 		assertNumberOfSolutions(solution, 6, #["N", "PIN", "R", "D", "S"])
 	}
 
+	@Test
+	def void testInvalidPrivateKey() {
+		val dfd = loadAndInitDFD("models/evaluation/privatetaxi/privatetatxi_dd.xmi",
+			"models/evaluation/privatetaxi/privatetaxi_dfd.xmi")
+		EcoreUtil.resolveAll(dfd.eResource.resourceSet)
+		
+		val actor = dfd.nodes.filter(CharacterizedExternalActor).findFirst[name == "Administrator"]
+		val lhs = actor.behavior.assignments.get(0).lhs
+		lhs.literal = lhs.literal.getEnum().literals.findFirst[name == "Driver"]
+		
+		var keySolution = findKeyFlaws()
+		assertNumberOfSolutions(keySolution, 2, #["N", "PIN0", "PIN1", "REQ", "PROV", "S0", "S1"])
+	}
+
 	protected def Solution<Object> findFlaws() {
-		builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
-		builder.nameDerivationMethod = NameGenerationStrategie.DETAILED
-		var workflow = builder.build()
-
-		workflow.run()
-		var result = workflow.getSerializedPrologProgram()
-		assertFalse(result.isEmpty())
-
-		prover.loadTheory(result.get())
-		var queryString = '''
+		'''
 		(
 			R = 'CalcDistanceService (_-1E2gOHnEeqO9NqdRSqKUA)',
 			D = 'ContactData (_pX3RkOHoEeqO9NqdRSqKUA)'
@@ -105,10 +125,38 @@ class PrivateTaxiTest extends AnalysisIntegrationTestBase {
 		inputPin(N,PIN),
 		nodeCharacteristic(N, 'IsEntity (_9fV10-HrEeqO9NqdRSqKUA)', R),
 		characteristic(N, PIN, 'CriticalDataType (_jQ2QA-HoEeqO9NqdRSqKUA)', D, S).
+		'''.findFlaws
+	}
+
+	protected def Solution<Object> findKeyFlaws() {
 		'''
-		var query = prover.query(queryString)
+			inputPin(N, PIN0),
+			inputPin(N, PIN1),
+			PIN0 \== PIN1,
+			setof(X, characteristic(N, PIN0, 'PrivateKeyOf (_JZLuc-HoEeqO9NqdRSqKUA)', X, S0), PROV),
+			setof(X, characteristic(N, PIN1, 'DecryptableBy (_L2LVU-HoEeqO9NqdRSqKUA)', X, S1), REQ),
+			REQ \== [],
+			intersection(PROV, REQ, []).
+		'''.findFlaws
+	}
+	
+	protected def Solution<Object> findFlaws(CharSequence queryString) {
+		if (!initialized) {
+			initialized = true
+			builder.addSerializeToString(SaveOptions.newBuilder().format().getOptions().toOptionsMap())
+			builder.nameDerivationMethod = NameGenerationStrategie.DETAILED
+			var workflow = builder.build()
+	
+			workflow.run()
+			var result = workflow.getSerializedPrologProgram()
+			assertFalse(result.isEmpty())
+	
+			prover.loadTheory(result.get())
+		}
+		var query = prover.query(queryString.toString)
 		var solution = query.solve()
 		solution
 	}
+
 
 }

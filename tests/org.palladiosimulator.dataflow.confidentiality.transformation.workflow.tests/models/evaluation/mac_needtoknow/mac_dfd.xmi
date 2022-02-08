@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
+    xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0"
+    xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0"
+    xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
+    xsi:schemaLocation="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0 http://palladiosimulator.org/dataflow/dictionary/characterized/1.0#//expressions"
+    id="_MoDmQNSXEeqakq6offlGZg">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_ypLapTAOEeyxUoEkMpyhIg"
+      name="Patient">
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
+        id="_3j5BIDAOEeyxUoEkMpyhIg"
+        name="">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_hedQgzANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_FeC5wDANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_GiFwsDANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_Hj06gDANEeyxUoEkMpyhIg"/>
+    </ownedCharacteristics>
+    <ownedBehavior
+        id="_DwcysTAREeyxUoEkMpyhIg">
+      <inputs
+          id="_GMEgkDAREeyxUoEkMpyhIg"
+          name="invoice"/>
+      <outputs
+          id="_Foc2ITAREeyxUoEkMpyhIg"
+          name="contact information"/>
+      <outputs
+          id="_F7j_YTAREeyxUoEkMpyhIg"
+          name="payment information"/>
+      <assignments
+          id="_JAUw4jAREeyxUoEkMpyhIg">
+        <lhs
+            id="_KGl1YDAREeyxUoEkMpyhIg"
+            pin="_F7j_YTAREeyxUoEkMpyhIg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_IgunozANEeyxUoEkMpyhIg"/>
+          <literal
+              href="mac_dd.xmi#_Hj06gDANEeyxUoEkMpyhIg"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_NXMqgTAREeyxUoEkMpyhIg"/>
+      </assignments>
+      <assignments
+          id="_OWj1wjAREeyxUoEkMpyhIg">
+        <lhs
+            id="_OpnUoDAREeyxUoEkMpyhIg"
+            pin="_F7j_YTAREeyxUoEkMpyhIg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_IgunozANEeyxUoEkMpyhIg"/>
+          <literal
+              href="mac_dd.xmi#_GiFwsDANEeyxUoEkMpyhIg"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_QUW_MTAREeyxUoEkMpyhIg"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_z90SVTAOEeyxUoEkMpyhIg"
+      name="Physician">
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
+        id="_62GYwDAOEeyxUoEkMpyhIg">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_hedQgzANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_FeC5wDANEeyxUoEkMpyhIg"/>
+    </ownedCharacteristics>
+    <ownedBehavior
+        id="_SeVjcTAREeyxUoEkMpyhIg">
+      <outputs
+          id="_TBG5UTAREeyxUoEkMpyhIg"
+          name="test result"/>
+      <outputs
+          id="_TvmXATAREeyxUoEkMpyhIg"
+          name="history"/>
+      <assignments
+          id="_Vf7sMjAREeyxUoEkMpyhIg">
+        <lhs
+            id="_V17xYDAREeyxUoEkMpyhIg"
+            pin="_TvmXATAREeyxUoEkMpyhIg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_IgunozANEeyxUoEkMpyhIg"/>
+          <literal
+              href="mac_dd.xmi#_FeC5wDANEeyxUoEkMpyhIg"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_XSzYATAREeyxUoEkMpyhIg"/>
+      </assignments>
+      <assignments
+          id="_YIBv0jAREeyxUoEkMpyhIg">
+        <lhs
+            id="_Yc6asDAREeyxUoEkMpyhIg"
+            pin="_TBG5UTAREeyxUoEkMpyhIg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_IgunozANEeyxUoEkMpyhIg"/>
+          <literal
+              href="mac_dd.xmi#_FeC5wDANEeyxUoEkMpyhIg"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_YtUOMTAREeyxUoEkMpyhIg"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_2IuqtTAOEeyxUoEkMpyhIg"
+      name="Clerk">
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
+        id="_CACP4DAPEeyxUoEkMpyhIg">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_hedQgzANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_GiFwsDANEeyxUoEkMpyhIg"/>
+      <values
+          href="mac_dd.xmi#_Hj06gDANEeyxUoEkMpyhIg"/>
+    </ownedCharacteristics>
+    <ownedBehavior
+        id="_cMQaQTAREeyxUoEkMpyhIg">
+      <outputs
+          id="_clQwITAREeyxUoEkMpyhIg"
+          name="treatment prices"/>
+      <assignments
+          id="_dwoXEjAREeyxUoEkMpyhIg">
+        <lhs
+            id="_ePak0DAREeyxUoEkMpyhIg"
+            pin="_clQwITAREeyxUoEkMpyhIg">
+          <characteristicType
+              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+              href="mac_dd.xmi#_IgunozANEeyxUoEkMpyhIg"/>
+          <literal
+              href="mac_dd.xmi#_GiFwsDANEeyxUoEkMpyhIg"/>
+        </lhs>
+        <rhs
+            xsi:type="expressions:True"
+            id="_epOL8TAREeyxUoEkMpyhIg"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_FOqIBjAPEeyxUoEkMpyhIg"
+      name="MedicalDB">
+    <referencedBehavior
+        href="mac_dd.xmi#_Lvq99TAPEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_GG7z1jAPEeyxUoEkMpyhIg"
+      name="PersonDB">
+    <referencedBehavior
+        href="mac_dd.xmi#_Lvq99TAPEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
+      id="_GeDTVjAPEeyxUoEkMpyhIg"
+      name="FinancialDB">
+    <referencedBehavior
+        href="mac_dd.xmi#_Lvq99TAPEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_Xv3cmDATEey4BOtQOfADog"
+      name="create diagnosis"
+      actor="_z90SVTAOEeyxUoEkMpyhIg">
+    <referencedBehavior
+        href="mac_dd.xmi#_zHIXZTANEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_pc_lqDATEey4BOtQOfADog"
+      name="create treatment list"
+      actor="_z90SVTAOEeyxUoEkMpyhIg">
+    <referencedBehavior
+        href="mac_dd.xmi#_EOVv-DAOEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_x9oJ-DATEey4BOtQOfADog"
+      name="create priced treatments"
+      actor="_2IuqtTAOEeyxUoEkMpyhIg">
+    <referencedBehavior
+        href="mac_dd.xmi#_zHIXZTANEeyxUoEkMpyhIg"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
+      id="_O2NsmDAZEey4BOtQOfADog"
+      name="create invoice"
+      actor="_2IuqtTAOEeyxUoEkMpyhIg">
+    <referencedBehavior
+        href="mac_dd.xmi#_zHIXZTANEeyxUoEkMpyhIg"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_0rEnqzATEey4BOtQOfADog"
+      name="treatment list"
+      target="_x9oJ-DATEey4BOtQOfADog"
+      source="_pc_lqDATEey4BOtQOfADog">
+    <sourcePin
+        href="mac_dd.xmi#_JiqJQTAOEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_0Rw-gDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_3jQ8yzATEey4BOtQOfADog"
+      name="treatment prices"
+      target="_x9oJ-DATEey4BOtQOfADog"
+      source="_GeDTVjAPEeyxUoEkMpyhIg">
+    <sourcePin
+        href="mac_dd.xmi#_NEh4ETAPEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_0fVgcDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_W5zIizAZEey4BOtQOfADog"
+      name="priced treatments"
+      target="_O2NsmDAZEey4BOtQOfADog"
+      source="_x9oJ-DATEey4BOtQOfADog">
+    <sourcePin
+        href="mac_dd.xmi#_16vugTANEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_0Rw-gDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_azsySzAZEey4BOtQOfADog"
+      name="contact information"
+      target="_O2NsmDAZEey4BOtQOfADog"
+      source="_GG7z1jAPEeyxUoEkMpyhIg">
+    <sourcePin
+        href="mac_dd.xmi#_NEh4ETAPEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_0fVgcDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_-pZ5CzATEey4BOtQOfADog"
+      name="invoice"
+      target="_ypLapTAOEeyxUoEkMpyhIg"
+      source="_O2NsmDAZEey4BOtQOfADog"
+      targetPin="_GMEgkDAREeyxUoEkMpyhIg">
+    <sourcePin
+        href="mac_dd.xmi#_16vugTANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_h2UaGTAREeyxUoEkMpyhIg"
+      name="treatment prices"
+      target="_GeDTVjAPEeyxUoEkMpyhIg"
+      source="_2IuqtTAOEeyxUoEkMpyhIg"
+      sourcePin="_clQwITAREeyxUoEkMpyhIg">
+    <targetPin
+        href="mac_dd.xmi#_M4-vYDAPEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_oXXFOTAREeyxUoEkMpyhIg"
+      name="payment information"
+      target="_GeDTVjAPEeyxUoEkMpyhIg"
+      source="_ypLapTAOEeyxUoEkMpyhIg"
+      sourcePin="_F7j_YTAREeyxUoEkMpyhIg">
+    <targetPin
+        href="mac_dd.xmi#_M4-vYDAPEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_rkFf6zAREeyxUoEkMpyhIg"
+      name="personal information"
+      target="_GG7z1jAPEeyxUoEkMpyhIg"
+      source="_ypLapTAOEeyxUoEkMpyhIg"
+      sourcePin="_Foc2ITAREeyxUoEkMpyhIg">
+    <targetPin
+        href="mac_dd.xmi#_M4-vYDAPEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_MLL4eTATEey4BOtQOfADog"
+      name="history"
+      target="_FOqIBjAPEeyxUoEkMpyhIg"
+      source="_z90SVTAOEeyxUoEkMpyhIg"
+      sourcePin="_TvmXATAREeyxUoEkMpyhIg">
+    <targetPin
+        href="mac_dd.xmi#_M4-vYDAPEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_eUJB6TATEey4BOtQOfADog"
+      name="history"
+      target="_Xv3cmDATEey4BOtQOfADog"
+      source="_FOqIBjAPEeyxUoEkMpyhIg">
+    <sourcePin
+        href="mac_dd.xmi#_NEh4ETAPEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_0Rw-gDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_hCoBazATEey4BOtQOfADog"
+      name="test results"
+      target="_Xv3cmDATEey4BOtQOfADog"
+      source="_z90SVTAOEeyxUoEkMpyhIg"
+      sourcePin="_TBG5UTAREeyxUoEkMpyhIg">
+    <targetPin
+        href="mac_dd.xmi#_0fVgcDANEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_kfVY1TATEey4BOtQOfADog"
+      name="diagnosis"
+      target="_FOqIBjAPEeyxUoEkMpyhIg"
+      source="_Xv3cmDATEey4BOtQOfADog">
+    <sourcePin
+        href="mac_dd.xmi#_16vugTANEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_M4-vYDAPEeyxUoEkMpyhIg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_uvAR2TATEey4BOtQOfADog"
+      name="treatments"
+      target="_pc_lqDATEey4BOtQOfADog"
+      source="_FOqIBjAPEeyxUoEkMpyhIg">
+    <sourcePin
+        href="mac_dd.xmi#_NEh4ETAPEeyxUoEkMpyhIg"/>
+    <targetPin
+        href="mac_dd.xmi#_JUbgADAOEeyxUoEkMpyhIg"/>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>
