@@ -14,7 +14,6 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagram
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowEdge
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Edge
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Entity
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedActorProcess
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedExternalActor
@@ -54,9 +53,9 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
 
 class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 
-	static val extension PrologFactory prologFactory = PrologFactory.eINSTANCE
-	static val extension ExpressionsFactory prologExpressionsFactory = ExpressionsFactory.eINSTANCE
-	static val extension PrologCreateUtils prologCreateUtils = new PrologCreateUtils
+	protected static val extension PrologFactory prologFactory = PrologFactory.eINSTANCE
+	protected static val extension ExpressionsFactory prologExpressionsFactory = ExpressionsFactory.eINSTANCE
+	protected static val extension PrologCreateUtils prologCreateUtils = new PrologCreateUtils
 	protected val extension UniqueNameUtils uniqueNameUtils
 	protected val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
 	val stagedTraces = new HashMap<EObject, Runnable>
@@ -458,33 +457,6 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			)
 		))
 
-		add(createHeaderComment("HELPER: Shortcuts for common use cases"))
-		add(createComment("Shortcut for characteristic queries"))
-		add(createRule(
-			createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
-			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, "S".toVar, createList)
-		))
-		
-		if (!dfd.nodes.filter(CharacterizedActorProcess).empty) {
-			add(createComment("Always inherit node characteristics from parent"))
-			add(createRule(
-				createCompoundTerm("nodeCharacteristic", "N", "CT", "V"),
-				createConjunction(
-					createCompoundTerm("actorProcess", "N", "A"),
-					createCompoundTerm("nodeCharacteristic", "A", "CT", "V")
-				)
-			))			
-		}
-
-		add(createHeaderComment("HELPER: collect all available data characteristics"))
-		add(createRule(
-			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "VALS", "S"),
-			createConjunction(
-				createCompoundTerm("flowTree", "N", "PIN", "S"),
-				createCompoundTerm("allCharacteristicValues", "N".toVar, "PIN".toVar, "CT".toVar, "S".toVar, createList, "VALS".toVar)
-			)
-			
-		))
 		add(createRule(
 			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "S", "VISITED", "RESULT"),
 			createConjunction(
@@ -601,6 +573,37 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("involvesNode", createList(#["_"], #["T"]), "N".toVar),
 			createCompoundTerm("involvesNode", "T", "N")
+		))
+		
+		this.addCharacteristicHelper(dfd)
+	}
+	
+	protected def void addCharacteristicHelper(DataFlowDiagram dfd) {
+		add(createHeaderComment("HELPER: Shortcuts for common use cases"))
+		add(createComment("Shortcut for characteristic queries"))
+		add(createRule(
+			createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+			createCompoundTerm("characteristic", "N".toVar, "PIN".toVar, "CT".toVar, "V".toVar, "S".toVar, createList)
+		))
+		
+		if (!dfd.nodes.filter(CharacterizedActorProcess).empty) {
+			add(createComment("Always inherit node characteristics from parent"))
+			add(createRule(
+				createCompoundTerm("nodeCharacteristic", "N", "CT", "V"),
+				createConjunction(
+					createCompoundTerm("actorProcess", "N", "A"),
+					createCompoundTerm("nodeCharacteristic", "A", "CT", "V")
+				)
+			))			
+		}
+		
+		add(createHeaderComment("HELPER: collect all available data characteristics"))
+		add(createRule(
+			createCompoundTerm("setof_characteristics", "N", "PIN", "CT", "RESULT", "S"),
+			createConjunction(
+				createCompoundTerm("flowTree", "N".toVar, "PIN".toVar, "S".toVar),
+				createCompoundTerm("setof", "V".toVar, createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"), "RESULT".toVar)
+			)
 		))
 		
 		add(createHeaderComment("HELPER: find input characteristics"))
