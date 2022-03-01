@@ -11,6 +11,16 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_A9vFZVGLEeq8MuaPiZgRhQ"
       name="User">
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
+        id="_DD6uwFGLEeq8MuaPiZgRhQ"
+        name="roles">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
+      <values
+          href="DDC_DistanceTracker_AccessControl.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_Cl9AYVGLEeq8MuaPiZgRhQ">
       <outputs
@@ -33,21 +43,6 @@
             id="_iZr3wVGLEeq8MuaPiZgRhQ"/>
       </assignments>
       <assignments
-          id="_iz4gelGLEeq8MuaPiZgRhQ">
-        <lhs
-            id="_jfNVYFGLEeq8MuaPiZgRhQ"
-            pin="_b8-TAVGLEeq8MuaPiZgRhQ">
-          <characteristicType
-              xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-              href="DDC_DistanceTracker_AccessControl.xmi#_fCiJk0NEEeq3NrD2DjPidQ"/>
-          <literal
-              href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
-        </lhs>
-        <rhs
-            xsi:type="expressions:True"
-            id="_lJDoEVGLEeq8MuaPiZgRhQ"/>
-      </assignments>
-      <assignments
           id="_lu9xilGLEeq8MuaPiZgRhQ">
         <lhs
             id="_meRHgFGLEeq8MuaPiZgRhQ"
@@ -63,23 +58,11 @@
             id="_o51LAVGLEeq8MuaPiZgRhQ"/>
       </assignments>
     </ownedBehavior>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_DD6uwFGLEeq8MuaPiZgRhQ"
-        name="roles">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
-      <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
-    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_tI3XSFGLEeq8MuaPiZgRhQ"
       name="confirmLocation"
       actor="_A9vFZVGLEeq8MuaPiZgRhQ">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_WKBileN7EeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_z6TO0FGLEeq8MuaPiZgRhQ"
@@ -90,12 +73,12 @@
       <values
           href="DDC_DistanceTracker_AccessControl.xmi#_GlhNR1GLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_Gn1xpeN8EeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_QFIs51GMEeq8MuaPiZgRhQ"
       name="recordUserLocation">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_UxmcAFGMEeq8MuaPiZgRhQ"
@@ -104,14 +87,14 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_J7aDplGOEeqgwc19jCODXg"
       name="LocationStore">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_WHatgFGOEeqgwc19jCODXg"
@@ -120,14 +103,14 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_g7vLt1GOEeqgwc19jCODXg"
       name="calculateDistance">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_iYig4FGOEeqgwc19jCODXg"
@@ -136,14 +119,14 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_uaGOSVGOEeqgwc19jCODXg"
       name="confirmDistance">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_Gn1xpeN8EeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_winZ8FGOEeqgwc19jCODXg"
@@ -152,14 +135,14 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_WKBileN7EeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess"
       id="_LFSAV1GPEeqgwc19jCODXg"
       name="recordDistance">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_OKlkYFGPEeqgwc19jCODXg"
@@ -168,14 +151,14 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_21WsleMIEeqO9NqdRSqKUA"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_Y7xPBlGPEeqgwc19jCODXg"
       name="DistanceStore">
-    <referencedBehavior
-        href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_aXtokFGPEeqgwc19jCODXg"
@@ -184,8 +167,10 @@
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="DDC_DistanceTracker_AccessControl.xmi#_g8Baw0NEEeq3NrD2DjPidQ"/>
       <values
-          href="DDC_DistanceTracker_AccessControl.xmi#_JHaiQFGLEeq8MuaPiZgRhQ"/>
+          href="DDC_DistanceTracker_AccessControl.xmi#_Kfr8wFGLEeq8MuaPiZgRhQ"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="DDC_DistanceTracker_AccessControl.xmi#_BGxSBeMJEeqO9NqdRSqKUA"/>
   </nodes>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_EtJg-VGMEeq8MuaPiZgRhQ"
@@ -194,7 +179,7 @@
       source="_A9vFZVGLEeq8MuaPiZgRhQ"
       sourcePin="_b8-TAVGLEeq8MuaPiZgRhQ">
     <targetPin
-        href="DDC_DistanceTracker_AccessControl.xmi#_XyfVMON7EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_J8ziUON8EeqO9NqdRSqKUA"/>
   </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_H6PvGlGMEeq8MuaPiZgRhQ"
@@ -203,7 +188,7 @@
       source="_A9vFZVGLEeq8MuaPiZgRhQ"
       sourcePin="_aD6foVGLEeq8MuaPiZgRhQ">
     <targetPin
-        href="DDC_DistanceTracker_AccessControl.xmi#_ZITRkON7EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_TXy2EON8EeqO9NqdRSqKUA"/>
   </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_aqZwiVGOEeqgwc19jCODXg"
@@ -211,7 +196,7 @@
       target="_QFIs51GMEeq8MuaPiZgRhQ"
       source="_tI3XSFGLEeq8MuaPiZgRhQ">
     <sourcePin
-        href="DDC_DistanceTracker_AccessControl.xmi#_YNlVweN7EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_KTrxQeN8EeqO9NqdRSqKUA"/>
     <targetPin
         href="DDC_DistanceTracker_AccessControl.xmi#_6P5g0OMIEeqO9NqdRSqKUA"/>
   </edges>
@@ -242,7 +227,7 @@
       source="_A9vFZVGLEeq8MuaPiZgRhQ"
       sourcePin="_aD6foVGLEeq8MuaPiZgRhQ">
     <targetPin
-        href="DDC_DistanceTracker_AccessControl.xmi#_TXy2EON8EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_ZITRkON7EeqO9NqdRSqKUA"/>
   </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_FMj5elGPEeqgwc19jCODXg"
@@ -252,7 +237,7 @@
     <sourcePin
         href="DDC_DistanceTracker_AccessControl.xmi#_6k2dIeMIEeqO9NqdRSqKUA"/>
     <targetPin
-        href="DDC_DistanceTracker_AccessControl.xmi#_J8ziUON8EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_XyfVMON7EeqO9NqdRSqKUA"/>
   </edges>
   <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
       id="_VA2RmlGPEeqgwc19jCODXg"
@@ -260,7 +245,7 @@
       target="_LFSAV1GPEeqgwc19jCODXg"
       source="_uaGOSVGOEeqgwc19jCODXg">
     <sourcePin
-        href="DDC_DistanceTracker_AccessControl.xmi#_KTrxQeN8EeqO9NqdRSqKUA"/>
+        href="DDC_DistanceTracker_AccessControl.xmi#_YNlVweN7EeqO9NqdRSqKUA"/>
     <targetPin
         href="DDC_DistanceTracker_AccessControl.xmi#_6P5g0OMIEeqO9NqdRSqKUA"/>
   </edges>

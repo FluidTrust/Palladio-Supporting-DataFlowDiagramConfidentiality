@@ -3,19 +3,14 @@
  */
 package org.palladiosimulator.dataflow.dictionary.characterized.dsl.tests
 
-import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
-import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterized
 
 @ExtendWith(InjectionExtension)
 @InjectWith(CharacterizedDataDictionaryInjectorProvider)
 class CharacterizedDataDictionaryParsingTest {
-	@Inject
-	ParseHelper<DataDictionaryCharacterized> parseHelper
 	
 	@Test
 	def void loadModel() {

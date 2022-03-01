@@ -4,27 +4,26 @@ import java.util.Optional;
 
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
-import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterized;
 
 import de.uka.ipd.sdq.identifier.Identifier;
 
 public class CharacterizedDataDictionaryDerivedStateComputer implements IDerivedStateComputer {
 
-    protected final IdDeriver idDeriver = new IdDeriver();
+    protected final XPathConstructor xpathConstructor = new XPathConstructor();
 
     @Override
     public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
         var rootElement = Optional.of(resource.getContents())
             .filter(c -> !c.isEmpty())
             .map(c -> c.get(0))
-            .filter(DataDictionaryCharacterized.class::isInstance)
-            .map(DataDictionaryCharacterized.class::cast);
+            .filter(Identifier.class::isInstance)
+            .map(Identifier.class::cast);
         if (rootElement.isEmpty()) {
             return;
         }
 
-        var dataDictionary = rootElement.get();
-        setAllIds(dataDictionary);
+        var foundRootElement = rootElement.get();
+        setAllIds(foundRootElement);
     }
 
     @Override
@@ -32,9 +31,9 @@ public class CharacterizedDataDictionaryDerivedStateComputer implements IDerived
         // not possible or useful to discard generated IDs
     }
 
-    protected void setAllIds(DataDictionaryCharacterized dictionary) {
-        var baseId = dictionary.getId();
-        for (var iter = dictionary.eAllContents(); iter.hasNext();) {
+    protected void setAllIds(Identifier rootElement) {
+        var baseId = rootElement.getId();
+        for (var iter = rootElement.eAllContents(); iter.hasNext();) {
             var eobject = iter.next();
             if (eobject instanceof Identifier) {
                 setDerivedId((Identifier) eobject, baseId);
@@ -43,7 +42,7 @@ public class CharacterizedDataDictionaryDerivedStateComputer implements IDerived
     }
 
     protected void setDerivedId(Identifier eobject, String baseId) {
-        idDeriver.getId(eobject, baseId)
-            .ifPresent(eobject::setId);
+        eobject.setId(xpathConstructor.getId(eobject, baseId));
     }
+
 }

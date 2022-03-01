@@ -192,33 +192,6 @@ public class DFDCValidationUtil {
 
 	/**
 	 * 
-	 * This method is a first attempt at a "greedy" strategy for validation; it is
-	 * currently not used but should be equally correct.
-	 * 
-	 */
-	private static List<List<Edge>> refineAllButOne(List<Edge> input) {
-		List<List<Edge>> results = new ArrayList<List<Edge>>();
-
-		for (int exception = 0; exception < input.size(); exception++) {
-
-			List<Edge> currentResults = new ArrayList<Edge>();
-
-			for (int i = 0; i < input.size(); i++) {
-
-				if (i == exception || !isRefinable(input.get(i))) {
-					currentResults.add(input.get(i));
-					continue;
-				}
-				currentResults.addAll(DFDCRefinementUtil.refineEdge(input.get(i)));
-			}
-			results.add(currentResults);
-
-		}
-		return results;
-	}
-
-	/**
-	 * 
 	 * This method is currently used and represents a conservative strategy for
 	 * generating candidates.
 	 * 

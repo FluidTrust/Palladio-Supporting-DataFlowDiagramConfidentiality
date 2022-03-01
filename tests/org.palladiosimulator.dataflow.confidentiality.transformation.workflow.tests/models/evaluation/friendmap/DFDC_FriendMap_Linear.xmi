@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFlowDiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DataDictionaryCharacterized="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0" xmlns:DataFlowDiagram="http://palladiosimulator.org/dataflow/diagram/1.0" xmlns:DataFlowDiagramCharacterized="http://palladiosimulator.org/dataflow/diagram/characterized/1.0" xmlns:expressions="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0" id="_jzfXIENEEeq3NrD2DjPidQ">
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_4xxMoFJSEeqqK-rwNEPIxA" name="FriendMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="__3jdobZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_sYXdoFJrEeqUv8Dzu96bPA">
+      <outputs id="_tsGWYVJrEeqUv8Dzu96bPA" name="FriendMap.out.appCode"/>
+      <assignments id="_yTrlglJrEeqUv8Dzu96bPA">
+        <lhs id="_zT_zAFJrEeqUv8Dzu96bPA" pin="_tsGWYVJrEeqUv8Dzu96bPA">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_06ZJEVJrEeqUv8Dzu96bPA"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_8cJztVJSEeqqK-rwNEPIxA" name="MapProvider">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_3wkOcVM7EeqcCsHl_K3SCQ" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_Wa0doFMuEeqoFMz22oElKw">
+      <outputs id="_W3MQkVMuEeqoFMz22oElKw" name="MapProvider.out.mapCode"/>
+      <assignments id="_agD0slMuEeqoFMz22oElKw">
+        <lhs id="_a3tfsFMuEeqoFMz22oElKw" pin="_W3MQkVMuEeqoFMz22oElKw">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_cLXf8VMuEeqoFMz22oElKw"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="_9xX6NVJSEeqqK-rwNEPIxA" name="SNAPP">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_AGkxEbZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_fKxQUFMuEeqoFMz22oElKw">
+      <inputs id="_ge7m4FMuEeqoFMz22oElKw" name="SNAPP.in.map"/>
+      <outputs id="_i2_qcVMuEeqoFMz22oElKw" name="SNAPP.out.location"/>
+      <assignments id="_lL66clMuEeqoFMz22oElKw">
+        <lhs id="_mAz7EFMuEeqoFMz22oElKw" pin="_i2_qcVMuEeqoFMz22oElKw">
+          <characteristicType xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_LNbeM1IoEeqxoa0IdF5JoA"/>
+          <literal href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+        </lhs>
+        <rhs xsi:type="expressions:True" id="_n13YMVMuEeqoFMz22oElKw"/>
+      </assignments>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor" id="__G90JVJSEeqqK-rwNEPIxA" name="Google">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_9Td2UVM7EeqcCsHl_K3SCQ" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_EihJ4FMvEeqoFMz22oElKw"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore" id="_5IT59lM6EeqcCsHl_K3SCQ" name="LocalDS">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ApaYYbZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <ownedBehavior id="_620DIFM6EeqcCsHl_K3SCQ">
+      <inputs id="_7bKtYFM6EeqcCsHl_K3SCQ" name="LocalDS.in"/>
+      <outputs id="_-uEokVM6EeqcCsHl_K3SCQ" name="LocalDS.out"/>
+    </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess" id="_0ZtTSlMuEeqoFMz22oElKw" name="Google.createMap" actor="__G90JVJSEeqqK-rwNEPIxA">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_D8buYVM8EeqcCsHl_K3SCQ" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_DYcQZ1JTEeqqK-rwNEPIxA" name="Alice.loadFriendMapCode">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_E2Mh4LZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_GZXqx1JTEeqqK-rwNEPIxA" name="Alice.loadMapCode">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Exnj4bZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_HtMDGVJTEeqqK-rwNEPIxA" name="Alice.createMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Es2_sLZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_I-G4aVJTEeqqK-rwNEPIxA" name="Alice.loadFriendLocations">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_En94obZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_ax__WFIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_K4aB6VJTEeqqK-rwNEPIxA" name="Alice.loadMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Eg3yILZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_MH1CaVJTEeqqK-rwNEPIxA" name="Alice.shareMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_Eb06EbZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_OsTxV1JTEeqqK-rwNEPIxA" name="CreateMap.receiveMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_EXVbobZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_RO0xaVJTEeqqK-rwNEPIxA" name="CreateMap.createMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ESxEsbZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_S-djAlJTEeqqK-rwNEPIxA" name="SocialNetwork.postMap">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_ENN2ULZDEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_UJz72VJTEeqqK-rwNEPIxA" name="SocialNetwork.findFriendLocation">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_9Ss7QbZCEeuZh9jeLw38-w" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_PtJx0FIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedProcess" id="_V8VCWVJTEeqqK-rwNEPIxA" name="MapServices">
+    <ownedCharacteristics xsi:type="DataDictionaryCharacterized:EnumCharacteristic" id="_GbKaoVM8EeqcCsHl_K3SCQ" name="trust">
+      <type xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" href="DDC_FriendMap_Linear.xmi#_R8xrE1IoEeqxoa0IdF5JoA"/>
+      <values href="DDC_FriendMap_Linear.xmi#_QlOpUFIoEeqxoa0IdF5JoA"/>
+    </ownedCharacteristics>
+    <referencedBehavior href="DDC_FriendMap_Linear.xmi#_VlznRVIoEeqxoa0IdF5JoA"/>
+  </nodes>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_aSrDiVMvEeqoFMz22oElKw" name="AppCode" target="_DYcQZ1JTEeqqK-rwNEPIxA" source="_4xxMoFJSEeqqK-rwNEPIxA" sourcePin="_tsGWYVJrEeqUv8Dzu96bPA">
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_X_cxylMxEeq94IabWUFI_w" name="MapCode" target="_V8VCWVJTEeqqK-rwNEPIxA" source="_8cJztVJSEeqqK-rwNEPIxA" sourcePin="_W3MQkVMuEeqoFMz22oElKw">
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_cO84GlMxEeq94IabWUFI_w" name="Locations" target="_UJz72VJTEeqqK-rwNEPIxA" source="_9xX6NVJSEeqqK-rwNEPIxA" sourcePin="_i2_qcVMuEeqoFMz22oElKw">
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_hTLm-lMxEeq94IabWUFI_w" name="Map" target="_9xX6NVJSEeqqK-rwNEPIxA" source="_S-djAlJTEeqqK-rwNEPIxA" targetPin="_ge7m4FMuEeqoFMz22oElKw">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_OhLgilMxEeq94IabWUFI_w" name="AppCode" target="_GZXqx1JTEeqqK-rwNEPIxA" source="_DYcQZ1JTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_gkKvalMyEeqcCsHl_K3SCQ" name="MapCode" target="_GZXqx1JTEeqqK-rwNEPIxA" source="_V8VCWVJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_6lk-qlM5EeqcCsHl_K3SCQ" name="MapCode" target="_HtMDGVJTEeqqK-rwNEPIxA" source="_GZXqx1JTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="__lktwVM5EeqcCsHl_K3SCQ" name="AppCode" target="_I-G4aVJTEeqqK-rwNEPIxA" source="_DYcQZ1JTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_bTQ5UFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_nsWZalM6EeqcCsHl_K3SCQ" name="Locations" target="_I-G4aVJTEeqqK-rwNEPIxA" source="_UJz72VJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_tL2vClM6EeqcCsHl_K3SCQ" name="Locations" target="_HtMDGVJTEeqqK-rwNEPIxA" source="_I-G4aVJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_brZFcFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_1Zh7GlM6EeqcCsHl_K3SCQ" name="Locations" target="_5IT59lM6EeqcCsHl_K3SCQ" source="_I-G4aVJTEeqqK-rwNEPIxA" targetPin="_7bKtYFM6EeqcCsHl_K3SCQ">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_F-1geVM7EeqcCsHl_K3SCQ" name="Locations" target="_RO0xaVJTEeqqK-rwNEPIxA" source="_HtMDGVJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_cBDzcVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_LRrTGlM7EeqcCsHl_K3SCQ" name="Locations" target="_0ZtTSlMuEeqoFMz22oElKw" source="_RO0xaVJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_PGgPmlM7EeqcCsHl_K3SCQ" name="Map" target="_OsTxV1JTEeqqK-rwNEPIxA" source="_0ZtTSlMuEeqoFMz22oElKw">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Vh9QGlM7EeqcCsHl_K3SCQ" name="Map" target="_K4aB6VJTEeqqK-rwNEPIxA" source="_OsTxV1JTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_Z2HM6lM7EeqcCsHl_K3SCQ" name="Map" target="_MH1CaVJTEeqqK-rwNEPIxA" source="_K4aB6VJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_dLOHilM7EeqcCsHl_K3SCQ" name="Map" target="_5IT59lM6EeqcCsHl_K3SCQ" source="_K4aB6VJTEeqqK-rwNEPIxA" targetPin="_7bKtYFM6EeqcCsHl_K3SCQ">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow" id="_iXuoqlM7EeqcCsHl_K3SCQ" name="Map" target="_S-djAlJTEeqqK-rwNEPIxA" source="_MH1CaVJTEeqqK-rwNEPIxA">
+    <sourcePin href="DDC_FriendMap_Linear.xmi#_XjMhAVIoEeqxoa0IdF5JoA"/>
+    <targetPin href="DDC_FriendMap_Linear.xmi#_WLaOsFIoEeqxoa0IdF5JoA"/>
+  </edges>
+</DataFlowDiagram:DataFlowDiagram>

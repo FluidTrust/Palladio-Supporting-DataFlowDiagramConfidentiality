@@ -11,10 +11,8 @@ import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.DataFlowDiagramRef
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Edge;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.EdgeRefinement;
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Node;
-import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Process;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedDataFlow;
 import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedProcess;
-import org.palladiosimulator.dataflow.diagram.characterized.DataFlowDiagramCharacterized.CharacterizedNode;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.ComparisonUtil;
 import org.palladiosimulator.dataflow.diagram.characterized.editor.sirius.util.leveling.DFDCRefinementUtil;
 

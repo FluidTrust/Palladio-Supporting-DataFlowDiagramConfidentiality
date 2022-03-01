@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.palladiosimulator.supporting.dataflow.confidentiality</groupId>
 		<artifactId>parent</artifactId>
-		<version>4.2.0-SNAPSHOT</version>
+		<version>5.1.0-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<artifactId>org.palladiosimulator.dataflow.confidentiality.mwe2</artifactId>	

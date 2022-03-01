@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="org.palladiosimulator.dataflow.dictionary.characterized.dsl.CharacterizedDataDictionary.BehaviorDefinition" deleted="false" description="Simple behavior that forwards everything" enabled="true" name="Behavior" id="org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.behavior">behavior ${name} {
+	input ${input_pin}
+	output ${output_pin}
+	${output_pin}.*.* := ${input_pin}.*.*
+}</template><template autoinsert="true" context="org.palladiosimulator.dataflow.dictionary.characterized.dsl.CharacterizedDataDictionary.EnumCharacteristic" deleted="false" description="Simple characteristic applying one literal" enabled="true" name="Characteristic" id="org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.characteristic">enumCharacteristic ${ name} using ${type:CrossReference(Characteristic.type)} {
+	${values:CrossReference(EnumCharacteristic.values)}
+}</template><template autoinsert="true" context="org.palladiosimulator.dataflow.dictionary.characterized.dsl.CharacterizedDataDictionary.CharacteristicType" deleted="false" description="Default characteristic type using an enumeration" enabled="true" name="Characteristic Type" id="org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.characteristictype">enumCharacteristicType ${name} using ${type:CrossReference(EnumCharacteristicType.type)}</template><template autoinsert="true" context="org.palladiosimulator.dataflow.dictionary.characterized.dsl.CharacterizedDataDictionary.Enumeration" deleted="false" description="Simple enumeration holding two literals" enabled="true" name="Enumeration" id="org.palladiosimulator.dataflow.dictionary.characterized.dsl.ui.enumeration">enum ${name} {
+	${literal1}
+	${literal2}
+}</template></templates>

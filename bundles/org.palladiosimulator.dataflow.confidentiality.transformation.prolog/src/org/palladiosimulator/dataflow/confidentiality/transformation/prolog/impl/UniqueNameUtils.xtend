@@ -9,6 +9,7 @@ import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCha
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Literal
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Pin
 import org.palladiosimulator.dataflow.diagram.DataFlowDiagram.Data
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition
 
 class UniqueNameUtils {
 	
@@ -45,6 +46,10 @@ class UniqueNameUtils {
 	
 	def getUniqueQuotedString(Data entity) {
 		entity.uniqueName.toQuotedString
+	}
+	
+	def getUniqueQuotedString(BehaviorDefinition behavior) {
+		behavior.uniqueName.toQuotedString
 	}
 	
 	def getUniqueQuotedString(Pin pin, CharacterizedNode node) {

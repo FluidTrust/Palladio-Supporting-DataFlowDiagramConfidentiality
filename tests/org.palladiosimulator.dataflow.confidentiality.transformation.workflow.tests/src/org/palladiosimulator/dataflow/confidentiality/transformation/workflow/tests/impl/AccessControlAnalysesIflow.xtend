@@ -42,9 +42,10 @@ class AccessControlAnalysesIflow extends AnalysisIntegrationTestBase {
 	protected def getQuery() {
 		var queryString = '''
 			inputPin(P, PIN),
-			setof(R, nodeCharacteristic(P, ?CTROLES, R), ROLES),
+			findall(R, nodeCharacteristic(P, ?CTROLES, R), L_ROLES),
 			flowTree(P, PIN, S),
-			setof(R, characteristic(P, PIN, ?CTRIGHTS, R, S), REQ),
+			findall(R, characteristic(P, PIN, ?CTRIGHTS, R, S), L_REQ),
+			sort(L_ROLES, ROLES), sort(L_REQ, REQ),
 			intersection(REQ, ROLES, []).
 		'''
 		var query = prover.query(queryString)
