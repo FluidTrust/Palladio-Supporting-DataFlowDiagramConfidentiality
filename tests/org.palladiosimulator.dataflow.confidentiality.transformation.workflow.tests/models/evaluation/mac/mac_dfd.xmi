@@ -12,6 +12,16 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
       id="_NCb1INSXEeqakq6offlGZg"
       name="Clerk">
+    <ownedCharacteristics
+        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
+        id="_k6jO4dSZEeqakq6offlGZg"
+        name="clearance">
+      <type
+          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
+          href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
+      <values
+          href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
+    </ownedCharacteristics>
     <ownedBehavior
         id="_WqHPINSZEeqakq6offlGZg"
         name="Clerk.behavior">
@@ -49,8 +59,6 @@
           <characteristicType
               xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
               href="mac_dd.xmi#_VD0vQ9MDEeqMaJ4277tZGA"/>
-          <literal
-              href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
         </lhs>
         <rhs
             xsi:type="expressions:ContainerCharacteristicReference"
@@ -61,20 +69,20 @@
         </rhs>
       </assignments>
     </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_QMTwJdSXEeqakq6offlGZg"
+      name="Flight Controller">
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_k6jO4dSZEeqakq6offlGZg"
+        id="_QvgVEdSdEeqakq6offlGZg"
         name="clearance">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
       <values
-          href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
+          href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
     </ownedCharacteristics>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_QMTwJdSXEeqakq6offlGZg"
-      name="Flight Controller">
     <ownedBehavior
         id="_EmnQoNSdEeqakq6offlGZg"
         name="FlightController.behavior">
@@ -125,26 +133,29 @@
         </rhs>
       </assignments>
     </ownedBehavior>
+  </nodes>
+  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
+      id="_UPU5pdSXEeqakq6offlGZg"
+      name="Military Flight Controller">
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_QvgVEdSdEeqakq6offlGZg"
+        id="_ztxxodSkEeqakq6offlGZg"
         name="clearance">
       <type
           xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
           href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
       <values
-          href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
+          href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
     </ownedCharacteristics>
-  </nodes>
-  <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedExternalActor"
-      id="_UPU5pdSXEeqakq6offlGZg"
-      name="Military Flight Controller">
     <ownedBehavior
         id="_18x_0NSkEeqakq6offlGZg"
         name="MilitaryFlightController.behavior">
       <inputs
           id="_5GZKMNSmEeqakq6offlGZg"
           name="MilitaryFlightController.in.planeRoute"/>
+      <inputs
+          id="_YF5DUXCzEeygXcujbis_9A"
+          name="MilitaryFlightController.in.planePosition"/>
       <outputs
           id="_4FnUkdSkEeqakq6offlGZg"
           name="MilitaryFlightController.out.planeId"/>
@@ -186,22 +197,10 @@
         </rhs>
       </assignments>
     </ownedBehavior>
-    <ownedCharacteristics
-        xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
-        id="_ztxxodSkEeqakq6offlGZg"
-        name="clearance">
-      <type
-          xsi:type="DataDictionaryCharacterized:EnumCharacteristicType"
-          href="mac_dd.xmi#_um9nwNMCEeqMaJ4277tZGA"/>
-      <values
-          href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
-    </ownedCharacteristics>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_NKGRdtSZEeqakq6offlGZg"
       name="Weather Information">
-    <referencedBehavior
-        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_gV4UkdS_EeqGKakHh_u4hw"
@@ -212,6 +211,8 @@
       <values
           href="mac_dd.xmi#_iLV_INMDEeqMaJ4277tZGA"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_Jx2GyNSaEeqakq6offlGZg"
@@ -237,8 +238,6 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_kgbh5tSdEeqakq6offlGZg"
       name="PlaneStore">
-    <referencedBehavior
-        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_befu4dS_EeqGKakHh_u4hw"
@@ -249,6 +248,8 @@
       <values
           href="mac_dd.xmi#_etgmUNMDEeqMaJ4277tZGA"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_MDKFSNSeEeqakq6offlGZg"
@@ -288,8 +289,6 @@
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedStore"
       id="_ec48BtSmEeqakq6offlGZg"
       name="MilitaryPlaneStore">
-    <referencedBehavior
-        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
     <ownedCharacteristics
         xsi:type="DataDictionaryCharacterized:EnumCharacteristic"
         id="_ox4QgdS_EeqGKakHh_u4hw"
@@ -300,6 +299,8 @@
       <values
           href="mac_dd.xmi#_gHYjUNMDEeqMaJ4277tZGA"/>
     </ownedCharacteristics>
+    <referencedBehavior
+        href="mac_dd.xmi#_PnKw1dSZEeqakq6offlGZg"/>
   </nodes>
   <nodes xsi:type="DataFlowDiagramCharacterized:CharacterizedActorProcess"
       id="_czT5qNSnEeqakq6offlGZg"
@@ -516,5 +517,43 @@
         href="mac_dd.xmi#_-JbAMdSbEeqakq6offlGZg"/>
     <targetPin
         href="mac_dd.xmi#_Qh23cNSZEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_xfBrSXCyEeygXcujbis_9A"
+      name="weather report"
+      target="_5VhMWNSbEeqakq6offlGZg"
+      source="_Jx2GyNSaEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_ShKAQdSaEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_907W4NSbEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_H-F5WXCzEeygXcujbis_9A"
+      name="plane id"
+      target="_JPgNuNSlEeqakq6offlGZg"
+      source="_UPU5pdSXEeqakq6offlGZg"
+      sourcePin="_4FnUkdSkEeqakq6offlGZg">
+    <targetPin
+        href="mac_dd.xmi#_SQGsgNSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_Pe9pynCzEeygXcujbis_9A"
+      name="military plane position"
+      target="_JPgNuNSlEeqakq6offlGZg"
+      source="_ec48BtSmEeqakq6offlGZg">
+    <sourcePin
+        href="mac_dd.xmi#_Q0I6QdSZEeqakq6offlGZg"/>
+    <targetPin
+        href="mac_dd.xmi#_S4KyENSaEeqakq6offlGZg"/>
+  </edges>
+  <edges xsi:type="DataFlowDiagramCharacterized:CharacterizedDataFlow"
+      id="_apH1GXCzEeygXcujbis_9A"
+      name="plane position"
+      target="_UPU5pdSXEeqakq6offlGZg"
+      source="_JPgNuNSlEeqakq6offlGZg"
+      targetPin="_YF5DUXCzEeygXcujbis_9A">
+    <sourcePin
+        href="mac_dd.xmi#_ShKAQdSaEeqakq6offlGZg"/>
   </edges>
 </DataFlowDiagram:DataFlowDiagram>

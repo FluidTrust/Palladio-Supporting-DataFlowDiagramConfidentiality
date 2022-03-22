@@ -4,8 +4,8 @@
   <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_g8Baw0NEEeq3NrD2DjPidQ" name="Roles" type="_FddZBFGLEeq8MuaPiZgRhQ"/>
   <enumerations id="_FddZBFGLEeq8MuaPiZgRhQ" name="Roles">
     <literals id="_GlhNR1GLEeq8MuaPiZgRhQ" name="User"/>
-    <literals id="_JHaiQFGLEeq8MuaPiZgRhQ" name="TrackingService"/>
-    <literals id="_Kfr8wFGLEeq8MuaPiZgRhQ" name="DistanceTracker"/>
+    <literals id="_JHaiQFGLEeq8MuaPiZgRhQ" name="DistanceTracker"/>
+    <literals id="_Kfr8wFGLEeq8MuaPiZgRhQ" name="TrackingService"/>
   </enumerations>
   <behaviorDefinitions id="_21WsleMIEeqO9NqdRSqKUA" name="Forwarder">
     <inputs id="_6P5g0OMIEeqO9NqdRSqKUA" name="input"/>

@@ -100,6 +100,144 @@ class CharacterizedDataDictionaryFormatterTest {
     	'''.assertFormatting
     }
     
+    @Test
+    def testBehaviorDefinition() {
+    	'''
+    	dictionary id "123456"
+    	
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1.*.* := in1.*.*
+    		out2.*.* := in2.*.*
+    	}
+    	
+    	'''.assertFormatting    	
+    }
+    
+    @Test
+    def testWildcardAssignments() {
+    	val initial = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1  .  *  .  *  :=  in1  .  *  .  *  
+    		out2  .  *  .  *   :=  container  .  *  .  *  
+    	}
+    	
+    	'''
+    	val expected = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1.*.* := in1.*.*
+    		out2.*.* := container.*.*
+    	}'''
+    	assertFormatting(expected, initial)
+    }
+    
+    @Test
+    def testBinaryLogicTerm() {
+    	val initial = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1  .  *  .  *  :=  in1  .  *  .  *   &   in2  .  *  .  *  
+    		out2  .  *  .  *   :=  container  .  *  .  *  |  in2  .  *  .  *  
+    	}
+    	
+    	'''
+    	val expected = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1.*.* := in1.*.* & in2.*.*
+    		out2.*.* := container.*.* | in2.*.*
+    	}'''
+    	assertFormatting(expected, initial)
+    }
+    
+    @Test
+    def testUnaryTerm() {
+    	val initial = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1  .  *  .  *  :=  !  in1  .  *  .  *  
+    	}
+    	
+    	'''
+    	val expected = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1.*.* := !in1.*.*
+    	}'''
+    	assertFormatting(expected, initial)
+    }
+    
+    @Test
+    def testPrimaryTerm() {
+    	val initial = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1  .  *  .  *  :=  (  in1  .  *  .  *  )  
+    	}
+    	
+    	'''
+    	val expected = '''
+    	dictionary id "123456"
+
+    	behavior SomeBehavior {
+    		input in1
+    		input in2
+    		output out1
+    		output out2
+
+    		out1.*.* := (in1.*.*)
+    	}'''
+    	assertFormatting(expected, initial)
+    }
+    
     protected def assertFormatting(CharSequence expected) {
    		val toBeFormatted = expected.toString.replaceAll("\\s(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)", "  ")
    		assertFormatting(expected.toString.trim, toBeFormatted)

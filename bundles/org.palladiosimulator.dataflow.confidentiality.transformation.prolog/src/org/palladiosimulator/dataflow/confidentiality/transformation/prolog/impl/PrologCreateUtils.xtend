@@ -141,6 +141,17 @@ class PrologCreateUtils {
 		]
 	}
 	
+	def createStandardOrderBefore(String leftVar, String rightVar) {
+		createStandardOrderBefore(leftVar.toVar, rightVar.toVar)
+	}
+	
+	def createStandardOrderBefore(Expression leftExpression, Expression rightExpression) {
+		createStandardOrderBefore => [
+			left = leftExpression
+			right = rightExpression
+		]
+	}
+	
 	def createDiscontiguousDirective(String predicateName, int arity) {
 		val directive = createDiscontiguous
 		directive.name = "discontiguous"
@@ -166,6 +177,24 @@ class PrologCreateUtils {
 	def createNotProvable(Expression expression) {
 		createNotProvable => [
 			expr = expression
+		]
+	}
+	
+	def createNumberEqual(String left, String right) {
+		createNumberEqual(left.toVar, right.toVar)
+	}
+	
+	def createNumberEqual(Expression leftExpression, Expression rightExpression) {
+		createNumberEqual => [
+			left = leftExpression
+			right = rightExpression
+		]
+	}
+	
+	def createPlus(Expression leftExpression, Expression rightExpression) {
+		createPlus => [
+			left = leftExpression
+			right = rightExpression
 		]
 	}
 }

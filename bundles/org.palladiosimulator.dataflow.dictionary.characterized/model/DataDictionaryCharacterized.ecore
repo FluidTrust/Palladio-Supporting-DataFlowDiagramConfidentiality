@@ -3,10 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DataDictionaryCharacterized" nsURI="http://palladiosimulator.org/dataflow/dictionary/characterized/1.0"
     nsPrefix="DataDictionaryCharacterized">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
-    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true" eSuperTypes="../../de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataDictionaryCharacterized" eSuperTypes="../../org.palladiosimulator.dataflow.dictionary/model/DataDictionary.ecore#//DataDictionary">
@@ -43,16 +43,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="Pin" eSuperTypes="#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//BehaviorDefinition"
         changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG">
         <details key="derivation" value="self.oclAsType(ecore::EObject).eContainer().oclAsType(BehaviorDefinition)"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="../../de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="leftHandSideRefersOutputPin characteristicWildcardHasToBeOnLhsAndRhs literalWildcardHasToBeOnLhsAndRhs"/>
     </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG">
       <details key="leftHandSideRefersOutputPin" value="self.oclAsType(ecore::EObject).eContainer().oclAsType(BehaviorDefinition).outputs->includes(self.lhs.pin)"/>
       <details key="characteristicWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::CharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.characteristicType.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::CharacteristicReference).characteristicType.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.characteristicType.oclIsUndefined()&#xA;)"/>
       <details key="literalWildcardHasToBeOnLhsAndRhs" value="not self.rhs.oclIsKindOf(expressions::EnumCharacteristicReference) or&#xA;(&#xA;&#x9;self.rhs.oclAsType(expressions::EnumCharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;self.lhs.literal.oclIsUndefined()&#xA;)&#xA;or&#xA;(&#xA;&#x9;not self.rhs.oclAsType(expressions::EnumCharacteristicReference).literal.oclIsUndefined()&#xA;&#x9;and&#xA;&#x9;not self.lhs.literal.oclIsUndefined()&#xA;)"/>
@@ -71,18 +71,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumCharacteristicType"
         lowerBound="1" eType="#//EnumCharacteristicType" changeable="false" volatile="true"
         transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-        <details key="derivation" value="self.type.oclAsType(DataDictionaryCharacterized::EnumCharacteristicType)"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG">
+        <details key="derivation" value="self.type.oclAsType(EnumCharacteristicType)"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eSubpackages name="expressions" nsURI="http://palladiosimulator.org/dataflow/dictionary/characterized/expressions/1.0"
       nsPrefix="expressions">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
-      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"/>
+      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="../../de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eClassifiers xsi:type="ecore:EClass" name="Constant" abstract="true" eSuperTypes="#//expressions/Term"/>
     <eClassifiers xsi:type="ecore:EClass" name="True" eSuperTypes="#//expressions/Constant"/>
     <eClassifiers xsi:type="ecore:EClass" name="False" eSuperTypes="#//expressions/Constant"/>
@@ -90,7 +90,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="terms" ordered="false"
           upperBound="-1" eType="#//expressions/Term" changeable="false" volatile="true"
           transient="true" derived="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG">
           <details key="derivation" value="self.oclAsType(ecore::EObject).eContents()->selectByKind(Term)->asSet()"/>
         </eAnnotations>
       </eStructuralFeatures>
@@ -117,7 +117,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
         <details key="constraints" value="literalHasToBeWildcardIfCharacteristicIsWildcard"/>
       </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG">
         <details key="literalHasToBeWildcardIfCharacteristicIsWildcard" value="not self.characteristicType.oclIsUndefined() or self.literal.oclIsUndefined()"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="#//Literal"/>

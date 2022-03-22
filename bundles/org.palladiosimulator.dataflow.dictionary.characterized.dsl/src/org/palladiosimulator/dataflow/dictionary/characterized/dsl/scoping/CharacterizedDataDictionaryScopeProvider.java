@@ -3,9 +3,18 @@
  */
 package org.palladiosimulator.dataflow.dictionary.characterized.dsl.scoping;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.invoke.LambdaMetafactory;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -16,43 +25,157 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Assignment;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.BehaviorDefinition;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.DataDictionaryCharacterizedPackage;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristic;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.EnumCharacteristicType;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Enumeration;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.Literal;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.CharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.DataCharacteristicReference;
+import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.EnumCharacteristicReference;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsPackage;
 import org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.Term;
 
 /**
  * This class contains custom scoping description.
  * 
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
- * on how and when to use it.
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping on how and when
+ * to use it.
  */
 public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacterizedDataDictionaryScopeProvider {
 
+    @FunctionalInterface
+    protected interface IScopeProcessor {
+        IScope apply(EObject context, EReference reference, IScope scope);
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    protected @interface IScopeProcessorMethod {
+    }
+
+    protected final Collection<IScopeProcessor> scopeProcessors;
+
+    public CharacterizedDataDictionaryScopeProvider() {
+        scopeProcessors = initScopeProcessors();
+    }
+
+    protected Collection<IScopeProcessor> initScopeProcessors() {
+        Collection<IScopeProcessor> processors = new ArrayList<>();
+
+        for (var method : CharacterizedDataDictionaryScopeProvider.class.getDeclaredMethods()) {
+            if (method.getAnnotation(IScopeProcessorMethod.class) == null) {
+                continue;
+            }
+
+            var functionalInterface = IScopeProcessor.class;
+            var functionalInterfaceMethod = functionalInterface.getMethods()[0];
+            var functionalInterfaceMethodName = functionalInterfaceMethod.getName();
+            var functionalInterfaceMethodType = MethodType.methodType(functionalInterfaceMethod.getReturnType(),
+                    functionalInterfaceMethod.getParameterTypes());
+            var lookup = MethodHandles.lookup();
+
+            try {
+                var handle = lookup.unreflect(method);
+
+                var callSite = LambdaMetafactory.metafactory(lookup, functionalInterfaceMethodName,
+                        MethodType.methodType(functionalInterface, CharacterizedDataDictionaryScopeProvider.class),
+                        functionalInterfaceMethodType, handle, functionalInterfaceMethodType);
+                var processor = (IScopeProcessor) callSite.getTarget()
+                    .bindTo(this)
+                    .invoke();
+                processors.add(processor);
+            } catch (Throwable e) {
+                continue;
+            }
+        }
+
+        return processors;
+    }
+
     @Override
     public IScope getScope(EObject context, EReference reference) {
-        var superScope = super.getScope(context, reference);
-        if (reference == ExpressionsPackage.Literals.DATA_CHARACTERISTIC_REFERENCE__PIN) {
-            var characteristicReference = Optional.ofNullable(context).filter(DataCharacteristicReference.class::isInstance).map(DataCharacteristicReference.class::cast);
-            var behaviorDefinition = findParentOfType(context, BehaviorDefinition.class);
-            var usablePins = new ArrayList<>();
-            if (characteristicReference.map(this::isLhs).orElse(true)) {
-                behaviorDefinition.map(BehaviorDefinition::getOutputs)
+        var currentScope = super.getScope(context, reference);
+        for (var processor : scopeProcessors) {
+            currentScope = processor.apply(context, reference, currentScope);
+        }
+        return currentScope;
+    }
+
+    @IScopeProcessorMethod
+    protected IScope getScopeForPinInDataCharacteristicReference(EObject context, EReference reference, IScope scope) {
+        if (reference != ExpressionsPackage.Literals.DATA_CHARACTERISTIC_REFERENCE__PIN) {
+            return scope;
+        }
+        var characteristicReference = Optional.ofNullable(context)
+            .filter(DataCharacteristicReference.class::isInstance)
+            .map(DataCharacteristicReference.class::cast);
+        var behaviorDefinition = findParentOfType(context, BehaviorDefinition.class);
+        var usablePins = new ArrayList<>();
+        if (characteristicReference.map(this::isLhs)
+            .orElse(true)) {
+            behaviorDefinition.map(BehaviorDefinition::getOutputs)
                 .ifPresent(usablePins::addAll);
-            }
-            if (characteristicReference.map(this::isRhs).orElse(true)) {
-                behaviorDefinition.map(BehaviorDefinition::getInputs)
+        }
+        if (characteristicReference.map(this::isRhs)
+            .orElse(true)) {
+            behaviorDefinition.map(BehaviorDefinition::getInputs)
                 .ifPresent(usablePins::addAll);
-            }
-            return new FilteringScope(superScope, description -> usablePins.contains(description.getEObjectOrProxy()));
         }
-        if (reference == ExpressionsPackage.Literals.ENUM_CHARACTERISTIC_REFERENCE__LITERAL) {
-            return buildLastSegmentScope(superScope);
+        return new FilteringScope(scope, description -> usablePins.contains(description.getEObjectOrProxy()));
+    }
+
+    @IScopeProcessorMethod
+    protected IScope getScopeForLiteralInEnumCharacteristicReference(EObject context, EReference reference,
+            IScope scope) {
+        if (reference != ExpressionsPackage.Literals.ENUM_CHARACTERISTIC_REFERENCE__LITERAL) {
+            return scope;
         }
-        if (reference == DataDictionaryCharacterizedPackage.Literals.ENUM_CHARACTERISTIC__VALUES) {
-            return buildLastSegmentScope(superScope);
+
+        var foundEnumeration = Optional.ofNullable(context)
+            .filter(EnumCharacteristicReference.class::isInstance)
+            .map(EnumCharacteristicReference.class::cast)
+            .map(EnumCharacteristicReference::getCharacteristicType)
+            .filter(EnumCharacteristicType.class::isInstance)
+            .map(EnumCharacteristicType.class::cast)
+            .map(EnumCharacteristicType::getType);
+        if (foundEnumeration.isEmpty()) {
+            return scope;
         }
-        return superScope;
+
+        var enumeration = foundEnumeration.get();
+        var enumerationName = enumeration.getName();
+        var literals = enumeration.getLiterals();
+
+        var newScope = new FilteringScope(scope, description -> {
+            var literal = (Literal) description.getEObjectOrProxy();
+            return literals.isEmpty() || literals.contains(description.getEObjectOrProxy())
+                    || Optional.of(literal.getEnum())
+                        .map(Enumeration::getName)
+                        .map(enumerationName::equals)
+                        .orElse(false);
+        });
+
+        return buildLastSegmentScope(newScope);
+    }
+
+    @IScopeProcessorMethod
+    protected IScope getScopeForValuesInEnumCharacteristic(EObject context, EReference reference, IScope scope) {
+        if (reference != DataDictionaryCharacterizedPackage.Literals.ENUM_CHARACTERISTIC__VALUES) {
+            return scope;
+        }
+        var literals = Optional.ofNullable(context)
+            .filter(EnumCharacteristic.class::isInstance)
+            .map(EnumCharacteristic.class::cast)
+            .map(EnumCharacteristic::getEnumCharacteristicType)
+            .map(EnumCharacteristicType::getType)
+            .map(Enumeration::getLiterals)
+            .orElse(new BasicEList<>());
+        if (literals.isEmpty()) {
+            return scope;
+        }
+        var filteredScope = new FilteringScope(scope,
+                description -> literals.contains(description.getEObjectOrProxy()));
+        return buildLastSegmentScope(filteredScope);
     }
 
     protected IScope buildLastSegmentScope(IScope superScope) {
@@ -69,19 +192,20 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
         EObject currentObject = object;
         while (currentObject != null) {
             if (parentType.isInstance(currentObject)) {
-                return Optional.of((T)currentObject);
+                return Optional.of((T) currentObject);
             }
             currentObject = currentObject.eContainer();
         }
         return Optional.empty();
     }
-    
+
     protected boolean isLhs(CharacteristicReference reference) {
         Optional<Assignment> assignment = findParentOfType(reference, Assignment.class);
         if (!assignment.isPresent()) {
             return false;
         }
-        return assignment.get().getLhs() == reference;
+        return assignment.get()
+            .getLhs() == reference;
     }
 
     protected boolean isRhs(CharacteristicReference reference) {
@@ -89,8 +213,9 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
         if (!assignment.isPresent()) {
             return false;
         }
-        
-        Term rhsTerm = assignment.get().getRhs();
+
+        Term rhsTerm = assignment.get()
+            .getRhs();
         if (rhsTerm == reference) {
             return true;
         }
@@ -103,8 +228,8 @@ public class CharacterizedDataDictionaryScopeProvider extends AbstractCharacteri
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
 }

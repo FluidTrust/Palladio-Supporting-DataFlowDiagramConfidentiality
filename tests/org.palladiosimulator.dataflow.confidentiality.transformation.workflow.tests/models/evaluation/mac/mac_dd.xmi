@@ -3,9 +3,9 @@
   <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_um9nwNMCEeqMaJ4277tZGA" name="Clearance" type="_wIcopNMCEeqMaJ4277tZGA"/>
   <characteristicTypes xsi:type="DataDictionaryCharacterized:EnumCharacteristicType" id="_VD0vQ9MDEeqMaJ4277tZGA" name="Classification" type="_wIcopNMCEeqMaJ4277tZGA"/>
   <enumerations id="_wIcopNMCEeqMaJ4277tZGA" name="Levels">
-    <literals id="_gHYjUNMDEeqMaJ4277tZGA" name="Secret"/>
-    <literals id="_etgmUNMDEeqMaJ4277tZGA" name="Classified"/>
     <literals id="_iLV_INMDEeqMaJ4277tZGA" name="Unclassified"/>
+    <literals id="_etgmUNMDEeqMaJ4277tZGA" name="Classified"/>
+    <literals id="_gHYjUNMDEeqMaJ4277tZGA" name="Secret"/>
   </enumerations>
   <behaviorDefinitions id="_PnKw1dSZEeqakq6offlGZg" name="Store">
     <inputs id="_Qh23cNSZEeqakq6offlGZg" name="input"/>

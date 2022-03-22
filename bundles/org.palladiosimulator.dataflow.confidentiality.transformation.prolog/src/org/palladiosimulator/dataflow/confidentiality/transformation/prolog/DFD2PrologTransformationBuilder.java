@@ -7,6 +7,7 @@ import org.palladiosimulator.dataflow.confidentiality.transformation.prolog.nami
 public class DFD2PrologTransformationBuilder {
 
     private UniqueNameProvider nameProvider = new IdShortingUniqueNameProvider();
+    private boolean performanceTweaks = false;
 
     protected DFD2PrologTransformationBuilder() {
     }
@@ -21,8 +22,13 @@ public class DFD2PrologTransformationBuilder {
         return this;
     }
 
+    public DFD2PrologTransformationBuilder enablePerformanceTweaks() {
+        this.performanceTweaks = true;
+        return this;
+    }
+    
     public DFD2PrologTransformation build() {
-        return new DFD2PrologTransformationImpl(nameProvider);
+        return new DFD2PrologTransformationImpl(nameProvider, performanceTweaks);
     }
     
     

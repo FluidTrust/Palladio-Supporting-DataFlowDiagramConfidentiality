@@ -3,7 +3,7 @@ Automatic-Module-Name: org.palladiosimulator.dataflow.dictionary.characterized.d
 Bundle-ManifestVersion: 2
 Bundle-Name: org.palladiosimulator.dataflow.dictionary.characterized.dsl
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 5.1.0.qualifier
 Bundle-SymbolicName: org.palladiosimulator.dataflow.dictionary.characterized.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.palladiosimulator.dataflow.dictionary.characterized,
@@ -14,13 +14,15 @@ Require-Bundle: org.palladiosimulator.dataflow.dictionary.characterized,
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.palladiosimulator.dataflow.dictionary.characterized.dsl.serializer,
+Export-Package: org.palladiosimulator.dataflow.dictionary.characterized.dsl,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.converter,
  org.palladiosimulator.dataflow.dictionary.characterized.dsl.formatting2,
- org.palladiosimulator.dataflow.dictionary.characterized.dsl.services,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.generator,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.parser.antlr,
  org.palladiosimulator.dataflow.dictionary.characterized.dsl.parser.antlr.internal,
  org.palladiosimulator.dataflow.dictionary.characterized.dsl.scoping,
- org.palladiosimulator.dataflow.dictionary.characterized.dsl.validation,
- org.palladiosimulator.dataflow.dictionary.characterized.dsl.parser.antlr,
- org.palladiosimulator.dataflow.dictionary.characterized.dsl.generator,
- org.palladiosimulator.dataflow.dictionary.characterized.dsl
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.serializer,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.service,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.services,
+ org.palladiosimulator.dataflow.dictionary.characterized.dsl.validation
 Import-Package: org.apache.log4j

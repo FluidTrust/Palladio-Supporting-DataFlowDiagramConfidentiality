@@ -59,14 +59,16 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 	protected val extension UniqueNameUtils uniqueNameUtils
 	protected val dfdExpressionsFactory = org.palladiosimulator.dataflow.dictionary.characterized.DataDictionaryCharacterized.expressions.ExpressionsFactory.eINSTANCE
 	val stagedTraces = new HashMap<EObject, Runnable>
+	val boolean performanceTweaks
 	protected var DFD2PrologTransformationWritableTrace trace
 	var Program program	
 	protected var Iterable<EnumCharacteristicType> characteristicTypesInBehaviors
 	var Iterable<EnumCharacteristicType> characteristicTypesInNodes
 	var Iterable<DataType> usedDataTypes
 	
-	new(UniqueNameProvider nameProvider) {
+	new(UniqueNameProvider nameProvider, boolean performanceTweaks) {
 		this.uniqueNameUtils = new UniqueNameUtils(nameProvider)
+		this.performanceTweaks = performanceTweaks
 	}
 
 	override transform(DataFlowDiagram dfd) {
@@ -149,24 +151,33 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
     	def Rule createOutputCharacteristicRule(DFD2PrologTransformationParameter param)
 	}
 	
+	protected def getUsedPins(CharacterizedNode node, Assignment assignment) {
+		(assignment.rhs.eAllContents + #[assignment.rhs as EObject].iterator).filter(DataCharacteristicReference).map[pin].toList.sortedView(node)
+	}
+	
+	protected def createBehaviorFact(CharacterizedNode behaving) {
+		createFact(createCompoundTerm("behavior", behaving.uniqueQuotedString, behaving.behavior.uniqueQuotedString))
+	}
+	
 	protected def dispatch transformNode(CharacterizedProcess process) {
 		process.transformNode("process", [param |
 			val assignmentToTransform = param.node.behavior.assignments.findLastMatchingAssignment(param.pin, param.ct, param.l)
 			val transformedAssignment = assignmentToTransform.transformAssignment(param)
-			val needsFlowTree = assignmentToTransform.needsFlowTree
+			val usedPins = assignmentToTransform.map[a | getUsedPins(process, a)].orElse(#[])
+			val needsFlowTree = !usedPins.isEmpty
 			if (needsFlowTree) {
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs, usedPins))
 				flowClauses += transformedAssignment
 				createRule(
-					createCharacteristicTerm(process, param, "S".toVar, "VISITED".toVar),
+					this.createCharacteristicTerm(process, param, "S".toVar, "VISITED".toVar),
 					createConjunction(flowClauses)
 				)
 			} else {
 				val fsVar = process.needsEmptyFlowTree ? createList : "_".toVar
 				createRule(
-					createCharacteristicTerm(process, param, fsVar, "_".toVar),
+					this.createCharacteristicTerm(process, param, fsVar, "_".toVar),
 					createConjunction(transformedAssignment)
 				)
 			}
@@ -198,7 +209,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		store.transformNode("store", [param |
 				// the flow tree has to be bound before the assignments can use them because the assignment
 				// could be a pure negation, which is not able to bind a valid flow stack.
-				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs))
+				val flowClauses = new ArrayList<Expression>(createFlowTreeClauses(param.node, param.node.behavior.inputs, param.node.behavior.inputs))
 				val term = dfdExpressionsFactory.createDataCharacteristicReference
 				term.pin = param.node.behavior.inputs.get(0)
 				term.characteristicType = param.ct
@@ -242,11 +253,12 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		]
 		
 		// behavior
-		node.behavior.inputs.forEach[pin |
+		clauses += node.createBehaviorFact
+		node.behavior.inputs.sortedView(node).forEach[pin |
 			clauses += createFact(createCompoundTerm("inputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
 		]
-		node.behavior.outputs.forEach[pin |
+		node.behavior.outputs.sortedView(node).forEach[pin |
 			clauses += createFact(createCompoundTerm("outputPin", node.uniqueQuotedString, pin.getUniqueQuotedString(node)))
 			clauses.last.stageTrace[trace.add(node, pin, pin.getUniqueQuotedString(node).value)]
 			characteristicTypesInBehaviors.forEach[ct |
@@ -259,14 +271,18 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		clauses
 	}
 	
+	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins, Iterable<Pin> usedPins) {
+		val sortedPins = inputPins.sortedView(node)
+		performanceTweaks ? createFlowTreeClausesPerformance(node, sortedPins, usedPins) : createFlowTreeClausesDefault(node, sortedPins)
+	}
+	
 	/**
 	 * Creates all clauses required to build a valid flow tree.
 	 * 
 	 * This includes the selection of a flow for every input pin as well as building the appropriate flow tree variables.
 	 * The flow tree variable Sn represents the flow tree to be used for the input pin n.
 	 */
-	protected def createFlowTreeClauses(CharacterizedNode node, Iterable<Pin> inputPins) {
-		val sortedPins = inputPins.sortedView(node)
+	protected def createFlowTreeClausesDefault(CharacterizedNode node, List<Pin> sortedPins) {
 		val clauses = new ArrayList<Expression>
 		val hasMultipleInputs = sortedPins.size > 1
 		val treeList = createList
@@ -277,6 +293,20 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			treeList.heads += '''S«i»'''.toVar
 		}
 		clauses += createUnification("S".toVar, treeList)
+		clauses
+	}
+	
+	/**
+	 * Creates the clauses required to refer to a part of an already initialized flow tree.
+	 * 
+	 * This implementation assumes that the given flow tree S has already been fully instantiated.
+	 */
+	protected def createFlowTreeClausesPerformance(CharacterizedNode node, List<Pin> sortedPins, Iterable<Pin> usedPins) {
+		val clauses = new ArrayList<Expression>
+		for (usedPin : usedPins) {
+			var index = sortedPins.indexOf(usedPin)
+			clauses += createCompoundTerm("nth0", index.toInt, "S".toVar, '''S«index»'''.toVar)
+		}
 		clauses
 	}
 	
@@ -349,30 +379,40 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createComment('''
 			Finds all input pins PINS for a given node N. The list of pins is sorted.
 			The sorted list containing all possible pins is the only result of the clause. No subsets or unsorted lists are returned.'''))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS"),
-			createConjunction(
-				createCompoundTerm("findAllInputPins", "N".toVar, createList, "PINS".toVar),
-				createCompoundTerm("sort", "PINS", "PINS")
-			)
-		))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS", "RESULT"),
-			createConjunction(
-				createCompoundTerm("inputPin", "N", "PIN"),
-				createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList),
-				createCompoundTerm("findAllInputPins", "N".toVar, createList(#["PIN"], #["PINS"]), "RESULT".toVar)
-			)
-		))
-		add(createRule(
-			createCompoundTerm("findAllInputPins", "N", "PINS", "PINS"),
-			createNotProvable(
+		if (performanceTweaks) {
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS"),
+				createConjunction(
+					createCompoundTerm("findall", "PIN".toVar, createCompoundTerm("inputPin", "N", "PIN"), "PINS".toVar),
+					createCompoundTerm("sort", "PINS", "PINS")
+				)
+			))
+		} else {
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS"),
+				createConjunction(
+					createCompoundTerm("findAllInputPins", "N".toVar, createList, "PINS".toVar),
+					createCompoundTerm("sort", "PINS", "PINS")
+				)
+			))
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS", "RESULT"),
 				createConjunction(
 					createCompoundTerm("inputPin", "N", "PIN"),
-					createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList)
+					createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList),
+					createCompoundTerm("findAllInputPins", "N".toVar, createList(#["PIN"], #["PINS"]), "RESULT".toVar)
 				)
-			)
-		))
+			))
+			add(createRule(
+				createCompoundTerm("findAllInputPins", "N", "PINS", "PINS"),
+				createNotProvable(
+					createConjunction(
+						createCompoundTerm("inputPin", "N", "PIN"),
+						createCompoundTerm("intersection", "PINS".toVar, createList(#["PIN"]), createList)
+					)
+				)
+			))
+		}
 		
 		add(createComment('''
 			Find one arbitrary set of flows (SELECTED_FLOWS) for a given node (P) in a way that for every input pin, there is exactly one input flow.
@@ -417,6 +457,40 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			)
 		))
 
+		add(createRule(
+			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "S", "VISITED", "RESULT"),
+			createConjunction(
+				createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+				createCompoundTerm("intersection", "VISITED".toVar, createList(#["V"]), createList),
+				createDisjunction(
+					createUnification("VISITED".toVar, createList),
+					createConjunction(
+						createCompoundTerm("nth0", 0.toInt, "VISITED".toVar, "FIRSTV".toVar),
+						createStandardOrderBefore("V", "FIRSTV")
+					)
+				),
+				createCompoundTerm("allCharacteristicValues", "N".toVar, "PIN".toVar, "CT".toVar, "S".toVar, createList(#["V"], #["VISITED"]), "RESULT".toVar)
+			)
+		))
+		add(createRule(
+			createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "S", "RESULT", "RESULT"),
+			createNotProvable(
+				createConjunction(
+					createCompoundTerm("characteristic", "N", "PIN", "CT", "V", "S"),
+					createCompoundTerm("intersection", "RESULT".toVar, createList(#["V"]), createList)
+				)
+			)
+		))
+		
+		add(createHeaderComment("HELPER: test if data characteristic values are exactly the given characteristic values"))
+		add(createRule(
+			createCompoundTerm("exactCharacteristicValues", "N", "PIN", "CT", "VALS", "S"),
+			createConjunction(
+				createCompoundTerm("allCharacteristicValues", "N", "PIN", "CT", "V", "S"),
+				createCompoundTerm("sort", "VALS", "V")
+			)
+		))
+
 		add(createHeaderComment("HELPER: create valid flow tree"))
 		add(createRule(
 			createCompoundTerm("flowTree", "N", "PIN", "S"),
@@ -455,6 +529,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("outputPin", "N", "PIN"),
 				processOrStore,
 				createCompoundTerm("inputFlowsSelection", "N", "FLOWS"),
+				createCompoundTerm("intersection", "FLOWS".toVar, "VISITED".toVar, createList),
 				createCompoundTerm("flowTreeForFlows", "N", "S", "FLOWS", "VISITED")
 			)
 		))
@@ -462,11 +537,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		add(createRule(
 			createCompoundTerm("flowTreeForFlows", "N".toVar, "S".toVar, createList(#["F"], #["T"]), "VISITED".toVar),
 			createConjunction(
-				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
-				createCompoundTerm("flowTreeForFlows", "N", "STAIL", "T", "VISITED"),
 				createCompoundTerm("dataflow", "F", "NSRC", "PINSRC", "_", "_"),
+				createCompoundTerm("intersection", createList(#["F"]), "VISITED".toVar, createList),
 				createCompoundTerm("flowTree", "NSRC".toVar, "PINSRC".toVar, "TMP".toVar, createList(#["F"], #["VISITED"])),
 				createUnification("SHEAD".toVar, createList(#["F"], #["TMP"])),
+				createCompoundTerm("flowTreeForFlows", "N", "STAIL", "T", "VISITED"),
 				createUnification("S".toVar, createList(#["SHEAD"], #["STAIL"]))
 			)
 		))
@@ -500,7 +575,7 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 			createCompoundTerm("involvesNode", "T", "N")
 		))
 		
-		addCharacteristicHelper(dfd)
+		this.addCharacteristicHelper(dfd)
 	}
 	
 	protected def void addCharacteristicHelper(DataFlowDiagram dfd) {
@@ -541,6 +616,53 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 				createCompoundTerm("characteristic", "NSRC".toVar, "PINSRC".toVar, "CT".toVar, "V".toVar, "S".toVar, createList(#["F"], #["VISITED"]))
 			)
 		))
+		
+		add(createHeaderComment("HELPER: find complement of set of characteristic type values"))
+		add(createComment("Find complement COMPLEMENT of value set VALS with the universal set defined through the values of the characteristic types CT"))
+		add(createRule(
+			createCompoundTerm("complement", "CTS", "VALS", "COMPLEMENT"),
+			createConjunction(
+				createCompoundTerm("is_set", "CTS"),
+				createCompoundTerm("universalSetForCharacteristicTypes", "CTS", "UNI"),
+				createCompoundTerm("subset", "VALS", "UNI"),
+				createCompoundTerm("subtract", "UNI", "VALS", "COMPLEMENT")
+			)
+		))
+		add(createComment("Find universal set UNI of values for characteristic types [H|T]"))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicTypes", createList(#["H"], #["T"]), "UNI".toVar),
+			createConjunction(
+				createCompoundTerm("universalSetForCharacteristicType", "H", "H_LITERALS"),
+				createCompoundTerm("universalSetForCharacteristicTypes", "T", "T_LITERALS"),
+				createCompoundTerm("append", "H_LITERALS", "T_LITERALS", "HT_LITERALS"),
+				createCompoundTerm("list_to_set", "HT_LITERALS", "UNI")
+			)
+		))
+		add(createFact(
+			createCompoundTerm("universalSetForCharacteristicTypes", createList, createList)
+		))
+		add(createComment("Find universal set UNI of values for characteristic type CT"))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT", "UNI"),
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, 0.toInt, "UNI".toVar)
+		))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, "N".toVar, createList(#["L"], #["T"])),
+			createConjunction(
+				createCompoundTerm("characteristicTypeValue", "CT", "L", "I"),
+				createNumberEqual("I", "N"),
+				createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, createPlus("N".toVar, 1.toInt), "T".toVar)
+			)
+		))
+		add(createRule(
+			createCompoundTerm("universalSetForCharacteristicType", "CT".toVar, "N".toVar, createList),
+			createNotProvable(
+				createConjunction(
+					createCompoundTerm("characteristicTypeValue", "CT", "_", "I"),
+					createNumberEqual("I", "N")
+				)
+			)
+		))
 	}
 
 	// queries
@@ -577,11 +699,11 @@ class DFD2PrologTransformationImpl implements DFD2PrologTransformation {
 		#[]
 	}
 	
-	protected def static <T extends CharacteristicType> Iterable<T> distinct(Iterable<T> sequence) {
+	protected def static Iterable<EnumCharacteristicType> distinct(Iterable<EnumCharacteristicType> sequence) {
 		sequence.iterator.distinct
 	}
 	
-	protected def static <T extends CharacteristicType> Iterable<T> distinct(Iterator<T> sequence) {
+	protected def static Iterable<EnumCharacteristicType> distinct(Iterator<EnumCharacteristicType> sequence) {
 		sequence.toMap[id].values.toList.sortBy[name]
 	}
 	

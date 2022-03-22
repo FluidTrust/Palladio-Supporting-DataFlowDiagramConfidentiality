@@ -20,10 +20,9 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 
 	@Test
 	def void testNoFlaws() {
-		//builder.addDFD(getRelativeURI(DFD_PATH))
 		loadAndInitDFD(DDC_PATH, DFD_PATH)
 		var solution = findFlaws()
-		assertNumberOfSolutions(solution, 0, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT", "S"])
+		assertNumberOfSolutions(solution, 0, #["A", "PIN", "S"])
 	}
 	
 	@Test
@@ -39,7 +38,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 4, #["A", "PIN", "S"])
 	}
 	
 	@Test
@@ -55,7 +54,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 1, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["A", "PIN", "S"])
 	}
 	
 	@Test
@@ -71,7 +70,7 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		dfd.edges += flow
 
 		var solution = findFlaws()
-		assertNumberOfSolutionsWithoutDuplicates(solution, 1, #["A", "PIN", "SUBJ_LOC", "SUBJ_ROLE", "OBJ_LOC", "OBJ_STAT"])
+		assertNumberOfSolutionsWithoutDuplicates(solution, 2, #["A", "PIN", "S"])
 	}
 
 	protected def Solution<Object> findFlaws() {
@@ -84,6 +83,28 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 		assertFalse(result.isEmpty())
 
 		prover.loadTheory(result.get())
+		prover.loadTheory('''
+			matchSubject('Clerk', N) :-
+			  nodeCharacteristic(N, 'EmployeeRole (_nNduk-JAEeqO9NqdRSqKUA)', 'Clerk (_c_En8OJAEeqO9NqdRSqKUA)').
+			
+			matchSubject('Manager', N) :-
+			  nodeCharacteristic(N, 'EmployeeRole (_nNduk-JAEeqO9NqdRSqKUA)', 'Manager (_dvk30OJAEeqO9NqdRSqKUA)').
+			
+			matchObject('Regular', N, PIN, S) :-
+			  exactCharacteristicValues(N, PIN, 'CustomerStatus (_lmMOw-JAEeqO9NqdRSqKUA)', ['Regular (_gYqZ8OJAEeqO9NqdRSqKUA)'], S).
+			
+			matchObject('all', _, _, _).
+			
+			read(N, PIN, S) :-
+			  matchSubject('Manager', N),
+			  matchObject('all', N, PIN, S).
+			
+			read(N, PIN, S) :-
+			  matchSubject('Clerk', N),
+			  matchObject('Regular', N, PIN, S),
+			  nodeCharacteristic(N, 'EmployeeLocation (_j_v1Y-JAEeqO9NqdRSqKUA)', L),
+			  exactCharacteristicValues(N, PIN, 'CustomerLocation (_h6k4o-JAEeqO9NqdRSqKUA)', [L], S).
+		''')
 		
 		var solution = query.solve()
 		solution
@@ -92,17 +113,9 @@ class ABACAnalysisTests extends AnalysisIntegrationTestBase {
 	protected def getQuery() {
 		var queryString = '''
 			actor(A),
-			inputPin(A,PIN),
-			nodeCharacteristic(A, 'EmployeeLocation (_j_v1Y-JAEeqO9NqdRSqKUA)', SUBJ_LOC),
-			nodeCharacteristic(A, 'EmployeeRole (_nNduk-JAEeqO9NqdRSqKUA)', SUBJ_ROLE),
-			characteristic(A, PIN, 'CustomerLocation (_h6k4o-JAEeqO9NqdRSqKUA)', OBJ_LOC, S),
-			characteristic(A, PIN, 'CustomerStatus (_lmMOw-JAEeqO9NqdRSqKUA)', OBJ_STAT, S),
-			(
-				SUBJ_LOC \= OBJ_LOC,
-				SUBJ_ROLE \= 'Manager (_dvk30OJAEeqO9NqdRSqKUA)';
-				OBJ_STAT = 'Celebrity (_hCxt8OJAEeqO9NqdRSqKUA)',
-				SUBJ_ROLE \= 'Manager (_dvk30OJAEeqO9NqdRSqKUA)'
-			).
+			inputPin(A, PIN),
+			flowTree(A, PIN, S),
+			\+ read(A, PIN, S).
 		'''
 		var query = prover.query(queryString)
 		query
